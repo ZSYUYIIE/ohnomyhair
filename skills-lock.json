@@ -13,12 +13,6 @@
       "skillPath": "skills/disciplines/audio-design/SKILL.md",
       "computedHash": "3238c0500fe6ba6d689f4cecc9033aaed54f960aff60b064e91b844ff3765acb"
     },
-    "bevy-ecs": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/bevy-ecs/SKILL.md",
-      "computedHash": "88cff80a5a90686fa0c561ef1d4d93dc886bf64afb508a470bacc5f0012a07a4"
-    },
     "camera-systems": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
@@ -97,6 +91,24 @@
       "skillPath": "skills/godot/godot-audio/SKILL.md",
       "computedHash": "fed1da4d4d45c4c70d2978a428370d1fec87c094bfc1491396dc2fa00ae4d1b5"
     },
+    "godot-camera-systems": {
+      "source": "thedivergentai/Game-Dev-Agentic-Skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot-camera-systems/SKILL.md",
+      "computedHash": "fc2895bb399f75f2c22dd74a75db1e872c28459f6da093aacc1f619916523db0"
+    },
+    "godot-characterbody-2d": {
+      "source": "thedivergentai/Game-Dev-Agentic-Skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot-characterbody-2d/SKILL.md",
+      "computedHash": "fa9023ebe0c120a04472de3c78a4a0e3ceece04589d865b061e0bb131773e121"
+    },
+    "godot-combat-system": {
+      "source": "thedivergentai/Game-Dev-Agentic-Skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot-combat-system/SKILL.md",
+      "computedHash": "ef918455debe0dcd692ddcfc74030ccc7557ef8bdfdc05324dd713a693a59d53"
+    },
     "godot-csharp": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
@@ -121,6 +133,12 @@
       "skillPath": "skills/godot/godot-gdscript-headless-testing/SKILL.md",
       "computedHash": "d37cb2a1c548a02549f152c232129429b3643cc92d7976cd3e4b30419807d68b"
     },
+    "godot-genre-platformer": {
+      "source": "thedivergentai/Game-Dev-Agentic-Skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot-genre-platformer/SKILL.md",
+      "computedHash": "89dd5256013bd2d1af8330b2f95690b8603e1aa1501d623bf0e0e1d06a5727b1"
+    },
     "godot-multiplayer": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
@@ -138,6 +156,12 @@
       "sourceType": "github",
       "skillPath": "skills/godot/godot-physics/SKILL.md",
       "computedHash": "bf2b5b5309833e17766a9dfa0d68bad726139f6aca03c393e9a3d19f421664de"
+    },
+    "godot-platform-web": {
+      "source": "thedivergentai/Game-Dev-Agentic-Skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot-platform-web/SKILL.md",
+      "computedHash": "4607e7142d83f4666325c9ee23a3084ec013c28ac14ff963d9f4f6bb14c88b24"
     },
     "godot-resources": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -187,41 +211,17 @@
       "skillPath": "skills/disciplines/level-design/SKILL.md",
       "computedHash": "30d5498877bacdfb4cb0fd2b287be802e65c4a1d068248c971b0eea756778ee9"
     },
-    "love2d-core": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/love2d-core/SKILL.md",
-      "computedHash": "4584e87e4768785e6dcf3d90f6f7b1dee0007b19481b199ca3b3e045269ada6b"
-    },
     "performance-optimization": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/disciplines/performance-optimization/SKILL.md",
       "computedHash": "9788da8674ddd2c5a895dad3a1ba54e815d3843060ad01366a5354c39f0ecde4"
     },
-    "phaser-arcade-physics": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/web-engines/phaser-arcade-physics/SKILL.md",
-      "computedHash": "5e01f84e7d8c07d7de424b9734de8431446c4a6fb555bdbc965ab622f375b324"
-    },
-    "phaser-core": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/web-engines/phaser-core/SKILL.md",
-      "computedHash": "44ce9ffd8700dea87d532b2315aaac8f7c3b56ab7cf6e9380829dac7af9b5076"
-    },
     "physics-tuning": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/disciplines/physics-tuning/SKILL.md",
       "computedHash": "69b3297e108853df60a23e9ce5528950a5d0d7057de2f0a2bc60a66129b642f0"
-    },
-    "pixijs-rendering": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/web-engines/pixijs-rendering/SKILL.md",
-      "computedHash": "7895f4aa0511b807c320ed9c5ce9250fe43a60ee28290d521db88092ea4dd296"
     },
     "platformer": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -246,54 +246,6 @@
       "sourceType": "github",
       "skillPath": "skills/genres/puzzle/SKILL.md",
       "computedHash": "80299c31a0f40d1285ad6c94d422533e440059d0361ec430cde64643f3188a88"
-    },
-    "pygame-core": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/pygame-core/SKILL.md",
-      "computedHash": "7b3df9d2af83bd71c8de477c3ebb0fd67ac6f8860eb00ec88dd13b971254bb0c"
-    },
-    "roblox-characters": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/roblox-characters/SKILL.md",
-      "computedHash": "55b9a97155901ec42124576aa1adf1d91d4340915cbad4736443532d6cf7f793"
-    },
-    "roblox-datastores": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/roblox-datastores/SKILL.md",
-      "computedHash": "34a35abe5dffc598aced99d817c2ca54c9d5bd3ee19bf23229857469129ba83c"
-    },
-    "roblox-luau": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/roblox-luau/SKILL.md",
-      "computedHash": "94971c76090f812ba5faf5819257ec8b1bc4881b2092c239a4686b127defcb30"
-    },
-    "roblox-networking": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/roblox-networking/SKILL.md",
-      "computedHash": "bc480380aba9f4cee748a5ff1e6496e904a4d5a81245558e216d13da6be633f0"
-    },
-    "roblox-physics": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/roblox-physics/SKILL.md",
-      "computedHash": "16e1444b4c286b089d95101e16c4d88f77acb97e92ecd8048953e56ed0e0b195"
-    },
-    "roblox-studio-workflow": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/roblox-studio-workflow/SKILL.md",
-      "computedHash": "17f4707b370ef4bab9ff40843670405fae7ae2b8b9ea429d18c3d94ea6dbc66e"
-    },
-    "roblox-ui": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/other-engines/roblox-ui/SKILL.md",
-      "computedHash": "34aed78d5ed73b71126ad8485c008f1b3345c9649d1b4c8ca996bdaa8695e8c4"
     },
     "roguelike": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
@@ -337,113 +289,11 @@
       "skillPath": "skills/genres/survival-crafting/SKILL.md",
       "computedHash": "cc5159598bc4502773ebe75fee40f7c1531a4ba24bed018d20caf2cc65d20c1f"
     },
-    "threejs-gltf-loading": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/web-engines/threejs-gltf-loading/SKILL.md",
-      "computedHash": "c629cd4bff5814b7bdda0543a64042aca4f9b9754bba018e3bb5c9104820b312"
-    },
-    "threejs-materials-lighting": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/web-engines/threejs-materials-lighting/SKILL.md",
-      "computedHash": "48985f502d3d5dd24737b36a1b44974d24ab18336227eddf15b4e16e012d243d"
-    },
-    "threejs-scene-setup": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/web-engines/threejs-scene-setup/SKILL.md",
-      "computedHash": "3b13409b7baaef43916fafcf347829d5514b345d41c9b64c5e1e5b66879008f3"
-    },
     "tower-defense": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
       "sourceType": "github",
       "skillPath": "skills/genres/tower-defense/SKILL.md",
       "computedHash": "d7c7cb405d7b9edbe0b7134af9561ad907af38b9e53fe5c2caa4efe5dc6fd073"
-    },
-    "unity-animation": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-animation/SKILL.md",
-      "computedHash": "6ed37e90206e5534f2bc1e3c5a5176cfdf0a4b1b2ccfbf0a935d618122a15721"
-    },
-    "unity-build-pipeline": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-build-pipeline/SKILL.md",
-      "computedHash": "1844226ff957ca6fae8b8c8f343d51700d5456ab03b95f9c2fa48f46e5004051"
-    },
-    "unity-csharp-scripting": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-csharp-scripting/SKILL.md",
-      "computedHash": "050e5798e44ffe1fbd62126db21370977de156a2bb2ff6eeff6a6088cee42920"
-    },
-    "unity-input-system": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-input-system/SKILL.md",
-      "computedHash": "18cc67db34f8cfc0595208fb0ae46d39a9376add722b2efbc709554df753a4f9"
-    },
-    "unity-navmesh": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-navmesh/SKILL.md",
-      "computedHash": "f6fa70b93bc91e6771ce16577beb0e893e01dd6524baa6805256a421e4ab82c1"
-    },
-    "unity-physics": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-physics/SKILL.md",
-      "computedHash": "e3cb38e5cd8fd920084a308c20481132dbcf536fb4a6d645b828f43961bcce6b"
-    },
-    "unity-scriptableobjects": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-scriptableobjects/SKILL.md",
-      "computedHash": "5e30fd4e71f4ee7abd8c56ff4ad01dea47f1b6c645be97d84e7465adb09b93ca"
-    },
-    "unity-tilemap-2d": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unity/unity-tilemap-2d/SKILL.md",
-      "computedHash": "7d426d245c978f0d79959b70de6925d958c45204f224fc21cdc4293de712e6f5"
-    },
-    "unreal-behavior-trees": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unreal/unreal-behavior-trees/SKILL.md",
-      "computedHash": "451028979dc23b44eca0b08aa570338b0fbecd93d3073b98ef2bc266ce7a55f2"
-    },
-    "unreal-blueprints": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unreal/unreal-blueprints/SKILL.md",
-      "computedHash": "cde95ab52e459dc628a551db8559215cfcf62abac7222dfdd458ebec4afcb00a"
-    },
-    "unreal-cpp-gameplay": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unreal/unreal-cpp-gameplay/SKILL.md",
-      "computedHash": "3f711e8b8d5bd53a0ece5a959f763de4c643dc2c7db110869eed477821be5b7c"
-    },
-    "unreal-enhanced-input": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unreal/unreal-enhanced-input/SKILL.md",
-      "computedHash": "49733ad50d04c34ccef6dc858acd419a62c8c71c59dd52a90a6a234799352ebe"
-    },
-    "unreal-niagara": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unreal/unreal-niagara/SKILL.md",
-      "computedHash": "97ad19bbfe1e20b80e9d3b2a92241ad8ecf35dd98f0e328fcebdd137136757a3"
-    },
-    "unreal-packaging": {
-      "source": "gamedev-skills/awesome-gamedev-agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/unreal/unreal-packaging/SKILL.md",
-      "computedHash": "6b47730fec5dc8762eba325ffc7ce73fa07cdb3c96b7b3fbd245779d385d9ef0"
     },
     "visual-novel": {
       "source": "gamedev-skills/awesome-gamedev-agent-skills",
