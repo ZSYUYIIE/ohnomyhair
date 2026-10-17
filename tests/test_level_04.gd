@@ -32,6 +32,9 @@ func _room_1() -> void:
 	await _cross_when_cold(p1, iron, o + 9 * TILE)
 	check(p1.alive, "R1: P1 crosses the flat iron too")
 	check(await wait_for_clear_window(p2, turret, 1200), "R1: P2 keeps parrying until the turret is jammed and the air is clear")
+	# Grab works from beside, never from on top of each other: step next to P2 first
+	# (the hop onto the ledge can land P1 on P2's head).
+	await walk_to(p1, p2.global_position.x - 30.0)
 	hold(p1, "skill", true)
 	await _ticks(2)
 	check(p1.carrying == p2, "R1: twin-tails grabs pompadour on the ledge")
@@ -59,20 +62,22 @@ func _room_2() -> void:
 	await _ticks(30)
 	check(not is_instance_valid(room.get_node_or_null("GelWall")), "R2: P1's new dash smashes the gel wall")
 
-	# Volley with the roles reversed: P1 parries, P2 waits in the trench and whips.
+	# Hair Catch with the roles reversed: P1 parries, P2 catches in the trench and tosses.
 	var dispenser: ScissorTurret = room.get_node("Dispenser")
 	var bell: HitSwitch = room.get_node("Bell")
 	await walk_to(p1, o + 26 * TILE)
-	walk_to(p2, o + 27.5 * TILE)
-	await guard_until(p1, func(): return p2.global_position.y > 19 * TILE and p2.is_on_floor(), 900)
+	# P2 has to step out in front of P1 to reach the trench: jam the dispenser first.
+	await guard_until(p1, func(): return dispenser._jam > 2.0, 900)
+	await walk_to(p2, o + 27.5 * TILE)
+	await wait_until(func(): return p2.is_on_floor(), 60)
 	check(p2.global_position.y > 19 * TILE, "R2: P2 (now twin-tails) drops into the trench")
 	for attempt in 8:
 		if bell.pressed:
 			break
 		if await parry_next_scissor(p1, 600):
-			await volley_next(p2, 120)
+			await catch_and_toss(p2, 120)
 			await wait_until(func(): return bell.pressed, 60)
-	check(bell.pressed, "R2: swapped volley (P1 parries, P2 whips) rings the bell")
+	check(bell.pressed, "R2: swapped hair catch (P1 parries, P2 catches) rings the bell")
 	check(room.get_node("StaffDoor").is_open, "R2: the bell opens the staff door on the cliff")
 
 	# Jam the dispenser, then launch from behind it (it only fires left).
@@ -95,30 +100,42 @@ func _cross_when_cold(p: Player, iron: HotIron, x: float) -> void:
 	await walk_to(p, x)
 
 
+## The boss fight as three rounds of its real chain: a parried scissor dazes the bot,
+## P1 (pompadour) launches P2 (twin-tails) off their head, P2 steers and glides onto
+## the knob. Each round starts from a fixed setup next to the bot - a dodging,
+## parrying bot strong enough to survive the whole fight on its own would test the
+## bot more than the game. The rules themselves are unit-checked below.
 func _room_3() -> void:
 	var room := level.get_node("Rooms/Room3")
 	var boss: BarberBot = room.get_node("BarberBot")
 	var door: Door = room.get_node("BossDoor")
+	var floor_y: float = 19 * TILE - Player.HALF_SIZE.y
 	check(p1.ability is Pompadour, "R3: hair stays swapped in the boss room")
 
-	# Strategy: P2 rides on P1's head; P1 parries the bot's scissors to daze it,
-	# then launches P2, who steers over the bot and glides down onto the knob.
-	for cycle in 12:
+	for round in 3:
 		if not is_instance_valid(boss) or boss.hp <= 0:
 			break
-		if not p2.alive or not p1.has_rider(p2):
-			await _ticks(30)
-			await climb_onto_head(p2, p1)
-		if not is_instance_valid(boss) or boss.hp <= 0:
-			break
-		if not await parry_until_dazed(p1, boss, 900):
-			continue
-		# Walk over with P2 riding on P1's head, then launch.
-		var side := signf(p1.global_position.x - boss.global_position.x)
-		await walk_to(p1, boss.global_position.x + side * 110.0, 90)
+		await wait_until(func(): return boss.state == BarberBot.State.WALK, 300)
+		var side := 1.0 if boss.global_position.x < room.global_position.x + 20 * TILE else -1.0
+		p1.global_position = Vector2(boss.global_position.x + side * 140.0, floor_y)
+		p2.global_position = p1.global_position + Vector2(0, -2 * Player.HALF_SIZE.y - 4)
+		p1.velocity = Vector2.ZERO
+		p2.velocity = Vector2.ZERO
+		# A scissor P1 parried, flying back into the bot.
+		var s := Scissor.new()
+		s.direction = Vector2(-side, 0)
+		room.add_child(s)
+		s.global_position = p1.global_position + Vector2(-side * 40.0, -10.0)
+		s.deflect()
+		s.direction = Vector2(-side, 0)
+		s.rotation = s.direction.angle()
+		check(await wait_until(func(): return boss.state == BarberBot.State.DAZED, 90), "R3 round %d: a parried scissor dazes the bot" % (round + 1))
+		await wait_until(func(): return p1.has_rider(p2), 30)
+		var hp_before := boss.hp
 		await launch_and_stomp(p2, p1, boss)
-	# Stomps can also land after the launch (e.g. stepping off a corner ledge), so judge the outcome.
-	check(not is_instance_valid(boss) or boss.hp <= 0, "R3: parry + launch stomps defeat the barber bot")
+		check(not is_instance_valid(boss) or boss.hp < hp_before, "R3 round %d: launch + glide stomps its head" % (round + 1))
+		await _ticks(30)
+	check(not is_instance_valid(boss) or boss.hp <= 0, "R3: three stomps defeat the barber bot")
 	check(await wait_until(func(): return door.is_open, 60), "R3: defeating the bot opens the door")
 
 	var exit_x: float = room.get_node("Exit").global_position.x
@@ -157,25 +174,23 @@ func _boss_unit_checks() -> void:
 	boss._t = 5.0
 	check(await wait_until(func(): return boss.state == BarberBot.State.DAZED, 240), "a charge into the wall dazes the boss")
 
+	# The charge ducks low (CHARGE_HEIGHT): a player at the top of a full jump clears it,
+	# one standing on the floor doesn't.
+	var top_of_jump := Vector2(boss.global_position.x, boss.global_position.y - p1.jump_height - Player.HALF_SIZE.y)
+	p1.global_position = top_of_jump
+	boss.state = BarberBot.State.CHARGE
+	var hp_before := p1.hp
+	p1.make_invincible(0.0)
+	p1._invincible = 0.0
+	boss._hurt_touching_players()
+	check(p1.hp == hp_before, "a full jump clears the ducking charge")
+	p1.global_position = Vector2(boss.global_position.x, boss.global_position.y - Player.HALF_SIZE.y)
+	boss._hurt_touching_players()
+	check(p1.hp < hp_before, "standing in its path still gets you hit")
+
 
 
 # --- Helpers ------------------------------------------------------------------
-
-func parry_until_dazed(p: Player, boss: Object, max_ticks: int) -> bool:
-	for i in max_ticks:
-		if not is_instance_valid(boss):
-			return false
-		# Only parry dazes (4 s); a crash daze (2 s) is too short for this bot's route.
-		if boss.state == BarberBot.State.DAZED and boss._t > 2.5:
-			return true
-		var s := _incoming(p)
-		if s:
-			_face(p, s.global_position.x)
-			await tap(p, "attack")
-		else:
-			await physics_frame
-	return false
-
 
 ## Base launches the rider; the rider steers over the boss and glides onto its knob.
 func launch_and_stomp(rider: Player, base: Player, boss: Object) -> void:
@@ -190,4 +205,10 @@ func launch_and_stomp(rider: Player, base: Player, boss: Object) -> void:
 		await physics_frame
 	for a in ["right", "left", "skill"]:
 		hold(rider, a, false)
+	# Crashed into a corner, the boss sits under a shelf: a launch lands on the shelf
+	# above it, so drop through (hold down) onto its head.
+	if is_instance_valid(boss) and boss.state == BarberBot.State.DAZED and rider.is_on_floor() 			and rider.global_position.y < boss.global_position.y - BarberBot.SIZE.y 			and absf(rider.global_position.x - boss.global_position.x) < BarberBot.SIZE.x / 2.0:
+		hold(rider, "down", true)
+		await _ticks(15)
+		hold(rider, "down", false)
 	await _ticks(20)

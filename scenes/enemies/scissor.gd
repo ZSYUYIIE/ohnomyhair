@@ -10,8 +10,10 @@ const DAMAGE := 1
 var direction := Vector2.LEFT
 var speed := SPEED
 var deflected := false
-## Volleyed by a twin-tails whip after a parry: flies straight up, twice as fast.
+## Tossed up by twin-tails after a Hair Catch: flies straight up, twice as fast.
 var golden := false
+## Twin-tails holding it in her pigtails (Hair Catch), or null.
+var holder: Player = null
 
 
 func _ready() -> void:
@@ -25,6 +27,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if holder:
+		if not is_instance_valid(holder) or not holder.alive:
+			queue_free()
+			return
+		global_position = holder.global_position + Vector2(0, -Player.HALF_SIZE.y - 26)
+		rotation += delta * 18.0
+		return
 	position += direction * speed * delta
 
 
@@ -44,8 +53,17 @@ func redirect(new_direction: Vector2, at: Vector2) -> void:
 	rotation = direction.angle()
 
 
-## Combo "Volley": a parried scissor whipped by twin-tails shoots straight up from `at_x`.
-func volley(at_x: float) -> void:
+## Combo "Hair Catch": twin-tails' open pigtails grab a parried scissor and hold it.
+## Held scissors don't hit anything until tossed.
+func catch_by(p: Player) -> void:
+	holder = p
+	set_deferred("monitoring", false)
+
+
+## Twin-tails lets go: the scissor shoots straight up from `at_x`, golden.
+func toss(at_x: float) -> void:
+	holder = null
+	set_deferred("monitoring", true)
 	golden = true
 	direction = Vector2.UP
 	speed = SPEED * 2.0

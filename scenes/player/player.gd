@@ -203,11 +203,16 @@ func launch(height: float) -> void:
 	_jump(-sqrt(2.0 * gravity * height), false)
 
 
+## Who to carry up as I rise: a friend whose feet rest on my head (geometric, so it holds
+## even on the frames their own floor check flickers, e.g. standing near the pad's edge).
 func _rider_on_head() -> Player:
 	var mate := teammate()
-	if mate and mate.alive and mate.carried_by == null and carried_by == null and has_rider(mate):
-		return mate
-	return null
+	if mate == null or not mate.alive or mate.carried_by or carried_by:
+		return null
+	var feet := mate.global_position.y + HALF_SIZE.y
+	var head := global_position.y - HALF_SIZE.y
+	var on_top := absf(feet - head) < 8.0 and absf(mate.global_position.x - global_position.x) < HALF_SIZE.x * 2.0
+	return mate if on_top and mate.velocity.y >= -1.0 else null
 
 
 ## True when `other` is standing on this player's head pad.
@@ -361,7 +366,7 @@ func set_frozen(frozen: bool) -> void:
 		velocity = Vector2.ZERO
 
 
-## Freeze-frame for impact (parry, volley, boss hits).
+## Freeze-frame for impact (parry, hair-catch toss, boss hits).
 func hit_stop(duration: float) -> void:
 	freeze_frame(get_tree(), duration)
 

@@ -44,7 +44,10 @@ func _room_1() -> void:
 	check(p1.global_position.y > 18 * TILE, "R1: P1 dropped off the shelf and went through the gate")
 	check(await climb_onto_head(p2, p1), "R1: P2 stands on P1's head in the big dryer")
 	check(await _hair_copter(o + 26 * TILE, 8), "R1: Hair-copter: both reach the 11-up exit ledge")
-	await enter_exit(room, 1)
+	if level.room_index == 0:
+		await enter_exit(room, 1)
+	else:
+		await wait_until(func(): return not level._busy, 120)
 
 
 ## Shower timing for the carry; rinse curtain soaks P2, dryer, then the gel.
@@ -140,6 +143,7 @@ func _pompadour_cant_cross_the_basin_alone() -> void:
 ## the ledge at ledge_x (top row ledge_row), and P1 glides after. Returns both on top.
 func _hair_copter(ledge_x: float, ledge_row: int) -> bool:
 	var ledge_top := ledge_row * TILE
+	var room_at_start := level.room_index
 	hold(p1, "jump", true)
 	hold(p1, "skill", true)
 	await wait_until(func(): return p2.global_position.y + Player.HALF_SIZE.y < ledge_top - 1.5 * TILE, 300)
@@ -155,9 +159,14 @@ func _hair_copter(ledge_x: float, ledge_row: int) -> bool:
 					hold(p, a, false)
 		if p1.is_on_floor() and p2.is_on_floor() and p1.global_position.x > ledge_x and p2.global_position.x > ledge_x:
 			break
+		# Gliding on with P2 still riding can carry them both straight into the exit: also a win.
+		if level.room_index != room_at_start:
+			break
 		await physics_frame
 	for p in [p1, p2]:
 		for a in ["jump", "skill", "right"]:
 			hold(p, a, false)
 	await _ticks(10)
+	if level.room_index != room_at_start:
+		return true
 	return p1.alive and p2.alive and p1.global_position.y < ledge_top and p2.global_position.y < ledge_top

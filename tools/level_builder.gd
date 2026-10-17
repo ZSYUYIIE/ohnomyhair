@@ -201,7 +201,7 @@ class RoomBuilder:
 		from.connect(signal_name, Callable(to, method), CONNECT_PERSIST)
 
 	## Floor stripes marking a spot (drawn on top of tile row `row`). Yellow = parry here,
-	## pink = twin-tails volleys here.
+	## pink = twin-tails catches scissors here.
 	func stripes(name: String, col0: int, col1: int, row: int, color := Color("f1c40f")) -> void:
 		var holder := Node2D.new()
 		add(holder, name)

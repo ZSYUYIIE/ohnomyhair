@@ -23,10 +23,10 @@ godot --path . res://scenes/levels/level_01.tscn -- --room=3
 ### Hair combos (both friends act at once)
 | Combo | Twin Tails | Pompadour | Effect |
 |---|---|---|---|
-| Carry | hold skill next to P2, glide | (hangs; can still parry) | fly over pits together |
+| Carry | hold skill next to P2 (beside you, not on your head), glide | (hangs; can still parry) | fly over pits together |
 | Launch | stand on P2's head | skill | rider rises ~9 tiles |
 | **Sling Dash** | carry P2 through the air | skill while hanging | flung 7 tiles flat, through gel walls |
-| **Volley** | attack (whip) a blue scissor | parry first (scissor turns blue) | scissor shoots straight up, golden, rings bells |
+| **Hair Catch** | hold skill: open pigtails catch a blue scissor; let go to toss it | parry first (scissor turns blue) | scissor shoots straight up, golden, rings bells |
 | **Hair-copter** | glide in a hair dryer's warm air | stand on her head | both rise; carrying instead only hovers |
 
 Salon hazards: **hair dryers** lift a gliding twin-tails and dry you; **shampoo showers** soak you

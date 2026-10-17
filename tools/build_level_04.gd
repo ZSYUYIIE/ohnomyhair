@@ -43,13 +43,13 @@ func _room_1() -> RoomBuilder:
 
 ## Room 2: the barber's chair sits in a tunnel everyone must pass, and swaps the haircuts.
 ## Then every combo runs with the roles reversed: P1 (now pompadour) dashes the gel and
-## parries, P2 (now twin-tails) volleys from the trench to ring the bell, P1 launches P2
+## parries, P2 (now twin-tails) catches and tosses from the trench to ring the bell, P1 launches P2
 ## up the cliff, P2 pulls the lever so the step rises for P1.
 func _room_2() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room2", "2 - The Chair", Color("f6dde4")))
 	rb.solid(0, 19, 26, 22)     # floor...
 	rb.solid(28, 19, 38, 22)
-	rb.solid(27, 21, 27, 22)    # ...with a volley trench at x=27
+	rb.solid(27, 21, 27, 22)    # ...with a catch trench at x=27
 	rb.solid(15, 1, 22, 14)     # low ceiling: the chair tunnel is rows 15-18
 	rb.solid(33, 13, 38, 22)    # cliff (6 up)
 	rb.solid(34, 1, 34, 9)      # wall above the staff door
@@ -66,7 +66,7 @@ func _room_2() -> RoomBuilder:
 	var door := rb.door("StaffDoor", 34, 10, 1, 3)
 	rb.link(bell, "activated", door, "open")
 	rb.stripes("ParryStripes", 25, 26, 19)
-	rb.stripes("VolleyMark", 27, 27, 21, Color("ff5fa2"))
+	rb.stripes("CatchMark", 27, 27, 21, Color("ff5fa2"))
 	var lever := rb.lever("ChairLever", 33, 12)
 	rb.block("RisingStep", 31, 19, 2, 3, Vector2i(0, -3), lever, true)
 	rb.exit(36, 10)
@@ -107,5 +107,5 @@ func _room_3() -> RoomBuilder:
 	var door := rb.door("BossDoor", 36, 1, 1, 18)
 	rb.link(boss, "defeated", door, "open")
 	rb.exit(37, 16)
-	rb.hint("Parry its scissors to daze it, then land on its glowing head.\nA volleyed (golden) scissor dazes it longer.", Vector2(330, 60))
+	rb.hint("Parry its scissors to daze it, then land on its glowing head.\nA tossed (golden) scissor dazes it longer.", Vector2(330, 60))
 	return rb

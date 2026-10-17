@@ -12,6 +12,9 @@ signal defeated
 enum State { WALK, SHOOT, WINDUP, CHARGE, DAZED, HURT, DEAD }
 
 const SIZE := Vector2(96, 128)
+## Charging, it ducks its head like a bull: only this much of it is solid, so a full
+## jump (about 114 px) clears it. Standing tall it can't be jumped (128 px).
+const CHARGE_HEIGHT := 72.0
 const KNOB_HEIGHT := 40.0  # stomp zone on top of the head
 
 @export var hp := 3
@@ -162,7 +165,7 @@ func daze(seconds: float) -> void:
 ## Only a parried scissor (stun 3 s) is strong enough to daze it.
 func take_hit(_damage: int, stun_time: float = 0.0, _knockback := Vector2.ZERO) -> void:
 	if stun_time >= 2.0:
-		daze(maxf(parry_daze_time, stun_time))  # a golden (volleyed) scissor dazes longer
+		daze(maxf(parry_daze_time, stun_time))  # a golden (hair-caught) scissor dazes longer
 
 
 func _stomped_by(player: Player) -> void:
@@ -201,7 +204,8 @@ func _nearest_player() -> Player:
 
 
 func _hurt_touching_players() -> void:
-	var me := Rect2(global_position + Vector2(-SIZE.x / 2, -SIZE.y), SIZE)
+	var h := CHARGE_HEIGHT if state == State.CHARGE else SIZE.y
+	var me := Rect2(global_position + Vector2(-SIZE.x / 2, -h), Vector2(SIZE.x, h))
 	for p: Player in get_tree().get_nodes_in_group("players"):
 		var them := Rect2(p.global_position - Player.HALF_SIZE, Player.HALF_SIZE * 2.0)
 		if p.alive and me.intersects(them):
@@ -209,6 +213,9 @@ func _hurt_touching_players() -> void:
 
 
 func _draw() -> void:
+	if state == State.CHARGE:
+		# Head down, squashed low: reads as "jump over me".
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.15, CHARGE_HEIGHT / SIZE.y))
 	var body := Color("c0392b")
 	match state:
 		State.DAZED: body = Color("7f8c8d")
