@@ -47,14 +47,12 @@ func _swap() -> void:
 	queue_redraw()
 
 
+const ART := preload("res://assets/art/props/prop_chair.png")
+
+
 func _draw() -> void:
+	# Frames: waiting | used (darker leather). The chair stands at the zone's bottom center.
 	var base := Vector2(size.x / 2.0, size.y)
-	var leather := Color("8e2f3c") if not used else Color("5b1f27")
-	draw_rect(Rect2(base + Vector2(-6, -40), Vector2(12, 40)), Color("9aa0a6"))       # pole
-	draw_rect(Rect2(base + Vector2(-40, -4), Vector2(80, 4)), Color("9aa0a6"))        # foot
-	draw_rect(Rect2(base + Vector2(-36, -56), Vector2(72, 16)), leather)              # seat
-	draw_rect(Rect2(base + Vector2(-36, -112), Vector2(16, 60)), leather)             # back
-	draw_rect(Rect2(base + Vector2(-44, -64), Vector2(12, 8)), Color("9aa0a6"))       # armrest
-	draw_rect(Rect2(base + Vector2(32, -64), Vector2(12, 8)), Color("9aa0a6"))
+	draw_texture_rect_region(ART, Rect2(base + Vector2(-56, -120), Vector2(112, 120)), Rect2(112 if used else 0, 0, 112, 120))
 	if used:
-		draw_string(ThemeDB.fallback_font, base + Vector2(-30, -124), "snip!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("ff5fa2"))
+		draw_string(ThemeDB.fallback_font, base + Vector2(-30, -126), "snip!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("ff5fa2"))

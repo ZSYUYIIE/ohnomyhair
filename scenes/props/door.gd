@@ -26,16 +26,25 @@ func open() -> void:
 	queue_redraw()
 
 
+const ART := "res://assets/art/props/prop_door.png"
+
+
 func _draw() -> void:
-	var wood := Color("8e6e53")
+	var ink := Color("2b2140")
 	if is_open:
-		draw_rect(Rect2(Vector2.ZERO, size), wood, false, 2.0)
+		draw_rect(Rect2(Vector2.ZERO, size), Color(ink, 0.25), false, 2.0)
 		return
-	draw_rect(Rect2(Vector2.ZERO, size), wood)
-	draw_rect(Rect2(Vector2(3, 3), size - Vector2(6, 6)), wood.darkened(0.2), false, 2.0)
-	draw_circle(Vector2(size.x / 2.0, minf(24.0, size.y / 4.0)), minf(size.x / 2.0 - 4.0, 9.0), Color("bfe3ef"))
-	draw_rect(Rect2(Vector2(2, size.y * 0.45), Vector2(size.x - 4, 10)), Color("f4e9d8"))
-	draw_string(ThemeDB.fallback_font, Vector2(3, size.y * 0.45 + 9), "STAFF", HORIZONTAL_ALIGNMENT_LEFT, size.x - 6, 9, Color("4a3426"))
+	draw_style_box(PropArt.nine_slice(ART, 8.0), Rect2(Vector2.ZERO, size))
+	var window := Vector2(size.x / 2.0, minf(24.0, size.y / 4.0))
+	var r := minf(size.x / 2.0 - 5.0, 9.0)
+	draw_circle(window, r + 2.0, ink)
+	draw_circle(window, r, Color("bfe3ef"))
+	var plate := Rect2(Vector2(3, size.y * 0.45), Vector2(size.x - 6, 11))
+	draw_rect(plate.grow(1.5), ink)
+	draw_rect(plate, Color("f4e9d8"))
+	draw_string(ThemeDB.fallback_font, plate.position + Vector2(0, 9), "STAFF", HORIZONTAL_ALIGNMENT_CENTER, plate.size.x, 7, Color("4a3426"))
 	# One gold pip per bell still needed.
 	for i in maxi(locks, 1):
-		draw_circle(Vector2(size.x / 2.0, size.y * 0.62 + i * 12), 4.0, Color("f1c40f"))
+		var pip := Vector2(size.x / 2.0, size.y * 0.62 + i * 12)
+		draw_circle(pip, 5.5, ink)
+		draw_circle(pip, 4.0, Color("f1c40f"))

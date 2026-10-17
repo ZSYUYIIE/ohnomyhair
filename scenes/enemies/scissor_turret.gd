@@ -46,19 +46,21 @@ func take_hit(_damage: int, stun_time: float = 0.0, _knockback := Vector2.ZERO) 
 	queue_redraw()
 
 
+const ART := preload("res://assets/art/enemies/enemy_dispenser.png")
+
+
 func _draw() -> void:
 	var jammed := _jam > 0.0
-	var body := Color("9aa0a6") if jammed else Color("c8ccd2")
-	draw_rect(Rect2(-14, -14, 28, 28), body)
-	draw_rect(Rect2(-14, -14, 28, 28), body.darkened(0.35), false, 2.0)
-	draw_rect(Rect2(Vector2(-14, -4) + direction * 12.0, Vector2(12, 8)), Color("2c2c34"))
-	# Little scissors logo.
-	draw_circle(Vector2(-4, 6), 3.0, Color("c0392b"))
-	draw_circle(Vector2(4, 6), 3.0, Color("c0392b"))
-	draw_line(Vector2(-2, 4), Vector2(6, -8), Color("5b6068"), 2.0)
-	draw_line(Vector2(2, 4), Vector2(-6, -8), Color("5b6068"), 2.0)
+	# The art's nozzle faces right: mirror it for left, turn it for up/down.
+	if absf(direction.x) >= absf(direction.y):
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2(signf(direction.x), 1.0))
+	else:
+		draw_set_transform(Vector2.ZERO, direction.angle())
+	draw_texture(ART, Vector2(-18, -18), Color(0.78, 0.78, 0.84) if jammed else Color.WHITE)
+	draw_set_transform(Vector2.ZERO)
 	# Warning light: on for the last 0.4 s before a shot.
 	var warn := not jammed and _timer < 0.4
-	draw_circle(Vector2(0, -20), 4.0, Color("ff3b30") if warn else Color("5b2a2a"))
+	draw_circle(Vector2(0, -22), 5.0, Color("2b2140"))
+	draw_circle(Vector2(0, -22), 3.6, Color("ff3b30") if warn else Color("5b2a2a"))
 	if jammed and int(_jam * 6.0) % 2 == 0:
-		draw_circle(Vector2(-4, -26), 6.0, Color(0.8, 0.8, 0.8, 0.7))
+		draw_circle(Vector2(-4, -30), 6.0, Color(0.8, 0.8, 0.8, 0.7))

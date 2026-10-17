@@ -88,9 +88,10 @@ func _on_area_entered(area: Area2D) -> void:
 		area.on_scissor(self)
 
 
+const ART := preload("res://assets/art/enemies/enemy_scissor.png")
+
+
 func _draw() -> void:
-	var c := Color("ffd23f") if golden else Color("5ce1e6") if deflected else Color("ff5a5a")
-	draw_line(Vector2(-10, -4), Vector2(10, 4), c, 4.0)
-	draw_line(Vector2(-10, 4), Vector2(10, -4), c, 4.0)
-	draw_circle(Vector2(-10, -4), 3.0, c)
-	draw_circle(Vector2(-10, 4), 3.0, c)
+	# Frames: enemy (red) | parried (cyan) | golden. The node's rotation points it.
+	var frame := 2 if golden else 1 if deflected else 0
+	draw_texture_rect_region(ART, Rect2(-14, -8, 28, 16), Rect2(frame * 28, 0, 28, 16))

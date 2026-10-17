@@ -57,17 +57,14 @@ func take_hit(damage: int, stun_time: float = 0.0, knockback := Vector2.ZERO) ->
 		queue_free()
 
 
+const ART := preload("res://assets/art/enemies/enemy_clipper.png")
+
+
 func _draw() -> void:
-	# An electric hair clipper on the loose.
+	# An electric hair clipper on the loose (tools/art/make_world_art.py), blades forward.
 	var stunned := stun > 0.0
-	var body := Color("7f8c8d") if stunned else Color("34495e")
-	var front := SIZE.x / 2.0 * direction
-	draw_rect(Rect2(Vector2(-SIZE.x / 2, -SIZE.y + 4), Vector2(SIZE.x, SIZE.y - 4)), body)
-	draw_rect(Rect2(Vector2(-SIZE.x / 2, -SIZE.y), Vector2(SIZE.x, 6)), body.lightened(0.2))
-	for i in 5:
-		var y := -SIZE.y + 3.0 + i * 4.5
-		draw_line(Vector2(front, y), Vector2(front + 6.0 * direction, y), Color("ecf0f1"), 2.0)
-	draw_circle(Vector2(-front * 0.4, -SIZE.y + 10), 2.5, Color("555555") if stunned else Color("2ecc71"))
-	draw_line(Vector2(-front, -6), Vector2(-front - 10.0 * direction, -2), Color("222222"), 2.0)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(direction, 1.0))
+	draw_texture_rect_region(ART, Rect2(-22, -31, 44, 32), Rect2(44 if stunned else 0, 0, 44, 32))
+	draw_set_transform(Vector2.ZERO)
 	if stunned:
-		draw_circle(Vector2(0, -32), 4.0, Color.YELLOW)
+		draw_circle(Vector2(0, -36), 4.0, Color.YELLOW)

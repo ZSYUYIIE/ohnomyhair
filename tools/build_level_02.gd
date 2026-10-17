@@ -44,6 +44,8 @@ func _configure() -> void:
 	level_title = "LEVEL 2 - Return to Sender"
 	next_level = "res://scenes/levels/level_03.tscn"
 	scene_path = "res://scenes/levels/level_02.tscn"
+	tile_atlas = "res://assets/art/l2/tiles_l2.png"
+	tileset_path = "res://assets/art/l2/salon_tileset.tres"
 
 
 func _rooms() -> Array:
@@ -53,7 +55,7 @@ func _rooms() -> Array:
 ## Room 1: a scissor dispenser fires along body height. Parrying alone just jams it;
 ## the bell over the trench only rings for a caught-and-tossed scissor. Shelves lead up to the door.
 func _room_1() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Return to Sender", Color("e3dcef")))
+	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Return to Sender", Color("e3dcef"), "res://assets/art/l2/bg_l2_01_reception.png"))
 	rb.solid(0, 19, 19, 22)
 	rb.solid(21, 19, 38, 22)
 	rb.solid(20, 21, 20, 22)    # trench at x=20, 2 deep: scissors fly over a player in it
@@ -79,7 +81,7 @@ func _room_1() -> RoomBuilder:
 ## Room 2: two bells, one trench each; the door needs both. The clipper bot patrols
 ## between the trenches and eats parried scissors meant for the far one.
 func _room_2() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room2", "2 - Scissor Corridor", Color("dfe7f2")))
+	var rb := RoomBuilder.new(self, room_node("Room2", "2 - Scissor Corridor", Color("dfe7f2"), "res://assets/art/l2/bg_l2_02_corridor.png"))
 	rb.ascii(CORRIDOR)
 	rb.spawn(1, 2, 21)
 	rb.spawn(2, 3, 21)

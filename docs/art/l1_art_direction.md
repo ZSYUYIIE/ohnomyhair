@@ -1,7 +1,7 @@
-# Art direction: doodle cartoon (Level 1)
+# Art direction: doodle cartoon (all levels)
 
-> Applies to Level 1 so far. L2 and L3 still use the greybox tiles and SalonDecor walls, but they
-> already share the new characters and the restyled lever, lift, gel, dye basin and exit.
+> Started with Level 1; Levels 2-4 now follow it too (see "Levels 2-4" below). No greybox
+> tiles or SalonDecor walls are left in the levels (the main menu still uses SalonDecor).
 > Asset list and provenance: [asset_manifest.json](asset_manifest.json).
 
 ## Game frame
@@ -71,21 +71,40 @@ On the characters: a soaked friend's sprite is tinted `WET_TINT` (cool blue) wit
 shows the `pull` pose while holding a caught scissor; every hit throws a `HairSnip` puff in the
 haircut's colour.
 
+## Levels 2-4 (`tools/art/make_world_art.py`)
+
+Same helpers and rules as L1, so nothing new to learn:
+
+- **Tiles:** the L1 cabinet atlas redrawn in each level's colours:
+  - L2 reception: walnut (`assets/art/l2/tiles_l2.png`);
+  - L3 wash room: grey-blue ceramic (`l3/tiles_l3.png`), kept away from the mint gel;
+  - L4 after hours: dark mahogany (`l4/tiles_l4.png`).
+- **Walls (one per room):**
+  - L2: reception (clock, appointment board, plant, the haircut sketches); staff corridor (pegboard of tools, staggered lockers, towels).
+  - L3: blow-dry bar (hood dryers, mirrors, warm swirls); shampoo station (staggered tiles, bottle niches, towels); rinse (hoses, swirls, bubbles).
+  - L4: closing time (night window, moon sign, clock at 11:55, broom); the chair (spotlight on the tunnel, haircut sketches with swap arrows); the workshop (gears, the bot's blueprint, striped pillars).
+- **Enemies** (`assets/art/enemies/`), drawn facing right and mirrored in code:
+  - clipper bot: patrolling | stunned;
+  - scissors: enemy red | parried cyan | golden (cyan, not P2's blue);
+  - scissor dispenser: one frame; the warning light and jam puff are code;
+  - barber bot: normal | dazed (gold knob, X eyes) | hurt flash. HP bars and STOMP! are code.
+- **Props:** service bell (waiting | rung), staff door (32x64 nine-slice; window, STAFF plate and pips are code), barber's chair (waiting | used).
+
 ## Rebuild everything
 
 ```
 python -I tools/art/normalize_characters.py
 python -I tools/art/make_l1_art.py
 python -I tools/art/make_salon_props.py
+python -I tools/art/make_world_art.py
 godot --headless --path . --import
 godot --headless --path . --script res://tools/build_character_frames.gd
-godot --headless --path . --script res://tools/build_level_01.gd
+godot --headless --path . --script res://tools/build_level_01.gd   # and 02, 03, 04
 ```
 
 Then check the art in context with `godot --path . --script res://tools/render_rooms.gd`.
 
 ## Next (not done)
 
-- L2/L3 rooms: their own backgrounds, plus enemy, Boss, chair and turret art.
 - HUD portraits could crop the idle frame's head instead of using colour blocks.
 - The dye pools in L1 rooms 2 and 3 sit mostly behind the bottom HUD bar: only the top 16 px of the dye shows. This is a layout issue, and it was already like this in the greybox.

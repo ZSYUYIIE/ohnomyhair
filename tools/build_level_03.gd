@@ -16,6 +16,8 @@ func _configure() -> void:
 	level_title = "LEVEL 3 - Wash & Blow-Dry"
 	next_level = "res://scenes/levels/level_04.tscn"
 	scene_path = "res://scenes/levels/level_03.tscn"
+	tile_atlas = "res://assets/art/l3/tiles_l3.png"
+	tileset_path = "res://assets/art/l3/salon_tileset.tres"
 
 
 func _rooms() -> Array:
@@ -26,7 +28,7 @@ func _rooms() -> Array:
 ## Then the exit ledge is 11 tiles up: carrying P2 in the warm air only hovers, so P2
 ## stands on P1's head and rides up (Hair-copter), then hops onto the ledge.
 func _room_1() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Blow-Dry Bar", Color("fbe9de")))
+	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Blow-Dry Bar", Color("fbe9de"), "res://assets/art/l3/bg_l3_01_blow_dry.png"))
 	rb.solid(0, 19, 38, 22)
 	rb.spawn(1, 2, 19)
 	rb.spawn(2, 4, 19)
@@ -49,7 +51,7 @@ func _room_1() -> RoomBuilder:
 ## soaked, the pompadour just bounces off it - go back to the dryer before the shower,
 ## dry off, and cross between sprays.
 func _room_2() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room2", "2 - Shampoo Station", Color("e2f1f4")))
+	var rb := RoomBuilder.new(self, room_node("Room2", "2 - Shampoo Station", Color("e2f1f4"), "res://assets/art/l3/bg_l3_02_shampoo.png"))
 	rb.solid(0, 19, 8, 22)        # start floor
 	rb.solid(9, 17, 11, 22)       # take-off ledge (2 up)
 	rb.dye_pool("DyePool", 12, 20, 10, 2)
@@ -71,7 +73,7 @@ func _room_2() -> RoomBuilder:
 ## soaks you; on the ledge, drink the tonic, dry off, smash the gel, and parry the
 ## scissor dispenser that the gel was shielding you from.
 func _room_3() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room3", "3 - Rinse & Repeat", Color("f3e6f4")))
+	var rb := RoomBuilder.new(self, room_node("Room3", "3 - Rinse & Repeat", Color("f3e6f4"), "res://assets/art/l3/bg_l3_03_rinse.png"))
 	rb.solid(0, 19, 38, 22)
 	rb.spawn(1, 2, 19)
 	rb.spawn(2, 4, 19)

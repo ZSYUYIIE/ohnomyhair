@@ -12,6 +12,8 @@ func _configure() -> void:
 	level_name = "Level04"
 	level_title = "LEVEL 4 - The Barber"
 	scene_path = "res://scenes/levels/level_04.tscn"
+	tile_atlas = "res://assets/art/l4/tiles_l4.png"
+	tileset_path = "res://assets/art/l4/salon_tileset.tres"
 	ending_text = "THE END\n\nThe barber offers to fix your hair.\nYou look at each other... and say no.\nBad hair. Good friends."
 
 
@@ -22,7 +24,7 @@ func _rooms() -> Array:
 ## Room 1: a turret fires along the take-off ledge and the carry's flight line.
 ## Parry first to jam it, or parry while being carried. A clipper bot guards the landing.
 func _room_1() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Closing Time", Color("efe3d0")))
+	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Closing Time", Color("efe3d0"), "res://assets/art/l4/bg_l4_01_closing.png"))
 	rb.solid(0, 19, 6, 22)      # start floor
 	rb.solid(7, 17, 11, 22)     # take-off ledge (2 up)
 	rb.solid(21, 19, 38, 22)    # landing (pool is 9 wide: carry from the ledge clears 11.4)
@@ -46,7 +48,7 @@ func _room_1() -> RoomBuilder:
 ## parries, P2 (now twin-tails) catches and tosses from the trench to ring the bell, P1 launches P2
 ## up the cliff, P2 pulls the lever so the step rises for P1.
 func _room_2() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room2", "2 - The Chair", Color("f6dde4")))
+	var rb := RoomBuilder.new(self, room_node("Room2", "2 - The Chair", Color("f6dde4"), "res://assets/art/l4/bg_l4_02_chair.png"))
 	rb.solid(0, 19, 26, 22)     # floor...
 	rb.solid(28, 19, 38, 22)
 	rb.solid(27, 21, 27, 22)    # ...with a catch trench at x=27
@@ -90,7 +92,7 @@ func _room_2() -> RoomBuilder:
 ## Room 3: the barber bot. Parry its scissors (or make it crash a charge) to daze it,
 ## then land on its head knob: launch from a friend's head, or glide from a ledge.
 func _room_3() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room3", "3 - The Barber Bot", Color("e2d6d6")))
+	var rb := RoomBuilder.new(self, room_node("Room3", "3 - The Barber Bot", Color("e2d6d6"), "res://assets/art/l4/bg_l4_03_workshop.png"))
 	rb.node.starts_with_swapped_hair = true
 	rb.solid(0, 19, 38, 22)     # arena floor
 	# Corner ledges only: a charge crashes the bot right under them, so you can drop
