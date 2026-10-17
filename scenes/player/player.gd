@@ -1,7 +1,9 @@
 class_name Player
 extends CharacterBody2D
-## Shared controller for both friends. Movement lives here; whatever the
-## haircut does lives in a HairAbility child, so hair can be swapped at runtime.
+## Shared controller for both friends. Movement, HP and carrying live here; whatever
+## the haircut does lives in a HairAbility child, so hair can be swapped at runtime.
+## Origin is the body's center. Friends pass through each other, but each has a
+## one-way pad on top of the head so the other can stand on it (for the launch).
 
 signal died(player: Player)
 
@@ -31,12 +33,17 @@ const CARRY_HANG := Vector2(0, 30)
 @export var jump_buffer := 0.12
 @export var jump_cut := 0.45
 
+@export_group("Health")
+@export var max_hp := 3
+@export var invincible_time := 0.7
+
 @onready var gravity := 2.0 * jump_height / (time_to_apex * time_to_apex)
 @onready var jump_velocity := -2.0 * jump_height / time_to_apex
 @onready var visual: Node2D = $Visual
 @onready var body_rect: ColorRect = $Visual/Body
 @onready var interact_area: Area2D = $InteractArea
-@onready var head_pad: Area2D = $HeadPad
+@onready var head_pad: AnimatableBody2D = $HeadPad
+@onready var hit_box: Area2D = $HitBox
 @onready var shape: CollisionShape2D = $CollisionShape2D
 @onready var label: Label = $Label
 @onready var _label_home := label.position
@@ -44,8 +51,11 @@ const CARRY_HANG := Vector2(0, 30)
 var ability: HairAbility
 var facing := 1.0
 var alive := true
+var hp := 3
 ## Abilities lower this each tick (gliding); reset to max_fall_speed every frame.
 var fall_cap := 0.0
+## Seconds during which input doesn't steer (knockback).
+var control_lock := 0.0
 var carrying: Player = null
 var carried_by: Player = null
 
@@ -53,15 +63,22 @@ var _actions := {}
 var _coyote := 0.0
 var _buffer := 0.0
 var _can_cut_jump := false
-var _separating: Player = null  # collision with this friend is restored once we no longer overlap
+var _invincible := 0.0
+var _separating: Player = null  # pads are re-enabled once we no longer overlap this friend
 
 
 func _ready() -> void:
 	for a in ["left", "right", "jump", "down", "skill", "attack"]:
 		_actions[a] = StringName("p%d_%s" % [player_id, a])
 	add_to_group("players")
+	add_collision_exception_with(head_pad)
 	label.text = "P%d" % player_id
+	hp = max_hp
 	set_hair(hair)
+
+
+func act(action: String) -> StringName:
+	return _actions[action]
 
 
 func pressed(action: String) -> bool:
@@ -76,9 +93,17 @@ func released(action: String) -> bool:
 	return Input.is_action_just_released(_actions[action])
 
 
+func teammate() -> Player:
+	for p in get_tree().get_nodes_in_group("players"):
+		if p != self:
+			return p
+	return null
+
+
 func set_hair(new_hair: Hair) -> void:
 	hair = new_hair
 	if ability:
+		ability.reset()
 		ability.queue_free()
 	ability = HAIR_SCRIPTS[hair].new()
 	ability.player = self
@@ -88,8 +113,10 @@ func set_hair(new_hair: Hair) -> void:
 
 func _physics_process(delta: float) -> void:
 	if _separating and _apart_from(_separating):
-		_set_collision_with(_separating, true)
+		_set_pads_with(_separating, true)
 		_separating = null
+	_invincible = maxf(_invincible - delta, 0.0)
+	visual.modulate.a = 0.35 if _invincible > 0.0 and int(_invincible * 20.0) % 2 == 0 else 1.0
 	if not alive:
 		return
 	if carried_by:
@@ -99,11 +126,13 @@ func _physics_process(delta: float) -> void:
 
 	_coyote = coyote_time if is_on_floor() else _coyote - delta
 	_buffer = jump_buffer if pressed("jump") else _buffer - delta
+	control_lock = maxf(control_lock - delta, 0.0)
 
 	var dir := Input.get_axis(_actions.left, _actions.right)
-	if dir != 0.0:
+	if dir != 0.0 and control_lock <= 0.0:
 		facing = signf(dir)
 		visual.scale.x = facing
+	hit_box.position.x = absf(hit_box.position.x) * facing
 
 	fall_cap = max_fall_speed
 	ability.tick(delta)
@@ -123,8 +152,11 @@ func _physics_process(delta: float) -> void:
 	velocity.y += g * delta
 	if velocity.y > fall_cap:
 		velocity.y = move_toward(velocity.y, fall_cap, 4000.0 * delta)
-	var accel := ground_accel if is_on_floor() else air_accel
-	velocity.x = move_toward(velocity.x, dir * run_speed, accel * delta)
+	if control_lock > 0.0:
+		velocity.x = move_toward(velocity.x, 0.0, 1200.0 * delta)
+	else:
+		var accel := ground_accel if is_on_floor() else air_accel
+		velocity.x = move_toward(velocity.x, dir * run_speed, accel * delta)
 
 	move_and_slide()
 	ability.after_move()
@@ -142,13 +174,34 @@ func launch(height: float) -> void:
 	_jump(-sqrt(2.0 * gravity * height), false)
 
 
+## True when `other` is standing on this player's head pad.
+func has_rider(other: Player) -> bool:
+	var feet := other.global_position.y + HALF_SIZE.y
+	var head := global_position.y - HALF_SIZE.y
+	return other.is_on_floor() and absf(feet - head) < 6.0 and absf(other.global_position.x - global_position.x) < HALF_SIZE.x * 2.0
+
+
+# --- Damage -------------------------------------------------------------------
+
+func take_hit(damage: int, _stun_time: float = 0.0, knockback := Vector2.ZERO) -> void:
+	if damage <= 0 or _invincible > 0.0 or not alive:
+		return
+	hp -= damage
+	_invincible = invincible_time
+	if knockback != Vector2.ZERO and carried_by == null:
+		velocity = knockback
+		control_lock = 0.2
+	if hp <= 0:
+		die()
+
+
 # --- Carrying (twin-tails grab) ---------------------------------------------
 
 func grab(other: Player) -> void:
 	carrying = other
 	other.carried_by = self
 	other.velocity = Vector2.ZERO
-	_set_collision_with(other, false)
+	_set_pads_with(other, false)
 
 
 func drop() -> void:
@@ -184,13 +237,14 @@ func _ease_visual_to(offset: Vector2) -> void:
 	label.position = _label_home + visual.position
 
 
-func _set_collision_with(other: Player, on: bool) -> void:
+## Overlapping friends must not stand on each other's head pads.
+func _set_pads_with(other: Player, on: bool) -> void:
 	if on:
-		remove_collision_exception_with(other)
-		other.remove_collision_exception_with(self)
+		remove_collision_exception_with(other.head_pad)
+		other.remove_collision_exception_with(head_pad)
 	else:
-		add_collision_exception_with(other)
-		other.add_collision_exception_with(self)
+		add_collision_exception_with(other.head_pad)
+		other.add_collision_exception_with(head_pad)
 
 
 func _apart_from(other: Player) -> bool:
@@ -218,7 +272,7 @@ func respawn_at(pos: Vector2) -> void:
 		carried_by.drop()
 	for p in get_tree().get_nodes_in_group("players"):
 		if p != self:
-			_set_collision_with(p, true)
+			_set_pads_with(p, true)
 	_separating = null
 	global_position = pos
 	velocity = Vector2.ZERO
@@ -226,6 +280,9 @@ func respawn_at(pos: Vector2) -> void:
 	label.position = _label_home
 	_coyote = 0.0
 	_buffer = 0.0
+	control_lock = 0.0
+	hp = max_hp
+	_invincible = 1.0
 	ability.reset()
 	alive = true
 	show()
@@ -236,3 +293,21 @@ func set_frozen(frozen: bool) -> void:
 	set_physics_process(not frozen)
 	if frozen:
 		velocity = Vector2.ZERO
+
+
+## Freeze-frame for impact (parry, boss hits).
+func hit_stop(duration: float) -> void:
+	Engine.time_scale = 0.05
+	await get_tree().create_timer(duration, true, false, true).timeout
+	Engine.time_scale = 1.0
+
+
+## Adds a rectangle CollisionShape2D (centered at `offset`) to a physics node built in code.
+static func add_rect_shape(owner_node: Node, size: Vector2, offset: Vector2) -> CollisionShape2D:
+	var col := CollisionShape2D.new()
+	var rect := RectangleShape2D.new()
+	rect.size = size
+	col.shape = rect
+	col.position = offset
+	owner_node.add_child(col)
+	return col

@@ -1,21 +1,30 @@
+class_name Pompadour
 extends HairAbility
-## Pompadour "The Parry": press skill to dash forward and smash hair-gel walls.
-## If your friend is standing on your head, the same press launches them upward.
+## Pompadour "The Parry".
+## Skill: launch a friend standing on your head; otherwise dash forward, smashing
+## hair-gel walls and ramming enemies.
+## Attack: parry (0.15 s window) that sends scissors back the way they came.
 
 const HAIR_COLOR := Color("3a8fd6")
 
 @export var dash_speed := 720.0
 @export var dash_time := 0.16
 @export var dash_cooldown := 0.4
-@export var launch_height := 224.0  # 7 tiles above your head
+@export var launch_height := 256.0  # rider rises 8 tiles above your head
+@export var parry_window := 0.15
+@export var parry_cooldown := 0.4
 
 var _dash_left := 0.0
 var _dash_dir := 1.0
 var _cooldown := 0.0
+var _parry := 0.0
+var _parry_cooldown := 0.0
+var _struck: Array[Node] = []
 
 
 func _init() -> void:
 	body_color = Color("a9d4ff")
+	display_name = "Pompadour"
 
 
 func tick(delta: float) -> void:
@@ -28,10 +37,25 @@ func tick(delta: float) -> void:
 			_dash_left = dash_time
 			_dash_dir = player.facing
 			_cooldown = dash_cooldown
+			_struck.clear()
 
 	if _dash_left > 0.0:
 		_dash_left -= delta
 		player.velocity = Vector2(_dash_dir * dash_speed, 0.0)
+		strike(_struck, 1, 0.3, Vector2(320.0, -160.0))
+
+	_parry_cooldown -= delta
+	if player.pressed("attack") and _parry_cooldown <= 0.0:
+		_parry = parry_window
+		_parry_cooldown = parry_cooldown
+		_struck.clear()
+	if _parry > 0.0:
+		_parry -= delta
+		for area in player.hit_box.get_overlapping_areas():
+			if area is Scissor and not area.deflected:
+				area.deflect()
+				player.hit_stop(0.05)
+		strike(_struck, 1, 0.2, Vector2(240.0, -120.0))
 	queue_redraw()
 
 
@@ -54,15 +78,14 @@ func after_move() -> void:
 func reset() -> void:
 	_dash_left = 0.0
 	_cooldown = 0.0
+	_parry = 0.0
 	queue_redraw()
 
 
 func _rider() -> Player:
-	for body in player.head_pad.get_overlapping_bodies():
-		# Must really be standing on top: a friend overlapping us (e.g. right after a carry) doesn't count.
-		var on_top: bool = body.global_position.y < player.global_position.y - Player.HALF_SIZE.y
-		if body is Player and body != player and body.alive and body.carried_by == null and body.is_on_floor() and on_top:
-			return body
+	var mate := player.teammate()
+	if mate and mate.alive and mate.carried_by == null and player.has_rider(mate):
+		return mate
 	return null
 
 
@@ -75,3 +98,5 @@ func _draw() -> void:
 		for i in 3:
 			var x := -24.0 - i * 10.0
 			draw_line(Vector2(x, top + 10 + i * 8), Vector2(x - 14, top + 10 + i * 8), HAIR_COLOR, 3.0)
+	if _parry > 0.0:
+		draw_arc(Vector2(20, 0), 24.0, -PI / 2, PI / 2, 12, Color.WHITE, 4.0)

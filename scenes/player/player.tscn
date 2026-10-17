@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
 
@@ -9,11 +9,14 @@ size = Vector2(28, 44)
 radius = 44.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_head"]
-size = Vector2(26, 12)
+size = Vector2(26, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(44, 52)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 65
 script = ExtResource("1_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -60,11 +63,22 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_reach")
 
-[node name="HeadPad" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
+[node name="HeadPad" type="AnimatableBody2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+sync_to_physics = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadPad"]
-position = Vector2(0, -24)
+position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_head")
+one_way_collision = true
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(24, 0)
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_hit")

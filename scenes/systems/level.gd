@@ -20,6 +20,7 @@ var _banner_tween: Tween
 
 
 func _ready() -> void:
+	add_child(Hud.new())
 	for room in $Rooms.get_children():
 		rooms.append(room)
 		room.exit.both_inside.connect(_on_room_cleared.bind(room))

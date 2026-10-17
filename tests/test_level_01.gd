@@ -1,7 +1,7 @@
 extends SceneTree
 ## Bot playthrough of L1: drives both players with simulated input through all
 ## three rooms and checks each puzzle step. Exits non-zero if any step fails.
-## Run: godot --headless --fixed-fps 60 --path . --script res://tools/test_level_01.gd
+## Run: godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 
 const TILE := 32.0
 const LevelScene := preload("res://scenes/levels/level_01.tscn")
