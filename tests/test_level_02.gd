@@ -46,17 +46,21 @@ func _ready() -> void:
 	_check("switch still off", not hit_switch.pressed, hit_switch.pressed)
 
 	# 4. Parry + spring lever: scissor bends up into the switch, door opens.
+	#    Regression for playtest 1: P2 parries right beside the plate and P1 pulls just after,
+	#    so the plate rises while the scissor already overlaps it.
 	a.global_position = lever.global_position + Vector2(-6, 0)
+	b.global_position = Vector2(440, 240)
+	b.facing = 1.0
 	b.hp = b.max_hp
 	turret._jam = 0.0
 	turret._timer = 0.05
 	await _wait_for_incoming(b)
-	await _tap("p1_skill")
 	await _tap("p2_attack")
+	await _tap("p1_skill")
 	await _frames(120)
 	_check("deflected scissor hits the switch", hit_switch.pressed, hit_switch.pressed)
 	_check("door opens", door.is_open, door.is_open)
-	await _frames(90)
+	await _frames(160)
 	_check("spring lever has sprung back", not lever.on, lever.on)
 
 	# 5. Getting hit by a scissor costs 1 HP.
@@ -80,11 +84,12 @@ func _ready() -> void:
 	get_tree().quit(0 if _failures == 0 else 1)
 
 
-func _wait_for_incoming(b: Player) -> void:
+## Waits until an incoming scissor is `distance` px in front of P2 (20 = parry range).
+func _wait_for_incoming(b: Player, distance := 20.0) -> void:
 	for i in 600:
 		for s in get_tree().get_nodes_in_group("scissors"):
 			var dx: float = s.global_position.x - b.global_position.x
-			if not s.deflected and dx > 14.0 and dx < 26.0:
+			if not s.deflected and absf(dx - distance) < 6.0:
 				return
 		await get_tree().physics_frame
 	_check("an incoming scissor reached P2", false, "timeout")
