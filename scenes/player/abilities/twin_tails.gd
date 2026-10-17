@@ -65,5 +65,5 @@ func _draw() -> void:
 		draw_rect(Rect2(14, top + 2, 6, 18), HAIR_COLOR)
 	draw_rect(Rect2(-14, top - 4, 28, 8), HAIR_COLOR)
 	if player.carrying:
-		var target := to_local(player.carrying.global_position + Vector2(0, -Player.HALF_SIZE.y))
+		var target := to_local(player.carrying.visual.global_position + Vector2(0, -Player.HALF_SIZE.y))
 		draw_line(Vector2(0, top), target, HAIR_COLOR, 4.0)

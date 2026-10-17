@@ -44,8 +44,8 @@ func _room_1() -> void:
 	await _ticks(30)
 	check(not is_instance_valid(room.get_node_or_null("GelWall")), "R1: pompadour dash smashes the gel wall")
 
-	await walk_to(p1, 22 * TILE)
-	check(await glide_jump(p1, 24 * TILE - 4, 32 * TILE + 20), "R1: twin-tails glides over the 8-tile pit")
+	await walk_to(p1, 20 * TILE)
+	check(await glide_jump(p1, 22 * TILE - 4, 32 * TILE + 20), "R1: twin-tails glides over the 10-tile pit")
 	await walk_to(p1, 34 * TILE + 16)
 	await tap(p1, "skill")
 	check(room.get_node("Lever").is_on, "R1: twin-tails pulls the lever")
@@ -64,7 +64,10 @@ func _room_2() -> void:
 	hold(p1, "skill", true)
 	await _ticks(2)
 	check(p1.carrying == p2, "R2: twin-tails grabs pompadour")
-	check(await glide_jump(p1, o + 12 * TILE - 4, o + 21 * TILE, false), "R2: carry over the dye pool from the take-off ledge")
+	# Sloppy on purpose (real players did this): P1 only taps jump, P2 mashes jump while carried.
+	hold(p2, "jump", true)
+	check(await glide_jump(p1, o + 12 * TILE - 4, o + 21 * TILE, false, 6), "R2: sloppy carry (tap jump, P2 mashing jump) still crosses the dye")
+	hold(p2, "jump", false)
 	hold(p1, "skill", false)
 	await _ticks(10)
 	check(p2.alive and p2.global_position.x > o + 20 * TILE, "R2: pompadour lands safely")
@@ -193,7 +196,8 @@ func walk_to(p: Player, x: float, max_ticks := 600) -> void:
 
 
 ## Run right, jump at take_off_x holding jump + skill (glide), land past land_x.
-func glide_jump(p: Player, take_off_x: float, land_x: float, release_skill := true) -> bool:
+## jump_frames > 0 releases jump after that many frames (a tap); otherwise it's held.
+func glide_jump(p: Player, take_off_x: float, land_x: float, release_skill := true, jump_frames := -1) -> bool:
 	hold(p, "skill", true)
 	hold(p, "right", true)
 	var jumped := false
@@ -202,6 +206,10 @@ func glide_jump(p: Player, take_off_x: float, land_x: float, release_skill := tr
 		if not jumped and p.global_position.x >= take_off_x:
 			hold(p, "jump", true)
 			jumped = true
+		elif jumped and jump_frames > 0:
+			jump_frames -= 1
+			if jump_frames == 0:
+				hold(p, "jump", false)
 		elif jumped and p.is_on_floor() and p.global_position.x > land_x:
 			break
 	hold(p, "right", false)

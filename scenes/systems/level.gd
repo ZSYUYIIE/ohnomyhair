@@ -26,6 +26,10 @@ func _ready() -> void:
 	for player in $Players.get_children():
 		players.append(player)
 		player.died.connect(_on_player_died)
+	# `godot ... -- --room=3` starts in room 3 (1-based) without editing the scene.
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--room="):
+			start_room = arg.get_slice("=", 1).to_int() - 1
 	room_index = clampi(start_room, 0, rooms.size() - 1)
 	camera.position = rooms[room_index].position
 	_place_players()

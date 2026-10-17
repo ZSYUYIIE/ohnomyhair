@@ -12,8 +12,9 @@ const HAIR_SCRIPTS := {
 	Hair.POMPADOUR: preload("res://scenes/player/abilities/pompadour.gd"),
 }
 const HALF_SIZE := Vector2(14, 22)  # keep in sync with CollisionShape2D (28x44)
-const CARRY_OFFSET := Vector2(0, 48)  # carried friend hangs this far below the carrier
-const CARRY_BREAK_DISTANCE := 96.0
+## Carried friend is drawn this far below the carrier. Visual only: their collision
+## box sits exactly on the carrier's, so they can never snag on a ledge the carrier clears.
+const CARRY_HANG := Vector2(0, 30)
 
 @export var player_id := 1
 @export var hair := Hair.TWIN_TAILS
@@ -37,6 +38,8 @@ const CARRY_BREAK_DISTANCE := 96.0
 @onready var interact_area: Area2D = $InteractArea
 @onready var head_pad: Area2D = $HeadPad
 @onready var shape: CollisionShape2D = $CollisionShape2D
+@onready var label: Label = $Label
+@onready var _label_home := label.position
 
 var ability: HairAbility
 var facing := 1.0
@@ -57,7 +60,7 @@ func _ready() -> void:
 	for a in ["left", "right", "jump", "down", "skill", "attack"]:
 		_actions[a] = StringName("p%d_%s" % [player_id, a])
 	add_to_group("players")
-	$Label.text = "P%d" % player_id
+	label.text = "P%d" % player_id
 	set_hair(hair)
 
 
@@ -90,8 +93,9 @@ func _physics_process(delta: float) -> void:
 	if not alive:
 		return
 	if carried_by:
-		_follow_carrier(delta)
+		_follow_carrier()
 		return
+	_ease_visual_to(Vector2.ZERO)
 
 	_coyote = coyote_time if is_on_floor() else _coyote - delta
 	_buffer = jump_buffer if pressed("jump") else _buffer - delta
@@ -109,7 +113,8 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if _buffer > 0.0 and _coyote > 0.0:
-		_jump(jump_velocity, true)
+		# Carrying always takes a full jump: a short hop with a friend attached just drops them in the dye.
+		_jump(jump_velocity, carrying == null)
 	if released("jump") and _can_cut_jump and velocity.y < 0.0:
 		velocity.y *= jump_cut
 		_can_cut_jump = false
@@ -155,21 +160,28 @@ func drop() -> void:
 	_separating = other
 
 
-func _follow_carrier(delta: float) -> void:
+## While carried: ride exactly on the carrier. Jump is ignored on purpose (players
+## mash it in sync with the carrier's jump); press down to let go.
+func _follow_carrier() -> void:
 	var carrier := carried_by
-	if pressed("jump"):
-		carrier.drop()
-		_jump(jump_velocity * 0.7, false)
-		return
-	var to_anchor := carrier.global_position + CARRY_OFFSET - global_position
-	if to_anchor.length() > CARRY_BREAK_DISTANCE:
+	if pressed("down"):
 		carrier.drop()
 		return
-	# Steer onto the anchor with move_and_slide so the dangling friend still collides with walls.
-	velocity = (to_anchor / delta).limit_length(1500.0)
+	global_position = carrier.global_position
+	velocity = carrier.velocity
 	facing = carrier.facing
 	visual.scale.x = facing
-	move_and_slide()
+	# Dangle below in the air; tuck in behind the carrier when they stand on the ground.
+	_ease_visual_to(CARRY_HANG if not carrier.is_on_floor() else Vector2(-carrier.facing * 16.0, 0))
+
+
+func _ease_visual_to(offset: Vector2) -> void:
+	if visual.position == offset:
+		return
+	visual.position = visual.position.lerp(offset, 0.3)
+	if visual.position.distance_to(offset) < 0.5:
+		visual.position = offset
+	label.position = _label_home + visual.position
 
 
 func _set_collision_with(other: Player, on: bool) -> void:
@@ -210,6 +222,8 @@ func respawn_at(pos: Vector2) -> void:
 	_separating = null
 	global_position = pos
 	velocity = Vector2.ZERO
+	visual.position = Vector2.ZERO
+	label.position = _label_home
 	_coyote = 0.0
 	_buffer = 0.0
 	ability.reset()

@@ -8,7 +8,7 @@ extends SceneTree
 ## Measured metrics these gaps were sized against (rerun tools/measure_metrics.gd
 ## after changing movement), as gap clearable from a running take-off:
 ##   jump: 3.56 high, 6.2 flat / 7.0 landing 2 lower / 8.1 landing 6 lower
-##   glide: 12.5 flat     carry: 7.0 flat / 9.5 two lower / 14.6 six lower
+##   glide: 12.5 flat     carry: 8.9 flat / 11.4 two lower / 16.5 six lower
 ##   launch: rider's feet peak 8.1 above the floor     dash: 5.2
 
 const TILE := 32
@@ -176,15 +176,15 @@ func _room_1() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, _room_node("Room1", "1 - Mirror, Mirror", Color("f3e3d3")))
 	rb.solid(0, 19, 7, 22)      # start floor
 	rb.solid(8, 17, 11, 22)     # step
-	rb.solid(12, 15, 23, 22)    # plateau
-	rb.solid(24, 18, 25, 22)    # pit: step back up
-	rb.solid(26, 19, 31, 22)    # pit: safe floor
+	rb.solid(12, 15, 21, 22)    # plateau
+	rb.solid(22, 18, 23, 22)    # pit: step back up
+	rb.solid(24, 19, 31, 22)    # pit: safe floor (pit is 10 wide: glide yes, carry/jump no)
 	rb.solid(32, 15, 38, 22)    # far side
 	rb.spawn(1, 3, 19)
 	rb.spawn(2, 5, 19)
 	rb.gel_wall("GelWall", 17, 10, 2, 5)
 	var lever := rb.lever("Lever", 34, 14)
-	rb.block("Bridge", 24, 9, 8, 1, Vector2i(0, 6), lever)
+	rb.block("Bridge", 22, 9, 10, 1, Vector2i(0, 6), lever)
 	rb.exit(36, 12)
 	rb.hint("P1 Twin-Tails:  A / D move   W jump   HOLD G glide", Vector2(48, 290))
 	rb.hint("P2 Pompadour:  arrow keys move & jump   /  dash", Vector2(48, 318))
