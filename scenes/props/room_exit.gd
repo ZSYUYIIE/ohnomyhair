@@ -5,6 +5,9 @@ extends Area2D
 
 signal both_inside
 
+## The glass shop door; the OPEN sign and the arrival pips above are drawn on top.
+const ART := preload("res://assets/art/props/prop_exit.png")
+
 @export var size := Vector2(64, 96):
 	set(value):
 		size = value
@@ -41,8 +44,7 @@ func _physics_process(_delta: float) -> void:
 
 func _draw() -> void:
 	var frame := Color("2e8b57")
-	draw_rect(Rect2(Vector2.ZERO, size), Color(frame, 0.12 + 0.2 * _inside))
-	draw_rect(Rect2(Vector2.ZERO, size), frame, false, 4.0)
+	draw_texture_rect(ART, Rect2(Vector2.ZERO, size), false)
 	# Hanging OPEN sign.
 	var sign_rect := Rect2(Vector2(size.x / 2.0 - 22.0, 10.0), Vector2(44, 16))
 	draw_line(Vector2(size.x / 2.0 - 14.0, 0), sign_rect.position + Vector2(8, 0), frame, 1.0)

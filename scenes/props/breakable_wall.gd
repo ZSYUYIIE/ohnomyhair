@@ -65,15 +65,11 @@ func _player_inside() -> bool:
 
 func _draw() -> void:
 	var gel := Color("9be7d8")
-	draw_rect(Rect2(Vector2.ZERO, size), gel)
-	var y := 8.0
-	while y < size.y:
-		draw_line(Vector2(4, y), Vector2(size.x - 4, y + 10), gel.darkened(0.25), 2.0)
-		y += 24.0
-	draw_rect(Rect2(Vector2.ZERO, size), gel.darkened(0.45), false, 2.0)
+	draw_style_box(PropArt.nine_slice("res://assets/art/props/prop_gel.png", 14.0), Rect2(Vector2.ZERO, size))
 	if regrow_time > 0.0:
 		# Drips along the bottom edge: this gel grows back.
-		var x := 6.0
-		while x < size.x - 4.0:
-			draw_rect(Rect2(x, size.y, 4, 8), gel.darkened(0.15))
-			x += 16.0
+		var x := 10.0
+		while x < size.x - 8.0:
+			draw_circle(Vector2(x, size.y + 1.0), 4.0, Color("2b2140"))
+			draw_circle(Vector2(x, size.y), 2.6, gel)
+			x += 18.0

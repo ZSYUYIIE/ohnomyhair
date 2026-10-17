@@ -39,12 +39,8 @@ func is_active() -> bool:
 
 
 func _draw() -> void:
-	# A salon wash basin full of hair dye.
-	draw_rect(Rect2(Vector2.ZERO, size), color)
-	draw_line(Vector2(0, 2), Vector2(size.x, 2), color.lightened(0.4), 4.0)
-	draw_rect(Rect2(-4, -4, 8, size.y + 4), Color("f4f1ec"))
-	draw_rect(Rect2(size.x - 4, -4, 8, size.y + 4), Color("f4f1ec"))
-	var x := 18.0
-	while x < size.x - 10.0:
-		draw_circle(Vector2(x, 10.0 + fmod(x, 3.0) * 4.0), 3.0, color.lightened(0.3))
-		x += 37.0
+	# A salon wash basin full of hair dye: dye fills the area, white rims on both sides.
+	draw_style_box(PropArt.nine_slice("res://assets/art/props/prop_dye.png", 16.0), Rect2(Vector2.ZERO, size))
+	for x in [-4.0, size.x - 4.0]:
+		draw_rect(Rect2(x, -6, 8, size.y + 6), Color("f4f1ec"))
+		draw_rect(Rect2(x, -6, 8, size.y + 6), Color("2b2140"), false, 2.0)

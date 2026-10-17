@@ -34,6 +34,11 @@ var level_title := ""
 var next_level := ""
 var ending_text := ""
 var scene_path := ""
+## Hand-drawn tiles: a 4x5 atlas from tools/art/make_l1_art.py, where each solid tile is
+## picked by which neighbours are solid (inked edges and countertops where it meets air).
+## Empty = the greybox tiles. `tileset_path` is where its TileSet is saved.
+var tile_atlas := ""
+var tileset_path := TILESET_PATH
 
 
 ## Override: set level_name, level_title, next_level (or ending_text), scene_path.
@@ -197,6 +202,9 @@ class RoomBuilder:
 		label.position = pos
 		label.add_theme_color_override("font_color", HINT_COLOR)
 		label.add_theme_font_size_override("font_size", 18)
+		# A soft paper-coloured halo keeps hints readable over the drawn backgrounds.
+		label.add_theme_color_override("font_outline_color", Color(1, 0.98, 0.94, 0.85))
+		label.add_theme_constant_override("outline_size", 6)
 		add(label, "Hint%d" % node.get_child_count())
 
 	func _center(col: int, row: int) -> Vector2:
@@ -260,11 +268,21 @@ func _initialize() -> void:
 	quit(err)
 
 
-func room_node(name: String, title: String, backdrop_color: Color) -> Node2D:
+## `background`: a 1280x720 painted wall for this room; without one the room gets a flat
+## `backdrop_color` wall dressed by SalonDecor.
+func room_node(name: String, title: String, backdrop_color: Color, background := "") -> Node2D:
 	var room := Node2D.new()
 	room.name = name
 	room.set_script(load("res://scenes/systems/room.gd"))
 	room.title = title
+	if background != "":
+		var wall := TextureRect.new()
+		wall.name = "Backdrop"
+		wall.texture = load(background)
+		wall.z_index = -10
+		wall.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		room.add_child(wall)
+		return room
 	var backdrop := ColorRect.new()
 	backdrop.name = "Backdrop"
 	backdrop.size = Vector2(COLS * TILE, 720)
@@ -301,10 +319,28 @@ func _paint(tiles: TileMapLayer, grid: Array[PackedByteArray], col_offset: int) 
 			var cell := Vector2i(col_offset + x, y)
 			match grid[y][x]:
 				SOLID:
-					var surface := y == 0 or grid[y - 1][x] != SOLID
-					tiles.set_cell(cell, 0, Vector2i(0 if surface else 1, 0))
+					if tile_atlas != "":
+						tiles.set_cell(cell, 0, _edge_tile(grid, x, y))
+					else:
+						var surface := y == 0 or grid[y - 1][x] != SOLID
+						tiles.set_cell(cell, 0, Vector2i(0 if surface else 1, 0))
 				ONE_WAY:
-					tiles.set_cell(cell, 0, Vector2i(2, 0))
+					tiles.set_cell(cell, 0, Vector2i(3, 4) if tile_atlas != "" else Vector2i(2, 0))
+
+
+## Atlas cell of a hand-drawn solid tile: its neighbour mask (1 up, 2 right, 4 down,
+## 8 left; outside the room counts as solid), or a random-looking variant when enclosed.
+func _edge_tile(grid: Array[PackedByteArray], x: int, y: int) -> Vector2i:
+	const SIDES: Array[Vector2i] = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
+	var mask := 0
+	for i in 4:
+		var n := Vector2i(x, y) + SIDES[i]
+		if n.x < 0 or n.y < 0 or n.x >= COLS or n.y >= ROWS or grid[n.y][n.x] == SOLID:
+			mask |= 1 << i
+	var variant := (x * 7 + y * 13) % 4
+	if mask == 15 and variant > 0:
+		return Vector2i(variant - 1, 4)
+	return Vector2i(mask % 4, mask / 4)
 
 
 func _print_ascii(rb: RoomBuilder) -> void:
@@ -326,22 +362,30 @@ func _make_tileset() -> TileSet:
 	ts.set_physics_layer_collision_layer(1, Layers.PLATFORMS)
 	ts.set_physics_layer_collision_mask(1, 0)
 	var src := TileSetAtlasSource.new()
-	src.texture = load("res://assets/tiles/greybox_tiles.png")
+	src.texture = load(tile_atlas if tile_atlas != "" else "res://assets/tiles/greybox_tiles.png")
 	src.texture_region_size = Vector2i(TILE, TILE)
 	ts.add_source(src, 0)
 	var h := TILE / 2.0
 	var square := PackedVector2Array([Vector2(-h, -h), Vector2(h, -h), Vector2(h, h), Vector2(-h, h)])
 	var lip := PackedVector2Array([Vector2(-h, -h), Vector2(h, -h), Vector2(h, -h + 8), Vector2(-h, -h + 8)])
-	for x in 3:
-		var coords := Vector2i(x, 0)
+	# Greybox: surface, interior, one-way in a row. Hand-drawn: 16 masks + 3 variants, then one-way.
+	var coords_list: Array[Vector2i] = [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
+	var one_way := Vector2i(2, 0)
+	if tile_atlas != "":
+		coords_list.clear()
+		for i in 20:
+			coords_list.append(Vector2i(i % 4, i / 4))
+		one_way = Vector2i(3, 4)
+	for coords in coords_list:
 		src.create_tile(coords)
 		var data := src.get_tile_data(coords, 0)
-		var layer := 1 if x == 2 else 0
+		var is_lip := coords == one_way
+		var layer := 1 if is_lip else 0
 		data.add_collision_polygon(layer)
-		data.set_collision_polygon_points(layer, 0, lip if x == 2 else square)
-		data.set_collision_polygon_one_way(layer, 0, x == 2)
-	ResourceSaver.save(ts, TILESET_PATH)
-	return load(TILESET_PATH)
+		data.set_collision_polygon_points(layer, 0, lip if is_lip else square)
+		data.set_collision_polygon_one_way(layer, 0, is_lip)
+	ResourceSaver.save(ts, tileset_path)
+	return load(tileset_path)
 
 
 func _build_ui() -> void:

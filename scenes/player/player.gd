@@ -40,7 +40,9 @@ const CARRY_HANG := Vector2(0, 30)
 @onready var gravity := 2.0 * jump_height / (time_to_apex * time_to_apex)
 @onready var jump_velocity := -2.0 * jump_height / time_to_apex
 @onready var visual: Node2D = $Visual
-@onready var body_rect: ColorRect = $Visual/Body
+## Pivot at the feet, so squash & stretch keeps them on the ground.
+@onready var squash: Node2D = $Visual/Squash
+@onready var sprite: AnimatedSprite2D = $Visual/Squash/Sprite
 @onready var interact_area: Area2D = $InteractArea
 @onready var head_pad: AnimatableBody2D = $HeadPad
 @onready var hit_box: Area2D = $HitBox
@@ -66,6 +68,9 @@ var _can_cut_jump := false
 var _invincible := 0.0
 var _drop_through := 0.0
 var _separating: Player = null  # pads are re-enabled once we no longer overlap this friend
+var _was_on_floor := true
+var _peak_fall := 0.0
+var _squash_tween: Tween
 
 
 func _ready() -> void:
@@ -109,7 +114,42 @@ func set_hair(new_hair: Hair) -> void:
 	ability = HAIR_SCRIPTS[hair].new()
 	ability.player = self
 	visual.add_child(ability)
-	body_rect.color = ability.body_color
+	# Body and hair are drawn together, so a new haircut is a whole new set of frames.
+	sprite.sprite_frames = ability.frames
+	sprite.play(&"idle")
+
+
+## Picks the animation from what the haircut is doing, else from movement.
+## Visual only, so it runs per rendered frame and never touches physics.
+func _process(_delta: float) -> void:
+	if not alive:
+		return
+	var grounded := is_on_floor() and carried_by == null
+	if grounded and not _was_on_floor and _peak_fall > 250.0:
+		bounce(Vector2(1.25, 0.78))
+	_peak_fall = 0.0 if grounded else maxf(_peak_fall, velocity.y)
+	_was_on_floor = grounded
+	label.visible = carried_by == null  # hanging below the carrier, it would cover their face
+
+	var anim := ability.anim()
+	if anim == &"":
+		if carried_by:
+			anim = &"idle" if carried_by.is_on_floor() else &"hang"
+		elif grounded:
+			anim = &"run" if absf(velocity.x) > 40.0 else &"idle"
+		else:
+			anim = &"jump" if velocity.y < 0.0 else &"fall"
+	if sprite.animation != anim:
+		sprite.play(anim)
+
+
+## Cartoon squash & stretch: snap to `amount`, spring back to normal.
+func bounce(amount: Vector2) -> void:
+	if _squash_tween:
+		_squash_tween.kill()
+	squash.scale = amount
+	_squash_tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_squash_tween.tween_property(squash, "scale", Vector2.ONE, 0.18)
 
 
 func _physics_process(delta: float) -> void:
@@ -172,6 +212,7 @@ func _physics_process(delta: float) -> void:
 
 func _jump(v: float, can_cut: bool) -> void:
 	velocity.y = v
+	bounce(Vector2(0.82, 1.2))
 	_buffer = 0.0
 	_coyote = 0.0
 	_can_cut_jump = can_cut
@@ -295,6 +336,7 @@ func respawn_at(pos: Vector2) -> void:
 	control_lock = 0.0
 	hp = max_hp
 	_invincible = 1.0
+	squash.scale = Vector2.ONE
 	ability.reset()
 	alive = true
 	show()
