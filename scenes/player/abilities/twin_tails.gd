@@ -28,17 +28,23 @@ var _held: Scissor = null
 var _whip := 0.0
 var _whip_cooldown := 0.0
 var _whipped: Array[Node] = []
+var _pose := &""        # one-shot animation (attack / pull) and how long it still shows
+var _pose_left := 0.0
 
 
 func _init() -> void:
 	body_color = Color("ffb3d1")
 	display_name = "Twin-Tails"
+	frames = preload("res://assets/art/characters/twin_tails/frames.tres")
 
 
 func tick(delta: float) -> void:
 	_tick_catch()
-	if player.pressed("skill") and _held == null and not _pull_lever():
-		_grab_friend()
+	if player.pressed("skill") and _held == null:
+		if _pull_lever():
+			_show(&"pull", 0.4)
+		else:
+			_grab_friend()
 	if player.carrying and not player.held("skill"):
 		player.drop()
 
@@ -55,14 +61,16 @@ func tick(delta: float) -> void:
 ## The whip also works while dangling from a friend's hair.
 func tick_attack(delta: float) -> void:
 	_whip_cooldown -= delta
+	_pose_left -= delta
 	if player.pressed("attack") and _whip_cooldown <= 0.0:
+		_show(&"attack", 0.3)
 		_whip = whip_time
 		_whip_cooldown = whip_cooldown
 		_whipped.clear()
 	if _whip > 0.0:
 		_whip -= delta
 		strike(_whipped, 0, whip_stun, Vector2.ZERO)
-	queue_redraw()
+
 
 
 ## Hair Catch: open pigtails (skill held) catch a parried scissor; letting go tosses it up.
@@ -97,6 +105,19 @@ func is_gliding() -> bool:
 	return _gliding
 
 
+func anim() -> StringName:
+	if _pose_left > 0.0:
+		return _pose
+	if _spin > 0.0:
+		return &"carry_glide" if player.carrying else &"glide"
+	return &""
+
+
+func _show(pose: StringName, seconds: float) -> void:
+	_pose = pose
+	_pose_left = seconds
+
+
 func reset() -> void:
 	if _held and is_instance_valid(_held):
 		_held.queue_free()
@@ -104,7 +125,7 @@ func reset() -> void:
 	_gliding = false
 	_spin = 0.0
 	_whip = 0.0
-	queue_redraw()
+	_pose_left = 0.0
 
 
 func _pull_lever() -> bool:
@@ -126,33 +147,3 @@ func _grab_friend() -> void:
 			player.grab(body)
 			return
 
-
-func _draw() -> void:
-	var top := -Player.HALF_SIZE.y
-	# Hair is the health bar: the tails get shorter with every hit.
-	var tail := 18.0 * player.hair_left()
-	var hair := HAIR_COLOR.darkened(0.25) if player.is_wet() else HAIR_COLOR
-	if _spin > 0.0:
-		# Propeller: two tails spinning above the head.
-		for i in 2:
-			var a := _spin + PI * i
-			var tip := Vector2(cos(a) * (4.0 + tail), top - 6.0 + sin(a) * 4.0)
-			draw_line(Vector2(0, top - 6.0), tip, hair, 6.0)
-		draw_circle(Vector2(0, top - 6.0), 4.0, hair)
-	elif player.is_wet():
-		# Soaked: the tails hang flat and long against the body.
-		draw_rect(Rect2(-19, top + 2, 5, tail + 10), hair)
-		draw_rect(Rect2(14, top + 2, 5, tail + 10), hair)
-	else:
-		draw_rect(Rect2(-20, top + 2, 6, tail), hair)
-		draw_rect(Rect2(14, top + 2, 6, tail), hair)
-	draw_rect(Rect2(-14, top - 4, 28, 8), hair)
-	if _whip > 0.0:
-		draw_line(Vector2(12, top + 10), Vector2(48, top + 22), Color.WHITE, 4.0)
-	if is_holding_scissor():
-		# Pigtails reaching up around the caught scissor.
-		draw_line(Vector2(-16, top + 4), Vector2(-8, top - 24), hair, 5.0)
-		draw_line(Vector2(16, top + 4), Vector2(8, top - 24), hair, 5.0)
-	if player.carrying:
-		var target := to_local(player.carrying.visual.global_position + Vector2(0, -Player.HALF_SIZE.y))
-		draw_line(Vector2(0, top), target, HAIR_COLOR, 4.0)

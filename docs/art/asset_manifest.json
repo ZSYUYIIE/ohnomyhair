@@ -1,0 +1,286 @@
+{
+  "project": "Oh No My Hair",
+  "scope": "Level 1 art pass",
+  "style": "docs/art/l1_art_direction.md",
+  "provenance": {
+    "characters": "Generated with an AI image tool by the team; keep the source sheets and this note with the build.",
+    "world": "Procedurally drawn by repo scripts; no third-party assets."
+  },
+  "assets": [
+    {
+      "path": "assets/art/characters/twin_tails/attack.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/carry_glide.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/fall.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/glide.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/hang.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/idle.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/jump.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/pull.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/run.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/pompadour/dash.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/pompadour/fall.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/pompadour/hang.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/pompadour/idle.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/pompadour/jump.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/pompadour/parry.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/characters/pompadour/run.png",
+      "type": "sprite_strip",
+      "cell": [
+        136,
+        128
+      ],
+      "anchor": "feet at (68,104)",
+      "source": "AI-generated sheet supplied by the team (art_src/characters), normalised by tools/art/normalize_characters.py",
+      "status": "in game (P0/P1)"
+    },
+    {
+      "path": "assets/art/l1/tiles_salon.png",
+      "type": "tileset",
+      "size": [
+        128,
+        160
+      ],
+      "notes": "4x5 atlas of 32 px tiles, edge-aware by neighbour mask; (3,4) one-way shelf",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/l1/bg_l1_01_mirror.png",
+      "type": "background",
+      "size": [
+        1280,
+        720
+      ],
+      "notes": "L1 room 1, opaque, no collision",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/l1/bg_l1_02_washing_basin.png",
+      "type": "background",
+      "size": [
+        1280,
+        720
+      ],
+      "notes": "L1 room 2",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/l1/bg_l1_03_gel_curtain.png",
+      "type": "background",
+      "size": [
+        1280,
+        720
+      ],
+      "notes": "L1 room 3",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/props/prop_lever.png",
+      "type": "prop",
+      "size": [
+        96,
+        48
+      ],
+      "notes": "2 frames 48x48: off | on; base bottom at frame bottom",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/props/prop_exit.png",
+      "type": "prop",
+      "size": [
+        64,
+        96
+      ],
+      "notes": "exit door; sign and pips drawn in code",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/props/prop_gel.png",
+      "type": "nine_slice",
+      "size": [
+        64,
+        64
+      ],
+      "notes": "margin 14, middle tiles",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/props/prop_lift.png",
+      "type": "nine_slice",
+      "size": [
+        64,
+        64
+      ],
+      "notes": "margin 14",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    },
+    {
+      "path": "assets/art/props/prop_dye.png",
+      "type": "nine_slice",
+      "size": [
+        64,
+        64
+      ],
+      "notes": "margin 16; basin rims drawn in code",
+      "source": "generated by tools/art/make_l1_art.py (deterministic, project-owned)",
+      "status": "in game"
+    }
+  ]
+}

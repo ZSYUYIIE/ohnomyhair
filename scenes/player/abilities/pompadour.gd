@@ -26,11 +26,13 @@ var _cooldown := 0.0
 var _parry := 0.0
 var _parry_cooldown := 0.0
 var _struck: Array[Node] = []
+var _parry_pose := 0.0  # how long the parry animation still shows
 
 
 func _init() -> void:
 	body_color = Color("a9d4ff")
 	display_name = "Pompadour"
+	frames = preload("res://assets/art/characters/pompadour/frames.tres")
 
 
 func tick(delta: float) -> void:
@@ -39,6 +41,7 @@ func tick(delta: float) -> void:
 		var rider := _rider()
 		if rider:
 			rider.launch(launch_height)
+			player.bounce(Vector2(1.3, 0.7))
 		elif _cooldown <= 0.0 and player.carried_by == null:
 			_start_dash(player.facing, dash_time)
 
@@ -83,7 +86,9 @@ func _start_dash(direction: float, seconds: float) -> void:
 ## Parry also works while dangling from twin-tails' hair.
 func tick_attack(delta: float) -> void:
 	_parry_cooldown -= delta
+	_parry_pose -= delta
 	if player.pressed("attack") and _parry_cooldown <= 0.0:
+		_parry_pose = 0.3
 		_parry = parry_window
 		_parry_cooldown = parry_cooldown
 		_struck.clear()
@@ -94,7 +99,14 @@ func tick_attack(delta: float) -> void:
 				area.deflect()
 				player.hit_stop(0.05)
 		strike(_struck, 1, 0.2, Vector2(240.0, -120.0))
-	queue_redraw()
+
+
+func anim() -> StringName:
+	if _dash_left > 0.0:
+		return &"dash"
+	if _parry_pose > 0.0:
+		return &"parry"
+	return &""
 
 
 func is_driving() -> bool:
@@ -129,7 +141,7 @@ func reset() -> void:
 	_slinging = false
 	_cooldown = 0.0
 	_parry = 0.0
-	queue_redraw()
+	_parry_pose = 0.0
 
 
 func _rider() -> Player:
@@ -138,20 +150,3 @@ func _rider() -> Player:
 		return mate
 	return null
 
-
-func _draw() -> void:
-	var top := -Player.HALF_SIZE.y
-	# The pompadour: a hard wedge sticking out forward (+x is always "forward" here).
-	# Hair is the health bar: each hit trims the wedge. Wet, it flops down over the face.
-	var reach := 14.0 + 16.0 * player.hair_left()
-	var hair := HAIR_COLOR.darkened(0.25) if player.is_wet() else HAIR_COLOR
-	var wedge := PackedVector2Array([Vector2(-14, top + 4), Vector2(-10, top - 8), Vector2(reach, top - 4), Vector2(14, top + 6)])
-	if player.is_wet():
-		wedge = PackedVector2Array([Vector2(-14, top + 4), Vector2(-10, top - 6), Vector2(reach - 4, top + 2), Vector2(reach - 8, top + 16)])
-	draw_colored_polygon(wedge, hair)
-	if _dash_left > 0.0:
-		for i in 3:
-			var x := -24.0 - i * 10.0
-			draw_line(Vector2(x, top + 10 + i * 8), Vector2(x - 14, top + 10 + i * 8), HAIR_COLOR, 3.0)
-	if _parry > 0.0:
-		draw_arc(Vector2(20, 0), 24.0, -PI / 2, PI / 2, 12, Color.WHITE, 4.0)

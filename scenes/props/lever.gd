@@ -8,6 +8,8 @@ extends Area2D
 
 signal toggled(on: bool)
 
+const ART := preload("res://assets/art/props/prop_lever.png")
+
 @export var one_shot := true
 @export var spring_time := 0.0
 
@@ -44,11 +46,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _draw() -> void:
-	# The barber chair's hydraulic pump handle.
-	var tip := Vector2(12, -14) if is_on else Vector2(-12, -14)
-	draw_rect(Rect2(-12, 8, 24, 8), Color("3a3f47"))
-	draw_rect(Rect2(-6, 2, 12, 7), Color("9aa0a6"))
-	draw_line(Vector2(0, 4), tip, Color("d9dde3"), 4.0)
-	draw_circle(tip, 6.0, Color("7ee081") if is_on else Color("c0392b"))
+	# The barber chair's hydraulic pump handle: frame 0 off, frame 1 on. Its base sits
+	# on the floor at the bottom of the tile the lever is centred in.
+	draw_texture_rect_region(ART, Rect2(-24, -32, 48, 48), Rect2(48 if is_on else 0, 0, 48, 48))
 	if spring_time > 0.0 and is_on:
 		draw_rect(Rect2(-16, -30, 32.0 * _remaining / spring_time, 4), Color("f1c40f"))
