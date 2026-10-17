@@ -34,6 +34,19 @@ func _run() -> void:
 	await _frames(10)
 	check(current_scene is Level and current_scene.scene_file_path.ends_with("level_02.tscn"), "Play loads that level")
 
+	# Regression (playtest 4): restarting while the level is the current scene - as in
+	# real play - lost track of the current scene (get_tree() after leaving the tree).
+	var old_level: Level = current_scene
+	old_level.restart_room()
+	await _frames(10)
+	check(current_scene is Level and current_scene != old_level and is_instance_valid(current_scene), "restarting a room keeps the fresh level as the current scene")
+	# Playtest 4 screenshot: after a restart, "Next level" left the old level running under
+	# the new one (two levels, two HUDs on screen). Exactly one level must remain.
+	(current_scene as Level)._on_menu_chosen("next")
+	await _frames(10)
+	var levels := root.get_children().filter(func(n): return n is Level)
+	check(levels.size() == 1 and current_scene == levels[0] and current_scene.scene_file_path.ends_with("level_03.tscn"), "after a restart, Next level replaces the level instead of stacking a second one")
+
 	var level: Level = current_scene
 	level.menu.show_pause(level.level_title, "x")
 	level.menu.press("Main menu")

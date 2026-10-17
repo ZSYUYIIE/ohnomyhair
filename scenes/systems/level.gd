@@ -120,12 +120,14 @@ func _load_fresh(room: int, time: float, death_count: int) -> void:
 	Engine.time_scale = 1.0
 	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count}
 	var fresh: Level = load(scene_file_path).instantiate()
+	# Grab the tree first: once this level is removed from it, get_tree() returns null.
+	var tree := get_tree()
 	var parent := get_parent()
-	var was_current := get_tree().current_scene == self
+	var was_current := tree.current_scene == self
 	parent.remove_child(self)
 	parent.add_child(fresh)
 	if was_current:
-		get_tree().current_scene = fresh
+		tree.current_scene = fresh
 	replaced.emit(fresh)
 	queue_free()
 
