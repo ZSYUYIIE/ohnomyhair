@@ -9,6 +9,8 @@ extends Hazard
 @export var on_time := 1.0
 @export var phase := 0.0
 
+const ART := preload("res://assets/art/props/prop_iron.png")
+
 var _t := 0.0
 
 
@@ -33,24 +35,15 @@ func _cycle_time() -> float:
 
 
 func _draw() -> void:
-	var chrome := Color("c8ccd2")
-	var plate := Color("8a9099")
-	if is_active():
-		plate = Color("ff4b2b")
-	elif _is_warning():
-		plate = Color("ff9f43") if fmod(_t, 0.2) < 0.1 else Color("b37a4c")
-	# Two long plates, hinged at the left end; a cord trails off the right.
-	var h := size.y
-	draw_rect(Rect2(0, h - 8, size.x, 8), Color("2d2d34"))
-	draw_rect(Rect2(4, h - 14, size.x - 8, 6), plate)
-	draw_rect(Rect2(4, h - 15, size.x - 8, 2), chrome)
-	draw_circle(Vector2(6, h - 8), 5.0, Color("2d2d34"))
-	draw_line(Vector2(size.x, h - 4), Vector2(size.x + 10, h - 1), Color("2d2d34"), 3.0)
+	# Frames: cold | red-hot. While warning it flickers between the two.
+	var hot := is_active() or (_is_warning() and fmod(_t, 0.2) < 0.1)
+	draw_texture_rect_region(ART, Rect2(0, size.y - 24, size.x, 24), Rect2(64 if hot else 0, 0, 64, 24))
 	if is_active():
 		# Steam wisps rising off the plates.
+		var h := size.y
 		var x := 10.0
 		while x < size.x - 6.0:
 			var sway := sin(_t * 9.0 + x) * 3.0
-			draw_line(Vector2(x, h - 16), Vector2(x + sway, h - 30), Color(1, 1, 1, 0.7), 2.0)
-			draw_line(Vector2(x + sway, h - 30), Vector2(x - sway, h - 42), Color(1, 1, 1, 0.4), 2.0)
+			draw_line(Vector2(x, h - 16), Vector2(x + sway, h - 30), Color(1, 1, 1, 0.75), 2.0)
+			draw_line(Vector2(x + sway, h - 30), Vector2(x - sway, h - 42), Color(1, 1, 1, 0.45), 2.0)
 			x += 14.0

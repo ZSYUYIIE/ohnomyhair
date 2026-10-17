@@ -106,6 +106,8 @@ func is_gliding() -> bool:
 
 
 func anim() -> StringName:
+	if is_holding_scissor():
+		return &"pull"   # arms up, holding the caught scissor overhead
 	if _pose_left > 0.0:
 		return _pose
 	if _spin > 0.0:

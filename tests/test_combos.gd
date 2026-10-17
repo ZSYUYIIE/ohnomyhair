@@ -369,7 +369,7 @@ func _tonic_grows_hair_back() -> void:
 	_check(is_instance_valid(full), "tonic: a friend with full hair leaves it")
 	full.free()
 	a.take_hit(1)
-	_check(a.hp == 2 and a.hair_left() < 1.0, "tonic: a hit snips the hair shorter")
+	_check(a.hp == 2 and _arena.get_children().any(func(n): return n is Player.HairSnip), "tonic: a hit costs a heart and snips a puff of hair")
 	var tonic := GrowthTonic.new()
 	tonic.position = a.global_position
 	_arena.add_child(tonic)

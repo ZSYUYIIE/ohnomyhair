@@ -13,6 +13,8 @@ extends Area2D
 @export var lift_accel := 1800.0
 @export var warm_fall_speed := 260.0
 
+const ART := preload("res://assets/art/props/prop_dryer.png")
+
 var _t := 0.0
 
 
@@ -49,16 +51,11 @@ func _exit_tree() -> void:
 
 
 func _draw() -> void:
-	# Warm air: faint streaks rising up the column.
+	# Warm air: faint cream streaks rising up the column (motion stays in code).
 	var streaks := int(size.x / 16.0)
 	for i in streaks:
 		var x := 8.0 + i * 16.0
 		var y := size.y - fmod(_t * 220.0 + i * 57.0, size.y)
-		draw_line(Vector2(x, y), Vector2(x + sin(_t * 6.0 + i) * 3.0, y - 26.0), Color(1, 0.95, 0.85, 0.45), 3.0)
-	draw_rect(Rect2(Vector2.ZERO, size), Color(1, 0.85, 0.6, 0.08))
-	# The dryer: chrome stand and a pink nozzle pointing up.
-	var base := Vector2(size.x / 2.0, size.y)
-	draw_rect(Rect2(base + Vector2(-18, -6), Vector2(36, 6)), Color("9aa0a6"))
-	draw_rect(Rect2(base + Vector2(-4, -22), Vector2(8, 16)), Color("c8ccd2"))
-	draw_rect(Rect2(base + Vector2(-14, -40), Vector2(28, 20)), Color("ff7eb6"))
-	draw_rect(Rect2(base + Vector2(-10, -46), Vector2(20, 6)), Color("2c2c34"))
+		draw_line(Vector2(x, y), Vector2(x + sin(_t * 6.0 + i) * 3.0, y - 26.0), Color(1, 0.95, 0.85, 0.5), 3.0)
+	draw_rect(Rect2(Vector2.ZERO, size), Color(1, 0.85, 0.6, 0.06))
+	draw_texture(ART, Vector2(size.x / 2.0 - 32.0, size.y - 64.0))

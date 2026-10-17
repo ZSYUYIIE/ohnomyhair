@@ -31,7 +31,8 @@ godot --path . res://scenes/levels/level_01.tscn -- --room=3
 
 Salon hazards: **hair dryers** lift a gliding twin-tails and dry you; **shampoo showers** soak you
 (wet twin-tails can't glide, wet pompadour can't smash gel); a **growth tonic** grows 1 HP of hair back.
-Hair is the health bar: tails and pompadour get shorter with every hit.
+Hair is the health bar: every hit snips a puff of hair off (hearts in the HUD); a soaked friend
+turns a washed-out blue and drips.
 
 Design notes: `docs/design/refinement.md`.
 

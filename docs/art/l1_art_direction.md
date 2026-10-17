@@ -57,11 +57,26 @@
   - Nine-slices for props that come in any size: gel, lift and dye (64×64, edge margins set in code by `PropArt`).
 - **Drawn by code, so no text is ever baked into images:** the OPEN sign, the exit pips, the gel regrow drips, and the dye basin rims.
 
+## Level 3 stations (`tools/art/make_salon_props.py`)
+
+Drawn with the same helpers as `make_l1_art.py` (wobbly ink, flat fill, supersampled):
+
+- **Hair dryer** `prop_dryer.png` (64×64, base at the bottom center): coral body, because P1's pink is reserved for the players.
+- **Shower head** `prop_shower.png` (64×40, mount at the top center).
+- **Growth tonic** `prop_tonic.png` (24×36, centered).
+- **Hot flat iron** `prop_iron.png` (two 64×24 frames: cold | red-hot).
+
+Motion stays in code: warm air, water lanes and warning drips, the tonic's bob, iron steam.
+On the characters: a soaked friend's sprite is tinted `WET_TINT` (cool blue) with drips; twin-tails
+shows the `pull` pose while holding a caught scissor; every hit throws a `HairSnip` puff in the
+haircut's colour.
+
 ## Rebuild everything
 
 ```
 python -I tools/art/normalize_characters.py
 python -I tools/art/make_l1_art.py
+python -I tools/art/make_salon_props.py
 godot --headless --path . --import
 godot --headless --path . --script res://tools/build_character_frames.gd
 godot --headless --path . --script res://tools/build_level_01.gd

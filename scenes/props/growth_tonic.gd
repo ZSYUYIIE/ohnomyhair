@@ -3,6 +3,8 @@ extends Area2D
 ## Hair-growth tonic bottle: grows back one notch of hair (1 HP). A friend at full hair
 ## leaves it for the other. Comes back when the room restarts. Position is its center.
 
+const ART := preload("res://assets/art/props/prop_tonic.png")
+
 var _t := 0.0
 
 
@@ -24,11 +26,6 @@ func _physics_process(delta: float) -> void:
 
 func _draw() -> void:
 	var bob := sin(_t * 3.0) * 3.0
-	var glass := Color("6fcf97")
-	draw_rect(Rect2(-9, -10 + bob, 18, 22), glass)
-	draw_rect(Rect2(-4, -16 + bob, 8, 6), glass.darkened(0.2))
-	draw_rect(Rect2(-5, -20 + bob, 10, 4), Color("c0392b"))
-	draw_rect(Rect2(-7, -4 + bob, 14, 8), Color("fffaf0"))
-	draw_line(Vector2(-4, 0 + bob), Vector2(4, 0 + bob), Color("2e8b57"), 2.0)
+	draw_texture(ART, Vector2(-12, -18 + bob))
 	if int(_t * 4.0) % 2 == 0:
-		draw_circle(Vector2(11, -14 + bob), 2.0, Color(1, 1, 1, 0.9))
+		draw_circle(Vector2(12, -16 + bob), 2.0, Color(1, 1, 1, 0.95))

@@ -14,6 +14,8 @@ const HAIR_SCRIPTS := {
 	Hair.POMPADOUR: preload("res://scenes/player/abilities/pompadour.gd"),
 }
 const HALF_SIZE := Vector2(14, 22)  # keep in sync with CollisionShape2D (28x44)
+## Sprite tint while soaked by a shampoo shower.
+const WET_TINT := Color(0.72, 0.86, 1.0)
 ## Carried friend is drawn this far below the carrier. Visual only: their collision
 ## box sits exactly on the carrier's, so they can never snag on a ledge the carrier clears.
 const CARRY_HANG := Vector2(0, 30)
@@ -146,6 +148,8 @@ func _process(_delta: float) -> void:
 			anim = &"jump" if velocity.y < 0.0 else &"fall"
 	if sprite.animation != anim:
 		sprite.play(anim)
+	# Soaked by a shampoo shower: a cool, washed-out tint (the drips are WetDrips).
+	sprite.modulate = WET_TINT if is_wet() else Color.WHITE
 
 
 ## Cartoon squash & stretch: snap to `amount`, spring back to normal.
@@ -270,6 +274,7 @@ func take_hit(damage: int, _stun_time: float = 0.0, knockback := Vector2.ZERO) -
 		return
 	hp -= damage
 	_invincible = invincible_time
+	_snip_hair()
 	if knockback != Vector2.ZERO and carried_by == null:
 		velocity = knockback
 		control_lock = 0.2
@@ -298,8 +303,11 @@ func is_wet() -> bool:
 
 
 ## How much hair is left, 1.0 = full. Hair is the health bar: each hit snips some off.
-func hair_left() -> float:
-	return clampf(float(hp) / float(max_hp), 0.34, 1.0)
+## Hair is the health bar: every hit snips a little puff of hair off in the haircut's colour.
+func _snip_hair() -> void:
+	var snip := HairSnip.new(ability.get("HAIR_COLOR") if ability.get("HAIR_COLOR") != null else Color.WHITE)
+	snip.position = global_position + Vector2(0, -HALF_SIZE.y)
+	get_parent().add_child(snip)
 
 
 func make_invincible(seconds: float) -> void:
@@ -430,6 +438,33 @@ static func add_rect_shape(owner_node: Node, size: Vector2, offset: Vector2) -> 
 	col.position = offset
 	owner_node.add_child(col)
 	return col
+
+
+## A puff of snipped hair strands that fall and fade (spawned by a hit).
+class HairSnip extends Node2D:
+	var color: Color
+	var _t := 0.0
+	var _strands: Array[Vector2] = []
+
+	func _init(c: Color) -> void:
+		color = c
+		z_index = 2
+		for i in 7:
+			_strands.append(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, -0.3)).normalized() * randf_range(60.0, 130.0))
+
+	func _process(delta: float) -> void:
+		_t += delta
+		if _t > 0.7:
+			queue_free()
+		queue_redraw()
+
+	func _draw() -> void:
+		var a := 1.0 - _t / 0.7
+		for v in _strands:
+			var p := v * _t + Vector2(0, 260.0 * _t * _t)
+			var tail := p - v.normalized() * 7.0
+			draw_line(tail, p, Color(color, a), 3.0)
+			draw_line(tail, p, Color("2b2140", a * 0.6), 1.0)
 
 
 ## Water drips around a soaked player (drawn under the Visual node, so it flips with it).
