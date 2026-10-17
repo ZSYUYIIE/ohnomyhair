@@ -11,6 +11,8 @@ func _run() -> void:
 	await _room_1()
 	if failed == 0:
 		await _room_2()
+	if failed == 0:
+		await _restart_and_pause()
 	finish()
 
 
@@ -88,6 +90,37 @@ func _room_2() -> void:
 	walk_to(p1, o + 21.5 * TILE)
 	await walk_to(p2, o + 20.5 * TILE)
 	check(await wait_until(func(): return level.banner.text.ends_with("CLEAR!"), 300), "R2: both in the exit clears L2")
+
+
+## Restart (R, or the death popup) rebuilds the room: the bot and the bells come back.
+## Esc pauses; Resume carries on.
+func _restart_and_pause() -> void:
+	await load_level(LevelScene, 1)
+	var bot: ClipperBot = level.get_node("Rooms/Room2/CorridorBot")
+	bot.take_hit(5)
+	var bell: HitSwitch = level.get_node("Rooms/Room2/Bell22")
+	bell.activated.emit()
+	bell.pressed = true
+	await _ticks(5)
+	await press_action("restart")
+	await _ticks(10)
+	check(level.room_index == 1, "R restarts the same room")
+	check(is_instance_valid(level.get_node_or_null("Rooms/Room2/CorridorBot")), "restart brings the clipper bot back")
+	check(not level.get_node("Rooms/Room2/Bell22").pressed, "restart un-rings the bells")
+	check(level.get_node("Rooms/Room2/StaffDoor").locks == 2, "restart re-locks the door")
+	p1.die()
+	check(await choose_on_death("Restart room"), "death popup appears")
+	check(level.deaths == 1 and is_instance_valid(level.get_node_or_null("Rooms/Room2/CorridorBot")), "death restart counts the death, room fresh")
+
+	await press_action("pause")
+	check(paused and level.menu.is_open(), "Esc pauses and shows the pause menu")
+	check(level.menu.button_labels() == ["Resume", "Restart room", "Main menu"], "pause menu has Resume / Restart room / Main menu")
+	var t: float = level.level_time
+	await _ticks(30)
+	check(is_equal_approx(level.level_time, t), "the level timer stops while paused")
+	level.menu.press("Resume")
+	await _ticks(5)
+	check(not paused and not level.menu.is_open(), "Resume closes the menu and unpauses")
 
 
 ## P2 parries until the dispenser is jammed for a while (parried scissors fly home).

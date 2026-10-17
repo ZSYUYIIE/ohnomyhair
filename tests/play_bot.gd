@@ -14,6 +14,9 @@ var p2: Player
 
 
 func _initialize() -> void:
+	# Level clears record best times: keep them out of the player's real save.
+	Progress.save_path = "user://test_progress.cfg"
+	Progress.reset()
 	_run.call_deferred()
 
 
@@ -26,12 +29,41 @@ func load_level(scene: PackedScene, start_room := 0) -> void:
 	if level:
 		level.queue_free()
 		await _ticks(2)
-	level = scene.instantiate()
+	paused = false   # a previous level may have left its results menu up
+	_follow(scene.instantiate())
 	level.start_room = start_room
 	root.add_child(level)
+	await _ticks(20)
+
+
+## Restarting a room swaps the Level node for a fresh copy: keep pointing at the live one.
+func _follow(fresh: Level) -> void:
+	level = fresh
 	p1 = level.get_node("Players/P1")
 	p2 = level.get_node("Players/P2")
-	await _ticks(20)
+	level.replaced.connect(_follow)
+
+
+## Waits for the death popup, then picks one of its buttons.
+func choose_on_death(button: String) -> bool:
+	var shown := await wait_until(func(): return level.menu.is_open(), 120)
+	if shown:
+		level.menu.press(button)
+		await _ticks(10)
+	return shown
+
+
+## Fire an input action as a key press (for Esc / R, which go through _unhandled_input).
+func press_action(action: String) -> void:
+	var ev := InputEventAction.new()
+	ev.action = action
+	ev.pressed = true
+	Input.parse_input_event(ev)
+	await physics_frame
+	ev = ev.duplicate()
+	ev.pressed = false
+	Input.parse_input_event(ev)
+	await _ticks(2)
 
 
 func finish() -> void:

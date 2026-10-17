@@ -6,7 +6,8 @@
 ## Open the project
 1. Install **Godot 4.7.x standard** (not .NET).
 2. Godot Project Manager → **Import** → pick this folder's `project.godot` → **Import & Edit**.
-3. F5 starts at Level 1. To play one level: open `scenes/levels/level_0N.tscn` and press F6.
+3. F5 opens the main menu (level cards unlock as you clear levels; best time and fewest deaths
+   are saved in `user://progress.cfg`). To play one level directly: open `scenes/levels/level_0N.tscn` and press F6.
 
 From a terminal (`--room=N` starts in room N of that level):
 ```
@@ -29,7 +30,11 @@ godot --path . res://scenes/levels/level_01.tscn -- --room=3
 
 Design notes: `docs/design/refinement.md`.
 
-While carried, press down to let go. Hold down to drop through a one-way platform. R restarts the current room.
+While carried, press down to let go. Hold down to drop through a one-way platform.
+**Esc** pauses (Resume / Restart room / Main menu). **R** restarts the current room.
+If either friend dies, a popup offers **Restart room** or **Main menu**. Restarting rebuilds the
+whole room - enemies, bells, doors, gel and levers reset - while the level's time and death count
+carry on. The bottom bar shows each friend's haircut, hearts and keys, plus level, room, time and deaths.
 Skill/attack follow the **haircut**, not the player: if hair gets swapped, so do the powers.
 
 Edit in Project Settings → Input Map. In code: `player.pressed("skill")` / `Input.is_action_pressed("p1_left")`.
@@ -38,6 +43,7 @@ Edit in Project Settings → Input Map. In code: `player.pressed("skill")` / `In
 Each test plays through a level with simulated input; exit code 0 = pass.
 `test_combos.gd` checks each hair combo (and that the solo shortcut fails) in a bare arena.
 ```
+godot --headless --path . --script res://tests/test_menu.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
@@ -51,6 +57,8 @@ On a fresh checkout run `godot --headless --path . --import` once first.
   counters, regrowing hair-gel, dye basins, hot flat irons, service bells, staff doors, scissor
   dispensers, clipper bots, the barber bot
 - `scenes/systems/salon_decor.gd` — background mirrors, lamps and barber poles for each room
+- `scenes/systems/progress.gd` — level list, unlocks and best times
+- `scenes/ui/` — main menu, bottom-bar HUD, death / pause / results menu, shared UI theme
 - `scenes/systems/` — `Level` (rooms, respawn, room-to-room camera) and `Room`
 - `scenes/levels/` — generated level scenes
 - `tools/` — `build_level_0N.gd` generate the level scenes (rerunning overwrites them),

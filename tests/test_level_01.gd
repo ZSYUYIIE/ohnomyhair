@@ -121,11 +121,19 @@ func _carry_alone_fails() -> void:
 	await _ticks(60)
 
 
+## Dying opens the popup; "Restart room" rebuilds the room (props reset), keeps the room
+## and counts the death.
 func _death_respawns() -> void:
-	# Restart from a fresh copy and drop P2 into the room-2 dye pool.
 	await load_level(LevelScene, 1)
-	var spawn := p2.global_position
+	var lever: Lever = level.get_node("Rooms/Room2/Lever")
+	lever.interact(p1)
+	check(lever.is_on, "setup: the room-2 lever is pulled")
 	p2.global_position = level.get_node("Rooms/Room2/DyePool").global_position + Vector2(100, 20)
 	check(await wait_until(func(): return not p2.alive, 30), "dye pool kills")
-	check(await wait_until(func(): return p2.alive, 60), "both respawn after a death")
-	check(p2.global_position.distance_to(spawn) < 4.0, "respawn puts P2 back at the room spawn")
+	check(await choose_on_death("Restart room"), "a death opens the restart / main menu popup")
+	check(not paused, "restarting unpauses the game")
+	check(level.room_index == 1 and p1.alive and p2.alive, "restart keeps the room and both are back")
+	check(not level.get_node("Rooms/Room2/Lever").is_on, "restart resets the room: the lever is back up")
+	check(level.deaths == 1, "the death is counted across the restart")
+	var spawn: Vector2 = level.rooms[1].spawn_point(2)
+	check(p2.global_position.distance_to(spawn) < 4.0, "restart puts P2 back at the room spawn")
