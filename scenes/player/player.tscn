@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
 
@@ -24,34 +24,22 @@ shape = SubResource("RectangleShape2D_body")
 
 [node name="Visual" type="Node2D" parent="."]
 
-[node name="Body" type="ColorRect" parent="Visual"]
-offset_left = -14.0
-offset_top = -22.0
-offset_right = 14.0
-offset_bottom = 22.0
-mouse_filter = 2
+[node name="Squash" type="Node2D" parent="Visual"]
+position = Vector2(0, 22)
 
-[node name="Eye" type="ColorRect" parent="Visual"]
-offset_left = 3.0
-offset_top = -12.0
-offset_right = 7.0
-offset_bottom = -4.0
-mouse_filter = 2
-color = Color(0.17, 0.13, 0.25, 1)
-
-[node name="Eye2" type="ColorRect" parent="Visual"]
-offset_left = 9.0
-offset_top = -12.0
-offset_right = 13.0
-offset_bottom = -4.0
-mouse_filter = 2
-color = Color(0.17, 0.13, 0.25, 1)
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual/Squash"]
+texture_filter = 2
+centered = false
+offset = Vector2(-68, -104)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -20.0
-offset_top = -60.0
+offset_top = -76.0
 offset_right = 20.0
-offset_bottom = -38.0
+offset_bottom = -54.0
+theme_override_colors/font_color = Color(0.17, 0.13, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1
 

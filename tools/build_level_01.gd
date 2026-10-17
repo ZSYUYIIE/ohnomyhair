@@ -7,6 +7,7 @@ extends LevelBuilder
 
 
 const CURTAIN_REGROW := 2.0
+const BG := "res://assets/art/l1/%s.png"
 
 
 func _configure() -> void:
@@ -14,6 +15,8 @@ func _configure() -> void:
 	level_title = "LEVEL 1 - Fresh Cut"
 	next_level = "res://scenes/levels/level_02.tscn"
 	scene_path = "res://scenes/levels/level_01.tscn"
+	tile_atlas = "res://assets/art/l1/tiles_salon.png"
+	tileset_path = "res://assets/art/l1/salon_tileset.tres"
 
 
 func _rooms() -> Array:
@@ -22,7 +25,7 @@ func _rooms() -> Array:
 
 ## Room 1: each friend learns their own move, and needs the other once.
 func _room_1() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Mirror, Mirror", Color("f3e3d3")))
+	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Mirror, Mirror", Color("f3e3d3"), BG % "bg_l1_01_mirror"))
 	rb.solid(0, 19, 7, 22)      # start floor
 	rb.solid(8, 17, 11, 22)     # step
 	rb.solid(12, 15, 21, 22)    # plateau
@@ -45,7 +48,7 @@ func _room_1() -> RoomBuilder:
 
 ## Room 2: teach both combos - carry over the dye, launch up the cliff.
 func _room_2() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room2", "2 - The Washing Basin", Color("d6eef2")))
+	var rb := RoomBuilder.new(self, room_node("Room2", "2 - The Washing Basin", Color("d6eef2"), BG % "bg_l1_02_washing_basin"))
 	rb.solid(0, 19, 6, 22)      # start floor
 	rb.solid(7, 17, 11, 22)     # take-off ledge (2 up)
 	rb.solid(20, 19, 26, 22)    # landing
@@ -70,7 +73,7 @@ func _room_2() -> RoomBuilder:
 ## Metrics: carry from 6 up reaches ~16 tiles; the fling covers 7.1 tiles flat, so
 ## flinging anywhere from x=18 to the curtain lands on the far side (a ~0.5 s window).
 func _room_3() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room3", "3 - The Gel Curtain", Color("efe0f0")))
+	var rb := RoomBuilder.new(self, room_node("Room3", "3 - The Gel Curtain", Color("efe0f0"), BG % "bg_l1_03_gel_curtain"))
 	rb.solid(0, 19, 8, 22)      # start floor
 	rb.solid(9, 17, 10, 22)     # stairs up to the take-off counter
 	rb.solid(11, 15, 12, 22)

@@ -64,6 +64,10 @@ On a fresh checkout run `godot --headless --path . --import` once first.
 - `tools/` — `build_level_0N.gd` generate the level scenes (rerunning overwrites them),
   `make_greybox_tiles.gd` paints the salon tile atlas,
   `measure_metrics.gd` prints jump/glide/carry/launch reach for sizing gaps
-- `docs/levels/`, `docs/design/` — level design docs and the mechanics refinement notes
+- `assets/art/` — hand-drawn art: character animation strips + SpriteFrames, L1 tiles, room walls
+  and prop textures. Style, asset list and how to rebuild them: `docs/art/l1_art_direction.md`
+- `art_src/` — source character sheets (ignored by Godot); `tools/art/*.py` turn them and the L1
+  world art into `assets/art/` (Python 3 + Pillow), `tools/build_character_frames.gd` makes the SpriteFrames
+- `docs/levels/`, `docs/design/`, `docs/art/` — level design docs, the mechanics refinement notes and the art direction
 - `tests/` — headless playthrough tests
 - `.claude/skills`, `.agents/skills`, `skills-lock.json` — AI agent skills (Godot, platformer, combat, camera, web export)

@@ -1,0 +1,110 @@
+{
+  "cell": [
+    136,
+    128
+  ],
+  "baseline": 104,
+  "scale": 0.45,
+  "characters": {
+    "twin_tails": {
+      "idle": {
+        "file": "twin_tails/idle.png",
+        "frames": 6,
+        "fps": 6,
+        "loop": true
+      },
+      "run": {
+        "file": "twin_tails/run.png",
+        "frames": 6,
+        "fps": 12,
+        "loop": true
+      },
+      "jump": {
+        "file": "twin_tails/jump.png",
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "file": "twin_tails/fall.png",
+        "frames": 6,
+        "fps": 8,
+        "loop": true
+      },
+      "attack": {
+        "file": "twin_tails/attack.png",
+        "frames": 6,
+        "fps": 20,
+        "loop": false
+      },
+      "glide": {
+        "file": "twin_tails/glide.png",
+        "frames": 6,
+        "fps": 16,
+        "loop": true
+      },
+      "pull": {
+        "file": "twin_tails/pull.png",
+        "frames": 6,
+        "fps": 15,
+        "loop": false
+      },
+      "carry_glide": {
+        "file": "twin_tails/carry_glide.png",
+        "frames": 6,
+        "fps": 16,
+        "loop": true
+      },
+      "hang": {
+        "file": "twin_tails/hang.png",
+        "frames": 1,
+        "fps": 1,
+        "loop": false
+      }
+    },
+    "pompadour": {
+      "idle": {
+        "file": "pompadour/idle.png",
+        "frames": 6,
+        "fps": 6,
+        "loop": true
+      },
+      "run": {
+        "file": "pompadour/run.png",
+        "frames": 6,
+        "fps": 12,
+        "loop": true
+      },
+      "jump": {
+        "file": "pompadour/jump.png",
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "file": "pompadour/fall.png",
+        "frames": 6,
+        "fps": 8,
+        "loop": true
+      },
+      "parry": {
+        "file": "pompadour/parry.png",
+        "frames": 6,
+        "fps": 20,
+        "loop": false
+      },
+      "dash": {
+        "file": "pompadour/dash.png",
+        "frames": 6,
+        "fps": 30,
+        "loop": false
+      },
+      "hang": {
+        "file": "pompadour/hang.png",
+        "frames": 1,
+        "fps": 1,
+        "loop": false
+      }
+    }
+  }
+}

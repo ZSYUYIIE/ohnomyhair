@@ -1,12 +1,14 @@
 class_name HairAbility
 extends Node2D
-## Base class for a haircut's skill + attack. Lives under the player's Visual node,
-## so it flips with facing and draws the hair itself. Swapping hairstyles = swapping
-## this node (Player.set_hair).
+## Base class for a haircut's skill + attack. Lives under the player's Visual node, so it
+## flips with facing. The hair is drawn in the character's sprite frames (body and hair
+## together), so swapping hairstyles = swapping this node and its `frames` (Player.set_hair).
 
 var player: Player
 var body_color := Color.WHITE
 var display_name := ""
+## Sprite frames for a friend wearing this haircut: idle, run, jump, fall, hang + skill moves.
+var frames: SpriteFrames
 
 
 ## Called every physics tick before the player moves. Read input via player.pressed()/held().
@@ -23,6 +25,12 @@ func tick_attack(_delta: float) -> void:
 ## Abilities can override it for carried combos (pompadour's sling dash).
 func tick_carried(delta: float) -> void:
 	tick_attack(delta)
+
+
+## Animation the haircut wants right now (skill or attack pose), or &"" to let the player
+## pick one from movement.
+func anim() -> StringName:
+	return &""
 
 
 ## True while the ability fully controls velocity (e.g. a dash); normal movement is skipped.
