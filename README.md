@@ -27,6 +27,11 @@ godot --path . res://scenes/levels/level_01.tscn -- --room=3
 | Launch | stand on P2's head | skill | rider rises ~9 tiles |
 | **Sling Dash** | carry P2 through the air | skill while hanging | flung 7 tiles flat, through gel walls |
 | **Volley** | attack (whip) a blue scissor | parry first (scissor turns blue) | scissor shoots straight up, golden, rings bells |
+| **Hair-copter** | glide in a hair dryer's warm air | stand on her head | both rise; carrying instead only hovers |
+
+Salon hazards: **hair dryers** lift a gliding twin-tails and dry you; **shampoo showers** soak you
+(wet twin-tails can't glide, wet pompadour can't smash gel); a **growth tonic** grows 1 HP of hair back.
+Hair is the health bar: tails and pompadour get shorter with every hit.
 
 Design notes: `docs/design/refinement.md`.
 
@@ -48,6 +53,7 @@ godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_03.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_level_04.gd
 ```
 On a fresh checkout run `godot --headless --path . --import` once first.
 

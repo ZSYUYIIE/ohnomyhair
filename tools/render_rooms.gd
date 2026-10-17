@@ -9,8 +9,8 @@ func _run() -> void:
 	if out == "":
 		out = ProjectSettings.globalize_path("user://shots")
 	DirAccess.make_dir_recursive_absolute(out)
-	for n in [1, 2, 3]:
-		var scene: PackedScene = load("res://scenes/levels/level_0%d.tscn" % n)
+	for n in range(1, Progress.LEVELS.size() + 1):
+		var scene: PackedScene = load(Progress.LEVELS[n - 1].path)
 		var probe: Level = scene.instantiate()
 		var count: int = probe.get_node("Rooms").get_child_count()
 		probe.free()

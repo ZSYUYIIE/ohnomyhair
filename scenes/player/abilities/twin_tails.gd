@@ -7,6 +7,7 @@ extends HairAbility
 ## Combo "Volley": whipping a scissor that pompadour already parried (blue) sends it
 ## straight up as a golden scissor. The whip reaches above the head, so twin-tails
 ## can wait in a trench while enemy scissors fly over her.
+## Wet (shampoo shower): the tails are too heavy to spin, so no gliding until dried.
 
 const HAIR_COLOR := Color("ff5fa2")
 
@@ -18,6 +19,7 @@ const HAIR_COLOR := Color("ff5fa2")
 @export var volley_reach := Vector2(52, 84)  # half-width; height above the head
 
 var _spin := 0.0
+var _gliding := false
 var _whip := 0.0
 var _whip_cooldown := 0.0
 var _whipped: Array[Node] = []
@@ -34,7 +36,8 @@ func tick(delta: float) -> void:
 	if player.carrying and not player.held("skill"):
 		player.drop()
 
-	var gliding := player.held("skill") and not player.is_on_floor()
+	var gliding := player.held("skill") and not player.is_on_floor() and not player.is_wet()
+	_gliding = gliding
 	if gliding:
 		player.fall_cap = carry_fall_speed if player.carrying else glide_fall_speed
 		_spin += delta * 30.0
@@ -65,7 +68,12 @@ func _in_volley_reach(pos: Vector2) -> bool:
 	return absf(rel.x) <= volley_reach.x and rel.y <= Player.HALF_SIZE.y and rel.y >= -Player.HALF_SIZE.y - volley_reach.y
 
 
+func is_gliding() -> bool:
+	return _gliding
+
+
 func reset() -> void:
+	_gliding = false
 	_spin = 0.0
 	_whip = 0.0
 	queue_redraw()
@@ -83,24 +91,32 @@ func _grab_friend() -> void:
 	if player.carrying:
 		return
 	for body in player.interact_area.get_overlapping_bodies():
-		if body is Player and body != player and body.alive and body.carried_by == null and body.carrying == null:
+		# A friend riding on my head isn't grabbed: pressing skill there means glide (hair-copter).
+		if body is Player and body != player and body.alive and body.carried_by == null and body.carrying == null and not player.has_rider(body):
 			player.grab(body)
 			return
 
 
 func _draw() -> void:
 	var top := -Player.HALF_SIZE.y
+	# Hair is the health bar: the tails get shorter with every hit.
+	var tail := 18.0 * player.hair_left()
+	var hair := HAIR_COLOR.darkened(0.25) if player.is_wet() else HAIR_COLOR
 	if _spin > 0.0:
 		# Propeller: two tails spinning above the head.
 		for i in 2:
 			var a := _spin + PI * i
-			var tip := Vector2(cos(a) * 22.0, top - 6.0 + sin(a) * 4.0)
-			draw_line(Vector2(0, top - 6.0), tip, HAIR_COLOR, 6.0)
-		draw_circle(Vector2(0, top - 6.0), 4.0, HAIR_COLOR)
+			var tip := Vector2(cos(a) * (4.0 + tail), top - 6.0 + sin(a) * 4.0)
+			draw_line(Vector2(0, top - 6.0), tip, hair, 6.0)
+		draw_circle(Vector2(0, top - 6.0), 4.0, hair)
+	elif player.is_wet():
+		# Soaked: the tails hang flat and long against the body.
+		draw_rect(Rect2(-19, top + 2, 5, tail + 10), hair)
+		draw_rect(Rect2(14, top + 2, 5, tail + 10), hair)
 	else:
-		draw_rect(Rect2(-20, top + 2, 6, 18), HAIR_COLOR)
-		draw_rect(Rect2(14, top + 2, 6, 18), HAIR_COLOR)
-	draw_rect(Rect2(-14, top - 4, 28, 8), HAIR_COLOR)
+		draw_rect(Rect2(-20, top + 2, 6, tail), hair)
+		draw_rect(Rect2(14, top + 2, 6, tail), hair)
+	draw_rect(Rect2(-14, top - 4, 28, 8), hair)
 	if _whip > 0.0:
 		draw_line(Vector2(12, top + 10), Vector2(48, top + 22), Color.WHITE, 4.0)
 		draw_arc(Vector2(0, top), volley_reach.x, PI * 1.1, PI * 1.9, 10, Color(1, 1, 1, 0.6), 3.0)

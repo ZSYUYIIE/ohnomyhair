@@ -6,7 +6,8 @@ extends RefCounted
 const LEVELS: Array[Dictionary] = [
 	{"path": "res://scenes/levels/level_01.tscn", "title": "Fresh Cut"},
 	{"path": "res://scenes/levels/level_02.tscn", "title": "Return to Sender"},
-	{"path": "res://scenes/levels/level_03.tscn", "title": "The Barber"},
+	{"path": "res://scenes/levels/level_03.tscn", "title": "Wash & Blow-Dry"},
+	{"path": "res://scenes/levels/level_04.tscn", "title": "The Barber"},
 ]
 const MAIN_MENU := "res://scenes/ui/main_menu.tscn"
 

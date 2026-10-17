@@ -159,6 +159,30 @@ class RoomBuilder:
 		c.patrol_range = patrol_tiles * TILE
 		return add(c, name)
 
+	## Hair dryer: warm-air column over tiles col..col+w-1, rows top_row..bottom_row (dryer at the bottom).
+	func dryer(name: String, col: int, top_row: int, w: int, bottom_row: int) -> Node2D:
+		var d := HairDryer.new()
+		d.position = Vector2(col, top_row) * TILE
+		d.size = Vector2(w, bottom_row - top_row + 1) * TILE
+		return add(d, name)
+
+	## Shampoo shower spraying over tiles col..col+w-1, rows top_row..bottom_row.
+	## off_time 0 = always on; otherwise sprays on_time out of every off_time + on_time.
+	func shower(name: String, col: int, top_row: int, w: int, bottom_row: int, off_time := 1.8, on_time := 1.6, phase := 0.0) -> Node2D:
+		var s := ShowerHead.new()
+		s.position = Vector2(col, top_row) * TILE
+		s.size = Vector2(w, bottom_row - top_row + 1) * TILE
+		s.off_time = off_time
+		s.on_time = on_time
+		s.phase = phase
+		return add(s, name)
+
+	## Growth tonic bottle (+1 hair) centered in a tile.
+	func tonic(name: String, col: int, row: int) -> Node2D:
+		var t := GrowthTonic.new()
+		t.position = _center(col, row)
+		return add(t, name)
+
 	func hit_switch(name: String, col: int, row: int) -> Node2D:
 		var s := HitSwitch.new()
 		s.position = _center(col, row)

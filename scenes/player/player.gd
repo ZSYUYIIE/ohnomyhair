@@ -66,6 +66,10 @@ var _can_cut_jump := false
 var _invincible := 0.0
 var _drop_through := 0.0
 var _separating: Player = null  # pads are re-enabled once we no longer overlap this friend
+## Seconds left soaked by a shampoo shower (twin-tails can't glide, pompadour can't smash gel).
+var wet_time := 0.0
+## Hair dryers whose warm-air column we're standing in (they add / remove themselves).
+var updrafts: Array[Node] = []
 
 
 func _ready() -> void:
@@ -76,6 +80,7 @@ func _ready() -> void:
 	label.text = "P%d" % player_id
 	hp = max_hp
 	set_hair(hair)
+	visual.add_child(WetDrips.new(self))
 
 
 func act(action: String) -> StringName:
@@ -117,6 +122,7 @@ func _physics_process(delta: float) -> void:
 		_set_pads_with(_separating, true)
 		_separating = null
 	_invincible = maxf(_invincible - delta, 0.0)
+	wet_time = maxf(wet_time - delta, 0.0)
 	visual.modulate.a = 0.35 if _invincible > 0.0 and int(_invincible * 20.0) % 2 == 0 else 1.0
 	if not alive:
 		return
@@ -156,8 +162,16 @@ func _physics_process(delta: float) -> void:
 		velocity.y *= jump_cut
 		_can_cut_jump = false
 
-	var g := gravity * (fall_multiplier if velocity.y > 0.0 else 1.0)
-	velocity.y += g * delta
+	if not updrafts.is_empty() and ability.is_gliding():
+		# Hair dryer: warm air lifts a glider. With a friend hanging on, it's only enough to hover.
+		var dryer: HairDryer = updrafts[0]
+		var target: float = 0.0 if carrying else -dryer.lift_speed
+		velocity.y = move_toward(velocity.y, target, dryer.lift_accel * delta)
+	else:
+		var g := gravity * (fall_multiplier if velocity.y > 0.0 else 1.0)
+		velocity.y += g * delta
+		if not updrafts.is_empty():
+			fall_cap = minf(fall_cap, (updrafts[0] as HairDryer).warm_fall_speed)
 	if velocity.y > fall_cap:
 		velocity.y = move_toward(velocity.y, fall_cap, 4000.0 * delta)
 	if control_lock > 0.0:
@@ -166,7 +180,14 @@ func _physics_process(delta: float) -> void:
 		var accel := ground_accel if is_on_floor() else air_accel
 		velocity.x = move_toward(velocity.x, dir * run_speed, accel * delta)
 
+	var rider := _rider_on_head()
+	var y_before := global_position.y
 	move_and_slide()
+	# A friend standing on my head rises with me (the head pad is one-way, so a rising pad
+	# would slide up through them otherwise). This is the hair-copter lift.
+	if rider and global_position.y < y_before:
+		rider.global_position.y += global_position.y - y_before
+		rider.velocity.y = minf(rider.velocity.y, 0.0)
 	ability.after_move()
 
 
@@ -180,6 +201,13 @@ func _jump(v: float, can_cut: bool) -> void:
 ## Thrown upward by a friend; rises `height` pixels and can't be cut short.
 func launch(height: float) -> void:
 	_jump(-sqrt(2.0 * gravity * height), false)
+
+
+func _rider_on_head() -> Player:
+	var mate := teammate()
+	if mate and mate.alive and mate.carried_by == null and carried_by == null and has_rider(mate):
+		return mate
+	return null
 
 
 ## True when `other` is standing on this player's head pad.
@@ -201,6 +229,31 @@ func take_hit(damage: int, _stun_time: float = 0.0, knockback := Vector2.ZERO) -
 		control_lock = 0.2
 	if hp <= 0:
 		die()
+
+
+## Growth tonic: hair grows back one notch. Returns false at full health.
+func heal(amount: int) -> bool:
+	if not alive or hp >= max_hp:
+		return false
+	hp = mini(hp + amount, max_hp)
+	return true
+
+
+func soak(seconds: float) -> void:
+	wet_time = maxf(wet_time, seconds)
+
+
+func dry() -> void:
+	wet_time = 0.0
+
+
+func is_wet() -> bool:
+	return wet_time > 0.0
+
+
+## How much hair is left, 1.0 = full. Hair is the health bar: each hit snips some off.
+func hair_left() -> float:
+	return clampf(float(hp) / float(max_hp), 0.34, 1.0)
 
 
 func make_invincible(seconds: float) -> void:
@@ -295,6 +348,7 @@ func respawn_at(pos: Vector2) -> void:
 	control_lock = 0.0
 	hp = max_hp
 	_invincible = 1.0
+	wet_time = 0.0
 	ability.reset()
 	alive = true
 	show()
@@ -329,3 +383,24 @@ static func add_rect_shape(owner_node: Node, size: Vector2, offset: Vector2) -> 
 	col.position = offset
 	owner_node.add_child(col)
 	return col
+
+
+## Water drips around a soaked player (drawn under the Visual node, so it flips with it).
+class WetDrips extends Node2D:
+	var player: Player
+
+	func _init(p: Player) -> void:
+		player = p
+		z_index = 1
+
+	func _process(_delta: float) -> void:
+		queue_redraw()
+
+	func _draw() -> void:
+		if not player.is_wet():
+			return
+		var t := Time.get_ticks_msec() / 1000.0
+		for i in 4:
+			var x := -16.0 + i * 11.0
+			var y := fmod(t * 60.0 + i * 13.0, 40.0) - Player.HALF_SIZE.y
+			draw_circle(Vector2(x, y), 2.5, Color("4aa3df"))

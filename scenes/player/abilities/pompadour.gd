@@ -6,6 +6,7 @@ extends HairAbility
 ## Attack: parry (0.15 s window) that sends scissors back the way they came.
 ## Combo "Sling Dash": press skill while dangling from twin-tails' hair to be flung
 ## forward: a long, gravity-free air dash that smashes gel; the carrier bobs up.
+## Wet (shampoo shower): the pompadour flops, and a dash just bounces off gel until dried.
 
 const HAIR_COLOR := Color("3a8fd6")
 
@@ -105,12 +106,12 @@ func after_move() -> void:
 		return
 	for i in player.get_slide_collision_count():
 		var collider := player.get_slide_collision(i).get_collider()
-		if collider and collider.has_method("smash"):
+		if collider and collider.has_method("smash") and not player.is_wet():
 			collider.smash()
 			# A sling dash punches straight through gel; a ground dash stops at the wall.
 			if not _slinging:
 				_dash_left = 0.0
-	if player.is_on_wall() and not (_slinging and _touching_gel()):
+	if player.is_on_wall() and not (_slinging and _touching_gel() and not player.is_wet()):
 		_dash_left = 0.0
 		_slinging = false
 
@@ -141,8 +142,13 @@ func _rider() -> Player:
 func _draw() -> void:
 	var top := -Player.HALF_SIZE.y
 	# The pompadour: a hard wedge sticking out forward (+x is always "forward" here).
-	var wedge := PackedVector2Array([Vector2(-14, top + 4), Vector2(-10, top - 8), Vector2(30, top - 4), Vector2(14, top + 6)])
-	draw_colored_polygon(wedge, HAIR_COLOR)
+	# Hair is the health bar: each hit trims the wedge. Wet, it flops down over the face.
+	var reach := 14.0 + 16.0 * player.hair_left()
+	var hair := HAIR_COLOR.darkened(0.25) if player.is_wet() else HAIR_COLOR
+	var wedge := PackedVector2Array([Vector2(-14, top + 4), Vector2(-10, top - 8), Vector2(reach, top - 4), Vector2(14, top + 6)])
+	if player.is_wet():
+		wedge = PackedVector2Array([Vector2(-14, top + 4), Vector2(-10, top - 6), Vector2(reach - 4, top + 2), Vector2(reach - 8, top + 16)])
+	draw_colored_polygon(wedge, hair)
 	if _dash_left > 0.0:
 		for i in 3:
 			var x := -24.0 - i * 10.0

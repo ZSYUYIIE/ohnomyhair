@@ -26,6 +26,12 @@ func _run() -> void:
 	await _hit_stop_survives_its_caller()
 	await _respawn_out_of_a_hazard_dies_once()
 	await _golden_scissor_dazes_the_boss_longer()
+	await _dryer_lifts_a_glider()
+	await _dryer_only_hovers_a_carry()
+	await _hair_copter_lifts_the_rider()
+	await _shower_soaks_and_dryer_dries()
+	await _wet_pompadour_bounces_off_gel()
+	await _tonic_grows_hair_back()
 	for action in InputMap.get_actions():
 		Input.action_release(action)
 	print("Results: %d passed, %d failed" % [passed, failed])
@@ -181,6 +187,134 @@ func _golden_scissor_dazes_the_boss_longer() -> void:
 	await _ticks(5)
 	boss.take_hit(2, 6.0)
 	_check(boss.state == BarberBot.State.DAZED and boss._t > 5.0, "boss: a golden (volleyed) scissor dazes it for 6 s")
+
+
+# --- Salon mechanics -----------------------------------------------------------
+
+## Column from y=-12 tiles to the floor, 2 tiles wide, centered on x=0.
+func _dryer_column() -> HairDryer:
+	var dryer := HairDryer.new()
+	dryer.position = Vector2(-TILE, -12 * TILE)
+	dryer.size = Vector2(2 * TILE, 12 * TILE)
+	_arena.add_child(dryer)
+	return dryer
+
+
+func _dryer_lifts_a_glider() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	_dryer_column()
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(0, 0))
+	await _ticks(10)
+	_hold(a, "jump", true)
+	_hold(a, "skill", true)
+	await _ticks(90)
+	_check(a.global_position.y < -9 * TILE, "dryer: a gliding twin-tails rides the warm air up (y=%.0f)" % a.global_position.y)
+	await _ticks(60)
+	_check(a.global_position.y > -13.5 * TILE and not a.is_on_floor(), "dryer: she bobs at the top of the column instead of flying off")
+	_hold(a, "skill", false)
+	await _wait(func(): return a.is_on_floor(), 240)
+	_hold(a, "jump", false)
+	var b := _spawn(2, Player.Hair.POMPADOUR, Vector2(0, -8 * TILE))
+	await _ticks(20)
+	_check(b.velocity.y <= 262.0, "dryer: a non-glider falls slower in the warm air")
+
+
+func _dryer_only_hovers_a_carry() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	_dryer_column()
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(-10, 0))
+	var b := _spawn(2, Player.Hair.POMPADOUR, Vector2(10, 0))
+	await _ticks(10)
+	_hold(a, "skill", true)
+	await _ticks(2)
+	_hold(a, "jump", true)
+	await _ticks(40)
+	var y0 := a.global_position.y
+	await _ticks(60)
+	_hold(a, "jump", false)
+	_hold(a, "skill", false)
+	_check(a.carrying == b and absf(a.global_position.y - y0) < 0.6 * TILE, "dryer: carrying a friend she only hovers (dy=%.0f)" % (a.global_position.y - y0))
+
+
+## Combo "Hair-copter": pompadour stands on the gliding twin-tails' head and rides up.
+func _hair_copter_lifts_the_rider() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	_dryer_column()
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(0, 0))
+	var b := _spawn(2, Player.Hair.POMPADOUR, Vector2(0, -2 * Player.HALF_SIZE.y - 4))
+	await _ticks(20)
+	_check(a.has_rider(b), "hair-copter: pompadour stands on twin-tails' head")
+	_hold(a, "jump", true)
+	_hold(a, "skill", true)
+	await _ticks(100)
+	_hold(a, "jump", false)
+	_check(b.global_position.y < -10 * TILE and a.has_rider(b), "hair-copter: the rider goes up with her (y=%.0f)" % b.global_position.y)
+	_hold(a, "skill", false)
+
+
+func _shower_soaks_and_dryer_dries() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	var shower := ShowerHead.new()
+	shower.off_time = 0.0
+	shower.position = Vector2(-2 * TILE, -10 * TILE)
+	shower.size = Vector2(4 * TILE, 10 * TILE)
+	_arena.add_child(shower)
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(0, 0))
+	await _ticks(10)
+	_check(a.is_wet(), "shower: standing under it soaks you")
+	a.global_position = Vector2(20 * TILE, -8 * TILE)
+	_hold(a, "skill", true)
+	await _ticks(20)
+	_check(not a.ability.is_gliding() and a.velocity.y > 200.0, "shower: wet twin-tails can't glide")
+	_hold(a, "skill", false)
+	await _wait(func(): return a.is_on_floor(), 120)
+	var dryer := HairDryer.new()
+	dryer.position = a.global_position - Vector2(TILE, 2 * TILE)
+	dryer.size = Vector2(2 * TILE, 3 * TILE)
+	_arena.add_child(dryer)
+	await _ticks(5)
+	_check(not a.is_wet(), "dryer: drying off is instant")
+
+
+func _wet_pompadour_bounces_off_gel() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	var wall := _gel(Rect2(4 * TILE, -5 * TILE, 2 * TILE, 5 * TILE), 0.0)
+	var b := _spawn(2, Player.Hair.POMPADOUR, Vector2(2 * TILE, 0))
+	await _ticks(10)
+	b.soak(5.0)
+	await _tap(b, "skill")
+	await _ticks(20)
+	_check(is_instance_valid(wall) and wall.is_solid(), "wet: a soggy pompadour bounces off the gel")
+	b.dry()
+	await _ticks(25)
+	await _tap(b, "skill")
+	await _ticks(20)
+	_check(not is_instance_valid(wall) or not wall.is_solid(), "wet: dried off, the dash smashes it")
+
+
+func _tonic_grows_hair_back() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(0, 0))
+	await _ticks(5)
+	var full := GrowthTonic.new()
+	full.position = a.global_position
+	_arena.add_child(full)
+	await _ticks(5)
+	_check(is_instance_valid(full), "tonic: a friend with full hair leaves it")
+	full.free()
+	a.take_hit(1)
+	_check(a.hp == 2 and a.hair_left() < 1.0, "tonic: a hit snips the hair shorter")
+	var tonic := GrowthTonic.new()
+	tonic.position = a.global_position
+	_arena.add_child(tonic)
+	await _ticks(5)
+	_check(a.hp == 3 and not is_instance_valid(tonic), "tonic: drinking it grows one notch back")
 
 
 # --- Arena helpers -------------------------------------------------------------

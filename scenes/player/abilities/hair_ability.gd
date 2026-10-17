@@ -25,6 +25,11 @@ func tick_carried(delta: float) -> void:
 	tick_attack(delta)
 
 
+## True while gliding (hair dryers only lift gliders).
+func is_gliding() -> bool:
+	return false
+
+
 ## True while the ability fully controls velocity (e.g. a dash); normal movement is skipped.
 func is_driving() -> bool:
 	return false
