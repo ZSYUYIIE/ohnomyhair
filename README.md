@@ -19,6 +19,16 @@ godot --path . res://scenes/levels/level_01.tscn -- --room=3
 | P1 Twin Tails | A / D | W | G: hold to glide; grab P2 to carry them; pull levers | F: hair whip (stun) |
 | P2 Pompadour | ← / → | ↑ | K: dash (smash gel walls), or launch P1 standing on your head | L: parry scissors |
 
+### Hair combos (both friends act at once)
+| Combo | Twin Tails | Pompadour | Effect |
+|---|---|---|---|
+| Carry | hold skill next to P2, glide | (hangs; can still parry) | fly over pits together |
+| Launch | stand on P2's head | skill | rider rises ~9 tiles |
+| **Sling Dash** | carry P2 through the air | skill while hanging | flung 7 tiles flat, through gel walls |
+| **Volley** | attack (whip) a blue scissor | parry first (scissor turns blue) | scissor shoots straight up, golden, rings bells |
+
+Design notes: `docs/design/refinement.md`.
+
 While carried, press down to let go. Hold down to drop through a one-way platform. R restarts the current room.
 Skill/attack follow the **haircut**, not the player: if hair gets swapped, so do the powers.
 
@@ -26,7 +36,9 @@ Edit in Project Settings → Input Map. In code: `player.pressed("skill")` / `In
 
 ## Run the tests
 Each test plays through a level with simulated input; exit code 0 = pass.
+`test_combos.gd` checks each hair combo (and that the solo shortcut fails) in a bare arena.
 ```
+godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_03.gd
@@ -35,11 +47,15 @@ On a fresh checkout run `godot --headless --path . --import` once first.
 
 ## Repo layout
 - `scenes/player/` — the shared Player and the two haircuts (`abilities/`)
-- `scenes/props/`, `scenes/enemies/` — levers, blocks, gel walls, hazards, doors, scissors, bots
+- `scenes/props/`, `scenes/enemies/` — barber-shop props and enemies: chair-pump levers, salon
+  counters, regrowing hair-gel, dye basins, hot flat irons, service bells, staff doors, scissor
+  dispensers, clipper bots, the barber bot
+- `scenes/systems/salon_decor.gd` — background mirrors, lamps and barber poles for each room
 - `scenes/systems/` — `Level` (rooms, respawn, room-to-room camera) and `Room`
 - `scenes/levels/` — generated level scenes
 - `tools/` — `build_level_0N.gd` generate the level scenes (rerunning overwrites them),
+  `make_greybox_tiles.gd` paints the salon tile atlas,
   `measure_metrics.gd` prints jump/glide/carry/launch reach for sizing gaps
-- `docs/levels/` — level design docs
+- `docs/levels/`, `docs/design/` — level design docs and the mechanics refinement notes
 - `tests/` — headless playthrough tests
 - `.claude/skills`, `.agents/skills`, `skills-lock.json` — AI agent skills (Godot, platformer, combat, camera, web export)

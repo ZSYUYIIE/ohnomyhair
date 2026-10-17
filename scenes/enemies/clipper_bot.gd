@@ -58,8 +58,16 @@ func take_hit(damage: int, stun_time: float = 0.0, knockback := Vector2.ZERO) ->
 
 
 func _draw() -> void:
-	var body := Color("7f8c8d") if stun > 0.0 else Color("d35400")
-	draw_rect(Rect2(Vector2(-SIZE.x / 2, -SIZE.y), SIZE), body)
-	draw_rect(Rect2(Vector2(SIZE.x / 2 * direction - 2.0, -18), Vector2(4, 12)), Color("ecf0f1"))
-	if stun > 0.0:
+	# An electric hair clipper on the loose.
+	var stunned := stun > 0.0
+	var body := Color("7f8c8d") if stunned else Color("34495e")
+	var front := SIZE.x / 2.0 * direction
+	draw_rect(Rect2(Vector2(-SIZE.x / 2, -SIZE.y + 4), Vector2(SIZE.x, SIZE.y - 4)), body)
+	draw_rect(Rect2(Vector2(-SIZE.x / 2, -SIZE.y), Vector2(SIZE.x, 6)), body.lightened(0.2))
+	for i in 5:
+		var y := -SIZE.y + 3.0 + i * 4.5
+		draw_line(Vector2(front, y), Vector2(front + 6.0 * direction, y), Color("ecf0f1"), 2.0)
+	draw_circle(Vector2(-front * 0.4, -SIZE.y + 10), 2.5, Color("555555") if stunned else Color("2ecc71"))
+	draw_line(Vector2(-front, -6), Vector2(-front - 10.0 * direction, -2), Color("222222"), 2.0)
+	if stunned:
 		draw_circle(Vector2(0, -32), 4.0, Color.YELLOW)

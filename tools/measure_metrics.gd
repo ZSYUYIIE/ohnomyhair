@@ -28,6 +28,8 @@ func _run() -> void:
 	print("carry: P2's feet hang %.2f tiles below P1's feet" % (carry.hang / TILE))
 	print("launch: rider's feet peak %.2f tiles above the floor" % (await _launch() / TILE))
 	print("dash: %.2f tiles" % (await _dash() / TILE))
+	var sling := await _sling()
+	print("sling dash (from a carry, 0.5 s after take-off): %.2f tiles forward, %.2f tiles drop" % [sling.x / TILE, sling.y / TILE])
 	quit()
 
 
@@ -131,6 +133,32 @@ func _launch() -> float:
 		await physics_frame
 		peak = maxf(peak, -_feet(a))
 	return peak
+
+
+## P1 carries P2 off the ledge; 0.5 s into the flight P2 presses skill.
+## Returns how far P2 travels during the fling (x) and how much it sinks (y).
+func _sling() -> Vector2:
+	_new_arena()
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(EDGE_X - 600, 0))
+	var b := _spawn(2, Player.Hair.POMPADOUR, Vector2(EDGE_X - 570, 0))
+	await _ticks(10)
+	Input.action_press("p1_skill")
+	await _ticks(2)
+	Input.action_press("p1_right")
+	while a.global_position.x < EDGE_X + 10:
+		await physics_frame
+	Input.action_press("p1_jump")
+	await _ticks(30)
+	Input.action_press("p2_skill")
+	await physics_frame
+	Input.action_release("p2_skill")
+	await physics_frame
+	var start := b.global_position
+	while b.ability.is_slinging():
+		await physics_frame
+	for action in ["p1_skill", "p1_right", "p1_jump"]:
+		Input.action_release(action)
+	return b.global_position - start
 
 
 func _dash() -> float:

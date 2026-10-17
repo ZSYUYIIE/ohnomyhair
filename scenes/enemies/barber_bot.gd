@@ -162,7 +162,7 @@ func daze(seconds: float) -> void:
 ## Only a parried scissor (stun 3 s) is strong enough to daze it.
 func take_hit(_damage: int, stun_time: float = 0.0, _knockback := Vector2.ZERO) -> void:
 	if stun_time >= 2.0:
-		daze(parry_daze_time)
+		daze(maxf(parry_daze_time, stun_time))  # a golden (volleyed) scissor dazes longer
 
 
 func _stomped_by(player: Player) -> void:

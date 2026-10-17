@@ -4,6 +4,9 @@ extends HairAbility
 ## Skill (hold): glide. Press next to a lever to pull it, or next to your friend to
 ## grab them and carry them while gliding.
 ## Attack: hair whip that stuns enemies for 1 s without damage.
+## Combo "Volley": whipping a scissor that pompadour already parried (blue) sends it
+## straight up as a golden scissor. The whip reaches above the head, so twin-tails
+## can wait in a trench while enemy scissors fly over her.
 
 const HAIR_COLOR := Color("ff5fa2")
 
@@ -12,6 +15,7 @@ const HAIR_COLOR := Color("ff5fa2")
 @export var whip_time := 0.12
 @export var whip_cooldown := 0.35
 @export var whip_stun := 1.0
+@export var volley_reach := Vector2(52, 84)  # half-width; height above the head
 
 var _spin := 0.0
 var _whip := 0.0
@@ -49,7 +53,16 @@ func tick_attack(delta: float) -> void:
 	if _whip > 0.0:
 		_whip -= delta
 		strike(_whipped, 0, whip_stun, Vector2.ZERO)
+		for scissor: Scissor in player.get_tree().get_nodes_in_group("scissors"):
+			if scissor.deflected and not scissor.golden and _in_volley_reach(scissor.global_position):
+				scissor.volley(player.global_position.x)
+				player.hit_stop(0.06)
 	queue_redraw()
+
+
+func _in_volley_reach(pos: Vector2) -> bool:
+	var rel := pos - player.global_position
+	return absf(rel.x) <= volley_reach.x and rel.y <= Player.HALF_SIZE.y and rel.y >= -Player.HALF_SIZE.y - volley_reach.y
 
 
 func reset() -> void:
@@ -90,6 +103,7 @@ func _draw() -> void:
 	draw_rect(Rect2(-14, top - 4, 28, 8), HAIR_COLOR)
 	if _whip > 0.0:
 		draw_line(Vector2(12, top + 10), Vector2(48, top + 22), Color.WHITE, 4.0)
+		draw_arc(Vector2(0, top), volley_reach.x, PI * 1.1, PI * 1.9, 10, Color(1, 1, 1, 0.6), 3.0)
 	if player.carrying:
 		var target := to_local(player.carrying.visual.global_position + Vector2(0, -Player.HALF_SIZE.y))
 		draw_line(Vector2(0, top), target, HAIR_COLOR, 4.0)

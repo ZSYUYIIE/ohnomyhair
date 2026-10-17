@@ -24,7 +24,7 @@ var LeverScene := load("res://scenes/props/lever.tscn")
 var BlockScene := load("res://scenes/props/moving_block.tscn")
 var WallScene := load("res://scenes/props/breakable_wall.tscn")
 var HazardScene := load("res://scenes/props/hazard.tscn")
-var SpikesScene := load("res://scenes/props/periodic_spikes.tscn")
+var IronScene := load("res://scenes/props/hot_iron.tscn")
 var ExitScene := load("res://scenes/props/room_exit.tscn")
 var PlayerScene := load("res://scenes/player/player.tscn")
 
@@ -122,10 +122,12 @@ class RoomBuilder:
 			m.z_index = -1
 		return add(m, name)
 
-	func gel_wall(name: String, col: int, row: int, w: int, h: int) -> Node2D:
+	## regrow > 0: the gel grows back that many seconds after being smashed.
+	func gel_wall(name: String, col: int, row: int, w: int, h: int, regrow := 0.0) -> Node2D:
 		var g: Node2D = b.WallScene.instantiate()
 		g.position = Vector2(col, row) * TILE
 		g.size = Vector2(w, h) * TILE
+		g.regrow_time = regrow
 		return add(g, name)
 
 	func dye_pool(name: String, col: int, row: int, w: int, h: int) -> Node2D:
@@ -134,9 +136,10 @@ class RoomBuilder:
 		h_node.size = Vector2(w, h) * TILE
 		return add(h_node, name)
 
-	## Spikes sit on top of the floor tile row `floor_row`.
-	func spikes(name: String, col: int, floor_row: int, w: int) -> Node2D:
-		var s: Node2D = b.SpikesScene.instantiate()
+	## A hot flat iron lying on top of the floor tile row `floor_row`; `phase` offsets its heat cycle.
+	func hot_iron(name: String, col: int, floor_row: int, w: int, phase := 0.0) -> Node2D:
+		var s: Node2D = b.IronScene.instantiate()
+		s.phase = phase
 		s.size = Vector2(w * TILE, 24)
 		s.position = Vector2(col * TILE, floor_row * TILE - 24)
 		return add(s, name)
@@ -156,28 +159,26 @@ class RoomBuilder:
 		c.patrol_range = patrol_tiles * TILE
 		return add(c, name)
 
-	func deflector(name: String, col: int, row: int) -> Node2D:
-		var d := Deflector.new()
-		d.position = _center(col, row)
-		return add(d, name)
-
 	func hit_switch(name: String, col: int, row: int) -> Node2D:
 		var s := HitSwitch.new()
 		s.position = _center(col, row)
 		return add(s, name)
 
-	func door(name: String, col: int, row: int, w: int, h: int) -> Node2D:
+	## locks: how many switches must call open() before it opens.
+	func door(name: String, col: int, row: int, w: int, h: int, locks := 1) -> Node2D:
 		var d := Door.new()
 		d.position = Vector2(col, row) * TILE
 		d.size = Vector2(w, h) * TILE
+		d.locks = locks
 		return add(d, name)
 
 	## Persistent signal connection, saved into the scene (visible in the Node dock).
 	func link(from: Node, signal_name: String, to: Node, method: String) -> void:
 		from.connect(signal_name, Callable(to, method), CONNECT_PERSIST)
 
-	## Yellow floor stripes marking a spot (drawn on top of tile row `row`).
-	func stripes(name: String, col0: int, col1: int, row: int) -> void:
+	## Floor stripes marking a spot (drawn on top of tile row `row`). Yellow = parry here,
+	## pink = twin-tails volleys here.
+	func stripes(name: String, col0: int, col1: int, row: int, color := Color("f1c40f")) -> void:
 		var holder := Node2D.new()
 		add(holder, name)
 		var x := col0 * TILE
@@ -185,7 +186,7 @@ class RoomBuilder:
 			var r := ColorRect.new()
 			r.position = Vector2(x, row * TILE)
 			r.size = Vector2(10, 6)
-			r.color = Color("f1c40f")
+			r.color = color
 			r.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			holder.add_child(r)
 			x += 20
@@ -271,6 +272,13 @@ func room_node(name: String, title: String, backdrop_color: Color) -> Node2D:
 	backdrop.z_index = -10
 	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	room.add_child(backdrop)
+	var decor := SalonDecor.new()
+	decor.name = "Decor"
+	decor.size = backdrop.size
+	decor.wall_color = backdrop_color
+	decor.layout_seed = hash(level_name + name)
+	decor.z_index = -9
+	room.add_child(decor)
 	return room
 
 

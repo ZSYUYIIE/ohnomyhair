@@ -1,156 +1,117 @@
-extends SceneTree
-## Plays through L2's intended solution with simulated input and checks each step
-## (ported from the original 640x360 prototype test; coordinates are now tiles x 32).
+extends PlayBot
+## Bot playthrough of L2 "Return to Sender": parry + volley rings the service bells.
+## Room 1 teaches it with one bell; room 2 needs two bells and a clipper bot cleared.
 ## Run: godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
 
-const TILE := 32.0
 const LevelScene := preload("res://scenes/levels/level_02.tscn")
-
-var passed := 0
-var failed := 0
-var level: Level
-var a: Player
-var b: Player
-
-
-func _initialize() -> void:
-	_run.call_deferred()
 
 
 func _run() -> void:
-	level = LevelScene.instantiate()
-	root.add_child(level)
-	a = level.get_node("Players/P1")
-	b = level.get_node("Players/P2")
+	await load_level(LevelScene)
+	await _room_1()
+	if failed == 0:
+		await _room_2()
+	finish()
+
+
+func _room_1() -> void:
 	var room := level.get_node("Rooms/Room1")
-	var turret: ScissorTurret = room.get_node("Turret")
-	var lever: Lever = room.get_node("Lever")
-	var hit_switch: HitSwitch = room.get_node("Switch")
-	var door: Door = room.get_node("Door")
-	var bot: ClipperBot = room.get_node("ClipperBot")
-	await _frames(10)
+	var o: float = room.global_position.x
+	var bell: HitSwitch = room.get_node("Bell")
+	var door: Door = room.get_node("StaffDoor")
+	var dispenser: ScissorTurret = room.get_node("Dispenser")
 
-	# 0. Combat: whip stuns the clipper bot, a dash damages it.
-	a.global_position = bot.global_position + Vector2(-40, -Player.HALF_SIZE.y)
-	a.facing = 1.0
-	await _frames(2)
-	await _tap("p1_attack")
-	_check("hair whip stuns the clipper bot", bot.stun > 0.0, bot.stun)
-	b.global_position = bot.global_position + Vector2(-70, -Player.HALF_SIZE.y)
-	b.facing = 1.0
-	var hp_before := bot.hp
-	await _tap("p2_skill")
-	await _frames(15)
-	_check("pompadour dash damages the clipper bot", not is_instance_valid(bot) or bot.hp < hp_before, hp_before)
+	# Parry alone: the scissor flies home and jams the dispenser, the bell stays quiet.
+	await walk_to(p2, o + 12 * TILE)
+	check(await parry_next_scissor(p2, 600), "R1: P2 parries a scissor")
+	check(await wait_until(func(): return dispenser._jam > 0.0, 240), "R1: a lone parry just jams the dispenser")
+	check(not bell.pressed, "R1: the bell needs more than a parry")
 
-	# 1. Launch: P1 on P2's head under the ledge, P2 presses skill.
-	turret.take_hit(0, 30.0)
-	_place(b, 19.5, 15)
-	a.global_position = b.global_position + Vector2(0, -60)
-	await _frames(40)
-	_check("P1 can stand on P2's head", a.is_on_floor() and b.has_rider(a), a.global_position)
-	await _tap("p2_skill")
-	await _frames(90)
-	_check("launch lands P1 on the lever ledge", a.is_on_floor() and absf(_feet(a) - 7 * TILE) < 2.0, a.global_position)
-
-	# 2. A normal jump from P2's head must NOT reach the ledge.
-	a.global_position = b.global_position + Vector2(0, -60)
-	await _frames(40)
-	await _tap("p1_jump", 30)
-	await _frames(90)
-	_check("plain jump from head can't reach the ledge", _feet(a) > 10 * TILE, a.global_position)
-
-	# 3. Parry without the lever: scissor goes back and jams the turret.
-	_place(b, 20, 15)
-	b.facing = 1.0
-	turret._jam = 0.0
-	turret._timer = 0.05
-	await _wait_for_incoming(b)
-	await _tap("p2_attack")
-	await _frames(150)
-	_check("unaided parry jams the turret", turret._jam > 0.0, turret._jam)
-	_check("switch still off", not hit_switch.pressed, hit_switch.pressed)
-
-	# 4. Parry + spring lever: scissor bends up into the switch, door opens.
-	#    Regression for playtest 1: P2 parries right beside the plate and P1 pulls just after,
-	#    so the plate rises while the scissor already overlaps it.
-	a.global_position = lever.global_position + Vector2(-12, 16 - Player.HALF_SIZE.y)
-	_place(b, 27.5, 15)
-	b.facing = 1.0
-	turret._jam = 0.0
-	turret._timer = 0.05
-	await _wait_for_incoming(b)
-	await _tap("p2_attack")
-	await _tap("p1_skill")
-	await _frames(120)
-	_check("deflected scissor hits the switch", hit_switch.pressed, hit_switch.pressed)
-	_check("door opens", door.is_open, door.is_open)
-	await _frames(160)
-	_check("spring lever has sprung back", not lever.is_on, lever.is_on)
-
-	# 5. Getting hit by a scissor costs 1 HP.
-	_place(b, 20, 15)
-	b.hp = b.max_hp
-	b._invincible = 0.0
-	turret._jam = 0.0
-	turret._timer = 0.05
-	await _wait_for_incoming(b)
-	await _frames(20)
-	_check("unparried scissor damages P2", b.hp == b.max_hp - 1, b.hp)
-
-	# 6. Both players in the exit clears the level.
-	turret.take_hit(0, 30.0)
-	_place(a, 20.5, 21)
-	_place(b, 21.5, 21)
-	var cleared := false
-	for i in 60:
-		await physics_frame
-		if level.banner.text.ends_with("CLEAR!"):
-			cleared = true
+	await walk_to(p1, o + 20.5 * TILE)
+	check(p1.global_position.y > 19 * TILE, "R1: twin-tails drops into the trench")
+	var hp_before := p1.hp
+	var rung := false
+	for attempt in 6:
+		if not await parry_next_scissor(p2, 600):
+			continue
+		if await volley_next(p1, 120) and await wait_until(func(): return bell.pressed, 60):
+			rung = true
 			break
-	_check("both players in EXIT clears L2", cleared, level.banner.text)
+	check(rung, "R1: parry + volley rings the bell")
+	check(p1.hp == hp_before, "R1: enemy scissors fly over twin-tails in the trench")
+	check(door.is_open, "R1: the bell opens the staff door")
 
-	print("Results: %d passed, %d failed" % [passed, failed])
-	quit(1 if failed > 0 else 0)
-
-
-## Put a player's feet on top of tile row `floor_row`, centered on tile column `col`.
-func _place(p: Player, col: float, floor_row: int) -> void:
-	p.global_position = Vector2(col * TILE, floor_row * TILE - Player.HALF_SIZE.y)
-	p.velocity = Vector2.ZERO
+	for p in [p2, p1]:
+		await _climb_shelves(p, o)
+	check(p1.global_position.y < 10 * TILE and p2.global_position.y < 10 * TILE, "R1: both climb the shelves to the door")
+	await enter_exit(room, 1)
 
 
-func _feet(p: Player) -> float:
-	return p.global_position.y + Player.HALF_SIZE.y
+func _room_2() -> void:
+	var room := level.get_node("Rooms/Room2")
+	var o: float = room.global_position.x
+	var door: Door = room.get_node("StaffDoor")
+	var bells: Array[HitSwitch] = [room.get_node("Bell22"), room.get_node("Bell30")]
+	var corridor_bot: ClipperBot = room.get_node("CorridorBot")
+	var dispenser: ScissorTurret = room.get_node("Dispenser")
+
+	check(await smash_bot(p2, room.get_node("ClipperBot")), "R2: pompadour clears the clipper bot by the stairs")
+	# P2 takes the front of the parry stripes and guards while P1 slips past into the trench.
+	await walk_to(p2, o + 20.5 * TILE)
+	walk_to(p1, o + 22.5 * TILE)
+	await guard_until(p2, func(): return p1.global_position.y > 15 * TILE and p1.is_on_floor(), 900)
+	check(p2.global_position.y < 15 * TILE and p1.global_position.y > 15 * TILE, "R2: P2 on the walkway, P1 in the first trench")
+
+	check(await _volley_until(bells[0]), "R2: volley rings the first bell")
+	check(not door.is_open, "R2: one bell isn't enough")
+
+	# The bot shields the far trench: parried scissors that P1 lets pass knock it out.
+	for i in 8:
+		if not is_instance_valid(corridor_bot):
+			break
+		await parry_next_scissor(p2, 600)
+		await _ticks(60)
+	check(not is_instance_valid(corridor_bot), "R2: parried scissors take out the corridor bot")
+
+	# With the bot gone a lone parry jams the dispenser: that's P1's window to move.
+	await _jam(dispenser)
+	await walk_to(p1, o + 30.5 * TILE)
+	check(p1.global_position.y > 15 * TILE and p1.alive, "R2: P1 moves to the far trench while it's jammed")
+	check(await _volley_until(bells[1]), "R2: volley from the far trench rings the second bell")
+	check(door.is_open, "R2: both bells open the staff door")
+
+	# Jam it once more, then down the right end and back left under the walkway.
+	await _jam(dispenser)
+	walk_to(p1, o + 37 * TILE)
+	await walk_to(p2, o + 37 * TILE)
+	await _ticks(30)
+	walk_to(p1, o + 21.5 * TILE)
+	await walk_to(p2, o + 20.5 * TILE)
+	check(await wait_until(func(): return level.banner.text.ends_with("CLEAR!"), 300), "R2: both in the exit clears L2")
 
 
-## Waits until an incoming scissor is `distance` px in front of P2 (40 = parry range).
-func _wait_for_incoming(p: Player, distance := 40.0) -> void:
-	for i in 600:
-		for s in get_nodes_in_group("scissors"):
-			var dx: float = s.global_position.x - p.global_position.x
-			if not s.deflected and absf(dx - distance) < 10.0:
-				return
-		await physics_frame
-	_check("an incoming scissor reached P2", false, "timeout")
+## P2 parries until the dispenser is jammed for a while (parried scissors fly home).
+func _jam(dispenser: ScissorTurret) -> void:
+	await guard_until(p2, func(): return dispenser._jam > 2.0, 900)
 
 
-func _tap(action: String, hold_frames := 2) -> void:
-	Input.action_press(action)
-	await _frames(hold_frames)
-	Input.action_release(action)
-	await _frames(1)
+## Parry, then volley from wherever P1 stands, until `bell` rings.
+func _volley_until(bell: HitSwitch) -> bool:
+	for attempt in 8:
+		if bell.pressed:
+			return true
+		if not await parry_next_scissor(p2, 600):
+			continue
+		if await volley_next(p1, 120):
+			await wait_until(func(): return bell.pressed, 60)
+	return bell.pressed
 
 
-func _frames(n: int) -> void:
-	for i in n:
-		await physics_frame
-
-
-func _check(what: String, ok: bool, detail: Variant) -> void:
-	print("  %s  %s  (%s)" % ["ok  " if ok else "FAIL", what, str(detail)])
-	if ok:
-		passed += 1
-	else:
-		failed += 1
-		push_error("FAIL " + what)
+## Room 1's shelves: three one-way planks, 3 tiles apart, up to the staff door.
+func _climb_shelves(p: Player, o: float) -> void:
+	await walk_to(p, o + 24.5 * TILE)
+	await jump_up(p)
+	await walk_to(p, o + 26.5 * TILE)
+	await jump_up(p)
+	await walk_to(p, o + 28.5 * TILE)
+	await jump_up(p)

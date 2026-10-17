@@ -123,7 +123,7 @@ func _physics_process(delta: float) -> void:
 	if carried_by:
 		_follow_carrier()
 		hit_box.position.x = absf(hit_box.position.x) * facing
-		ability.tick_attack(delta)
+		ability.tick_carried(delta)
 		return
 	_ease_visual_to(Vector2.ZERO)
 
@@ -307,11 +307,17 @@ func set_frozen(frozen: bool) -> void:
 		velocity = Vector2.ZERO
 
 
-## Freeze-frame for impact (parry, boss hits).
+## Freeze-frame for impact (parry, volley, boss hits).
 func hit_stop(duration: float) -> void:
+	freeze_frame(get_tree(), duration)
+
+
+## Restoring the time scale must not depend on the caller surviving the freeze: if it
+## awaited the timer itself, freeing it mid-freeze (room change, test arena) would leave
+## the whole game stuck at 5% speed. A lambda made in a static func isn't bound to anyone.
+static func freeze_frame(tree: SceneTree, duration: float) -> void:
 	Engine.time_scale = 0.05
-	await get_tree().create_timer(duration, true, false, true).timeout
-	Engine.time_scale = 1.0
+	tree.create_timer(duration, true, false, true).timeout.connect(func(): Engine.time_scale = 1.0)
 
 
 ## Adds a rectangle CollisionShape2D (centered at `offset`) to a physics node built in code.

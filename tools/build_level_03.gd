@@ -32,28 +32,42 @@ func _room_1() -> RoomBuilder:
 	# Row 16 is ledge-body / flight height; players on the low floors are under it.
 	rb.turret("Turret", 38, 16, Vector2.LEFT, 3.0, 1.5)
 	rb.clipper("ClipperBot", 29, 19, 4.0)
+	# A flat iron on the start floor, below the scissor line (a knockback can't throw
+	# anyone onto it): time the walk between heats.
+	rb.hot_iron("FlatIron", 5, 19, 2, 0.8)
 	rb.exit(36, 16)
 	rb.hint("Closing time. The barber's robot wants to finish the job.", Vector2(40, 300))
-	rb.hint("Scissors at ledge height!\nP2: parry them back (L) - even while carried", Vector2(200, 400))
-	rb.hint("Clipper bot: whip (F) stuns, dash (K) smashes", Vector2(700, 470))
+	rb.hint("P2 can parry (L) while hanging from P1's hair", Vector2(200, 420))
 	return rb
 
 
-## Room 2: the barber's chair sits in a tunnel everyone must pass. Afterwards the
-## gel wall needs P1's new dash and the cliff needs P1 to launch P2.
+## Room 2: the barber's chair sits in a tunnel everyone must pass, and swaps the haircuts.
+## Then every combo runs with the roles reversed: P1 (now pompadour) dashes the gel and
+## parries, P2 (now twin-tails) volleys from the trench to ring the bell, P1 launches P2
+## up the cliff, P2 pulls the lever so the step rises for P1.
 func _room_2() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room2", "2 - The Chair", Color("f6dde4")))
-	rb.solid(0, 19, 38, 22)     # floor
-	rb.solid(15, 1, 24, 14)     # low ceiling: the chair tunnel is rows 15-18
+	rb.solid(0, 19, 26, 22)     # floor...
+	rb.solid(28, 19, 38, 22)
+	rb.solid(27, 21, 27, 22)    # ...with a volley trench at x=27
+	rb.solid(15, 1, 22, 14)     # low ceiling: the chair tunnel is rows 15-18
 	rb.solid(33, 13, 38, 22)    # cliff (6 up)
+	rb.solid(34, 1, 34, 9)      # wall above the staff door
 	rb.spawn(1, 2, 19)
 	rb.spawn(2, 4, 19)
 	var chair: Node2D = ChairScene.instantiate()
-	chair.position = Vector2(16, 15) * TILE
+	chair.position = Vector2(15, 15) * TILE
 	chair.size = Vector2(8, 4) * TILE
 	rb.add(chair, "HairSwapChair")
-	rb.gel_wall("GelWall", 27, 13, 2, 6)
-	var lever := rb.lever("Lever", 35, 12)
+	# Shields the room from the dispenser until P1 (pompadour after the swap) dashes it.
+	rb.gel_wall("GelWall", 23, 13, 2, 6)
+	rb.turret("Dispenser", 30, 18, Vector2.LEFT, 2.5, 1.0)  # fires left only: the launch spot behind it is safe
+	var bell := rb.hit_switch("Bell", 27, 2)
+	var door := rb.door("StaffDoor", 34, 10, 1, 3)
+	rb.link(bell, "activated", door, "open")
+	rb.stripes("ParryStripes", 25, 26, 19)
+	rb.stripes("VolleyMark", 27, 27, 21, Color("ff5fa2"))
+	var lever := rb.lever("ChairLever", 33, 12)
 	rb.block("RisingStep", 31, 19, 2, 3, Vector2i(0, -3), lever, true)
 	rb.exit(36, 10)
 	rb.hint("The barber's chair.\nTake a seat...?", Vector2(40, 330))
@@ -61,13 +75,13 @@ func _room_2() -> RoomBuilder:
 	var after := Node2D.new()
 	after.visible = false
 	rb.add(after, "AfterSwapHints")
-	for line in [["P1 is the POMPADOUR now:\nG dash / launch,   F parry", Vector2(820, 180)],
-			["P2 is the TWIN-TAILS now:\nK glide / grab / pull lever,   L whip", Vector2(820, 260)]]:
+	for line in [["P1 is the POMPADOUR now:  G dash / launch,  F parry", Vector2(760, 60)],
+			["P2 is the TWIN-TAILS now:  K glide / grab / lever,  L whip", Vector2(760, 92)]]:
 		var label := Label.new()
 		label.text = line[0]
 		label.position = line[1]
 		label.add_theme_color_override("font_color", Color("b0306a"))
-		label.add_theme_font_size_override("font_size", 20)
+		label.add_theme_font_size_override("font_size", 18)
 		after.add_child(label)
 	rb.link(chair, "swapped", after, "show")
 	return rb
@@ -93,6 +107,5 @@ func _room_3() -> RoomBuilder:
 	var door := rb.door("BossDoor", 36, 1, 1, 18)
 	rb.link(boss, "defeated", door, "open")
 	rb.exit(37, 16)
-	rb.hint("Parry its scissors back to daze it (P1: F),\nthen land on the glowing head knob!", Vector2(330, 60))
-	rb.hint("Carry P2 over on P1's head and launch (G) - or drop from a corner ledge (hold down)", Vector2(330, 120))
+	rb.hint("Parry its scissors to daze it, then land on its glowing head.\nA volleyed (golden) scissor dazes it longer.", Vector2(330, 60))
 	return rb
