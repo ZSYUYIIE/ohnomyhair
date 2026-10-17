@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/props/lever.gd" id="1_lever"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lever"]
+radius = 18.0
+
+[node name="Lever" type="Area2D"]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_lever")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lever")

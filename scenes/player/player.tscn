@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(28, 44)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_reach"]
+radius = 44.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_head"]
+size = Vector2(26, 12)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Body" type="ColorRect" parent="Visual"]
+offset_left = -14.0
+offset_top = -22.0
+offset_right = 14.0
+offset_bottom = 22.0
+mouse_filter = 2
+
+[node name="Eye" type="ColorRect" parent="Visual"]
+offset_left = 3.0
+offset_top = -12.0
+offset_right = 7.0
+offset_bottom = -4.0
+mouse_filter = 2
+color = Color(0.17, 0.13, 0.25, 1)
+
+[node name="Eye2" type="ColorRect" parent="Visual"]
+offset_left = 9.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = -4.0
+mouse_filter = 2
+color = Color(0.17, 0.13, 0.25, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = -38.0
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 34
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_reach")
+
+[node name="HeadPad" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadPad"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_head")
