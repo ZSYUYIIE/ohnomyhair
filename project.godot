@@ -99,6 +99,7 @@ restart={
 2d_physics/layer_5="enemy_attack"
 2d_physics/layer_6="interactables"
 2d_physics/layer_7="head_pads"
+2d_physics/layer_8="platforms"
 
 [rendering]
 

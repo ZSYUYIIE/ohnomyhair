@@ -36,7 +36,11 @@ func tick(delta: float) -> void:
 		_spin += delta * 30.0
 	else:
 		_spin = 0.0
+	tick_attack(delta)
 
+
+## The whip also works while dangling from a friend's hair.
+func tick_attack(delta: float) -> void:
 	_whip_cooldown -= delta
 	if player.pressed("attack") and _whip_cooldown <= 0.0:
 		_whip = whip_time

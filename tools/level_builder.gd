@@ -32,10 +32,11 @@ var level_root: Node2D
 var level_name := "Level"
 var level_title := ""
 var next_level := ""
+var ending_text := ""
 var scene_path := ""
 
 
-## Override: set level_name, level_title, next_level, scene_path.
+## Override: set level_name, level_title, next_level (or ending_text), scene_path.
 func _configure() -> void:
 	pass
 
@@ -210,6 +211,7 @@ func _initialize() -> void:
 	level_root.set_script(load("res://scenes/systems/level.gd"))
 	level_root.level_title = level_title
 	level_root.next_level = next_level
+	level_root.ending_text = ending_text
 
 	var tiles := TileMapLayer.new()
 	tiles.name = "Tiles"
@@ -309,9 +311,12 @@ func _print_ascii(rb: RoomBuilder) -> void:
 func _make_tileset() -> TileSet:
 	var ts := TileSet.new()
 	ts.tile_size = Vector2i(TILE, TILE)
-	ts.add_physics_layer()
+	ts.add_physics_layer()  # 0: solid tiles
 	ts.set_physics_layer_collision_layer(0, Layers.WORLD)
 	ts.set_physics_layer_collision_mask(0, 0)
+	ts.add_physics_layer()  # 1: one-way platforms (separate layer so players can drop through)
+	ts.set_physics_layer_collision_layer(1, Layers.PLATFORMS)
+	ts.set_physics_layer_collision_mask(1, 0)
 	var src := TileSetAtlasSource.new()
 	src.texture = load("res://assets/tiles/greybox_tiles.png")
 	src.texture_region_size = Vector2i(TILE, TILE)
@@ -323,9 +328,10 @@ func _make_tileset() -> TileSet:
 		var coords := Vector2i(x, 0)
 		src.create_tile(coords)
 		var data := src.get_tile_data(coords, 0)
-		data.add_collision_polygon(0)
-		data.set_collision_polygon_points(0, 0, lip if x == 2 else square)
-		data.set_collision_polygon_one_way(0, 0, x == 2)
+		var layer := 1 if x == 2 else 0
+		data.add_collision_polygon(layer)
+		data.set_collision_polygon_points(layer, 0, lip if x == 2 else square)
+		data.set_collision_polygon_one_way(layer, 0, x == 2)
 	ResourceSaver.save(ts, TILESET_PATH)
 	return load(TILESET_PATH)
 

@@ -6,6 +6,8 @@ extends Node2D
 const SIZE := Vector2(1280, 720)
 
 @export var title := ""
+## Debug start (--room=N / start_room) in a room that comes after the hair swap.
+@export var starts_with_swapped_hair := false
 
 @onready var exit: RoomExit = $Exit
 

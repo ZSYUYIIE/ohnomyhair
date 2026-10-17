@@ -43,7 +43,11 @@ func tick(delta: float) -> void:
 		_dash_left -= delta
 		player.velocity = Vector2(_dash_dir * dash_speed, 0.0)
 		strike(_struck, 1, 0.3, Vector2(320.0, -160.0))
+	tick_attack(delta)
 
+
+## Parry also works while dangling from twin-tails' hair.
+func tick_attack(delta: float) -> void:
 	_parry_cooldown -= delta
 	if player.pressed("attack") and _parry_cooldown <= 0.0:
 		_parry = parry_window

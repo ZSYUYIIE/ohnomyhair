@@ -14,6 +14,11 @@ func tick(_delta: float) -> void:
 	pass
 
 
+## Attack-only tick, used while being carried (no skill, no movement).
+func tick_attack(_delta: float) -> void:
+	pass
+
+
 ## True while the ability fully controls velocity (e.g. a dash); normal movement is skipped.
 func is_driving() -> bool:
 	return false

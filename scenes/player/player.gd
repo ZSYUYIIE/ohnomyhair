@@ -64,6 +64,7 @@ var _coyote := 0.0
 var _buffer := 0.0
 var _can_cut_jump := false
 var _invincible := 0.0
+var _drop_through := 0.0
 var _separating: Player = null  # pads are re-enabled once we no longer overlap this friend
 
 
@@ -121,6 +122,8 @@ func _physics_process(delta: float) -> void:
 		return
 	if carried_by:
 		_follow_carrier()
+		hit_box.position.x = absf(hit_box.position.x) * facing
+		ability.tick_attack(delta)
 		return
 	_ease_visual_to(Vector2.ZERO)
 
@@ -141,6 +144,11 @@ func _physics_process(delta: float) -> void:
 		ability.after_move()
 		return
 
+	# Hold down to drop through one-way platforms: stop colliding with their layer for a moment.
+	if held("down") and is_on_floor():
+		_drop_through = 0.25
+	_drop_through = maxf(_drop_through - delta, 0.0)
+	set_collision_mask_value(8, _drop_through <= 0.0)  # layer 8 = Layers.PLATFORMS
 	if _buffer > 0.0 and _coyote > 0.0:
 		# Carrying always takes a full jump: a short hop with a friend attached just drops them in the dye.
 		_jump(jump_velocity, carrying == null)
@@ -193,6 +201,10 @@ func take_hit(damage: int, _stun_time: float = 0.0, knockback := Vector2.ZERO) -
 		control_lock = 0.2
 	if hp <= 0:
 		die()
+
+
+func make_invincible(seconds: float) -> void:
+	_invincible = maxf(_invincible, seconds)
 
 
 # --- Carrying (twin-tails grab) ---------------------------------------------

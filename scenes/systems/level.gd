@@ -7,6 +7,8 @@ extends Node2D
 ## Handy while building: start the level in a later room.
 @export var start_room := 0
 @export var level_title := ""
+## Shown after the last room of the last level instead of loading next_level.
+@export_multiline var ending_text := ""
 
 @onready var camera: Camera2D = $Camera2D
 @onready var flash: ColorRect = $UI/Flash
@@ -33,8 +35,11 @@ func _ready() -> void:
 			start_room = arg.get_slice("=", 1).to_int() - 1
 	room_index = clampi(start_room, 0, rooms.size() - 1)
 	camera.position = rooms[room_index].position
+	if rooms[room_index].starts_with_swapped_hair:
+		for player in players:
+			player.set_hair(Player.Hair.POMPADOUR if player.player_id == 1 else Player.Hair.TWIN_TAILS)
 	_place_players()
-	_show_banner(level_title + "\n" + rooms[room_index].title)
+	show_banner(level_title + "\n" + rooms[room_index].title)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,8 +51,7 @@ func _on_player_died(_player: Player) -> void:
 	if _busy:
 		return
 	_busy = true
-	flash.color.a = 0.8
-	create_tween().tween_property(flash, "color:a", 0.0, 0.4)
+	flash_screen(0.8)
 	await get_tree().create_timer(0.45).timeout
 	_place_players()
 	_busy = false
@@ -66,9 +70,11 @@ func _on_room_cleared(room: Room) -> void:
 		player.set_frozen(true)
 
 	if room_index == rooms.size() - 1:
-		_show_banner(level_title + " CLEAR!", 0.0)
+		show_banner(level_title + " CLEAR!", 0.0)
 		await get_tree().create_timer(2.0).timeout
-		if next_level != "" and ResourceLoader.exists(next_level):
+		if ending_text != "":
+			show_banner(ending_text, 0.0)
+		elif next_level != "" and ResourceLoader.exists(next_level):
 			get_tree().change_scene_to_file(next_level)
 		return
 
@@ -79,11 +85,16 @@ func _on_room_cleared(room: Room) -> void:
 	_place_players()
 	for player in players:
 		player.set_frozen(false)
-	_show_banner(rooms[room_index].title)
+	show_banner(rooms[room_index].title)
 	_busy = false
 
 
-func _show_banner(text: String, hide_after := 2.0) -> void:
+func flash_screen(alpha: float, color := Color.WHITE) -> void:
+	flash.color = Color(color, alpha)
+	create_tween().tween_property(flash, "color:a", 0.0, 0.4)
+
+
+func show_banner(text: String, hide_after := 2.0) -> void:
 	if _banner_tween:
 		_banner_tween.kill()
 	banner.text = text

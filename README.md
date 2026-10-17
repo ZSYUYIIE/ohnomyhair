@@ -19,7 +19,7 @@ godot --path . res://scenes/levels/level_01.tscn -- --room=3
 | P1 Twin Tails | A / D | W | G: hold to glide; grab P2 to carry them; pull levers | F: hair whip (stun) |
 | P2 Pompadour | ← / → | ↑ | K: dash (smash gel walls), or launch P1 standing on your head | L: parry scissors |
 
-While carried, press down to let go. R restarts the current room.
+While carried, press down to let go. Hold down to drop through a one-way platform. R restarts the current room.
 Skill/attack follow the **haircut**, not the player: if hair gets swapped, so do the powers.
 
 Edit in Project Settings → Input Map. In code: `player.pressed("skill")` / `Input.is_action_pressed("p1_left")`.
@@ -29,6 +29,7 @@ Each test plays through a level with simulated input; exit code 0 = pass.
 ```
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_level_03.gd
 ```
 On a fresh checkout run `godot --headless --path . --import` once first.
 
