@@ -1,0 +1,287 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://scenes/systems/level.gd" id="1_n536o"]
+[ext_resource type="TileSet" path="res://assets/tiles/greybox_tileset.tres" id="2_m2jhg"]
+[ext_resource type="Script" path="res://scenes/systems/room.gd" id="3_q6ljp"]
+[ext_resource type="Script" path="res://scenes/enemies/clipper_bot.gd" id="4_4dr30"]
+[ext_resource type="Script" path="res://scenes/enemies/scissor_turret.gd" id="5_dscar"]
+[ext_resource type="Script" path="res://scenes/props/deflector.gd" id="6_01hg1"]
+[ext_resource type="PackedScene" path="res://scenes/props/lever.tscn" id="7_v5pqk"]
+[ext_resource type="Script" path="res://scenes/props/lever.gd" id="8_m2te4"]
+[ext_resource type="Script" path="res://scenes/props/door.gd" id="9_kxbgd"]
+[ext_resource type="Script" path="res://scenes/props/hit_switch.gd" id="10_lky54"]
+[ext_resource type="PackedScene" path="res://scenes/props/room_exit.tscn" id="11_ies7a"]
+[ext_resource type="Script" path="res://scenes/props/room_exit.gd" id="12_kx1rr"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="13_gus8w"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="14_xwa1x"]
+
+[node name="Level02" type="Node2D" unique_id=468843167]
+script = ExtResource("1_n536o")
+next_level = "res://scenes/levels/level_03.tscn"
+level_title = "LEVEL 2 - Scissor Corridor"
+
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=1690203704]
+tile_map_data = PackedByteArray("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AAAZABUAAAAAAAAAAAAaABUAAAAAAAAAAAAbABUAAAAAAAAAAAAcABUAAAAAAAAAAAAdABUAAAAAAAAAAAAeABUAAAAAAAAAAAAfABUAAAAAAAAAAAAgABUAAAAAAAAAAAAhABUAAAAAAAAAAAAiABUAAAAAAAAAAAAjABUAAAAAAAAAAAAkABUAAAAAAAAAAAAlABUAAAAAAAAAAAAmABUAAAAAAAAAAAAnABUAAAABAAAAAAAAABYAAAABAAAAAAABABYAAAABAAAAAAACABYAAAABAAAAAAADABYAAAABAAAAAAAEABYAAAABAAAAAAAFABYAAAABAAAAAAAGABYAAAABAAAAAAAHABYAAAABAAAAAAAIABYAAAABAAAAAAAJABYAAAABAAAAAAAKABYAAAABAAAAAAALABYAAAABAAAAAAAMABYAAAABAAAAAAANABYAAAABAAAAAAAOABYAAAABAAAAAAAPABYAAAABAAAAAAAQABYAAAABAAAAAAARABYAAAABAAAAAAASABYAAAABAAAAAAATABYAAAABAAAAAAAUABYAAAABAAAAAAAVABYAAAABAAAAAAAWABYAAAABAAAAAAAXABYAAAABAAAAAAAYABYAAAABAAAAAAAZABYAAAABAAAAAAAaABYAAAABAAAAAAAbABYAAAABAAAAAAAcABYAAAABAAAAAAAdABYAAAABAAAAAAAeABYAAAABAAAAAAAfABYAAAABAAAAAAAgABYAAAABAAAAAAAhABYAAAABAAAAAAAiABYAAAABAAAAAAAjABYAAAABAAAAAAAkABYAAAABAAAAAAAlABYAAAABAAAAAAAmABYAAAABAAAAAAAnABYAAAABAAAAAAA=")
+tile_set = ExtResource("2_m2jhg")
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1450992123]
+
+[node name="Room1" type="Node2D" parent="Rooms" unique_id=942218956]
+script = ExtResource("3_q6ljp")
+title = "Parry together"
+
+[node name="Backdrop" type="ColorRect" parent="Rooms/Room1" unique_id=1031791175]
+z_index = -10
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.8901961, 0.8627451, 0.9372549, 1)
+
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room1" unique_id=1953901295]
+position = Vector2(80, 650)
+
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room1" unique_id=354323979]
+position = Vector2(112, 650)
+
+[node name="ClipperBot" type="CharacterBody2D" parent="Rooms/Room1" unique_id=1884550365]
+position = Vector2(272, 672)
+script = ExtResource("4_4dr30")
+
+[node name="Turret" type="StaticBody2D" parent="Rooms/Room1" unique_id=1949461601]
+position = Vector2(1232, 464)
+script = ExtResource("5_dscar")
+
+[node name="Deflector" type="Area2D" parent="Rooms/Room1" unique_id=331638844]
+position = Vector2(912, 464)
+script = ExtResource("6_01hg1")
+
+[node name="Lever" type="Area2D" parent="Rooms/Room1" unique_id=314892591 instance=ExtResource("7_v5pqk")]
+position = Vector2(688, 208)
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("8_m2te4")
+one_shot = false
+spring_time = 2.5
+
+[node name="Door" type="StaticBody2D" parent="Rooms/Room1" unique_id=1165056582]
+position = Vector2(768, 512)
+script = ExtResource("9_kxbgd")
+
+[node name="Switch" type="Area2D" parent="Rooms/Room1" unique_id=136408452]
+position = Vector2(912, 48)
+script = ExtResource("10_lky54")
+
+[node name="ParryStripes" type="Node2D" parent="Rooms/Room1" unique_id=1168733954]
+
+[node name="@ColorRect@2" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1864269985]
+offset_left = 544.0
+offset_top = 480.0
+offset_right = 554.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@3" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=771574426]
+offset_left = 564.0
+offset_top = 480.0
+offset_right = 574.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@4" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1447005644]
+offset_left = 584.0
+offset_top = 480.0
+offset_right = 594.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@5" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=2021552863]
+offset_left = 604.0
+offset_top = 480.0
+offset_right = 614.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@6" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=107200688]
+offset_left = 624.0
+offset_top = 480.0
+offset_right = 634.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@7" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=490730009]
+offset_left = 644.0
+offset_top = 480.0
+offset_right = 654.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@8" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1935923217]
+offset_left = 664.0
+offset_top = 480.0
+offset_right = 674.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@9" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1696932057]
+offset_left = 684.0
+offset_top = 480.0
+offset_right = 694.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@10" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1229043136]
+offset_left = 704.0
+offset_top = 480.0
+offset_right = 714.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@11" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=802478170]
+offset_left = 724.0
+offset_top = 480.0
+offset_right = 734.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@12" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1564045710]
+offset_left = 744.0
+offset_top = 480.0
+offset_right = 754.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@13" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1134337430]
+offset_left = 764.0
+offset_top = 480.0
+offset_right = 774.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@14" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=149328582]
+offset_left = 784.0
+offset_top = 480.0
+offset_right = 794.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@15" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=509417910]
+offset_left = 804.0
+offset_top = 480.0
+offset_right = 814.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@16" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1638758997]
+offset_left = 824.0
+offset_top = 480.0
+offset_right = 834.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@17" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=855202050]
+offset_left = 844.0
+offset_top = 480.0
+offset_right = 854.0
+offset_bottom = 486.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="Exit" type="Area2D" parent="Rooms/Room1" unique_id=1580576873 instance=ExtResource("11_ies7a")]
+position = Vector2(608, 608)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("12_kx1rr")
+size = Vector2(128, 64)
+
+[node name="Hint11" type="Label" parent="Rooms/Room1" unique_id=1709938096]
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 48.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+text = "P1  A/D move   W jump   G glide + pull lever   F hair whip"
+
+[node name="Hint12" type="Label" parent="Rooms/Room1" unique_id=1352122150]
+offset_left = 48.0
+offset_top = 76.0
+offset_right = 48.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+text = "P2  Arrows move   Up jump   K dash / launch   L parry"
+
+[node name="Hint13" type="Label" parent="Rooms/Room1" unique_id=335602199]
+offset_left = 440.0
+offset_top = 300.0
+offset_right = 440.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+text = "P1 stand on P2's head, P2 press K"
+
+[node name="Hint14" type="Label" parent="Rooms/Room1" unique_id=85699617]
+offset_left = 552.0
+offset_top = 380.0
+offset_right = 552.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+text = "P2 parry (L) on the yellow stripes"
+
+[node name="Players" type="Node2D" parent="." unique_id=1443410686]
+
+[node name="P1" type="CharacterBody2D" parent="Players" unique_id=937210734 instance=ExtResource("13_gus8w")]
+collision_layer = 2
+collision_mask = 193
+script = ExtResource("14_xwa1x")
+
+[node name="P2" type="CharacterBody2D" parent="Players" unique_id=627177683 instance=ExtResource("13_gus8w")]
+collision_layer = 2
+collision_mask = 193
+script = ExtResource("14_xwa1x")
+player_id = 2
+hair = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1016480750]
+anchor_mode = 0
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1806541055]
+
+[node name="Flash" type="ColorRect" parent="UI" unique_id=600867841]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Banner" type="Label" parent="UI" unique_id=1420505766]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 40.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 34
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+horizontal_alignment = 1
+
+[connection signal="toggled" from="Rooms/Room1/Lever" to="Rooms/Room1/Deflector" method="set_raised"]
+[connection signal="activated" from="Rooms/Room1/Switch" to="Rooms/Room1/Door" method="open"]

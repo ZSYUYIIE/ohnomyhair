@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" format=3]
+[gd_resource type="TileSet" format=3 uid="uid://bggtpn6aems11"]
 
-[ext_resource type="Texture2D" path="res://assets/tiles/greybox_tiles.png" id="1_37vps"]
+[ext_resource type="Texture2D" uid="uid://dd4muhbc5ytq8" path="res://assets/tiles/greybox_tiles.png" id="1_37vps"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w053r"]
 texture = ExtResource("1_37vps")
@@ -9,9 +9,14 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:0/0 = 0
+2:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -8, -16, -8)
+2:0/0/physics_layer_1/polygon_0/one_way = true
 
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
+physics_layer_1/collision_layer = 128
+physics_layer_1/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_w053r")
