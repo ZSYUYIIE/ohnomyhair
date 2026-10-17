@@ -2,7 +2,7 @@
 class_name Lever
 extends Area2D
 ## Pulled by twin-tails (skill key while in reach). Listeners connect to `toggled`
-## (MovingBlock.trigger does this; Deflector uses set_raised).
+## (MovingBlock.trigger does this).
 ## one_shot: stays down once pulled. spring_time > 0: springs back after that many
 ## seconds, and every pull re-arms the timer. Neither: a plain on/off toggle.
 
@@ -44,9 +44,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _draw() -> void:
+	# The barber chair's hydraulic pump handle.
 	var tip := Vector2(12, -14) if is_on else Vector2(-12, -14)
-	draw_rect(Rect2(-12, 8, 24, 8), Color("4a3b2a"))
-	draw_line(Vector2(0, 10), tip, Color("d8d8d8"), 4.0)
-	draw_circle(tip, 6.0, Color("7ee081") if is_on else Color("ff6b6b"))
+	draw_rect(Rect2(-12, 8, 24, 8), Color("3a3f47"))
+	draw_rect(Rect2(-6, 2, 12, 7), Color("9aa0a6"))
+	draw_line(Vector2(0, 4), tip, Color("d9dde3"), 4.0)
+	draw_circle(tip, 6.0, Color("7ee081") if is_on else Color("c0392b"))
 	if spring_time > 0.0 and is_on:
 		draw_rect(Rect2(-16, -30, 32.0 * _remaining / spring_time, 4), Color("f1c40f"))

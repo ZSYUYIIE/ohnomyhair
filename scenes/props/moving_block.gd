@@ -42,7 +42,16 @@ func _on_trigger_toggled(on: bool) -> void:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), color)
-	draw_rect(Rect2(Vector2.ZERO, size), color.darkened(0.4), false, 2.0)
+	var wood := Color("a0714f")
+	draw_rect(Rect2(Vector2.ZERO, size), wood)
+	draw_rect(Rect2(Vector2.ZERO, Vector2(size.x, 5)), Color("d9dde3"))   # chrome top rail
+	# Rolled towels along the front, in the block's accent colour.
+	var x := 10.0
+	while x < size.x - 6.0 and size.y >= 24.0:
+		var c := Vector2(x, minf(size.y - 9.0, 18.0))
+		draw_circle(c, 6.0, color.lightened(0.35))
+		draw_circle(c, 2.0, color.darkened(0.2))
+		x += 16.0
+	draw_rect(Rect2(Vector2.ZERO, size), wood.darkened(0.4), false, 2.0)
 	if Engine.is_editor_hint() and move_offset != Vector2.ZERO:
 		draw_rect(Rect2(move_offset, size), Color(color, 0.35), false, 2.0)

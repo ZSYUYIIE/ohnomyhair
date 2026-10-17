@@ -14,9 +14,15 @@ func tick(_delta: float) -> void:
 	pass
 
 
-## Attack-only tick, used while being carried (no skill, no movement).
+## Attack-only tick (no skill, no movement).
 func tick_attack(_delta: float) -> void:
 	pass
+
+
+## Called instead of tick() while dangling from a friend's hair. Default: attack only.
+## Abilities can override it for carried combos (pompadour's sling dash).
+func tick_carried(delta: float) -> void:
+	tick_attack(delta)
 
 
 ## True while the ability fully controls velocity (e.g. a dash); normal movement is skipped.

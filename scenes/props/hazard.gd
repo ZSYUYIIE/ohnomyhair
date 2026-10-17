@@ -1,7 +1,7 @@
 @tool
 class_name Hazard
 extends Area2D
-## Kills any player overlapping it while active (dye pools, spikes).
+## Kills any player overlapping it while active (hair-dye basins, hot irons).
 ## Position is the top-left corner.
 
 @export var size := Vector2(128, 64):
@@ -24,7 +24,12 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint() or not is_active():
 		return
+	var me := Rect2(global_position, size)
 	for body in get_overlapping_bodies():
+		# The overlap list can lag a physics step behind a teleport: a player who just
+		# respawned elsewhere would die twice. Trust only a real rect overlap.
+		if body is Player and not me.intersects(Rect2(body.global_position - Player.HALF_SIZE, Player.HALF_SIZE * 2.0)):
+			continue
 		if body.has_method("die"):
 			body.die()
 
@@ -34,5 +39,12 @@ func is_active() -> bool:
 
 
 func _draw() -> void:
+	# A salon wash basin full of hair dye.
 	draw_rect(Rect2(Vector2.ZERO, size), color)
 	draw_line(Vector2(0, 2), Vector2(size.x, 2), color.lightened(0.4), 4.0)
+	draw_rect(Rect2(-4, -4, 8, size.y + 4), Color("f4f1ec"))
+	draw_rect(Rect2(size.x - 4, -4, 8, size.y + 4), Color("f4f1ec"))
+	var x := 18.0
+	while x < size.x - 10.0:
+		draw_circle(Vector2(x, 10.0 + fmod(x, 3.0) * 4.0), 3.0, color.lightened(0.3))
+		x += 37.0

@@ -148,6 +148,103 @@ func launch_onto(rider: Player, base: Player, stop_x: float) -> void:
 	await walk_to(rider, stop_x)
 
 
+# --- Combat / combo helpers ------------------------------------------------------
+
+## Face and parry the next incoming enemy scissor. True if one got deflected.
+func parry_next_scissor(p: Player, max_ticks: int) -> bool:
+	for i in max_ticks:
+		var s := _incoming(p)
+		if s:
+			_face(p, s.global_position.x)
+			await tap(p, "attack")
+			return s.deflected
+		await physics_frame
+	return false
+
+
+## What a sensible P2 does before a carry: parry whatever comes, and go once the
+## turret is jammed and no enemy scissor is still in flight.
+func wait_for_clear_window(parrier: Player, turret: ScissorTurret, max_ticks: int) -> bool:
+	for i in max_ticks:
+		var s := _incoming(parrier)
+		if s:
+			_face(parrier, s.global_position.x)
+			await tap(parrier, "attack")
+			continue
+		var in_flight := get_nodes_in_group("scissors").any(func(x): return not x.deflected)
+		if turret._jam > 1.5 and not in_flight:
+			return true
+		await physics_frame
+	return false
+
+
+## Walk up to a clipper bot and dash into it until it's gone.
+func smash_bot(p: Player, bot: ClipperBot) -> bool:
+	for attempt in 8:
+		if not is_instance_valid(bot):
+			return true
+		var side := signf(p.global_position.x - bot.global_position.x)
+		await walk_to(p, bot.global_position.x + side * 90.0, 120)
+		if not is_instance_valid(bot):
+			return true
+		_face(p, bot.global_position.x)
+		await tap(p, "skill")
+		await _ticks(25)
+	return not is_instance_valid(bot)
+
+
+## An enemy scissor about to enter p's parry range from either side.
+func _incoming(p: Player) -> Scissor:
+	for s: Scissor in get_nodes_in_group("scissors"):
+		var dx := s.global_position.x - p.global_position.x
+		var dy := absf(s.global_position.y - p.global_position.y)
+		if not s.deflected and dy < 24.0 and signf(dx) == -signf(s.direction.x) and absf(dx) < 44.0:
+			return s
+	return null
+
+
+func _face(p: Player, x: float) -> void:
+	p.facing = signf(x - p.global_position.x)
+	p.visual.scale.x = p.facing
+	p.hit_box.position.x = absf(p.hit_box.position.x) * p.facing
+
+
+## Twin-tails whips the next parried (blue) scissor that comes into volley reach.
+## True if it turned golden.
+func volley_next(p: Player, max_ticks: int) -> bool:
+	for i in max_ticks:
+		for s: Scissor in get_nodes_in_group("scissors"):
+			if s.deflected and not s.golden and p.ability._in_volley_reach(s.global_position + s.direction * 6.0):
+				await tap(p, "attack")
+				return is_instance_valid(s) and s.golden
+		await physics_frame
+	return false
+
+
+## `guard` parries anything coming at them until `done` returns true (run another
+## player's moves in parallel by starting them without await).
+func guard_until(guard: Player, done: Callable, max_ticks: int) -> bool:
+	for i in max_ticks:
+		if done.call():
+			return true
+		var s := _incoming(guard)
+		if s:
+			_face(guard, s.global_position.x)
+			await tap(guard, "attack")
+		else:
+			await physics_frame
+	return done.call()
+
+
+## Full-height jump straight up (onto a shelf above), then wait to land.
+func jump_up(p: Player) -> void:
+	hold(p, "jump", true)
+	await _ticks(20)
+	hold(p, "jump", false)
+	await wait_until(func(): return p.is_on_floor(), 90)
+	await _ticks(5)
+
+
 func check(ok: bool, label: String) -> void:
 	if ok:
 		passed += 1

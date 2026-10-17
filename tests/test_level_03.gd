@@ -22,11 +22,15 @@ func _room_1() -> void:
 	var room := level.get_node("Rooms/Room1")
 	var o: float = room.global_position.x
 	var turret: ScissorTurret = room.get_node("Turret")
-	await walk_to(p2, o + 10 * TILE)
+	var iron: HotIron = room.get_node("FlatIron")
+	# The flat iron covers x=5-6 of the start floor: cross it right after it cools.
+	await _cross_when_cold(p2, iron, o + 10 * TILE)
+	check(p2.alive, "R1: P2 crosses the flat iron between heats")
 	check(await parry_next_scissor(p2, 400), "R1: P2 parries a turret scissor on the ledge")
 	check(await wait_until(func(): return turret._jam > 0.0, 240), "R1: the parried scissor jams the turret")
 
-	await walk_to(p1, o + 9 * TILE)
+	await _cross_when_cold(p1, iron, o + 9 * TILE)
+	check(p1.alive, "R1: P1 crosses the flat iron too")
 	check(await wait_for_clear_window(p2, turret, 1200), "R1: P2 keeps parrying until the turret is jammed and the air is clear")
 	hold(p1, "skill", true)
 	await _ticks(2)
@@ -48,23 +52,47 @@ func _room_2() -> void:
 	await _ticks(5)
 	check(p1.ability is Pompadour and p2.ability is TwinTails, "R2: the barber's chair swaps both haircuts")
 	check(room.get_node("AfterSwapHints").visible, "R2: post-swap hints appear")
-	await walk_to(p2, o + 22 * TILE)
+	await walk_to(p2, o + 21 * TILE)
 
-	await walk_to(p1, o + 27 * TILE - 20)
+	await walk_to(p1, o + 23 * TILE - 20)
 	await tap(p1, "skill")
 	await _ticks(30)
 	check(not is_instance_valid(room.get_node_or_null("GelWall")), "R2: P1's new dash smashes the gel wall")
 
-	await walk_to(p1, o + 30 * TILE)
-	check(await climb_onto_head(p2, p1), "R2: P2 (now twin-tails) stands on P1's head")
-	await launch_onto(p2, p1, o + 35 * TILE + 16)
+	# Volley with the roles reversed: P1 parries, P2 waits in the trench and whips.
+	var dispenser: ScissorTurret = room.get_node("Dispenser")
+	var bell: HitSwitch = room.get_node("Bell")
+	await walk_to(p1, o + 26 * TILE)
+	walk_to(p2, o + 27.5 * TILE)
+	await guard_until(p1, func(): return p2.global_position.y > 19 * TILE and p2.is_on_floor(), 900)
+	check(p2.global_position.y > 19 * TILE, "R2: P2 (now twin-tails) drops into the trench")
+	for attempt in 8:
+		if bell.pressed:
+			break
+		if await parry_next_scissor(p1, 600):
+			await volley_next(p2, 120)
+			await wait_until(func(): return bell.pressed, 60)
+	check(bell.pressed, "R2: swapped volley (P1 parries, P2 whips) rings the bell")
+	check(room.get_node("StaffDoor").is_open, "R2: the bell opens the staff door on the cliff")
+
+	# Jam the dispenser, then launch from behind it (it only fires left).
+	await guard_until(p1, func(): return dispenser._jam > 2.0, 900)
+	await walk_to(p1, o + 31.5 * TILE)
+	check(await climb_onto_head(p2, p1), "R2: P2 stands on P1's head")
+	await launch_onto(p2, p1, o + 33.5 * TILE)
 	check(p2.global_position.y < 13 * TILE, "R2: P1 launches P2 onto the cliff")
 	await tap(p2, "skill")
 	await _ticks(60)
-	check(room.get_node("Lever").is_on, "R2: P2 pulls the lever with the new hair")
+	check(room.get_node("ChairLever").is_on, "R2: P2 pulls the lever with the new hair")
 	await walk_to(p1, o + 34 * TILE)
 	check(p1.global_position.y < 13 * TILE, "R2: P1 climbs the risen step")
 	await enter_exit(room, 2)
+
+
+## Wait for the iron to cool down, then walk across it to x.
+func _cross_when_cold(p: Player, iron: HotIron, x: float) -> void:
+	await wait_until(func(): return iron._cycle_time() < 0.2, 300)
+	await walk_to(p, x)
 
 
 func _room_3() -> void:
@@ -133,34 +161,6 @@ func _boss_unit_checks() -> void:
 
 # --- Helpers ------------------------------------------------------------------
 
-## Face and parry the next incoming enemy scissor. True if one got deflected.
-func parry_next_scissor(p: Player, max_ticks: int) -> bool:
-	for i in max_ticks:
-		var s := _incoming(p)
-		if s:
-			_face(p, s.global_position.x)
-			await tap(p, "attack")
-			return s.deflected
-		await physics_frame
-	return false
-
-
-## What a sensible P2 does before a carry: parry whatever comes, and go once the
-## turret is jammed and no enemy scissor is still in flight.
-func wait_for_clear_window(parrier: Player, turret: ScissorTurret, max_ticks: int) -> bool:
-	for i in max_ticks:
-		var s := _incoming(parrier)
-		if s:
-			_face(parrier, s.global_position.x)
-			await tap(parrier, "attack")
-			continue
-		var in_flight := get_nodes_in_group("scissors").any(func(x): return not x.deflected)
-		if turret._jam > 1.5 and not in_flight:
-			return true
-		await physics_frame
-	return false
-
-
 func parry_until_dazed(p: Player, boss: Object, max_ticks: int) -> bool:
 	for i in max_ticks:
 		if not is_instance_valid(boss):
@@ -191,34 +191,3 @@ func launch_and_stomp(rider: Player, base: Player, boss: Object) -> void:
 	for a in ["right", "left", "skill"]:
 		hold(rider, a, false)
 	await _ticks(20)
-
-
-## Walk up to a clipper bot and dash into it until it's gone.
-func smash_bot(p: Player, bot: ClipperBot) -> bool:
-	for attempt in 8:
-		if not is_instance_valid(bot):
-			return true
-		var side := signf(p.global_position.x - bot.global_position.x)
-		await walk_to(p, bot.global_position.x + side * 90.0, 120)
-		if not is_instance_valid(bot):
-			return true
-		_face(p, bot.global_position.x)
-		await tap(p, "skill")
-		await _ticks(25)
-	return not is_instance_valid(bot)
-
-
-## An enemy scissor about to enter p's parry range from either side.
-func _incoming(p: Player) -> Scissor:
-	for s: Scissor in get_nodes_in_group("scissors"):
-		var dx := s.global_position.x - p.global_position.x
-		var dy := absf(s.global_position.y - p.global_position.y)
-		if not s.deflected and dy < 24.0 and signf(dx) == -signf(s.direction.x) and absf(dx) < 44.0:
-			return s
-	return null
-
-
-func _face(p: Player, x: float) -> void:
-	p.facing = signf(x - p.global_position.x)
-	p.visual.scale.x = p.facing
-	p.hit_box.position.x = absf(p.hit_box.position.x) * p.facing

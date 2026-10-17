@@ -40,9 +40,15 @@ func _physics_process(_delta: float) -> void:
 
 
 func _draw() -> void:
-	var frame := Color("2ecc71")
-	draw_rect(Rect2(Vector2.ZERO, size), Color(frame, 0.15 + 0.2 * _inside))
-	draw_rect(Rect2(Vector2.ZERO, size), frame, false, 3.0)
+	var frame := Color("2e8b57")
+	draw_rect(Rect2(Vector2.ZERO, size), Color(frame, 0.12 + 0.2 * _inside))
+	draw_rect(Rect2(Vector2.ZERO, size), frame, false, 4.0)
+	# Hanging OPEN sign.
+	var sign_rect := Rect2(Vector2(size.x / 2.0 - 22.0, 10.0), Vector2(44, 16))
+	draw_line(Vector2(size.x / 2.0 - 14.0, 0), sign_rect.position + Vector2(8, 0), frame, 1.0)
+	draw_line(Vector2(size.x / 2.0 + 14.0, 0), sign_rect.position + Vector2(36, 0), frame, 1.0)
+	draw_rect(sign_rect, Color("fffaf0"))
+	draw_string(ThemeDB.fallback_font, sign_rect.position + Vector2(4, 13), "OPEN", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("c0392b"))
 	for i in 2:
 		var pip := Vector2(size.x / 2.0 - 10.0 + i * 20.0, -12.0)
 		draw_circle(pip, 6.0, frame if i < _inside else Color(frame, 0.25))

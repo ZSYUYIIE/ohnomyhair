@@ -1,8 +1,12 @@
 extends LevelBuilder
 ## Generates the greybox L1 "Fresh Cut": res://scenes/levels/level_01.tscn.
-## Teaches each haircut's skill, then both combos (carry, launch). No enemies.
+## Teaches each haircut's skill, then the carry and launch, then twists the carry into
+## the Sling Dash (docs/design/refinement.md). No enemies.
 ## Rerunning OVERWRITES the scene (see LevelBuilder).
 ## Run: godot --headless --path . --script res://tools/build_level_01.gd
+
+
+const CURTAIN_REGROW := 2.0
 
 
 func _configure() -> void:
@@ -59,19 +63,26 @@ func _room_2() -> RoomBuilder:
 	return rb
 
 
-## Room 3: everything at once, with timed comb spikes for pressure.
+## Room 3: twist - the Sling Dash. A gel curtain hangs from the ceiling into a wide dye
+## pool and grows back 2 s after it's smashed. The pair's carry flight runs into it, so
+## pompadour (hanging) must press skill to be flung through it; twin-tails, suddenly
+## lighter, bobs up and glides through the hole before it closes.
+## Metrics: carry from 6 up reaches ~16 tiles; the fling covers 7.1 tiles flat, so
+## flinging anywhere from x=18 to the curtain lands on the far side (a ~0.5 s window).
 func _room_3() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room3", "3 - The Barber's Bench", Color("efe0f0")))
+	var rb := RoomBuilder.new(self, room_node("Room3", "3 - The Gel Curtain", Color("efe0f0")))
 	rb.solid(0, 19, 8, 22)      # start floor
-	rb.solid(9, 13, 17, 22)     # high deck (6 up)
-	rb.solid(28, 19, 38, 22)    # landing
-	rb.dye_pool("DyePool", 18, 20, 10, 2)
+	rb.solid(9, 17, 10, 22)     # stairs up to the take-off counter
+	rb.solid(11, 15, 12, 22)
+	rb.solid(13, 13, 16, 22)    # take-off counter (6 up)
+	rb.solid(25, 15, 38, 22)    # landing, right behind the curtain
+	rb.dye_pool("DyePool", 17, 20, 8, 2)
 	rb.spawn(1, 2, 19)
 	rb.spawn(2, 4, 19)
-	var lever := rb.lever("Lever", 10, 12)
-	rb.block("RisingStep", 7, 19, 2, 3, Vector2i(0, -3), lever, true)
-	rb.spikes("CombSpikes", 13, 13, 2)
-	rb.gel_wall("GelWall", 33, 13, 2, 6)
-	rb.exit(36, 16)
-	rb.hint("Everything you learned. Together.", Vector2(40, 330))
+	# Ceiling to the dye: no way over or under it.
+	rb.gel_wall("GelCurtain", 23, 1, 2, 19, CURTAIN_REGROW)
+	rb.exit(36, 12)
+	rb.hint("This gel grows back!", Vector2(600, 40))
+	rb.hint("P2 hanging from P1's hair:
+press  K  to get flung through", Vector2(40, 330))
 	return rb
