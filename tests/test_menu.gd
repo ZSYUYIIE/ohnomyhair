@@ -25,6 +25,12 @@ func _run() -> void:
 	await _frames(5)
 	check(menu._controls.visible and menu._controls.is_ancestor_of(root.gui_get_focus_owner()), "help opens with keyboard focus inside the overlay")
 	check(menu._controls.size == menu.size, "help overlay fills the screen and centers its panel")
+	menu._controls._tabs.current_tab = 2
+	await _frames(5)
+	await _key(KEY_PAGEDOWN)
+	var guide_scroll: ScrollContainer = menu._controls._tabs.get_current_tab_control().get_child(0)
+	check(guide_scroll.scroll_vertical > 0, "new haircut help scrolls with Page Down")
+	menu._controls._tabs.current_tab = 0
 	for i in 6:
 		await _key(KEY_TAB)
 		check(menu._controls.is_ancestor_of(root.gui_get_focus_owner()), "Tab stays inside help (%d)" % i)

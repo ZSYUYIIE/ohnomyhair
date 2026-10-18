@@ -27,6 +27,7 @@ var _parry := 0.0
 var _parry_cooldown := 0.0
 var _struck: Array[Node] = []
 var _parry_pose := 0.0  # how long the parry animation still shows
+var _cannonball := false
 
 
 func _init() -> void:
@@ -39,7 +40,11 @@ func tick(delta: float) -> void:
 	_cooldown -= delta
 	if player.pressed("skill"):
 		var rider := _rider()
-		if rider:
+		var base := player.teammate()
+		var waiting_for_spring: bool = base != null and base.ability.has_method("is_charging") and base.ability.is_charging() and base.has_rider(player)
+		if waiting_for_spring:
+			pass  # Holding skill on a charging Afro arms the co-op cannonball.
+		elif rider:
 			rider.launch(launch_height)
 			player.bounce(Vector2(1.3, 0.7))
 		elif _cooldown <= 0.0 and player.carried_by == null:
@@ -50,7 +55,7 @@ func tick(delta: float) -> void:
 		if _dash_left <= 0.0:
 			_slinging = false
 		player.velocity = Vector2(_dash_dir * dash_speed, 0.0)
-		strike(_struck, 1, 0.3, Vector2(320.0, -160.0))
+		strike(_struck, 2 if _cannonball else 1, 3.0 if _cannonball else 0.3, Vector2(480.0 if _cannonball else 320.0, -160.0))
 	tick_attack(delta)
 
 
@@ -77,10 +82,20 @@ func is_slinging() -> bool:
 
 
 func _start_dash(direction: float, seconds: float) -> void:
+	_cannonball = false
 	_dash_left = seconds
 	_dash_dir = direction
 	_cooldown = dash_cooldown
 	_struck.clear()
+
+
+## Afro charges underneath a rider; that rider holds skill as Afro releases.
+func spring_launch(direction: float) -> void:
+	_start_dash(direction, 0.5)
+	_cannonball = true
+	_slinging = true
+	player.bounce(Vector2(1.4, 0.7))
+	player.make_invincible(0.35)
 
 
 ## Parry also works while dangling from twin-tails' hair.
@@ -119,7 +134,7 @@ func after_move() -> void:
 	for i in player.get_slide_collision_count():
 		var collider := player.get_slide_collision(i).get_collider()
 		if collider and collider.has_method("smash") and not player.is_wet():
-			collider.smash()
+			collider.smash(_cannonball)
 			# A sling dash punches straight through gel; a ground dash stops at the wall.
 			if not _slinging:
 				_dash_left = 0.0
@@ -137,6 +152,7 @@ func _touching_gel() -> bool:
 
 
 func reset() -> void:
+	_cannonball = false
 	_dash_left = 0.0
 	_slinging = false
 	_cooldown = 0.0

@@ -14,6 +14,8 @@ var deflected := false
 var golden := false
 ## Twin-tails holding it in her pigtails (Hair Catch), or null.
 var holder: Player = null
+## Only Tony's scissors restyle a player, and only after an unblocked damaging hit.
+var restyles := false
 
 
 func _ready() -> void:
@@ -72,6 +74,19 @@ func toss(at_x: float) -> void:
 	queue_redraw()
 
 
+func return_from_afro(facing: float) -> void:
+	holder = null
+	golden = true
+	deflected = true
+	restyles = false
+	direction = Vector2(facing, 0)
+	speed = SPEED * 2
+	rotation = direction.angle()
+	global_position += Vector2(facing * 42, 0)
+	set_deferred("monitoring", true)
+	queue_redraw()
+
+
 func _on_body_entered(body: Node) -> void:
 	if body.has_method("take_hit"):
 		if golden:
@@ -79,7 +94,10 @@ func _on_body_entered(body: Node) -> void:
 		elif deflected:
 			body.take_hit(DAMAGE, 3.0)
 		else:
+			var hp_before: int = body.hp if body is Player else 0
 			body.take_hit(DAMAGE, 0.0, Vector2(signf(direction.x) * 280.0, -240.0))
+			if restyles and body is Player and body.alive and body.hp < hp_before:
+				body.restyle_next.call_deferred()
 	queue_free()
 
 

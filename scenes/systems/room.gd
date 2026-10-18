@@ -8,6 +8,8 @@ const SIZE := Vector2(1280, 720)
 @export var title := ""
 ## Debug start (--room=N / start_room) in a room that comes after the hair swap.
 @export var starts_with_swapped_hair := false
+## Optional authored pair for experimental rooms; a styling checkpoint takes priority.
+@export var starting_hair := PackedInt32Array()
 
 @onready var exit: RoomExit = $Exit
 

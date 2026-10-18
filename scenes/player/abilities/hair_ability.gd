@@ -53,6 +53,15 @@ func reset() -> void:
 	pass
 
 
+## Defensive abilities may absorb a hit before HP is reduced. Lethal hazards still kill.
+func block_hit() -> bool:
+	return false
+
+
+func move_multiplier() -> float:
+	return 1.0
+
+
 ## Hits everything in the player's hit box once per swing (`struck` remembers who).
 func strike(struck: Array[Node], damage: int, stun: float, knockback: Vector2) -> void:
 	for body in player.hit_box.get_overlapping_bodies():

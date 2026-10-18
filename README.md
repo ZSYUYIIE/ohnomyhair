@@ -46,6 +46,26 @@ Skill/attack follow the **haircut**, not the player: if hair gets swapped, so do
 Edit in Project Settings → Input Map. In code: `player.pressed("skill")` / `Input.is_action_pressed("p1_left")`.
 
 ## Run the tests
+
+### Four-haircut expansion
+
+Choose **Style Lab** on the title screen to try Afro and Long Straight Hair in three new
+rooms. At a gold-marked styling chair, bring both friends nearby and press **S / Down**
+to choose styles, heal and save a checkpoint for the current room/run.
+
+- **Afro:** hold skill to charge, release to bounce a rider. Pompadour holds skill on top
+  as Afro releases for a **cannonball** that breaks reinforced orange gel. Hold attack for
+  a short shield or to catch a parried scissor; release to return it.
+- **Long Straight:** hold skill on a ledge to lower a rope; your friend holds jump to climb
+  and moves sideways to release. In the air, skill hooks a gold ring. Attack lassos bots
+  or levers.
+- Wet Afro hair cannot spring or shield. Tony's damaging scissors change your haircut;
+  blocking prevents it. Watch the portrait and skill hints.
+
+Style Lab does not unlock campaign chapters. Design details and scope:
+[`docs/design/four_haircut_expansion.md`](docs/design/four_haircut_expansion.md).
+
+### Automated checks
 Each test plays through a level with simulated input; exit code 0 = pass.
 `test_combos.gd` checks each hair combo (and that the solo shortcut fails) in a bare arena.
 ```
@@ -55,6 +75,8 @@ godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_03.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_04.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_haircuts.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_style_lab.gd
 ```
 On a fresh checkout run `godot --headless --path . --import` once first.
 

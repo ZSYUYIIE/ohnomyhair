@@ -11,6 +11,8 @@ extends StaticBody2D
 		queue_redraw()
 
 @export var regrow_time := 0.0
+## Reinforced salon gel needs the Afro + Pompadour cannonball combo.
+@export var requires_cannonball := false
 
 var _broken := false
 var _regrow_left := 0.0
@@ -26,8 +28,8 @@ func _ready() -> void:
 	$Shape.position = size / 2.0
 
 
-func smash() -> void:
-	if _broken:
+func smash(powered := false) -> void:
+	if _broken or (requires_cannonball and not powered):
 		return
 	_broken = true
 	$Shape.set_deferred("disabled", true)
@@ -66,6 +68,9 @@ func _player_inside() -> bool:
 func _draw() -> void:
 	var gel := Color("9be7d8")
 	draw_style_box(PropArt.nine_slice("res://assets/art/props/prop_gel.png", 14.0), Rect2(Vector2.ZERO, size))
+	if requires_cannonball:
+		for y in range(12, int(size.y) - 8, 36):
+			draw_line(Vector2(6, y), Vector2(size.x - 6, y), Color("ee9a42"), 7)
 	if regrow_time > 0.0:
 		# Drips along the bottom edge: this gel grows back.
 		var x := 10.0

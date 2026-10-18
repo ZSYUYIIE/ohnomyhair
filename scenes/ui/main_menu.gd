@@ -55,6 +55,9 @@ func _ready() -> void:
 	_controls_button = _button("How to play & combos", _toggle_controls)
 	buttons.add_child(_controls_button)
 	_menu_buttons.append(_controls_button)
+	var lab := _button("Style Lab", _play_lab)
+	buttons.add_child(lab)
+	_menu_buttons.append(lab)
 	var quit_button := _button("Quit", func(): get_tree().quit())
 	buttons.add_child(quit_button)
 	_menu_buttons.append(quit_button)
@@ -97,6 +100,11 @@ func _focus_latest() -> void:
 func play(index: int) -> void:
 	if index >= 0 and index < Progress.LEVELS.size() and Progress.is_unlocked(index) and not _controls.visible:
 		get_tree().change_scene_to_file(Progress.LEVELS[index].path)
+
+
+func _play_lab() -> void:
+	if not _controls.visible:
+		get_tree().change_scene_to_file("res://scenes/levels/style_lab.tscn")
 
 
 func _level_card(i: int) -> PanelContainer:

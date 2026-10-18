@@ -32,6 +32,12 @@ var _banner_tween: Tween
 
 ## Handed from a level to its fresh copy across restart_room().
 static var _carry_over := {}
+const StyleMenu := preload("res://scenes/ui/styling_menu.gd")
+const StyleChair := preload("res://scenes/props/styling_chair.gd")
+const HairAnchor := preload("res://scenes/props/hair_anchor.gd")
+var styling_menu: CanvasLayer
+var _active_chair: Area2D
+var _checkpoint := {}
 
 
 func _ready() -> void:
@@ -43,6 +49,10 @@ func _ready() -> void:
 	menu = LevelMenu.new()
 	add_child(menu)
 	menu.chosen.connect(_on_menu_chosen)
+	styling_menu = StyleMenu.new()
+	add_child(styling_menu)
+	styling_menu.styles_chosen.connect(_save_styles)
+	styling_menu.closed.connect(func(): get_tree().paused = false)
 	# The banner sits below the top edge, clear of the ceiling bells.
 	banner.offset_top = 70.0
 	banner.offset_bottom = 190.0
@@ -56,6 +66,7 @@ func _ready() -> void:
 		start_room = _carry_over.room
 		level_time = _carry_over.time
 		deaths = _carry_over.deaths
+		_checkpoint = _carry_over.get("checkpoint", {})
 	else:
 		# `godot ... -- --room=3` starts in room 3 (1-based) without editing the scene.
 		for arg in OS.get_cmdline_user_args():
@@ -69,6 +80,7 @@ func _ready() -> void:
 		for player in players:
 			player.set_hair(Player.Hair.POMPADOUR if player.player_id == 1 else Player.Hair.TWIN_TAILS)
 	_place_players()
+	_install_stations()
 	show_banner(level_title + "\n" + rooms[room_index].title)
 
 
@@ -107,6 +119,7 @@ func _on_menu_chosen(action: String) -> void:
 		"restart":
 			restart_room()
 		"replay":
+			_checkpoint = {}
 			_load_fresh(0, 0.0, 0)
 		"next":
 			get_tree().change_scene_to_file(next_level)
@@ -123,7 +136,7 @@ func restart_room() -> void:
 func _load_fresh(room: int, time: float, death_count: int) -> void:
 	get_tree().paused = false
 	Engine.time_scale = 1.0
-	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count}
+	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count, "checkpoint": _checkpoint.duplicate(true)}
 	var fresh: Level = load(scene_file_path).instantiate()
 	# Grab the tree first: once this level is removed from it, get_tree() returns null.
 	var tree := get_tree()
@@ -147,7 +160,13 @@ func _activate_room(index: int) -> void:
 
 func _place_players() -> void:
 	for player in players:
-		player.respawn_at(rooms[room_index].spawn_point(player.player_id))
+		var at := rooms[room_index].spawn_point(player.player_id)
+		if _checkpoint.get("room", -1) == room_index:
+			player.set_hair(_checkpoint.hair[player.player_id - 1])
+			at = _checkpoint.positions[player.player_id - 1]
+		elif rooms[room_index].starting_hair.size() == 2:
+			player.set_hair(rooms[room_index].starting_hair[player.player_id - 1])
+		player.respawn_at(at)
 
 
 func _on_room_cleared(room: Room) -> void:
@@ -175,6 +194,7 @@ func _on_room_cleared(room: Room) -> void:
 		return
 
 	room_index += 1
+	_checkpoint = {}
 	var pan := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	pan.tween_property(camera, "position", rooms[room_index].position, 0.7)
 	await pan.finished
@@ -184,6 +204,45 @@ func _on_room_cleared(room: Room) -> void:
 		player.set_frozen(false)
 	show_banner(rooms[room_index].title)
 	_busy = false
+
+
+func _install_stations() -> void:
+	for room in rooms:
+		var station := StyleChair.new()
+		station.level = self
+		station.name = "StylingStation"
+		station.position = (room.get_node("SpawnP1").position + room.get_node("SpawnP2").position) / 2 + Vector2(80, 22)
+		room.add_child(station)
+		for child in room.get_children():
+			if child is BarberBot:
+				for at in [Vector2(160, 340), Vector2(1080, 340)]:
+					var ring := HairAnchor.new()
+					ring.position = at
+					room.add_child(ring)
+
+
+func open_styling(chair: Area2D) -> void:
+	if _busy or get_tree().paused or chair.get_parent() != rooms[room_index]: return
+	for player in players:
+		if not player.alive or player.global_position.distance_to(chair.global_position) > 160:
+			show_banner("Bring both friends to the styling chair", 1.5)
+			return
+	_active_chair = chair
+	get_tree().paused = true
+	styling_menu.open(players)
+
+
+func _save_styles(styles: Array[int]) -> void:
+	get_tree().paused = false
+	if not is_instance_valid(_active_chair) or styles.size() != players.size(): return
+	var positions: Array[Vector2] = []
+	for i in players.size():
+		players[i].set_hair(styles[i])
+		players[i].heal(players[i].max_hp)
+		players[i].dry()
+		positions.append(_active_chair.global_position + Vector2(-24 if i == 0 else 24, -22))
+	_checkpoint = {"room": room_index, "hair": styles.duplicate(), "positions": positions}
+	show_banner("Fresh styles. Room checkpoint saved!", 1.8)
 
 
 func flash_screen(alpha: float, color := Color.WHITE) -> void:

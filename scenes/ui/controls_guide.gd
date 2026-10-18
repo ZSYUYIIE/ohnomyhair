@@ -24,7 +24,7 @@ func _ready() -> void:
 	box.add_theme_constant_override("separation", 12)
 	panel.add_child(box)
 	box.add_child(UiTheme.label("A little teamwork goes a long way.", 32))
-	box.add_child(UiTheme.label("One keyboard. Two friends. Skills follow the haircut when hair gets swapped.", 20, UiTheme.MUTED))
+	box.add_child(UiTheme.label("Skills follow the haircut. Mouse wheel / Page Down to scroll for more.", 20, UiTheme.MUTED))
 	_tabs = TabContainer.new()
 	_tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	box.add_child(_tabs)
@@ -45,6 +45,15 @@ func _ready() -> void:
 		["05  HAIR-COPTER", "Pompadour stands on Twin-Tails' head. Hold Twin-Tails' skill in warm air to lift both. Carrying hovers."],
 	]:
 		combos.add_child(_text(entry[0], entry[1], 18))
+	var styles := _page("New styles & chairs")
+	for entry in [
+		["AFRO — SPRING / SHIELD", "Hold skill to charge; release with a friend on your head to bounce them up. Hold attack for a short shield or to catch a parried scissor. Release to send it back."],
+		["CANNONBALL — AFRO + POMPADOUR", "Afro charges skill. Pompadour stands on Afro's head and holds skill too. Afro releases: Pompadour becomes a drill through reinforced gel and dazes the boss."],
+		["LONG STRAIGHT — ROPE / HOOK / LASSO", "Hold skill on a ledge to lower a rope. Your friend holds jump to climb; left/right releases with a boost. In the air, skill hooks a gold ring. Attack lassos bots or levers."],
+		["STYLE & CHECKPOINT", "Bring both friends near a chair and press S / ↓. Choose each haircut and save to heal, dry off, and keep those styles when restarting this room."],
+		["SOMETHING'S OFF...", "Tony's scissors change your haircut if they hurt you. Watch your portrait and skill hints! Wet Afro hair cannot spring or shield; find a dryer."],
+	]:
+		styles.add_child(_text(entry[0], entry[1], 18))
 	_close = Button.new()
 	_close.text = "Got it  /  Esc"
 	_close.custom_minimum_size.y = 48
@@ -80,8 +89,13 @@ func dismiss() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if is_visible_in_tree() and event.is_action_pressed("ui_cancel"):
+	if not is_visible_in_tree(): return
+	if event.is_action_pressed("ui_cancel"):
 		dismiss()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_page_down") or event.is_action_pressed("ui_page_up"):
+		var scroll := _tabs.get_current_tab_control().get_child(0) as ScrollContainer
+		scroll.scroll_vertical += 220 if event.is_action_pressed("ui_page_down") else -220
 		get_viewport().set_input_as_handled()
 
 
@@ -91,9 +105,13 @@ func _page(title: String) -> VBoxContainer:
 	for edge in ["left", "right", "top", "bottom"]:
 		margin.add_theme_constant_override("margin_" + edge, 14)
 	_tabs.add_child(margin)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	margin.add_child(scroll)
 	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 12)
-	margin.add_child(box)
+	scroll.add_child(box)
 	return box
 
 

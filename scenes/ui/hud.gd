@@ -43,11 +43,12 @@ func _process(_delta: float) -> void:
 		_names[id].text = "P%d  %s" % [id, p.ability.display_name]
 		var skill := "G" if id == 1 else "K"
 		var attack := "F" if id == 1 else "L"
-		_keys[id].text = "%s %s  /  %s %s" % [skill, "glide/carry" if p.hair == Player.Hair.TWIN_TAILS else "dash/launch", attack, "whip" if p.hair == Player.Hair.TWIN_TAILS else "parry"]
+		_keys[id].text = "%s %s  /  %s %s" % [skill, Player.HAIR_INFO[p.hair].skill, attack, Player.HAIR_INFO[p.hair].attack]
 		if p.is_wet():
 			_keys[id].text = "SOAKED  /  Find warm air to dry off"
 		_hearts[id].set_values(maxi(p.hp, 0) if p.alive else 0, p.max_hp)
 		_portraits[id].set_colors(p.ability.body_color, p.ability.get("HAIR_COLOR"))
+		_portraits[id].set_frames(p.ability.frames)
 	if level:
 		var room := level.rooms[level.room_index] if level.rooms.size() > 0 else null
 		var room_name: String = room.title.get_slice(" - ", 1) if room and " - " in room.title else (room.title if room else "")
@@ -122,9 +123,14 @@ func _plate() -> PanelContainer:
 ## Little head-and-hair icon in the player's current colours.
 class Portrait extends Control:
 	const TWIN_FRAMES = preload("res://assets/art/characters/twin_tails/frames.tres")
-	const POMP_FRAMES = preload("res://assets/art/characters/pompadour/frames.tres")
 	var body := Color.WHITE
 	var hair := Color.WHITE
+	var _frames: SpriteFrames = TWIN_FRAMES
+
+	func set_frames(value: SpriteFrames) -> void:
+		if value and value != _frames:
+			_frames = value
+			queue_redraw()
 
 	func _init() -> void:
 		custom_minimum_size = Vector2(34, 42)
@@ -136,8 +142,7 @@ class Portrait extends Control:
 			queue_redraw()
 
 	func _draw() -> void:
-		var frames: SpriteFrames = POMP_FRAMES if hair == UiTheme.BLUE else TWIN_FRAMES
-		draw_texture_rect(frames.get_frame_texture("idle", 0), Rect2(-27, -28, 88, 83), false)
+		draw_texture_rect(_frames.get_frame_texture("idle", 0), Rect2(-27, -28, 88, 83), false)
 
 
 ## Row of hearts: filled = HP left.

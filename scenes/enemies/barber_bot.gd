@@ -183,6 +183,7 @@ func _stomped_by(player: Player) -> void:
 
 func _fire() -> void:
 	var scissor := Scissor.new()
+	scissor.restyles = true
 	scissor.direction = Vector2(facing, 0)
 	# Body height of a player standing on the same floor, so it's parriable and dodgeable by jumping.
 	scissor.position = position + Vector2(facing * (SIZE.x / 2 + 16), -30)
