@@ -2,10 +2,10 @@ extends CanvasLayer
 ## Modal co-op selection; choices are staged until both players confirm together.
 signal styles_chosen(styles: Array[int])
 signal closed
-const FRAME_DIRS := ["twin_tails", "pompadour", "afro", "long_straight"]
+const FRAME_DIRS := ["twin_tails", "pompadour"]
 var selections: Array[int] = [0, 1]
 ## Haircuts this room's chair offers (Room.styles); the rest are greyed out.
-var allowed := PackedInt32Array([0, 1, 2, 3])
+var allowed := PackedInt32Array([0, 1])
 var _options: Array[Button] = []
 var _descriptions: Array[Label] = []
 var _portraits: Array[TextureRect] = []
@@ -31,7 +31,7 @@ func _ready() -> void:
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 14)
 	panel.add_child(box)
-	box.add_child(UiTheme.label("Choose your next bad idea.", 36))
+	box.add_child(UiTheme.label("Two friends. Pick your roles.", 36))
 	box.add_child(UiTheme.label("Your keys stay the same. Your haircut changes the skill. Save to heal both friends.", 20, UiTheme.MUTED))
 	var row := HBoxContainer.new()
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -86,7 +86,7 @@ func _ready() -> void:
 	UiTheme.focus_loop(focus)
 	hide()
 
-func open(players: Array[Player], styles := PackedInt32Array([0, 1, 2, 3])) -> void:
+func open(players: Array[Player], styles := PackedInt32Array([0, 1])) -> void:
 	allowed = styles
 	for i in 2: selections[i] = players[i].hair
 	_update()
@@ -107,9 +107,10 @@ func _update() -> void:
 		# Full-resolution portrait (tools/art/make_portraits.py), sharp at menu size.
 		_portraits[id].texture = load("res://assets/art/characters/portraits/%s.png" % FRAME_DIRS[style])
 		for h in Player.HAIR_INFO.size():
-			var option := _options[id * 4 + h]
+			var option := _options[id * Player.HAIR_INFO.size() + h]
 			option.text = ("✓ " if h == style else "") + Player.HAIR_INFO[h].name
 			option.disabled = h not in allowed
+			option.visible = h in allowed
 			option.add_theme_stylebox_override("normal", UiTheme.card(Color("f9e39b") if h == style else UiTheme.CREAM, UiTheme.WALNUT, 2, 8, 8))
 	var same := selections[0] == selections[1]
 	_confirm.disabled = same

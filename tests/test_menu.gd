@@ -19,6 +19,7 @@ func _run() -> void:
 	Progress.reset()
 
 	var menu: MainMenu = await _open_menu()
+	check(menu._menu_buttons.size() == 2 and menu._menu_buttons.all(func(b): return b.text != "Style Lab"), "retired prototype is absent from the playable menu")
 	check(not menu._play_buttons[0].disabled, "level 1 is always unlocked")
 	check(menu._play_buttons[1].disabled and menu._play_buttons[2].disabled and menu._play_buttons[3].disabled, "chapters 2, 3 and 4 start locked")
 	check(root.get_visible_rect().encloses(menu._controls_button.get_global_rect()), "title screen actions fit inside the viewport")
@@ -30,7 +31,7 @@ func _run() -> void:
 	await _frames(5)
 	await _key(KEY_PAGEDOWN)
 	var guide_scroll: ScrollContainer = menu._controls._tabs.get_current_tab_control().get_child(0)
-	check(guide_scroll.scroll_vertical > 0, "new haircut help scrolls with Page Down")
+	check(guide_scroll.scroll_vertical > 0, "story and checkpoint help scrolls with Page Down")
 	menu._controls._tabs.current_tab = 0
 	for i in 6:
 		await _key(KEY_TAB)
@@ -157,18 +158,20 @@ func _legacy_save() -> void:
 		legacy.set_value("level_%d" % (i + 1), "best_deaths", i)
 	legacy.save(Progress.save_path)
 	check(Progress.is_cleared(0) and Progress.best_time(2) == 62.0, "legacy save preserves the first three chapter records")
-	check(not Progress.is_cleared(3) and not Progress.is_cleared(4), "old boss clear does not count as either new chapter")
-	check(Progress.is_unlocked(3) and not Progress.is_unlocked(4) and not Progress.is_unlocked(5), "legacy save must play both new chapters before returning to the finale")
-	check(Progress.best_time(5) == 63.0 and Progress.best_deaths(5) == 3, "old boss records move to The Barber's stable ID")
-	Progress.record_clear(3, 45.0, 0)
-	check(Progress.best_time(3) == 45.0 and Progress.best_time(5) == 63.0, "new chapter clear cannot overwrite the migrated boss record")
-	check(Progress.is_unlocked(4) and not Progress.is_unlocked(5), "clearing Perm Day unlocks Extensions only")
-	Progress.record_clear(4, 50.0, 0)
-	check(Progress.is_unlocked(5), "clearing both new chapters unlocks the preserved finale")
+	check(Progress.LEVELS.size() == 4 and Progress.LEVELS[3].id == "the_barber", "campaign follows the two friends through four chapters")
+	check(Progress.is_unlocked(3) and not Progress.is_unlocked(4), "original save unlocks the finale after the original three chapters")
+	check(Progress.best_time(3) == 63.0 and Progress.best_deaths(3) == 3, "old boss records remain attached to the finale")
 	var saved := ConfigFile.new()
 	saved.load(Progress.save_path)
 	check(saved.get_value("save", "version", 0) == Progress.SAVE_VERSION and not saved.has_section("level_4"), "migration persists its version and removes ambiguous positional records")
-	check(Progress.best_time(5) == 63.0, "reloading a migrated save preserves its records")
+	check(Progress.best_time(3) == 63.0, "reloading a migrated save preserves its records")
+	# Expansion saves already use IDs. Removed chapter records must not become
+	# a finale clear or a prerequisite for the restored four-chapter route.
+	saved.erase_section("the_barber")
+	saved.set_value("perm_day", "best_time", 12.0)
+	saved.set_value("extensions", "best_time", 13.0)
+	saved.save(Progress.save_path)
+	check(Progress.is_unlocked(3) and not Progress.is_cleared(3), "expansion chapter records neither gate nor clear the finale")
 
 
 ## Playtest 5: the results popup between levels broke the flow. Clearing a level now

@@ -7,9 +7,8 @@ const LEVELS: Array[Dictionary] = [
 	{"id": "fresh_cut", "path": "res://scenes/levels/level_01.tscn", "title": "Fresh Cut"},
 	{"id": "return_to_sender", "path": "res://scenes/levels/level_02.tscn", "title": "Return to Sender"},
 	{"id": "wash_and_blow_dry", "path": "res://scenes/levels/level_03.tscn", "title": "Wash & Blow-Dry"},
-	{"id": "perm_day", "path": "res://scenes/levels/level_04.tscn", "title": "Perm Day"},
-	{"id": "extensions", "path": "res://scenes/levels/level_05.tscn", "title": "Extensions"},
-	{"id": "the_barber", "path": "res://scenes/levels/level_06.tscn", "title": "The Barber"},
+	# Keep the stable save ID and scene path: earlier finale records still belong here.
+	{"id": "the_barber", "path": "res://scenes/levels/level_06.tscn", "title": "The Assistant"},
 ]
 const MAIN_MENU := "res://scenes/ui/main_menu.tscn"
 const SAVE_VERSION := 2

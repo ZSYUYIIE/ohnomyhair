@@ -29,15 +29,6 @@ def from_old_sheet(name: str) -> Image.Image:
     return norm.drop_neighbour_bleed(norm.clean_alpha(cell))
 
 
-def from_new_sheet(row: int) -> Image.Image:
-    """Idle pose (column 0) of the 6x2 four-haircuts sheet; same alpha rule as its normaliser."""
-    sheet = Image.open(norm.SRC / "four_haircuts_sheet.png").convert("RGBA")
-    w, h = sheet.size
-    cell = sheet.crop((0, round(row * h / 2), round(w / 6), round((row + 1) * h / 2)))
-    cell.putdata([(r, g, b, 255 if a > 200 else a) if a >= 80 else (0, 0, 0, 0) for r, g, b, a in (cell.get_flattened_data() if hasattr(cell, 'get_flattened_data') else cell.getdata())])
-    return cell
-
-
 def portrait(figure: Image.Image) -> Image.Image:
     figure = figure.crop(figure.getbbox())
     scale = min((SIZE - 2 * MARGIN) / figure.height, (SIZE - 2 * MARGIN) / figure.width)
@@ -52,8 +43,6 @@ def main() -> None:
     figures = {
         "twin_tails": from_old_sheet("twin_tails"),
         "pompadour": from_old_sheet("pompadour"),
-        "afro": from_new_sheet(0),
-        "long_straight": from_new_sheet(1),
     }
     for name, figure in figures.items():
         bbox = figure.getbbox()

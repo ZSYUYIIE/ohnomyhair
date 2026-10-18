@@ -1,5 +1,9 @@
 # Afro and Long Straight character art
 
+> **Archived prototype.** These characters were removed from the playable game on
+> 2026-10-18. All source/runtime paths below now live under `archive/four_haircut_prototype/`.
+> The current art direction retains the original Twin-Tails and Pompadour sprites.
+
 Created for the four-haircut expansion with the built-in OpenAI image-generation tool,
 then normalized with `tools/art/normalize_new_haircuts.py`. No external asset pack is used.
 

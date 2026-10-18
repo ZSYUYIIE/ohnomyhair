@@ -9,9 +9,8 @@ extends SceneTree
 
 const TILE := 32.0
 const PlayerScene := preload("res://scenes/player/player.tscn")
-const LAB := "res://scenes/levels/style_lab.tscn"
-const GAP_VERBS := ["jump", "glide", "carry", "rope_glide", "cannonball"]
-const RISE_VERBS := ["jump", "launch", "spring", "hook", "rope", "lasso_lever"]
+const GAP_VERBS := ["jump", "glide", "carry"]
+const RISE_VERBS := ["jump", "launch"]
 
 var _arena: Node2D
 var _cache := {}
@@ -24,7 +23,6 @@ func _initialize() -> void:
 func _run() -> void:
 	var rows := []
 	var paths: Array = Progress.LEVELS.map(func(e): return e.path)
-	paths.append(LAB)
 	for path in paths:
 		var level: Level = load(path).instantiate()
 		for room: Room in level.get_node("Rooms").get_children():
@@ -67,17 +65,12 @@ func _capability(verb: String, spec: Dictionary) -> float:
 		var drop: int = spec.get("drop", 0)
 		match verb:
 			"jump": return await _cached("jump_reach_%d" % drop, _flight.bind(false, false, drop))
-			"glide", "rope_glide": return await _cached("glide_reach_%d" % drop, _flight.bind(true, false, drop))
+			"glide": return await _cached("glide_reach_%d" % drop, _flight.bind(true, false, drop))
 			"carry": return await _cached("carry_reach_%d" % drop, _flight.bind(true, true, drop))
-			"cannonball": return await _cached("cannonball_reach", _cannonball)
 	if spec.has("rise") and verb in RISE_VERBS:
 		match verb:
 			"jump": return await _cached("jump_rise", _jump_rise)
 			"launch": return await _cached("launch_rise", _launch_rise)
-			"spring": return await _cached("spring_rise_min", _spring_rise.bind(13))
-			"hook": return Player.HAIR_SCRIPTS[Player.Hair.LONG_STRAIGHT].new().hook_reach / TILE
-			"rope": return Player.HAIR_SCRIPTS[Player.Hair.LONG_STRAIGHT].new().rope_length / TILE
-			"lasso_lever": return Player.HAIR_SCRIPTS[Player.Hair.LONG_STRAIGHT].new().lasso_reach / TILE
 	return -1.0
 
 
@@ -187,43 +180,9 @@ func _launch_rise() -> float:
 	return await _peak(rider)
 
 
-## Spring with the shortest charge that still fires (charge_ticks frames).
-func _spring_rise(charge_ticks: int) -> float:
-	_new_arena()
-	var base := _player(1, Player.Hair.AFRO, Vector2.ZERO)
-	var rider := _player(2, Player.Hair.TWIN_TAILS, Vector2(0, -2 * Player.HALF_SIZE.y - 2))
-	await _ticks(20)
-	_hold(base, "skill", true)
-	await _ticks(charge_ticks)
-	_hold(base, "skill", false)
-	return await _peak(rider)
-
-
 func _peak(p: Player) -> float:
 	var peak := 0.0
 	for i in 150:
 		await physics_frame
 		peak = maxf(peak, -(p.global_position.y + Player.HALF_SIZE.y))
 	return peak / TILE
-
-
-## Flat distance the pompadour flies from the afro's centre in a full cannonball.
-func _cannonball() -> float:
-	_new_arena()
-	var base := _player(1, Player.Hair.AFRO, Vector2.ZERO)
-	var rider := _player(2, Player.Hair.POMPADOUR, Vector2(0, -2 * Player.HALF_SIZE.y - 2))
-	await _ticks(20)
-	_hold(base, "skill", true)
-	await _ticks(35)
-	_hold(rider, "skill", true)
-	await _ticks(2)
-	_hold(base, "skill", false)
-	var far := 0.0
-	for i in 200:
-		await physics_frame
-		far = maxf(far, rider.global_position.x)
-		if i > 10 and rider.is_on_floor():
-			break
-	for action in InputMap.get_actions():
-		Input.action_release(action)
-	return (far - Player.HALF_SIZE.x) / TILE

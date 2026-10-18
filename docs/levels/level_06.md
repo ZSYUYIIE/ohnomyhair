@@ -1,7 +1,8 @@
-# L6「理发师」：The Barber
+# 第 4 章「失控助手」：The Assistant
 
-> **编号变了**：新增了 L4「烫发日」和 L5「接发」，这一关（终章）现在是 **L6**，文件是 `level_06.tscn`。
-> Boss 房间的椅子可以选任意两种不同的发型（见 `docs/design/roster_and_chapters.md`）；房间 1 的出生点离热夹板远了两格。
+> **当前剧情**：两位朋友穿过洗发区，来到机器人助手把守的后门。终章在游戏中显示为第 4 章，
+> 保留内部文件名 `level_06.tscn` 与存档 ID。椅子和剪刀只会互换双马尾与前刺，
+> 不会引入其他角色；「烫发日」和「接发」已归档。见 [story_escape.md](../design/story_escape.md)。
 
 > 最后一关，四个单屏房间，预计 5–7 分钟。场景由 `tools/build_level_06.gd` 生成（重新运行会覆盖场景），测试是 `tests/test_level_06.gd`。
 >

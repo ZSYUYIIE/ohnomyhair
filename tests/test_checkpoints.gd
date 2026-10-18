@@ -1,6 +1,6 @@
 extends PlayBot
 ## Every campaign chair must restore both players to safe authored ground, including
-## the Extensions tower and the finale's timed flat iron. Uses an isolated test save.
+## the finale's timed flat iron. Uses an isolated test save.
 
 func _run() -> void:
 	for chapter in Progress.LEVELS:

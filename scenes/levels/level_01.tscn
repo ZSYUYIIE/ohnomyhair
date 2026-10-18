@@ -37,7 +37,7 @@ title = "1 - Mirror, Mirror"
 starting_hair = PackedInt32Array(0, 1)
 styles = PackedInt32Array(0, 1)
 gates = Array[Dictionary]([{
-"any": PackedStringArray("dash_gel", "cannonball"),
+"any": PackedStringArray("dash_gel"),
 "name": "Gel wall"
 }, {
 "any": PackedStringArray("glide"),
@@ -47,7 +47,7 @@ gates = Array[Dictionary]([{
 "gap": 10
 }
 }, {
-"any": PackedStringArray("lever", "lasso_lever"),
+"any": PackedStringArray("lever"),
 "name": "Bridge lever"
 }])
 
@@ -178,13 +178,13 @@ gates = Array[Dictionary]([{
 "gap": 8
 }
 }, {
-"any": PackedStringArray("launch", "spring"),
+"any": PackedStringArray("launch"),
 "name": "6-up cliff",
 "spec": {
 "rise": 6
 }
 }, {
-"any": PackedStringArray("lever", "lasso_lever"),
+"any": PackedStringArray("lever"),
 "name": "Step lever"
 }])
 

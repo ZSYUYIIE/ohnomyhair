@@ -33,11 +33,11 @@
 
 [node name="Level06" type="Node2D" unique_id=858694536]
 script = ExtResource("1_hlprc")
-level_title = "LEVEL 6 - The Barber"
+level_title = "LEVEL 4 - The Assistant"
 ending_text = "THE END
 
-The barber offers to fix your hair.
-You look at each other... and say no.
+The assistant powers down. The back door clicks open.
+You take your friend's hand and run.
 Bad hair. Good friends."
 
 [node name="Tiles" type="TileMapLayer" parent="." unique_id=880379408]
@@ -59,10 +59,10 @@ gates = Array[Dictionary]([{
 "gap": 9
 }
 }, {
-"any": PackedStringArray("parry", "shield"),
+"any": PackedStringArray("parry"),
 "name": "Turret on the flight line"
 }, {
-"any": PackedStringArray("whip", "parry", "lasso_stun", "jump"),
+"any": PackedStringArray("whip", "parry", "jump"),
 "name": "Clipper bot on the landing"
 }, {
 "any": PackedStringArray("walk"),
@@ -158,13 +158,13 @@ gates = Array[Dictionary]([{
 "any": PackedStringArray("catch_toss"),
 "name": "Ceiling bell"
 }, {
-"any": PackedStringArray("launch", "spring"),
+"any": PackedStringArray("launch"),
 "name": "6-up cliff",
 "spec": {
 "rise": 6
 }
 }, {
-"any": PackedStringArray("lever", "lasso_lever"),
+"any": PackedStringArray("lever"),
 "name": "Step lever"
 }])
 
@@ -344,10 +344,10 @@ title = "3 - Rush Hour"
 starting_hair = PackedInt32Array(1, 0)
 styles = PackedInt32Array(1, 0)
 gates = Array[Dictionary]([{
-"any": PackedStringArray("dash_gel", "parry", "whip", "lasso_stun"),
+"any": PackedStringArray("dash_gel", "parry", "whip"),
 "name": "Three waves of clipper bots"
 }, {
-"any": PackedStringArray("parry", "shield"),
+"any": PackedStringArray("parry"),
 "name": "Dispenser (wave 2)"
 }, {
 "any": PackedStringArray("walk"),
@@ -449,20 +449,20 @@ template = "Parry ({pomp.attack}) the scissors back into the robots"
 [node name="Room4" type="Node2D" parent="Rooms" unique_id=2010010235]
 position = Vector2(3840, 0)
 script = ExtResource("3_mxvdf")
-title = "4 - The Barber Bot"
+title = "4 - The Runaway Assistant"
 starting_hair = PackedInt32Array(1, 0)
-styles = PackedInt32Array(0, 1, 2, 3)
+styles = PackedInt32Array(0, 1)
 gates = Array[Dictionary]([{
-"any": PackedStringArray("crash", "parry", "catch_return", "cannonball"),
+"any": PackedStringArray("crash", "parry"),
 "name": "Daze Tony"
 }, {
-"any": PackedStringArray("launch", "spring", "hook"),
+"any": PackedStringArray("launch"),
 "name": "Corner ledge 7 up, above the knob",
 "spec": {
 "rise": 7
 }
 }, {
-"any": PackedStringArray("dash_gel", "parry", "whip", "lasso_stun", "shield", "jump"),
+"any": PackedStringArray("dash_gel", "parry", "whip", "jump"),
 "name": "Backup robots (phase 2)"
 }])
 
@@ -525,8 +525,8 @@ theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
 theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
-text = "Its scissors CHANGE YOUR HAIRCUT.
-The chair lets you pick a pair again."
+text = "Its scissors SWAP YOUR TWO HAIRCUTS.
+Watch your skills. Protect your friend."
 
 [node name="Players" type="Node2D" parent="." unique_id=1058346060]
 

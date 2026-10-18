@@ -1,5 +1,9 @@
 # Difficulty report (generated)
 
+> Historical six-chapter run. Perm Day / Extensions rows below belong to the archived
+> prototype. The current campaign has four chapters; the report tool now targets only
+> levels 01, 02, 03 and 06. Rebuild to collect a new timing sweep for that route.
+
 > `python -I tools/difficulty/report.py` rebuilds this page; see the bottom for how to read it.
 
 ## 1. Margins: how much room to spare

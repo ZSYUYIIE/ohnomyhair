@@ -1,5 +1,8 @@
 # Four haircuts: the co-op expansion
 
+> **Historical prototype — retired 2026-10-18.** See [the current escape story](story_escape.md).
+> The extra art, abilities, stages and tests are preserved under `archive/four_haircut_prototype`.
+
 The campaign remains four chapters with sequential unlocks. **Style Lab** is a separate,
 always-available three-room practice adventure on the title screen. Clearing it does not
 record campaign clears or unlock later chapters.

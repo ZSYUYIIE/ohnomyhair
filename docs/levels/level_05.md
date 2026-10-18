@@ -1,5 +1,8 @@
 # L5「接发」：Extensions
 
+> **已归档 / Retired prototype.** 不再属于当前剧情或可玩关卡。源文件保存在
+> `archive/four_haircut_prototype/`；当前路线见 [story_escape.md](../design/story_escape.md)。
+
 > 三个单屏房间。组合固定为 **P1 双马尾（Twin-Tails）+ P2 黑长直（Long Straight）**。
 > 场景由 `tools/build_level_05.gd` 生成（重新运行会覆盖场景），测试是 `tests/test_level_05.gd`（15 项）。
 > 总体设计和数值见 `docs/design/roster_and_chapters.md`，每个房间的关卡门槛见 `docs/levels/gate_graph.md`。

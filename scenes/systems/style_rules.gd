@@ -10,8 +10,6 @@ extends RefCounted
 
 const TT := Player.Hair.TWIN_TAILS
 const POMP := Player.Hair.POMPADOUR
-const AFRO := Player.Hair.AFRO
-const LONG := Player.Hair.LONG_STRAIGHT
 
 ## Anyone can do these.
 const UNIVERSAL: Array[String] = ["walk", "jump", "crash"]
@@ -19,16 +17,11 @@ const UNIVERSAL: Array[String] = ["walk", "jump", "crash"]
 const SOLO := {
 	TT: ["glide", "carry", "lever", "whip", "hair_copter"],
 	POMP: ["dash_gel", "parry", "launch"],
-	AFRO: ["spring", "shield"],
-	LONG: ["hook", "rope", "lasso_lever", "lasso_stun"],
 }
 ## Combos that need both haircuts of a specific pair.
 const COMBOS := [
 	{"verb": "sling", "needs": [TT, POMP]},
 	{"verb": "catch_toss", "needs": [TT, POMP]},
-	{"verb": "cannonball", "needs": [AFRO, POMP]},
-	{"verb": "catch_return", "needs": [AFRO, POMP]},
-	{"verb": "rope_glide", "needs": [LONG, TT]},
 ]
 ## What each verb means, for the gate graph and the design doc.
 const VERB_INFO := {
@@ -37,13 +30,7 @@ const VERB_INFO := {
 	"glide": "glide (12.5 tiles flat)", "carry": "carry a friend (8.9 flat, 16.5 from 6 up)",
 	"lever": "pull a lever by hand", "whip": "whip-stun a bot", "hair_copter": "ride a glider up a dryer",
 	"dash_gel": "dash through gel", "parry": "parry a scissor", "launch": "launch a rider (9 tiles)",
-	"spring": "spring a rider (12-13 tiles)", "shield": "shield a hit",
-	"hook": "hook a gold ring (9 tiles)", "rope": "lower a hair rope (10 tiles)",
-	"lasso_lever": "lasso a lever (6 tiles)", "lasso_stun": "lasso-stun a bot",
 	"sling": "sling dash through regrowing gel", "catch_toss": "catch a parried scissor, toss it up",
-	"cannonball": "cannonball through reinforced gel (13.8 tiles)",
-	"catch_return": "catch a parried scissor, return it sideways",
-	"rope_glide": "climb the rope, leap off and glide",
 }
 
 

@@ -32,7 +32,7 @@ title = "1 - Return to Sender"
 starting_hair = PackedInt32Array(0, 1)
 styles = PackedInt32Array(0, 1)
 gates = Array[Dictionary]([{
-"any": PackedStringArray("parry", "shield"),
+"any": PackedStringArray("parry"),
 "name": "Dispenser on the body line"
 }, {
 "any": PackedStringArray("catch_toss"),
@@ -290,7 +290,7 @@ gates = Array[Dictionary]([{
 "any": PackedStringArray("catch_toss"),
 "name": "Two ceiling bells"
 }, {
-"any": PackedStringArray("whip", "parry", "lasso_stun", "jump"),
+"any": PackedStringArray("whip", "parry", "jump"),
 "name": "Clipper bots"
 }])
 

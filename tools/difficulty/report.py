@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "difficulty"
 DEFAULT_GODOT = r"C:\Users\drdot\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe"
 USER_DIR = Path(os.environ.get("APPDATA", "")) / "Godot" / "app_userdata" / "Oh No My Hair"
-LEVEL_TESTS = ["test_level_01", "test_level_02", "test_level_03", "test_level_04", "test_level_05", "test_level_06"]
+LEVEL_TESTS = ["test_level_01", "test_level_02", "test_level_03", "test_level_06"]
 ANSI = re.compile(r"\x1b\[[0-9;]*m")
 
 

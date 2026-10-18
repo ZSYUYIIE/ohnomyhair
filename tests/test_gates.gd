@@ -1,12 +1,10 @@
 extends SceneTree
-## Gate check: every room of every chapter (and the Style Lab) is solvable by every
+## Gate check: every room of the escape campaign is solvable by every
 ## haircut pair it allows. A room lists its obstacles as gates (each passable with any one
 ## of a few verbs, StyleRules) and its chair's style set; every distinct pair from that set
 ## must have a verb for every gate. This is the design contract behind the bot playthroughs:
 ## the bots prove one pair can do it, this proves no allowed pair is locked out.
 ## Run: godot --headless --path . --script res://tests/test_gates.gd
-
-const LAB := "res://scenes/levels/style_lab.tscn"
 
 var passed := 0
 var failed := 0
@@ -16,7 +14,6 @@ func _initialize() -> void:
 	var paths: Array[String] = []
 	for entry in Progress.LEVELS:
 		paths.append(entry.path)
-	paths.append(LAB)
 	for path in paths:
 		var level: Level = load(path).instantiate()
 		for room: Room in level.get_node("Rooms").get_children():
@@ -33,6 +30,8 @@ func _check_room(level_name: String, room: Room) -> void:
 	check(room.starting_hair.size() == 2 and room.starting_hair[0] != room.starting_hair[1], "%s: starts with two different haircuts" % where)
 	check(room.styles.size() >= 2 and room.starting_hair[0] in room.styles and room.starting_hair[1] in room.styles,
 		"%s: its starting pair is one its chair offers" % where)
+	check(room.styles.size() == 2 and StyleRules.TT in room.styles and StyleRules.POMP in room.styles,
+		"%s: the story stays with Twin-Tails and Pompadour" % where)
 	for pair in StyleRules.pairs(room.styles):
 		var blocked := StyleRules.blocked_gates(pair, room.gates)
 		check(blocked.is_empty(), "%s: %s + %s can pass every gate%s" % [where, StyleRules.hair_name(pair[0]),
@@ -43,13 +42,10 @@ func _check_room(level_name: String, room: Room) -> void:
 
 
 func _unit_rules() -> void:
-	var all := PackedInt32Array([0, 1, 2, 3])
-	check(StyleRules.pairs(all).size() == 6, "four haircuts make six distinct pairs")
-	check("cannonball" in StyleRules.verbs([StyleRules.AFRO, StyleRules.POMP]) and not "cannonball" in StyleRules.verbs([StyleRules.AFRO, StyleRules.TT]),
-		"combos need both of their haircuts")
-	check(StyleRules.next_style(StyleRules.TT, StyleRules.POMP, all) == StyleRules.AFRO, "Tony's restyle skips the friend's haircut")
-	check(StyleRules.next_style(StyleRules.LONG, StyleRules.TT, all) == StyleRules.POMP, "Tony's restyle wraps around the set")
 	var two := PackedInt32Array([StyleRules.TT, StyleRules.POMP])
+	check(StyleRules.pairs(two).size() == 1, "the two story haircuts make one distinct pair")
+	check(Player.HAIR_INFO.size() == 2 and Player.HAIR_SCRIPTS.size() == 2, "only the original two haircuts are playable")
+	check("sling" in StyleRules.verbs([StyleRules.TT, StyleRules.POMP]) and not "sling" in StyleRules.verbs([StyleRules.TT]), "sling needs both friends")
 	check(StyleRules.next_style(StyleRules.TT, StyleRules.POMP, two) == -1, "with only the pair allowed there is nothing new: the friends swap")
 
 

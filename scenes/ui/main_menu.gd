@@ -3,10 +3,10 @@ extends Control
 ## Salon title screen with the two friends beside a chapter grid.
 
 const Guide := preload("res://scenes/ui/controls_guide.gd")
-const DESCRIPTIONS := ["Glide, carry & sling your friend", "Parry scissors & ring the bells", "Ride warm air. Watch the shampoo!",
-	"Afro springs & cannonballs", "Hooks, hair ropes & lassos", "Swap haircuts & face the barber"]
-## Chapter cards per row: six chapters fit as two rows of three.
-const CARD_COLUMNS := 3
+const DESCRIPTIONS := ["Find the service route together", "Turn the robot's scissors against it",
+	"Escape through the wash room", "Face the runaway assistant. Reach the back door."]
+## The escape has four chapters, in two rows of two.
+const CARD_COLUMNS := 2
 
 var _cards: Array[PanelContainer] = []
 var _play_buttons: Array[Button] = []
@@ -33,7 +33,7 @@ func _ready() -> void:
 	margin.add_child(col)
 	col.add_child(UiTheme.label("A TWO-PLAYER SALON ESCAPE  /  SHARED KEYBOARD", 16, UiTheme.MUTED))
 	col.add_child(UiTheme.label("OH NO MY HAIR!", 64))
-	col.add_child(UiTheme.label("Two terrible haircuts. One great escape. Better together.", 22, UiTheme.MUTED))
+	col.add_child(UiTheme.label("One bad haircut. Two good friends.", 22, UiTheme.MUTED))
 	var content := HBoxContainer.new()
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation", 24)
@@ -58,9 +58,6 @@ func _ready() -> void:
 	_controls_button = _button("How to play & combos", _toggle_controls)
 	buttons.add_child(_controls_button)
 	_menu_buttons.append(_controls_button)
-	var lab := _button("Style Lab", _play_lab)
-	buttons.add_child(lab)
-	_menu_buttons.append(lab)
 	var quit_button := _button("Quit", func(): get_tree().quit())
 	buttons.add_child(quit_button)
 	_menu_buttons.append(quit_button)
@@ -104,11 +101,6 @@ func _focus_latest() -> void:
 func play(index: int) -> void:
 	if index >= 0 and index < Progress.LEVELS.size() and Progress.is_unlocked(index) and not _controls.visible:
 		get_tree().change_scene_to_file(Progress.LEVELS[index].path)
-
-
-func _play_lab() -> void:
-	if not _controls.visible:
-		get_tree().change_scene_to_file("res://scenes/levels/style_lab.tscn")
 
 
 func _level_card(i: int) -> PanelContainer:
@@ -171,7 +163,7 @@ func _friends_panel() -> PanelContainer:
 		var keys := UiTheme.label("A D move / W jump\nG skill / F whip" if id == 1 else "← → move / ↑ jump\nK skill / L parry", 16, UiTheme.MUTED)
 		keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		player_col.add_child(keys)
-	var note := UiTheme.label("Bring a friend. You will need each other.\nHair is health. Both players must reach the exit.", 17)
+	var note := UiTheme.label("The front door is locked. Find another way.\nProtect your friend. Escape together.", 17)
 	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(note)
 	return panel

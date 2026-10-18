@@ -45,13 +45,15 @@ func _ready() -> void:
 		["05  WARM AIR", "Glide into a hair dryer to rise - carrying your friend too, just slower. Riding on her head goes up fastest."],
 	]:
 		combos.add_child(_text(entry[0], entry[1], 18))
-	var styles := _page("New styles & chairs")
+	var styles := _page("Story & checkpoints")
 	for entry in [
-		["AFRO — SPRING / SHIELD", "Hold skill to charge; release with a friend on your head to bounce them up. Hold attack for a short shield or to catch a parried scissor. Release to send it back."],
-		["CANNONBALL — AFRO + POMPADOUR", "Afro charges skill. Pompadour stands on Afro's head and holds skill too. Afro releases: Pompadour becomes a drill through reinforced gel and dazes the boss."],
-		["LONG STRAIGHT — ROPE / HOOK / LASSO", "Hold skill on a ledge to lower a rope. Your friend holds jump to climb; left/right releases with a boost. In the air, skill hooks a gold ring. Attack lassos bots or levers."],
-		["STYLE & CHECKPOINT", "Bring both friends near a chair and press S / ↓. Choose each haircut and save to heal, dry off, and keep those styles when restarting this room."],
-		["SOMETHING'S OFF...", "Tony's scissors change your haircut if they hurt you. Watch your portrait and skill hints! Wet Afro hair cannot spring or shield; find a dryer."],
+		["01  ONE SNIP TOO MANY", "Two friends arrive at closing time, hoping for a fresh look. The barber leaves them with his robot assistant. Something's off: the assistant cuts too much, and their hair reveals unexpected powers."],
+		["02  THE DOOR LOCKS", "The robot locks the front door and turns its scissors towards them. Pompadour steps in to protect Twin-Tails. She notices another way through the salon."],
+		["03  TRUST ME", "They choose to run together. Glide, carry, launch and parry through the service rooms. Both friends must reach each green exit; nobody gets left behind."],
+		["04  THE SERVICE ROUTE", "Fresh Cut leads to Return to Sender, then Wash & Blow-Dry. These are rooms along the escape, where the same two friends learn to use their new powers together."],
+		["05  THE ASSISTANT", "The runaway robot and its backup block the back door. Daze it with a parried scissor or a wall crash, then land on its glowing head. Escape together when it powers down."],
+		["CHAIRS & CHECKPOINTS", "Bring both friends near a chair and press S / ↓. Swap the two familiar haircuts or keep your roles. Saving heals, dries off, and keeps your chosen pair on a room restart."],
+		["SOMETHING'S OFF...", "The surprise chair and the assistant's damaging scissors can swap your two haircuts. Your movement keys stay yours; skills follow the haircut. Check your portrait and skill hints, then help each other adapt."],
 	]:
 		styles.add_child(_text(entry[0], entry[1], 18))
 	_close = Button.new()

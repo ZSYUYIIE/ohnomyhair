@@ -186,7 +186,7 @@ func _stomped_by(player: Player) -> void:
 	player.hit_stop(0.08)
 	if hp <= 0:
 		collision_layer = 0
-		Level.banner_for(self, "The barber bot is down!", 2.0)
+		Level.banner_for(self, "The assistant is down!", 2.0)
 		defeated.emit()
 		var tween := create_tween()
 		tween.tween_property(self, "modulate:a", 0.0, 0.8)
@@ -298,7 +298,7 @@ class BossBar extends CanvasLayer:
 		_panel.draw_rect(r, Color("fff6ea"))
 		_panel.draw_rect(r, ink, false, 3.0)
 		var font := ThemeDB.fallback_font
-		_panel.draw_string(font, Vector2(14, 22), "THE BARBER BOT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
+		_panel.draw_string(font, Vector2(14, 22), "THE ASSISTANT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
 		_panel.draw_string(font, Vector2(14, 22), "PHASE %d" % boss.phase(), HORIZONTAL_ALIGNMENT_RIGHT, _panel.size.x - 28, 16, Color("b0306a"))
 		var w := (_panel.size.x - 28 - 2 * 8) / boss._max_hp
 		for i in boss._max_hp:

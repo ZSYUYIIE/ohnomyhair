@@ -6,8 +6,7 @@ extends Label
 ##   {tt.skill} {tt.attack} ... (any key)  -> that player's key: G / F for P1, K / L for P2
 ## e.g. "{tt}: jump, then HOLD {tt.skill} to glide".
 
-const KEYS := {"tt": Player.Hair.TWIN_TAILS, "pomp": Player.Hair.POMPADOUR,
-	"afro": Player.Hair.AFRO, "long": Player.Hair.LONG_STRAIGHT}
+const KEYS := {"tt": Player.Hair.TWIN_TAILS, "pomp": Player.Hair.POMPADOUR}
 
 @export_multiline var template := ""
 

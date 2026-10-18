@@ -1,5 +1,9 @@
 # Four haircuts, six chapters: who plays what, where
 
+> **Historical prototype — retired 2026-10-18.** The current game uses the two-friend
+> [escape story](story_escape.md). Perm Day, Extensions, Style Lab and their extra
+> haircuts are archived and excluded from Godot. The design below records the earlier experiment.
+
 > Follows `four_haircut_expansion.md` (the Afro and Long Straight abilities). This doc fixes how
 > the four haircuts fit the campaign without breaking the levels that were built for two.
 > Rules in code: `scenes/systems/style_rules.gd`. Per-room data: `Room.styles`, `Room.gates`.

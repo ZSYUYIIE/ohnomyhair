@@ -24,7 +24,7 @@
 
 [node name="Level03" type="Node2D" unique_id=1118433263]
 script = ExtResource("1_tipwo")
-next_level = "res://scenes/levels/level_04.tscn"
+next_level = "res://scenes/levels/level_06.tscn"
 level_title = "LEVEL 3 - Wash & Blow-Dry"
 
 [node name="Tiles" type="TileMapLayer" parent="." unique_id=637423805]
@@ -42,10 +42,10 @@ gates = Array[Dictionary]([{
 "any": PackedStringArray("glide"),
 "name": "Lever shelf 10 up"
 }, {
-"any": PackedStringArray("lever", "lasso_lever"),
+"any": PackedStringArray("lever"),
 "name": "Gate lever"
 }, {
-"any": PackedStringArray("hair_copter", "spring"),
+"any": PackedStringArray("hair_copter"),
 "name": "Exit ledge 11 up, both friends",
 "spec": {
 "rise": 11
@@ -241,7 +241,7 @@ title = "3 - Rinse & Repeat"
 starting_hair = PackedInt32Array(0, 1)
 styles = PackedInt32Array(0, 1)
 gates = Array[Dictionary]([{
-"any": PackedStringArray("hair_copter", "spring"),
+"any": PackedStringArray("hair_copter"),
 "name": "Dryer column under a timed shower, both friends"
 }, {
 "any": PackedStringArray("carry"),

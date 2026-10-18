@@ -7,19 +7,15 @@ extends CharacterBody2D
 
 signal died(player: Player)
 
-enum Hair { TWIN_TAILS, POMPADOUR, AFRO, LONG_STRAIGHT }
+enum Hair { TWIN_TAILS, POMPADOUR }
 
 const HAIR_SCRIPTS := {
 	Hair.TWIN_TAILS: preload("res://scenes/player/abilities/twin_tails.gd"),
 	Hair.POMPADOUR: preload("res://scenes/player/abilities/pompadour.gd"),
-	Hair.AFRO: preload("res://scenes/player/abilities/afro.gd"),
-	Hair.LONG_STRAIGHT: preload("res://scenes/player/abilities/long_straight.gd"),
 }
 const HAIR_INFO := [
 	{"name": "Twin-Tails", "skill": "glide/carry", "attack": "whip", "color": Color("ff5fa2"), "about": "Hold skill to glide or carry. Pull levers and catch parried scissors."},
 	{"name": "Pompadour", "skill": "dash/launch", "attack": "parry", "color": Color("3a8fd6"), "about": "Dash through gel. Launch a friend off your head. Parry scissors."},
-	{"name": "Afro", "skill": "spring", "attack": "shield/catch", "color": Color("ee9a42"), "about": "Hold skill to charge, release to bounce a rider. Hold attack to shield or catch a parried scissor."},
-	{"name": "Long Straight", "skill": "rope/hook", "attack": "lasso", "color": Color("9467d5"), "about": "Hold skill on a ledge to lower a rope. In the air, hook a gold ring. Lasso light enemies or levers."},
 ]
 const HALF_SIZE := Vector2(14, 22)  # keep in sync with CollisionShape2D (28x44)
 ## Sprite tint while soaked by a shampoo shower.
@@ -152,7 +148,7 @@ func restyle_next() -> void:
 	if not alive:
 		return
 	var level := get_parent().get_parent() as Level
-	var styles := PackedInt32Array([0, 1, 2, 3])
+	var styles := PackedInt32Array([0, 1])
 	if level and level.rooms.size() > 0:
 		styles = level.rooms[level.room_index].styles
 	var mate := teammate()

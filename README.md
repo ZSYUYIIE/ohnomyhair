@@ -54,31 +54,25 @@ Edit in Project Settings → Input Map. In code: `player.pressed("skill")` / `In
 
 ## Run the tests
 
-### Four-haircut expansion
+### The escape story
 
-Choose **Style Lab** on the title screen to try Afro and Long Straight Hair in three new
-rooms. At a gold-marked styling chair, bring both friends nearby and press **S / Down**
-to choose styles, heal and save a checkpoint for the current room/run.
+Two friends arrive at closing time for a haircut. The barber leaves them with his robot
+assistant. One snip too many reveals their hair powers; the robot locks the front door.
+Pompadour protects Twin-Tails, she spots the service route, and they choose to escape together.
 
-- **Afro:** hold skill to charge, release to bounce a rider. Pompadour holds skill on top
-  as Afro releases for a **cannonball** that breaks reinforced orange gel. Hold attack for
-  a short shield or to catch a parried scissor; release to return it.
-- **Long Straight:** hold skill on a ledge to lower a rope; your friend holds jump to climb
-  and moves sideways to release. In the air, skill hooks a gold ring. Attack lassos bots
-  or levers.
-- Wet Afro hair cannot spring or shield. Tony's damaging scissors change your haircut;
-  blocking prevents it. Watch the portrait and skill hints.
+The campaign follows the same two friends through **Fresh Cut → Return to Sender →
+Wash & Blow-Dry → The Assistant**. The finale keeps its internal `level_06.tscn` path and
+stable save ID, but is chapter 4 in the game. Chairs and damaging boss scissors can swap
+their two familiar haircuts; both players must reach each exit.
 
-Style Lab does not unlock campaign chapters. Design details and scope:
-[`docs/design/four_haircut_expansion.md`](docs/design/four_haircut_expansion.md).
+**Perm Day, Extensions and Style Lab are retired.** Their source art, abilities, scenes and
+tests are preserved under [`archive/four_haircut_prototype`](archive/four_haircut_prototype/README.md),
+excluded from Godot by `.gdignore`. The playable roster and portraits use only the original
+Twin-Tails and Pompadour artwork. Story and visual direction:
+[`docs/design/story_escape.md`](docs/design/story_escape.md).
 
-In the campaign each chapter has one pair: Twin-Tails + Pompadour (chapters 1-3), **Afro +
-Pompadour** (4, Perm Day), **Twin-Tails + Long Straight** (5, Extensions), and the finale's
-arena lets you pick any two different haircuts. A room's chair only offers the haircuts that
-room was built for, and `tests/test_gates.gd` checks every allowed pair can get through.
-How and why: [`docs/design/roster_and_chapters.md`](docs/design/roster_and_chapters.md);
-every room's obstacles: [`docs/levels/gate_graph.md`](docs/levels/gate_graph.md)
-(regenerate with `godot --headless --path . --script res://tools/gate_graph.gd`).
+At a gold-marked chair, bring both friends nearby and press **S / Down** to swap or keep
+roles, heal, dry off and save the current room's checkpoint.
 
 ### Automated checks
 Each test plays through a level with simulated input; exit code 0 = pass.
@@ -89,19 +83,16 @@ godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_03.gd
-godot --headless --fixed-fps 60 --path . --script res://tests/test_level_04.gd
-godot --headless --fixed-fps 60 --path . --script res://tests/test_level_05.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_06.gd
 godot --headless --path . --script res://tests/test_gates.gd
-godot --headless --fixed-fps 60 --path . --script res://tests/test_haircuts.gd
-godot --headless --fixed-fps 60 --path . --script res://tests/test_style_lab.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_checkpoints.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_boss_pairs.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_story_roster.gd
 ```
 On a fresh checkout run `godot --headless --path . --import` once first.
 
 ## Repo layout
-- `scenes/player/` — the shared Player and the four haircuts (`abilities/`)
+- `scenes/player/` — the shared Player and the two story haircuts (`abilities/`)
 - `scenes/props/`, `scenes/enemies/` — barber-shop props and enemies: chair-pump levers, salon
   counters, regrowing hair-gel, dye basins, hot flat irons, service bells, staff doors, scissor
   dispensers, clipper bots, the barber bot

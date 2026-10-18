@@ -1,11 +1,11 @@
 extends LevelBuilder
-## Generates L6 "The Barber" (the finale; it was L4): res://scenes/levels/level_06.tscn.
+## Generates chapter 4 "The Assistant" at its stable legacy path level_06.tscn.
 ## A rising curve:
 ##   1 Closing Time - warm-up recap: carry + parry under fire, a hot iron, a clipper bot;
 ##   2 The Chair    - the twist: the haircuts swap (Something's Off);
 ##   3 Rush Hour    - the robots arrive in three waves, each adding a threat; then a
 ##                    breather (hazards off, growth tonics);
-##   4 The Barber Bot - the boss, in three announced phases (backup robots, then furious).
+##   4 The Runaway Assistant - the boss, in three phases (backup robots, then furious).
 ## Design notes: docs/levels/level_06.md.
 ## Rerunning OVERWRITES the scene (see LevelBuilder).
 ## Run: godot --headless --path . --script res://tools/build_level_06.gd
@@ -15,11 +15,11 @@ var ChairScene := load("res://scenes/props/hair_swap_chair.tscn")
 
 func _configure() -> void:
 	level_name = "Level06"
-	level_title = "LEVEL 6 - The Barber"
+	level_title = "LEVEL 4 - The Assistant"
 	scene_path = "res://scenes/levels/level_06.tscn"
 	tile_atlas = "res://assets/art/l4/tiles_l4.png"
 	tileset_path = "res://assets/art/l4/salon_tileset.tres"
-	ending_text = "THE END\n\nThe barber offers to fix your hair.\nYou look at each other... and say no.\nBad hair. Good friends."
+	ending_text = "THE END\n\nThe assistant powers down. The back door clicks open.\nYou take your friend's hand and run.\nBad hair. Good friends."
 
 
 func _rooms() -> Array:
@@ -45,8 +45,8 @@ func _room_1() -> RoomBuilder:
 	rb.exit(36, 16)
 	rb.hint("Closing time. The barber's robot wants to finish the job.", Vector2(40, 300))
 	rb.gate("9-wide dye pool, both friends", ["carry"], {"gap": 9, "drop": 2})
-	rb.gate("Turret on the flight line", ["parry", "shield"])
-	rb.gate("Clipper bot on the landing", ["whip", "parry", "lasso_stun", "jump"])
+	rb.gate("Turret on the flight line", ["parry"])
+	rb.gate("Clipper bot on the landing", ["whip", "parry", "jump"])
 	rb.gate("Flat iron", ["walk"])
 	rb.hint("{pomp} can parry ({pomp.attack}) while hanging from {tt}'s hair", Vector2(200, 420))
 	return rb
@@ -99,8 +99,8 @@ func _room_2() -> RoomBuilder:
 	rb.gate("Barber's chair tunnel (swaps roles)", ["walk"])
 	rb.gate("Gel wall shielding the room", ["dash_gel"])
 	rb.gate("Ceiling bell", ["catch_toss"])
-	rb.gate("6-up cliff", ["launch", "spring"], {"rise": 6})
-	rb.gate("Step lever", ["lever", "lasso_lever"])
+	rb.gate("6-up cliff", ["launch"], {"rise": 6})
+	rb.gate("Step lever", ["lever"])
 	return rb
 
 
@@ -141,8 +141,8 @@ func _room_3() -> RoomBuilder:
 	rb.add(arena, "Waves")
 	rb.link(arena, "cleared", door, "open")
 	rb.exit(37, 16)
-	rb.gate("Three waves of clipper bots", ["dash_gel", "parry", "whip", "lasso_stun"])
-	rb.gate("Dispenser (wave 2)", ["parry", "shield"])
+	rb.gate("Three waves of clipper bots", ["dash_gel", "parry", "whip"])
+	rb.gate("Dispenser (wave 2)", ["parry"])
 	rb.gate("Hot irons (wave 3)", ["walk"])
 	rb.hint("Robots incoming!  {pomp} dash ({pomp.skill}) breaks them,  {tt} whip ({tt.attack}) stuns them", Vector2(130, 250))
 	rb.hint("Parry ({pomp.attack}) the scissors back into the robots", Vector2(700, 330))
@@ -153,10 +153,9 @@ func _room_3() -> RoomBuilder:
 ## then land on its head knob: launch from a friend's head, or glide from a ledge.
 ## Phase 2 calls backup robots through the corner vents; they power down when it falls.
 func _room_4() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room4", "4 - The Barber Bot", Color("e2d6d6"), "res://assets/art/l4/bg_l4_03_workshop.png"))
-	# The arena's chair offers all four haircuts, and Tony restyles inside that set too,
-	# so every distinct pair must be able to win here (tests/test_gates.gd).
-	rb.styles([Player.Hair.TWIN_TAILS, Player.Hair.POMPADOUR, Player.Hair.AFRO, Player.Hair.LONG_STRAIGHT],
+	var rb := RoomBuilder.new(self, room_node("Room4", "4 - The Runaway Assistant", Color("e2d6d6"), "res://assets/art/l4/bg_l4_03_workshop.png"))
+	# The escape follows the same two friends. Restyles swap their familiar roles.
+	rb.styles([Player.Hair.TWIN_TAILS, Player.Hair.POMPADOUR],
 			[Player.Hair.POMPADOUR, Player.Hair.TWIN_TAILS])
 	rb.solid(0, 19, 38, 22)     # arena floor
 	# Corner ledges only: a charge crashes the bot right under them, so you can drop
@@ -182,9 +181,9 @@ func _room_4() -> RoomBuilder:
 	rb.link(boss, "backup_called", backup, "start_next")
 	rb.link(boss, "defeated", backup, "scrap_all")
 	rb.exit(37, 16)
-	rb.gate("Daze Tony", ["crash", "parry", "catch_return", "cannonball"])
-	rb.gate("Corner ledge 7 up, above the knob", ["launch", "spring", "hook"], {"rise": 7})
-	rb.gate("Backup robots (phase 2)", ["dash_gel", "parry", "whip", "lasso_stun", "shield", "jump"])
+	rb.gate("Daze the assistant", ["crash", "parry"])
+	rb.gate("Corner ledge 7 up, above the knob", ["launch"], {"rise": 7})
+	rb.gate("Backup robots (phase 2)", ["dash_gel", "parry", "whip", "jump"])
 	rb.hint("Daze it (parry its scissors, or make it crash a charge into a wall),\nthen land on its glowing head from a high corner ledge.", Vector2(300, 230))
-	rb.hint("Its scissors CHANGE YOUR HAIRCUT.\nThe chair lets you pick a pair again.", Vector2(56, 270))
+	rb.hint("Its scissors SWAP YOUR TWO HAIRCUTS.\nWatch your skills. Protect your friend.", Vector2(56, 270))
 	return rb

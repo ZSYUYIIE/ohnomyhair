@@ -37,7 +37,6 @@ var _banner_tween: Tween
 static var _carry_over := {}
 const StyleMenu := preload("res://scenes/ui/styling_menu.gd")
 const StyleChair := preload("res://scenes/props/styling_chair.gd")
-const HairAnchor := preload("res://scenes/props/hair_anchor.gd")
 var styling_menu: CanvasLayer
 var _active_chair: Area2D
 var _checkpoint := {}
@@ -218,12 +217,6 @@ func _install_stations() -> void:
 		station.name = "StylingStation"
 		station.position = (room.get_node("SpawnP1").position + room.get_node("SpawnP2").position) / 2 + Vector2(0, 22)
 		room.add_child(station)
-		for child in room.get_children():
-			if child is BarberBot:
-				for at in [Vector2(160, 340), Vector2(1080, 340)]:
-					var ring := HairAnchor.new()
-					ring.position = at
-					room.add_child(ring)
 
 
 func open_styling(chair: Area2D) -> void:
