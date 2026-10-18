@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bilcl6bkwnde0"
-path="res://.godot/imported/title_interactive_backdrop.png-6382a990f23ce21b4b9fde324cb12a3f.ctex"
+uid="uid://dogaxdmbksbma"
+path="res://.godot/imported/title_button_start.png-5e6b9a4ebdf5797f601686bdb164cc88.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/ui/poster/title_interactive_backdrop.png"
-dest_files=["res://.godot/imported/title_interactive_backdrop.png-6382a990f23ce21b4b9fde324cb12a3f.ctex"]
+source_file="res://assets/art/ui/poster/title_button_start.png"
+dest_files=["res://.godot/imported/title_button_start.png-5e6b9a4ebdf5797f601686bdb164cc88.ctex"]
 
 [params]
 

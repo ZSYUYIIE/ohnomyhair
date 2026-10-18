@@ -65,7 +65,7 @@ func _ready() -> void:
 	var navigation := _page("Shortcuts")
 	for entry in [
 		["ALL MENUS", "Arrow keys / Tab: move focus. Shift + Tab: previous control.\nEnter / Space: activate the focused button. Mouse: point and click."],
-		["TITLE & CHAPTERS", "I: watch the opening from the title. F1 / H: open this shortcut guide.\nChapter menu: ← / → or 1–4 (also numpad) selects an unlocked chapter. P plays it. Esc goes back."],
+		["TITLE & CHAPTERS", "I or the chapter menu's Opening button: replay the opening. F1 / H: open this shortcut guide. Esc on the title: quit (desktop).\nChapter menu: ← / → or 1–4 (also numpad) selects an unlocked chapter. P plays it. Esc goes back."],
 		["PLAYING & PAUSING", "Esc: pause / resume. R: restart the current room, including from pause or death.\nF1 / H: pause and open help. Esc from help returns to pause; Esc again resumes."],
 		["CHAIRS & TEAMWORK", "S / ↓ near a chair: open styling and checkpoints when both friends are nearby.\nHold S / ↓ to drop through shelves; press down to let go when carried. In chair menus, Tab / arrows select, Enter confirms, Esc cancels."],
 		["OPENING & HELP", "Any key, mouse click or controller button skips the opening. Replay returns to the title.\nIn help: Page Up / Page Down or mouse wheel scrolls. Focus the tabs and use ← / → to switch pages. Esc / F1 / H closes help."],
