@@ -102,6 +102,6 @@ func _room_3() -> RoomBuilder:
 	rb.gate("Bell behind the dispenser line", ["parry"])
 	rb.gate("Bell past the friends", ["catch_return"])
 	rb.hint("Two bells. The door needs both.", Vector2(560, 200))
-	rb.hint("{pomp}: parry ({pomp.attack}) on the yellow stripes", Vector2(380, 470))
+	rb.hint("{pomp}: parry ({pomp.attack}) on the yellow stripes", Vector2(380, 420))
 	rb.hint("{afro}: wait in the trench, HOLD {afro.attack} to catch a BLUE scissor,\nturn around, and let go: it flies back the other way!", Vector2(40, 330))
 	return rb

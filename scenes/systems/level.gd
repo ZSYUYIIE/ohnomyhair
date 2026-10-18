@@ -210,7 +210,7 @@ func _install_stations() -> void:
 		var station := StyleChair.new()
 		station.level = self
 		station.name = "StylingStation"
-		station.position = (room.get_node("SpawnP1").position + room.get_node("SpawnP2").position) / 2 + Vector2(80, 22)
+		station.position = (room.get_node("SpawnP1").position + room.get_node("SpawnP2").position) / 2 + Vector2(0, 22)
 		room.add_child(station)
 		for child in room.get_children():
 			if child is BarberBot:
@@ -241,7 +241,9 @@ func _save_styles(styles: Array[int]) -> void:
 		players[i].set_hair(styles[i])
 		players[i].heal(players[i].max_hp)
 		players[i].dry()
-		positions.append(_active_chair.global_position + Vector2(-24 if i == 0 else 24, -22))
+		# A restart resets the room's obstacles too. Use its authored safe starts:
+		# fixed offsets from the chair can land inside a tower or on a hot iron.
+		positions.append(rooms[room_index].spawn_point(players[i].player_id))
 	_checkpoint = {"room": room_index, "hair": styles.duplicate(), "positions": positions}
 	show_banner("Fresh styles. Room checkpoint saved!", 1.8)
 

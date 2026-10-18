@@ -91,7 +91,7 @@ func _room_2() -> RoomBuilder:
 		label.add_theme_font_size_override("font_size", 18)
 		after.add_child(label)
 	rb.link(chair, "swapped", after, "show")
-	# HP carries through the level: top up before the boss.
+	# Recover from damage taken in this room. Entering the next room heals both friends.
 	rb.tonic("Tonic", 34, 12)
 	rb.gate("Barber's chair tunnel (swaps roles)", ["walk"])
 	rb.gate("Gel wall shielding the room", ["dash_gel"])

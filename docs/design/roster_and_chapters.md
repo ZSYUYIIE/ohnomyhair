@@ -30,7 +30,7 @@ Every room carries three pieces of data (set by the level builders):
 `StyleRules.verbs(pair)` lists what a pair can do: each haircut's own verbs plus the combos
 that need both (sling, catch & toss, cannonball, catch & return, rope glide).
 
-**The contract** (`tests/test_gates.gd`, 193 checks): for every room, every distinct pair from
+**The contract** (`tests/test_gates.gd`, 191 checks): for every room, every distinct pair from
 `styles` has a verb for every gate. Gates must only list verbs that really work in that room's
 geometry; the bot playthroughs (`tests/test_level_0N.gd`) prove one pair actually does it.
 
@@ -101,9 +101,9 @@ This pair has no lever puller, so every switch is a bell and every height is a s
 
 - **Finale room 1:** the friends spawned next to the hot flat iron (P2 at column 4, iron at
   5-6). Spawns moved two tiles clear.
-- **A tonic before the boss:** HP carries through a level, so a growth tonic on the finale's
-  room 2 exit ledge is worth something. (Chapter 3's tonic still sits before the only damage in
-  its room; it is kept for the tonic lesson.)
+- **A tonic near the room 2 exit:** restores damage taken in that room. Room transitions
+  restore full HP, so it does not change starting health in the boss arena. Chapter 3's
+  tonic remains part of the tonic lesson.
 - **Hints that gave the answer away** ("P1 stands on P2's head, P2 presses K") now name the move
   being taught instead.
 - **The title screen** lays out six chapters, three per row.
@@ -111,6 +111,23 @@ This pair has no lever puller, so every switch is a bell and every height is a s
 ## Next
 
 - Art for chapters 4 and 5: they reuse the existing tile sets and walls for now.
-- Afro and Long Straight in a co-op boss fight that the bots play through (the gate check covers
-  all six pairs; the bots cover the Twin-Tails + Pompadour route).
+- A full survival playthrough of the boss with Afro and Long Straight. The physical route
+  check now covers a real wall crash and corner stomp with all six pairs; it uses fixed
+  starting positions and temporary immunity, so it does not measure survival difficulty.
 - Optional later chapter: free choice in more rooms, now that the gate check makes it safe.
+
+## Integration review
+
+- Save version 2 uses stable chapter IDs. Unversioned `level_4` records belonged to the old
+  Barber finale and migrate there, leaving Perm Day and Extensions to be played in order.
+  Unversioned expansion saves cannot distinguish an old Barber record from a new Perm Day
+  record; ambiguous chapter-4 records are treated as the legacy finale to avoid skipping a
+  new chapter. Existing chapter-5/6 records are retained, with unlock prerequisites enforced.
+- Styling checkpoints keep the chosen pair but restart at authored room spawn points.
+  A fixed chair offset embedded a player in Extensions' tower or on the finale's flat iron.
+  Chair placement now uses the spawn midpoint, clear of those obstacles.
+- `tests/test_checkpoints.gd` checks selection and idle restarts at all 17 campaign chairs.
+  `tests/test_menu.gd` checks migration, records and sequential unlocks.
+- `tests/test_boss_pairs.gd` physically reaches the high corner with launch, spring or hook,
+  baits a wall crash and lands a stomp for each of the six allowed pairs. The existing finale
+  playthrough covers all three rounds with Pompadour + Twin-Tails.

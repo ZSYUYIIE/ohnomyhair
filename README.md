@@ -88,11 +88,13 @@ godot --headless --fixed-fps 60 --path . --script res://tests/test_level_06.gd
 godot --headless --path . --script res://tests/test_gates.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_haircuts.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_style_lab.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_checkpoints.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_boss_pairs.gd
 ```
 On a fresh checkout run `godot --headless --path . --import` once first.
 
 ## Repo layout
-- `scenes/player/` — the shared Player and the two haircuts (`abilities/`)
+- `scenes/player/` — the shared Player and the four haircuts (`abilities/`)
 - `scenes/props/`, `scenes/enemies/` — barber-shop props and enemies: chair-pump levers, salon
   counters, regrowing hair-gel, dye basins, hot flat irons, service bells, staff doors, scissor
   dispensers, clipper bots, the barber bot

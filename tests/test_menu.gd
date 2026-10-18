@@ -15,6 +15,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	Progress.save_path = "user://test_menu_progress.cfg"
+	_legacy_save()
 	Progress.reset()
 
 	var menu: MainMenu = await _open_menu()
@@ -132,6 +133,27 @@ func _run() -> void:
 	Progress.reset()
 	print("Results: %d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
+
+
+func _legacy_save() -> void:
+	var legacy := ConfigFile.new()
+	for i in 4:
+		legacy.set_value("level_%d" % (i + 1), "best_time", 60.0 + i)
+		legacy.set_value("level_%d" % (i + 1), "best_deaths", i)
+	legacy.save(Progress.save_path)
+	check(Progress.is_cleared(0) and Progress.best_time(2) == 62.0, "legacy save preserves the first three chapter records")
+	check(not Progress.is_cleared(3) and not Progress.is_cleared(4), "old boss clear does not count as either new chapter")
+	check(Progress.is_unlocked(3) and not Progress.is_unlocked(4) and not Progress.is_unlocked(5), "legacy save must play both new chapters before returning to the finale")
+	check(Progress.best_time(5) == 63.0 and Progress.best_deaths(5) == 3, "old boss records move to The Barber's stable ID")
+	Progress.record_clear(3, 45.0, 0)
+	check(Progress.best_time(3) == 45.0 and Progress.best_time(5) == 63.0, "new chapter clear cannot overwrite the migrated boss record")
+	check(Progress.is_unlocked(4) and not Progress.is_unlocked(5), "clearing Perm Day unlocks Extensions only")
+	Progress.record_clear(4, 50.0, 0)
+	check(Progress.is_unlocked(5), "clearing both new chapters unlocks the preserved finale")
+	var saved := ConfigFile.new()
+	saved.load(Progress.save_path)
+	check(saved.get_value("save", "version", 0) == Progress.SAVE_VERSION and not saved.has_section("level_4"), "migration persists its version and removes ambiguous positional records")
+	check(Progress.best_time(5) == 63.0, "reloading a migrated save preserves its records")
 
 
 func _open_menu() -> MainMenu:
