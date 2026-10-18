@@ -40,6 +40,7 @@ func _physics_process(delta: float) -> void:
 
 
 func deflect() -> void:
+	Sound.play("parry")
 	deflected = true
 	direction = -direction
 	speed *= DEFLECT_SPEED_MULTIPLIER
@@ -58,12 +59,14 @@ func redirect(new_direction: Vector2, at: Vector2) -> void:
 ## Combo "Hair Catch": twin-tails' open pigtails grab a parried scissor and hold it.
 ## Held scissors don't hit anything until tossed.
 func catch_by(p: Player) -> void:
+	Sound.play("catch")
 	holder = p
 	set_deferred("monitoring", false)
 
 
 ## Twin-tails lets go: the scissor shoots straight up from `at_x`, golden.
 func toss(at_x: float) -> void:
+	Sound.play("toss")
 	holder = null
 	set_deferred("monitoring", true)
 	golden = true

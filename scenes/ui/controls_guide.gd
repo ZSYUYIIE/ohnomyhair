@@ -12,18 +12,19 @@ func _ready() -> void:
 	theme = UiTheme.get_theme()
 	var dim := ColorRect.new()
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dim.color = Color(0.12, 0.08, 0.18, 0.78)
+	dim.color = Color(0.16, 0.10, 0.22, 0.68)
 	add_child(dim)
 	var center := CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(center)
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(1080, 620)
+	panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 4, 26, 18))
 	center.add_child(panel)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 12)
 	panel.add_child(box)
-	box.add_child(UiTheme.label("A little teamwork goes a long way.", 32))
+	box.add_child(UiTheme.heading("A little teamwork goes a long way.", 34))
 	box.add_child(UiTheme.label("Skills follow the haircut. Mouse wheel / Page Down to scroll for more.", 20, UiTheme.MUTED))
 	_tabs = TabContainer.new()
 	_tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -36,6 +37,7 @@ func _ready() -> void:
 	row.add_child(_player_keys(2))
 	basics.add_child(_text("THE GOAL", "Both friends must stand in the green exit to leave a room.\nHearts are your hair: lose them all and you both restart the room.", 20))
 	basics.add_child(_text("ROOM SHORTCUTS", "Esc  Pause / resume     R  Restart room\nHold S / ↓ to drop through shelves. Press down to let go when carried.", 20))
+	basics.add_child(_text("LEVERS", "Twin-Tails: tap skill near a lever to move its platform. Tap again to bring it back. Holding the key does not repeatedly switch it.", 20))
 	var combos := _page("Hair combos")
 	for entry in [
 		["01  CARRY & GLIDE", "Twin-Tails: hold skill beside your friend to pick them up. Jump and keep holding to glide together."],
@@ -56,6 +58,19 @@ func _ready() -> void:
 		["SOMETHING'S OFF...", "The surprise chair and the assistant's damaging scissors can swap your two haircuts. Your movement keys stay yours; skills follow the haircut. Check your portrait and skill hints, then help each other adapt."],
 	]:
 		styles.add_child(_text(entry[0], entry[1], 18))
+	var about := _page("About")
+	about.add_child(UiTheme.heading("Oh No My Hair!", 38))
+	about.add_child(_text("CREATED FOR", "GameJamPlus 26/27\nNPC Union\nSingapore", 26))
+	about.add_child(_text("BAD HAIR. GOOD FRIENDS.", "One bad haircut. Two good friends. Escape the salon together.\nUse the other tabs for controls, hair combos and checkpoints.", 23))
+	var navigation := _page("Shortcuts")
+	for entry in [
+		["ALL MENUS", "Arrow keys / Tab: move focus. Shift + Tab: previous control.\nEnter / Space: activate the focused button. Mouse: point and click."],
+		["TITLE & CHAPTERS", "I: watch the opening from the title. F1 / H: open this shortcut guide.\nChapter menu: ← / → or 1–4 (also numpad) selects an unlocked chapter. P plays it. Esc goes back."],
+		["PLAYING & PAUSING", "Esc: pause / resume. R: restart the current room, including from pause or death.\nF1 / H: pause and open help. Esc from help returns to pause; Esc again resumes."],
+		["CHAIRS & TEAMWORK", "S / ↓ near a chair: open styling and checkpoints when both friends are nearby.\nHold S / ↓ to drop through shelves; press down to let go when carried. In chair menus, Tab / arrows select, Enter confirms, Esc cancels."],
+		["OPENING & HELP", "Any key, mouse click or controller button skips the opening. Replay returns to the title.\nIn help: Page Up / Page Down or mouse wheel scrolls. Focus the tabs and use ← / → to switch pages. Esc / F1 / H closes help."],
+	]:
+		navigation.add_child(_text(entry[0], entry[1], 20))
 	_close = Button.new()
 	_close.text = "Got it  /  Esc"
 	_close.custom_minimum_size.y = 48
@@ -79,8 +94,8 @@ func _ready() -> void:
 	_close.focus_neighbor_right = _close.get_path()
 
 
-func open() -> void:
-	_tabs.current_tab = 0
+func open(tab: int = 0) -> void:
+	_tabs.current_tab = tab
 	show()
 	UiTheme.focus_if_visible.call_deferred(_close)
 
@@ -92,7 +107,7 @@ func dismiss() -> void:
 
 func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree(): return
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("show_help"):
 		dismiss()
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("ui_page_down") or event.is_action_pressed("ui_page_up"):
@@ -124,7 +139,7 @@ func _player_keys(id: int) -> PanelContainer:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 6)
 	panel.add_child(col)
-	col.add_child(UiTheme.label("P1  /  TWIN-TAILS" if id == 1 else "P2  /  POMPADOUR", 24))
+	col.add_child(UiTheme.heading("P1  /  TWIN-TAILS" if id == 1 else "P2  /  POMPADOUR", 25))
 	col.add_child(UiTheme.label("A / D   Move     W   Jump\nG   Hold: glide / carry   Tap: lever\nF   Hair whip to stun" if id == 1 else "← / →   Move     ↑   Jump\nK   Dash / launch a friend\nL   Parry flying scissors", 20))
 	return panel
 

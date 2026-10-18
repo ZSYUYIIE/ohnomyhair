@@ -103,6 +103,8 @@ func _begin_wave(index: int) -> void:
 	var w: Dictionary = waves[index]
 	for col in w.get("drops", []):
 		_warning[col] = WARN_TIME
+	if not w.get("drops", []).is_empty():
+		Sound.play("wave_alarm" if auto_start else "robot_drop", 0.0)
 	# Every hazard woken so far comes back on, plus this wave's new ones.
 	_set_wave_hazards(index, true)
 	if auto_start:

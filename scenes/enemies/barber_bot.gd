@@ -98,6 +98,7 @@ func _enter(new_state: State) -> void:
 			_t = windup_time
 			_face_target()
 		State.CHARGE:
+			Sound.play("boss_charge", 0.0)
 			_t = charge_timeout
 		State.HURT:
 			_t = hurt_time
@@ -145,6 +146,7 @@ func _charge() -> State:
 	_hurt_touching_players()
 	if is_on_wall():
 		daze(crash_daze_time)
+		Sound.play("boss_stomp", 0.05, -4.0)  # the crash into the wall
 		return State.DAZED
 	return State.WALK if _t <= 0.0 else State.CHARGE
 
@@ -169,6 +171,8 @@ func _hurt() -> State:
 func daze(seconds: float) -> void:
 	if state == State.DEAD or state == State.HURT:
 		return
+	if state != State.DAZED:
+		Sound.play("boss_daze")
 	state = State.DAZED
 	_t = seconds
 
@@ -180,6 +184,7 @@ func take_hit(_damage: int, stun_time: float = 0.0, _knockback := Vector2.ZERO) 
 
 
 func _stomped_by(player: Player) -> void:
+	Sound.play("boss_stomp", 0.0)
 	hp -= 1
 	player.launch(96.0)
 	player.make_invincible(1.2)
@@ -244,7 +249,7 @@ func _hurt_touching_players() -> void:
 			p.take_hit(1, 0.0, Vector2(signf(p.global_position.x - global_position.x) * 360.0, -300.0))
 
 
-const ART := preload("res://assets/art/enemies/enemy_barber_bot.png")
+const ART := preload("res://assets/art/enemies/assistant_poster.png")
 
 
 func _draw() -> void:
@@ -257,10 +262,13 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO, 0.0, squash * Vector2(facing, 1.0))
 	# Furious (phase 3): it throbs red.
 	var tint := Color(1, 0.62, 0.6) if phase() == 3 and state != State.DAZED and int(Time.get_ticks_msec() / 150) % 2 == 0 else Color.WHITE
-	draw_texture_rect_region(ART, Rect2(-72, -140, 144, 144), Rect2(frame * 144, 0, 144, 144), tint)
+	if frame == 2: tint = Color(1.8, 1.6, 1.5)
+	draw_texture_rect(ART, Rect2(-72, -140, 144, 144), false, tint)
 	draw_set_transform(Vector2.ZERO, 0.0, squash)
 	var top := -SIZE.y
 	if state == State.DAZED:
+		draw_circle(Vector2(0, top), 12, Color("ffdf58"))
+		draw_arc(Vector2(0, top), 15, 0, TAU, 24, Color("fff4b0"), 3, true)
 		draw_string(ThemeDB.fallback_font, Vector2(-44, top - 14), "STOMP!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("f1c40f"))
 	for i in hp:
 		var bar := Rect2(-SIZE.x / 2 + i * 34, top - 34 if state != State.DAZED else top - 44, 28, 7)
@@ -272,12 +280,18 @@ func _draw() -> void:
 class BossBar extends CanvasLayer:
 	var boss: BarberBot
 	var _panel: Control
+	var _paper: StyleBoxFlat
+	var _filled: StyleBoxFlat
+	var _empty: StyleBoxFlat
 
 	func _init(b: BarberBot) -> void:
 		boss = b
 		layer = 8
 
 	func _ready() -> void:
+		_paper = UiTheme.card(UiTheme.CREAM, UiTheme.INK, 3, 16, 8)
+		_filled = UiTheme.card(UiTheme.PINK, UiTheme.INK, 2, 5, 0)
+		_empty = UiTheme.card(UiTheme.LILAC, UiTheme.INK, 2, 5, 0)
 		_panel = Control.new()
 		_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_panel.set_anchors_preset(Control.PRESET_CENTER_TOP)
@@ -295,13 +309,11 @@ class BossBar extends CanvasLayer:
 	func _draw_bar() -> void:
 		var ink := Color("2b2140")
 		var r := Rect2(Vector2.ZERO, _panel.size)
-		_panel.draw_rect(r, Color("fff6ea"))
-		_panel.draw_rect(r, ink, false, 3.0)
-		var font := ThemeDB.fallback_font
+		_panel.draw_style_box(_paper, r)
+		var font := UiTheme.heading_font()
 		_panel.draw_string(font, Vector2(14, 22), "THE ASSISTANT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
 		_panel.draw_string(font, Vector2(14, 22), "PHASE %d" % boss.phase(), HORIZONTAL_ALIGNMENT_RIGHT, _panel.size.x - 28, 16, Color("b0306a"))
 		var w := (_panel.size.x - 28 - 2 * 8) / boss._max_hp
 		for i in boss._max_hp:
 			var seg := Rect2(14 + i * (w + 8), 30, w, 12)
-			_panel.draw_rect(seg, Color("e74c3c") if i < boss.hp else Color(ink, 0.15))
-			_panel.draw_rect(seg, ink, false, 2.0)
+			_panel.draw_style_box(_filled if i < boss.hp else _empty, seg)

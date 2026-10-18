@@ -1,0 +1,367 @@
+{
+  "version": 3,
+  "direction": "Teammate Asset Library v1",
+  "viewport": [
+    1280,
+    720
+  ],
+  "provenance": "User-supplied AI artwork; original teammate metadata retained under docs/art/teammate_library_v1",
+  "assets": [
+    {
+      "path": "assets/art/opening/cutscene_01_closing_time.png",
+      "source": "cutscene/panels/cutscene_01_closing_time.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "935c57a8e494713e85c4203c8cc0e187db69d426a24d1a7c352f954f8be4d2c5",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_02_robot_assistant.png",
+      "source": "cutscene/panels/cutscene_02_robot_assistant.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "34ce95763da036e2c40ed35f3e1bf605c1c62f63c131046eeca8b1781e59f4a8",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_03_good_hair_day.png",
+      "source": "cutscene/panels/cutscene_03_good_hair_day.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "88b089447859dce22da59faa34cbed9a51287c662f25f57d078c8a8a82a2dba2",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_04_robot_malfunction.png",
+      "source": "cutscene/panels/cutscene_04_robot_malfunction.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "aab84cc4f30d1795a5ec573f2d6a91a58c8a2501c1a010a62f4ed23a4aa9a25f",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_05_hair_burst.png",
+      "source": "cutscene/panels/cutscene_05_hair_burst.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "0a726ba602de261789a3ddfba10268ce236321df4ab7de2bc4e4af041bf65834",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_06_power_hair_reveal.png",
+      "source": "cutscene/panels/cutscene_06_power_hair_reveal.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "bf17e96da85c8bd32d1350f93a0f700b5bc363870122940c080a8892ecb4d54c",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_07_door_lock.png",
+      "source": "cutscene/panels/cutscene_07_door_lock.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "36a63a69c0565d1c0cc233afc8a01284db725c5ab4cf5f41e7575dad9d48a6c1",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_08_protect_friend.png",
+      "source": "cutscene/panels/cutscene_08_protect_friend.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "6c96fb09e369d3a1c28868a28294994dd56f1d677d4cd6e49ca4c273032d0230",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_09_another_way.png",
+      "source": "cutscene/panels/cutscene_09_another_way.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "de24b36687cbb832a923210ba20ad7f740d1d4f03a6bb987ee622ae70fc9e245",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_10_trust_me.png",
+      "source": "cutscene/panels/cutscene_10_trust_me.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "ab1405ef7c44ab102c40aebe64aa96214df5cc875deefe25ec4b5ec2ae1a58e6",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_11_escape_together.png",
+      "source": "cutscene/panels/cutscene_11_escape_together.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "27e6d4b205971e4a2ab6b835a754d61125d042f058815ea6e94cd30f3f78d1ab",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/ui/poster/map_friends.png",
+      "source": "reusable_earlier_title_parts/landing_characters.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "aa1b500fc6b84c1f878c3531162e664a0e828621d8bad372cb328e0f5690af8b",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false,
+      "status": "superseded source/reference retained; not used by the current interactive menu"
+    },
+    {
+      "path": "assets/art/ui/poster/title_main_menu.png",
+      "source": "ui/previews/title_main_menu_preview.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "6c10862e78cb57ae339611c19c9dbf9b7cf5cc6c1ef3e96c6d061ea5b54b1db0",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false,
+      "status": "superseded source/reference retained; not used by the current interactive menu"
+    },
+    {
+      "path": "scenes/ui/salon_map_backdrop.gd",
+      "source": "Native Godot implementation of teammate salon_map_preview.png",
+      "status": "superseded source/reference retained; not used by the current interactive menu"
+    },
+    {
+      "path": "assets/fonts/Fredoka.ttf",
+      "source": "https://github.com/google/fonts/tree/main/ofl/fredoka",
+      "license": "SIL OFL 1.1",
+      "license_file": "assets/fonts/Fredoka-OFL.txt",
+      "modified": false
+    },
+    {
+      "path": "assets/fonts/Nunito.ttf",
+      "source": "https://github.com/google/fonts/tree/main/ofl/nunito",
+      "license": "SIL OFL 1.1",
+      "license_file": "assets/fonts/Nunito-OFL.txt",
+      "modified": false
+    },
+    {
+      "path": "assets/art/ui/chapters/fresh_cut.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "d2e73dba213a250c8fa8d1eb4cee44f0b48f54baf26253ed79f0c735a906f0b1",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/chapters/mystery.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "f2ccb47ed125c53f5750763a8e2698e3ae56dab6d029095a70a06268ed1478bb",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/chapters/return_to_sender.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "de5ca68d8f768d15e0fd3f7447490099cbdd9691f44bf412df53b848fe445324",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/chapters/wash_blow_dry.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "766761f989dae93fde1a082b8d17e8d2c1dcf9640de6fe1155e2ecf946382db3",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/props/chair_salon.png",
+      "dimensions": [
+        1211,
+        1299
+      ],
+      "transparency": true,
+      "sha256": "c302e8af791f9bcde4210a3f538c32797991f427a3b4573b3d957b9b5a89c5d3",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files",
+      "status": "superseded by chair_flat.svg; retained as an unused earlier draft"
+    },
+    {
+      "path": "assets/art/enemies/assistant_poster.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparency": true,
+      "sha256": "7350174388f4f75beb6fe4aa27d2aeeaeaf1c67d13d57136582dbb60ab94f5ea",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/poster/title_interactive_backdrop.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "transparency": false,
+      "sha256": "70f81241dd68310a54d0f35b7fc25e8b70745e2d7d248d6970cc299567cef9f8",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/salon_v2/landing_background.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "transparency": false,
+      "sha256": "57f5d8c618cfccdf1ab141b78512ae435b6162a9fda12ff828489c029467543a",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "supplied teammate layer"
+    },
+    {
+      "path": "assets/art/l1/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "a6c8fe923a1b7ce8b0132eb4cf6e5c013eba6e58085dce35df87775859fc17f3",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/l2/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "6e9f129e14e93a833b3e6bf687871053e4ca858981b081454dcea7bc2ed4e7bf",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/l3/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "912ed4b355f05bd51e830b398e4d73097a098c94197bbe2290d53da0fe321899",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/l4/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "1a9c7fae1e12403d59f4986678956383d93e7478f2409b9b7107b7de2e00a004",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/props/chair_flat.svg",
+      "format": "editable SVG",
+      "dimensions": [
+        112,
+        120
+      ],
+      "source": "hand-authored vector matching the original game prop palette and outline weight",
+      "sha256": "0a1412c87334f23f7982ed994e16e6cdee75e6c6f9efd84d431c0fcf06833b86",
+      "collision": "existing chair trigger areas unchanged",
+      "filter": "linear"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/pull_source.png",
+      "source": "byte-identical copy of art_src/characters/twin_tails_sheet.png",
+      "sha256": "96b27bec6a9fe304b154c193f7c6b8e5457869f3ba10706f2ea829792735ad25",
+      "purpose": "full-width pull pose regions; source artwork unchanged",
+      "framing": "scenes/player/pull_frames.gd",
+      "cleanup": "assets/art/characters/twin_tails/pull_cleanup.gdshader",
+      "scale": 0.45,
+      "collision": "unchanged 28x44 player body"
+    }
+  ]
+}

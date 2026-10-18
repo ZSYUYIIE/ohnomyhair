@@ -38,6 +38,15 @@ func anim() -> StringName:
 	return &""
 
 
+## Source-resolution atlas frames can retain their full silhouette without clipping.
+func frame_scale(_animation: StringName) -> float:
+	return 1.0
+
+
+func frame_material(_animation: StringName) -> Material:
+	return null
+
+
 ## True while the ability fully controls velocity (e.g. a dash); normal movement is skipped.
 func is_driving() -> bool:
 	return false

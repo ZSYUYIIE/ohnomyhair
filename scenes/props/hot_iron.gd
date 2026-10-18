@@ -46,6 +46,7 @@ func _cycle_time() -> float:
 
 func _touch(body: Node) -> void:
 	if body is Player:
+		Sound.play("iron_hiss")
 		var away := signf(body.global_position.x - (global_position.x + size.x / 2.0))
 		body.take_hit(1, 0.0, Vector2((away if away != 0.0 else 1.0) * 380.0, -420.0))
 

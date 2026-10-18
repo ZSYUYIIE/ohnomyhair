@@ -18,6 +18,7 @@ func on_scissor(scissor: Scissor) -> void:
 	if pressed:
 		return
 	pressed = true
+	Sound.play("bell", 0.0)
 	activated.emit()
 	queue_redraw()
 

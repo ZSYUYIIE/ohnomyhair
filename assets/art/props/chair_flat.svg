@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="120" viewBox="0 0 112 120">
+  <!-- Editable game prop: flat fills, one shadow tone, 2.5px ink. No gradients. -->
+  <g stroke="#2b2140" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="56" cy="114" rx="35" ry="4" fill="#b8b5c7"/>
+    <rect x="49" y="86" width="14" height="25" rx="2" fill="#aaa8be"/>
+    <path d="M53 91v16" fill="none" stroke="#e8e5ee" stroke-width="3"/>
+    <path d="M62 91h28v7H66" fill="#b8b5c7"/>
+    <path d="M22 73 16 27q-1-9 8-10l18-1q8 0 9 9l5 48" fill="#df6b72"/>
+    <path d="m22 70-5-43q-1-9 7-10l6-1 5 54" fill="#bb5666" stroke="none"/>
+    <path d="M22 73 16 27q-1-9 8-10l18-1q8 0 9 9l5 48" fill="none"/>
+    <rect x="23" y="7" width="22" height="11" rx="4" fill="#df6b72"/>
+    <path d="M24 13h20" stroke="#bb5666" stroke-width="3"/>
+    <path d="M21 73h61q10 0 10 8t-10 9H25q-8 0-8-8t4-9" fill="#bb5666"/>
+    <path d="M22 71h58q10 0 11 8H18q-1-7 4-8" fill="#e78180"/>
+    <path d="M23 72h58" stroke="#f1a09a" stroke-width="2"/>
+    <path d="M26 75V58H15M81 74V58h12" fill="none" stroke-width="7"/>
+    <path d="M26 75V58H15M81 74V58h12" fill="none" stroke="#b8b5c7" stroke-width="3"/>
+    <rect x="9" y="54" width="21" height="7" rx="3" fill="#c9c7d5"/>
+    <rect x="78" y="54" width="21" height="7" rx="3" fill="#c9c7d5"/>
+    <path d="m48 96-18 6" fill="none" stroke-width="5"/>
+    <path d="m48 96-18 6" fill="none" stroke="#c9c7d5" stroke-width="2"/>
+    <ellipse cx="28" cy="103" rx="6" ry="3" fill="#f1c44f"/>
+  </g>
+</svg>

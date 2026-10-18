@@ -44,7 +44,7 @@ func _configure() -> void:
 	level_title = "LEVEL 2 - Return to Sender"
 	next_level = "res://scenes/levels/level_03.tscn"
 	scene_path = "res://scenes/levels/level_02.tscn"
-	tile_atlas = "res://assets/art/l2/tiles_l2.png"
+	tile_atlas = "res://assets/art/l2/tiles_poster.svg"
 	tileset_path = "res://assets/art/l2/salon_tileset.tres"
 
 

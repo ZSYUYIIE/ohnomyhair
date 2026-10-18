@@ -9,6 +9,18 @@
 3. F5 opens the main menu (level cards unlock as you clear levels; best time and fewest deaths
    are saved in `user://progress.cfg`). To play one level directly: open `scenes/levels/level_0N.tscn` and press F6.
 
+The illustrated title uses **Start Game → Salon Map → Play**. Select an unlocked stop;
+the final stop stays a mystery until cleared. A new save plays the supplied 39-second
+opening before the first level; any key, mouse click or controller button skips it.
+**About** opens team credits, controls and story help.
+**Watch opening / I** replays the introduction without changing your save.
+Menus support arrows / Tab, Shift+Tab and Enter / Space. In chapter selection,
+**1–4** selects an unlocked chapter and **P** plays it; **Esc** goes back.
+**F1 / H** opens the shortcut guide from the title, chapters, gameplay or pause.
+In gameplay, **Esc** pauses and **R** restarts the current room. The guide lists
+both players' movement, abilities, chair interactions and help scrolling controls.
+UI art sources, licenses and integration details: [poster_ui.md](docs/art/poster_ui.md).
+
 From a terminal (`--room=N` starts in room N of that level):
 ```
 godot --path . res://scenes/levels/level_01.tscn -- --room=3
@@ -79,6 +91,9 @@ Each test plays through a level with simulated input; exit code 0 = pass.
 `test_combos.gd` checks each hair combo (and that the solo shortcut fails) in a bare arena.
 ```
 godot --headless --path . --script res://tests/test_menu.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_opening.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_navigation.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_levers.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd

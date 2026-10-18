@@ -25,13 +25,14 @@ func _ready() -> void:
 	add_child(root)
 	_dim = ColorRect.new()
 	_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_dim.color = Color(0.1, 0.06, 0.08, 0.55)
+	_dim.color = Color(0.16, 0.10, 0.22, 0.62)
 	root.add_child(_dim)
 	var center := CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.add_child(center)
 	_panel = PanelContainer.new()
-	_panel.custom_minimum_size = Vector2(460, 0)
+	_panel.custom_minimum_size = Vector2(540, 0)
+	_panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 4, 26, 24))
 	center.add_child(_panel)
 	_box = VBoxContainer.new()
 	_box.add_theme_constant_override("separation", 12)
@@ -112,7 +113,7 @@ func _open(title: String, body: String, buttons: Array) -> void:
 		c.queue_free()
 	_guide.hide()
 	_panel.show()
-	var t := UiTheme.label(title, 36, UiTheme.PINK.darkened(0.2))
+	var t := UiTheme.heading(title, 40, UiTheme.PINK.darkened(0.18))
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_box.add_child(t)
 	var b := UiTheme.label(body, 20)
@@ -144,6 +145,11 @@ func _on_pressed(action: String) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible or _guide.visible:
+		return
+	if _can_resume and event.is_action_pressed("show_help"):
+		get_viewport().set_input_as_handled()
+		_on_pressed("help")
+		_guide._tabs.current_tab = 4
 		return
 	if _can_restart and event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()

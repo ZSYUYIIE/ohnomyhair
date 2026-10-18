@@ -45,7 +45,11 @@ func _physics_process(_delta: float) -> void:
 func _draw() -> void:
 	var frame := Color("2e8b57")
 	var door := door_rect()
-	draw_texture_rect(ART, door, false)
+	PropArt.gloss(self, door, Color("cb875c"), 13)
+	var glass := Rect2(door.position + Vector2(8, 28), door.size - Vector2(16, 36))
+	PropArt.gloss(self, glass, Color("80d8f4"), 7)
+	draw_line(glass.position + Vector2(4, glass.size.y - 8), glass.end - Vector2(6, glass.size.y - 8), Color("d8f9ff"), 4, true)
+	draw_circle(door.position + Vector2(door.size.x - 9, door.size.y * 0.65), 3.5, UiTheme.GOLD)
 	# Hanging OPEN sign.
 	var cx := door.get_center().x
 	var sign_rect := Rect2(Vector2(cx - 22.0, door.position.y + 10.0), Vector2(44, 16))

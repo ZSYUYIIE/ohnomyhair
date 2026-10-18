@@ -36,6 +36,8 @@ func _physics_process(_delta: float) -> void:
 ## What touching it does: hair dye is deadly. Hazards that only hurt override this.
 func _touch(body: Node) -> void:
 	if body.has_method("die"):
+		if body is Player and body.alive:
+			Sound.play("splash")
 		body.die()
 
 
