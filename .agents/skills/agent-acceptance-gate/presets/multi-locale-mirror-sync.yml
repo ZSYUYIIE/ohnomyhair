@@ -1,0 +1,157 @@
+# Preset: multi-locale-mirror-sync
+# Structural verification for any two or more locale variants.
+
+preset_name: multi-locale-mirror-sync
+description: |
+  Verify that an explicit list of locale files preserves document structure,
+  required technical terms, diagrams, links, and locale-specific writing
+  contracts. This preset does not infer filenames from a fixed three-locale
+  convention and does not use line count as a translation-quality proxy.
+
+# Kept in sync with the agent-acceptance-gate description and preset
+# table by scripts/check_skill_contracts.py.
+trigger:
+  situation: "a diff touches two or more locale variants of one file stem"
+  description_keyword: "locale"
+
+invocation_param:
+  files:
+    description: "Comma-separated locale files; two or more are required."
+    required: true
+  required_terms:
+    description: "Comma-separated exact technical terms required in every file."
+    required: false
+    default: ""
+  locale_profiles:
+    description: |
+      Optional file-to-profile mapping, such as README.zh-TW.md=zh-TW.
+      A profile adds locale-specific script and terminology checks.
+    required: false
+    default: ""
+  brief_file:
+    description: |
+      Optional task brief binding the delegated task's content-evidence review.
+      Omit for primary-agent or manual edits. File times are advisory only.
+    required: false
+    default: ""
+
+checks:
+  - id: file_existence
+    type: files_exist
+    files_param: files
+    require: all
+
+  - id: h2_parity
+    type: file_pattern_count
+    files_param: files
+    pattern: "^## "
+    require: same_count
+    note: "A section added or dropped in one locale is blocking."
+
+  - id: table_structure_parity
+    type: table_structure_check
+    files_param: files
+    require: matching_column_count_per_table_index
+    note: "Translated cell text may differ; table topology may not."
+
+  - id: mermaid_node_parity
+    type: mermaid_structure_check
+    files_param: files
+    compare: node_ids
+    require: same_set
+
+  - id: mermaid_edge_parity
+    type: mermaid_structure_check
+    files_param: files
+    compare: normalized_edges
+    require: same_multiset
+
+  - id: required_terms_cross_locale
+    type: pattern_present_all_files
+    files_param: files
+    patterns_param: required_terms
+    skip_when_empty: true
+
+  - id: internal_link_resolution
+    type: markdown_relative_links_exist
+    files_param: files
+    require: all
+
+  - id: stale_time_language
+    type: pattern_absent
+    files_param: files
+    patterns:
+      - "pushed today"
+      - "updated today"
+      - "今天已更新"
+      - "今天 pushed"
+      - "very recently"
+    exempt_when_inside_quotes: true
+
+  - id: unrequested_attribution_lines
+    type: pattern_absent
+    files_param: files
+    severity: warn
+    patterns:
+      - "^>?\\s*Attributions?:\\s*"
+      - "^>?\\s*Sources?:\\s*"
+      - "^>?\\s*Credits?:\\s*"
+      - "^>?\\s*Citations?:\\s*"
+
+  - id: locale_profile
+    type: locale_profile_check
+    files_param: files
+    profiles_param: locale_profiles
+    skip_when_empty: true
+    profiles:
+      zh-TW:
+        require_any:
+          - "繁體中文"
+          - "人類"
+        reject:
+          - "软件"
+          - "网络"
+          - "数据"
+      zh-Hans:
+        reject:
+          - "軟體"
+          - "網路"
+          - "資料"
+
+  - id: markdown_anchor_resolution
+    type: markdown_anchor_links_resolve
+    files_param: files
+    require: all
+
+  - id: post_brief_mtime_check
+    type: file_mtime_after
+    files_param: files
+    reference_file_param: brief_file
+    skip_when_empty: true
+    severity: warn
+    note: |
+      Retained for adapter compatibility. A newer mtime is not proof of an edit;
+      unchanged or timestamp-preserving writes can also be valid. Never use
+      this observation alone to pass or fail task-content evidence.
+
+  - id: task_content_evidence
+    type: manual_check
+    files_param: files
+    reference_file_param: brief_file
+    skip_when_empty: true
+    severity: fail
+    requirements:
+      - "Bind the evidence to the current run, task, and exact brief; reject missing, stale, or wrong-task records."
+      - "Compare the primary-agent's pre-task baseline with the independently observed candidate content; include existing dirty state and task-bounded diff references."
+      - "Verify all observed changed paths against authorized scope; a worker's claimed file list is insufficient."
+      - "An unchanged result is valid only when the task permits it, explains why, and supplies current criterion evidence; never force a token edit."
+      - "Content hashes prove byte identity, not semantic correctness; review the current candidate against the declared criterion."
+    note: |
+      See docs/task-content-evidence.md. This preset is a declarative review
+      contract, not a bundled acceptance engine. If the host cannot verify the
+      required evidence, report BLOCKED or FAIL instead of claiming PASS.
+
+failure_action: |
+  Preserve the failed check and evidence. Request a human-authorized targeted
+  correction, then re-run this preset only when canonical policy permits the
+  next cycle. Do not replace a FAIL with agent consensus or a manual claim.
