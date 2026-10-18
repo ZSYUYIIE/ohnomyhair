@@ -184,16 +184,16 @@
  {
   "test": "test_level_02",
   "seed": 3,
-  "passed": 16,
-  "failed": 3,
-  "first_fail": "R2: hair catch from the far trench rings the second bell"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 4,
-  "passed": 16,
-  "failed": 3,
-  "first_fail": "R2: hair catch from the far trench rings the second bell"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
@@ -212,16 +212,16 @@
  {
   "test": "test_level_02",
   "seed": 7,
-  "passed": 18,
-  "failed": 1,
-  "first_fail": "R2: both in the exit clears L2"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 8,
-  "passed": 7,
-  "failed": 2,
-  "first_fail": "R1: both climb the shelves to the door"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
@@ -233,16 +233,16 @@
  {
   "test": "test_level_02",
   "seed": 10,
-  "passed": 16,
-  "failed": 3,
-  "first_fail": "R2: hair catch from the far trench rings the second bell"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 11,
-  "passed": 18,
-  "failed": 1,
-  "first_fail": "R2: both in the exit clears L2"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
@@ -254,23 +254,23 @@
  {
   "test": "test_level_02",
   "seed": 13,
-  "passed": 16,
-  "failed": 3,
-  "first_fail": "R2: hair catch from the far trench rings the second bell"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 14,
-  "passed": 7,
-  "failed": 2,
-  "first_fail": "R1: both climb the shelves to the door"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 15,
-  "passed": 18,
-  "failed": 1,
-  "first_fail": "R2: both in the exit clears L2"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
@@ -282,9 +282,9 @@
  {
   "test": "test_level_02",
   "seed": 17,
-  "passed": 18,
-  "failed": 1,
-  "first_fail": "R2: both in the exit clears L2"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
@@ -296,9 +296,9 @@
  {
   "test": "test_level_02",
   "seed": 19,
-  "passed": 16,
-  "failed": 3,
-  "first_fail": "R2: hair catch from the far trench rings the second bell"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
@@ -310,30 +310,30 @@
  {
   "test": "test_level_02",
   "seed": 21,
-  "passed": 15,
-  "failed": 4,
-  "first_fail": "R2: P1 moves to the far trench while it's jammed"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 22,
-  "passed": 16,
-  "failed": 3,
-  "first_fail": "R2: hair catch from the far trench rings the second bell"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 23,
-  "passed": 16,
-  "failed": 3,
-  "first_fail": "R2: hair catch from the far trench rings the second bell"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 24,
-  "passed": 7,
-  "failed": 2,
-  "first_fail": "R1: both climb the shelves to the door"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_03",
@@ -863,16 +863,16 @@
  {
   "test": "test_level_06",
   "seed": 4,
-  "passed": 8,
-  "failed": 2,
-  "first_fail": "R1: pompadour's dash takes out the clipper bot"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",
   "seed": 5,
-  "passed": 30,
-  "failed": 7,
-  "first_fail": "R3: wave 3 drops its robots through the vents"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",
@@ -898,9 +898,9 @@
  {
   "test": "test_level_06",
   "seed": 9,
-  "passed": 8,
-  "failed": 2,
-  "first_fail": "R1: pompadour's dash takes out the clipper bot"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",
@@ -940,30 +940,30 @@
  {
   "test": "test_level_06",
   "seed": 15,
-  "passed": 30,
-  "failed": 7,
-  "first_fail": "R3: wave 3 drops its robots through the vents"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",
   "seed": 16,
-  "passed": 8,
-  "failed": 2,
-  "first_fail": "R1: pompadour's dash takes out the clipper bot"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",
   "seed": 17,
-  "passed": 30,
-  "failed": 7,
-  "first_fail": "R3: wave 3 drops its robots through the vents"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",
   "seed": 18,
-  "passed": 8,
-  "failed": 2,
-  "first_fail": "R1: pompadour's dash takes out the clipper bot"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",

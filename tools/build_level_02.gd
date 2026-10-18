@@ -61,9 +61,11 @@ func _room_1() -> RoomBuilder:
 	# Trench at x=20-21, 2 deep: scissors fly over a player in it. Two tiles wide: a
 	# one-tile hole left a 28 px body 4 px to fall in (docs/difficulty/report.md).
 	rb.solid(20, 21, 21, 22)
-	rb.one_way(23, 27, 16)      # shelves up to the exit (3 tiles apart)
-	rb.one_way(26, 29, 13)
-	rb.one_way(28, 31, 10)
+	# Shelves up to the exit, 2 tiles apart: a jump clears 3.56, so 3-tile steps left half a
+	# tile to spare and a slightly short hop missed (docs/difficulty/report.md).
+	rb.one_way(23, 26, 16)
+	rb.one_way(25, 28, 14)
+	rb.one_way(27, 30, 12)
 	rb.solid(32, 10, 38, 12)    # exit counter, above the dispenser
 	rb.solid(32, 1, 32, 6)      # wall above the staff door: no jumping over it
 	rb.spawn(1, 3, 19)

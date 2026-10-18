@@ -78,22 +78,27 @@ func _room_2() -> void:
 		if not is_instance_valid(corridor_bot):
 			break
 		await parry_next_scissor(p2, 600)
-		await _ticks(60)
+		await guard_until(p2, func(): return false, 60)  # keep parrying, like a person
 	check(not is_instance_valid(corridor_bot), "R2: parried scissors take out the corridor bot")
 
 	# With the bot gone a lone parry jams the dispenser: that's P1's window to move.
 	await _jam(dispenser)
+	var moving := [true]
+	guard_until(p2, func(): return not moving[0], 900)  # P2 keeps parrying while P1 moves
 	await walk_to(p1, o + 31 * TILE)
+	moving[0] = false
 	check(p1.global_position.y > 15 * TILE and p1.alive, "R2: P1 moves to the far trench while it's jammed")
 	check(await _volley_until(bells[1]), "R2: hair catch from the far trench rings the second bell")
 	check(door.is_open, "R2: both bells open the staff door")
 
-	# Jam it once more, then down the right end and back left under the walkway.
+	# Jam it once more and parry any scissor already in the air, then down the right
+	# end and back left under the walkway.
 	await _jam(dispenser)
+	await guard_until(p2, func(): return get_nodes_in_group("scissors").all(func(s): return s.deflected), 120)
 	# One at a time, so nobody ends up standing on the other's head at the turn-around.
 	for p in [p2, p1]:
 		await walk_to(p, o + 37 * TILE)
-		await walk_to(p, o + (20.5 if p == p2 else 21.5) * TILE)
+		await walk_to(p, o + (19.5 if p == p2 else 20.5) * TILE)
 	check(await wait_until(func(): return level.banner.text.contains("CLEAR!"), 300), "R2: both in the exit clears L2")
 
 
@@ -157,12 +162,18 @@ func _volley_until(bell: HitSwitch) -> bool:
 			return true
 		if not await parry_next_scissor(p2, 600):
 			continue
-		if await catch_and_toss(p1, 120):
+		# P2 keeps guarding while P1 waits for the catch, like a person would: otherwise the
+		# next scissor arrives while P2 just stands there.
+		var catching := [true]
+		guard_until(p2, func(): return not catching[0], 400)
+		var tossed := await catch_and_toss(p1, 120)
+		catching[0] = false
+		if tossed:
 			await wait_until(func(): return bell.pressed, 60)
 	return bell.pressed
 
 
-## Room 1's shelves: three one-way planks, 3 tiles apart, up to the staff door.
+## Room 1's shelves: three one-way planks, 2 tiles apart, then the counter by the staff door.
 func _climb_shelves(p: Player, o: float) -> void:
 	await walk_to(p, o + 24.5 * TILE)
 	await jump_up(p)
@@ -170,3 +181,4 @@ func _climb_shelves(p: Player, o: float) -> void:
 	await jump_up(p)
 	await walk_to(p, o + 28.5 * TILE)
 	await jump_up(p)
+	await walk_to(p, o + 33 * TILE)  # hops up onto the counter from the top shelf

@@ -40,11 +40,11 @@ Each level's playthrough bot, rerun with 130-330 ms reactions, aim off by up to
 | Level | Clean runs | Most common first failure |
 |---|---|---|
 | level_01 | 24/24 | - |
-| level_02 | 8/24 | R2: hair catch from the far trench rings the second bell (7x); R2: both in the exit clears L2 (4x); R1: both climb the shelves to the door (4x) |
+| level_02 | 23/24 | R1: both climb the shelves to the door (1x) |
 | level_03 | 24/24 | - |
 | level_04 | 23/24 | R2: the cannonball punches the pompadour through the perm-set gel (1x) |
 | level_05 | 23/24 | R3: Long Straight lassos the gate lever (1x) |
-| level_06 | 17/24 | R1: pompadour's dash takes out the clipper bot (4x); R3: wave 3 drops its robots through the vents (3x) |
+| level_06 | 24/24 | - |
 
 ## 3. Play log: where people (and sloppy bots) die, and how long rooms take
 
@@ -53,8 +53,8 @@ Each level's playthrough bot, rerun with 130-330 ms reactions, aim off by up to
 | bot-sloppy | level_01 | 1 - Mirror, Mirror | 24 | 24 | 24 | 0 | 10.6 | - |
 | bot-sloppy | level_01 | 2 - The Washing Basin | 24 | 24 | 24 | 0 | 9.9 | - |
 | bot-sloppy | level_01 | 3 - The Gel Curtain | 24 | 24 | 24 | 0 | 11.0 | - |
-| bot-sloppy | level_02 | 1 - Return to Sender | 24 | 24 | 20 | 4 | 29.0 | Scissor 4 |
-| bot-sloppy | level_02 | 2 - Scissor Corridor | 20 | 20 | 8 | 8 | 42.4 | Scissor 8 |
+| bot-sloppy | level_02 | 1 - Return to Sender | 24 | 24 | 23 | 1 | 29.7 | Scissor 1 |
+| bot-sloppy | level_02 | 2 - Scissor Corridor | 23 | 23 | 23 | 0 | 44.7 | - |
 | bot-sloppy | level_03 | 1 - Blow-Dry Bar | 24 | 24 | 24 | 0 | 12.7 | - |
 | bot-sloppy | level_03 | 2 - Shampoo Station | 24 | 24 | 24 | 0 | 20.1 | - |
 | bot-sloppy | level_03 | 3 - Rinse & Repeat | 24 | 24 | 24 | 0 | 10.6 | - |
@@ -64,18 +64,18 @@ Each level's playthrough bot, rerun with 130-330 ms reactions, aim off by up to
 | bot-sloppy | level_05 | 1 - Extension Bar | 24 | 24 | 24 | 0 | 9.8 | - |
 | bot-sloppy | level_05 | 2 - The Up-Do | 24 | 24 | 24 | 0 | 8.7 | - |
 | bot-sloppy | level_05 | 3 - Tangles | 24 | 24 | 23 | 1 | 9.9 | ClipperBot 1 |
-| bot-sloppy | level_06 | 1 - Closing Time | 24 | 24 | 20 | 4 | 29.8 | ClipperBot 4 |
-| bot-sloppy | level_06 | 2 - The Chair | 20 | 20 | 20 | 0 | 23.2 | - |
-| bot-sloppy | level_06 | 3 - Rush Hour | 20 | 20 | 17 | 3 | 23.3 | Scissor 3 |
-| bot-sloppy | level_06 | 4 - The Barber Bot | 17 | 17 | 17 | 0 | 12.1 | - |
-| human | level_01 | 1 - Mirror, Mirror | 4 | 8 | 0 | 0 | - | - |
-| human | level_01 | 3 - The Gel Curtain | 4 | 0 | 4 | 0 | - | - |
-| human | level_02 | 1 - Return to Sender | 4 | 16 | 0 | 0 | - | - |
-| human | level_03 | 1 - Blow-Dry Bar | 4 | 16 | 0 | 0 | - | - |
-| human | level_04 | 1 - The Perm Rollers | 4 | 4 | 0 | 0 | - | - |
-| human | level_05 | 1 - Extension Bar | 4 | 4 | 0 | 0 | - | - |
-| human | level_06 | 1 - Closing Time | 4 | 8 | 0 | 0 | - | - |
-| human | level_06 | 4 - The Barber Bot | 4 | 0 | 4 | 0 | - | - |
+| bot-sloppy | level_06 | 1 - Closing Time | 24 | 24 | 24 | 0 | 30.1 | - |
+| bot-sloppy | level_06 | 2 - The Chair | 24 | 24 | 24 | 0 | 23.2 | - |
+| bot-sloppy | level_06 | 3 - Rush Hour | 24 | 24 | 24 | 0 | 23.2 | - |
+| bot-sloppy | level_06 | 4 - The Barber Bot | 24 | 24 | 24 | 0 | 12.1 | - |
+| human | level_01 | 1 - Mirror, Mirror | 5 | 10 | 0 | 0 | - | - |
+| human | level_01 | 3 - The Gel Curtain | 5 | 0 | 5 | 0 | - | - |
+| human | level_02 | 1 - Return to Sender | 5 | 20 | 0 | 0 | - | - |
+| human | level_03 | 1 - Blow-Dry Bar | 5 | 20 | 0 | 0 | - | - |
+| human | level_04 | 1 - The Perm Rollers | 5 | 5 | 0 | 0 | - | - |
+| human | level_05 | 1 - Extension Bar | 5 | 5 | 0 | 0 | - | - |
+| human | level_06 | 1 - Closing Time | 5 | 10 | 0 | 0 | - | - |
+| human | level_06 | 4 - The Barber Bot | 5 | 0 | 5 | 0 | - | - |
 
 ### Death heatmaps
 
@@ -85,21 +85,9 @@ Red dots: people. Orange dots: sloppy bots.
 
 ![level_02_R1](heatmaps/level_02_R1.png)
 
-**level_02_R2**
-
-![level_02_R2](heatmaps/level_02_R2.png)
-
 **level_05_R3**
 
 ![level_05_R3](heatmaps/level_05_R3.png)
-
-**level_06_R1**
-
-![level_06_R1](heatmaps/level_06_R1.png)
-
-**level_06_R3**
-
-![level_06_R3](heatmaps/level_06_R3.png)
 
 ## How to read it
 

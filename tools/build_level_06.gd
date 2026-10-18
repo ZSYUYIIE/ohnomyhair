@@ -38,7 +38,7 @@ func _room_1() -> RoomBuilder:
 	rb.spawn(2, 2, 19)
 	# Row 16 is ledge-body / flight height; players on the low floors are under it.
 	rb.turret("Turret", 38, 16, Vector2.LEFT, 3.0, 1.5)
-	rb.clipper("ClipperBot", 29, 19, 4.0)
+	rb.clipper("ClipperBot", 31, 19, 3.0)  # clear of the carry's landing (x=21-24)
 	# A flat iron on the start floor, below the scissor line (a knockback can't throw
 	# anyone onto it): time the walk between heats.
 	rb.hot_iron("FlatIron", 5, 19, 2, 0.8)
@@ -132,7 +132,7 @@ func _room_3() -> RoomBuilder:
 	var waves: Array[Dictionary] = [
 		{"drops": [14, 24], "tonic": 19},
 		{"drops": [8, 24, 30], "wake": ["Dispenser"], "tonic": 19},
-		{"drops": [6, 32], "wake": ["IronLeft", "IronRight"]},  # patrols stay clear of the irons
+		{"drops": [4, 34], "wake": ["IronLeft", "IronRight"]},  # on the floor, clear of the shelves and the irons
 	]
 	arena.waves = waves
 	arena.vent_row = 0

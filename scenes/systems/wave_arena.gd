@@ -67,6 +67,9 @@ func _physics_process(delta: float) -> void:
 			_finish()
 		else:
 			_wait = breather
+			# A real breather: woken hazards rest until the next wave starts. A dispenser
+			# that kept firing here picked off whoever was low on hair (difficulty report).
+			_set_wave_hazards(wave, false)
 			Level.banner_for(self, "Wave %d cleared!" % (wave + 1), 1.2)
 			if waves[wave].has("tonic"):
 				_place_tonic(waves[wave].tonic)
@@ -100,8 +103,8 @@ func _begin_wave(index: int) -> void:
 	var w: Dictionary = waves[index]
 	for col in w.get("drops", []):
 		_warning[col] = WARN_TIME
-	for hazard_name in w.get("wake", []):
-		_set_awake(get_parent().get_node(hazard_name), true)
+	# Every hazard woken so far comes back on, plus this wave's new ones.
+	_set_wave_hazards(index, true)
 	if auto_start:
 		Level.banner_for(self, "WAVE %d / %d" % [index + 1, waves.size()], 1.4)
 	wave_started.emit(index + 1)
@@ -131,6 +134,13 @@ func _place_tonic(col: int) -> void:
 	var tonic := GrowthTonic.new()
 	tonic.position = position + Vector2(col * TILE + TILE / 2.0, tonic_row * TILE + TILE / 2.0)
 	get_parent().add_child(tonic)
+
+
+## Wakes (or rests) every hazard named by waves 0..last.
+func _set_wave_hazards(last: int, awake: bool) -> void:
+	for i in range(0, mini(last + 1, waves.size())):
+		for hazard_name in waves[i].get("wake", []):
+			_set_awake(get_parent().get_node(hazard_name), awake)
 
 
 ## Dispensers and irons sleep by being switched off: a sleeping dispenser stops firing
