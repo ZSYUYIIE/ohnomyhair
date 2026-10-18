@@ -1,10 +1,9 @@
 class_name BarberBot
 extends CharacterBody2D
 ## L6 (finale) boss: the runaway barber robot. Origin is at the feet.
-## Loop: WALK toward a player -> SHOOT 3 scissors / WINDUP + CHARGE (alternating).
-## Three phases, one per hair of HP, each announced with a banner and shown on the boss bar:
-##   1 - as above;   2 - it calls for backup (`backup_called`: wire it to a WaveArena);
-##   3 - furious: faster, longer scissor bursts, shorter wind-up.
+## Loop: approach -> charge / aimed burst / marked overhead snips.
+## Ten health: phase 2 at 6, phase 3 at 3. Phase changes notify the arena controller.
+##   1 - base attacks; 2 - showers/roaming backup; 3 - faster attacks and more backup.
 ## It only takes damage from being stomped on its head knob while DAZED. It gets dazed by
 ## a parried scissor (3 s) or by crashing into a wall at the end of a charge (shorter).
 ## Whips, dashes and parry swings just bounce off ("too big").
@@ -12,23 +11,29 @@ extends CharacterBody2D
 
 signal defeated
 signal backup_called
+signal phase_changed(number: int)
 
-enum State { WALK, SHOOT, WINDUP, CHARGE, DAZED, HURT, DEAD }
+enum State { WALK, SHOOT, WINDUP, CHARGE, RAIN, DAZED, HURT, DEAD }
 
 const SIZE := Vector2(96, 128)
-## Charging, it ducks its head like a bull: only this much of it is solid, so a full
-## jump (about 114 px) clears it. Standing tall it can't be jumped (128 px).
+## The charge's damaging core is lower so a full jump (about 114 px) clears it.
+## The upright running drawing keeps the same height; the jump window stays forgiving.
 const CHARGE_HEIGHT := 72.0
 const KNOB_HEIGHT := 40.0  # stomp zone on top of the head
 
-@export var hp := 3
+@export var hp := 10
 @export var walk_speed := 90.0
 @export var walk_time := 1.6
-## While walking it keeps about this far from the nearest player (so its scissors
-## come from far enough away to read and parry), backing off if they get closer.
+## Stop approaching within this distance, keeping scissors readable without backsliding.
 @export var keep_distance := 192.0
 @export var shots := 3
 @export var shot_gap := 0.5
+## Every shot warns first, then stops tracking before release. No homing in flight.
+const AIM_LOCK := 0.20
+const AIM_WARNING := 0.65
+const ACCELERATION := 600.0
+const CHARGE_ACCELERATION := 2400.0
+const Rain := preload("res://scenes/enemies/boss_scissor_rain.gd")
 @export var windup_time := 0.7
 @export var charge_speed := 560.0
 @export var charge_timeout := 3.0
@@ -41,11 +46,17 @@ var state := State.WALK
 var facing := -1.0
 var _t := 0.0
 var _shots_left := 0
-var _charge_next := false
+var _attack_index := 0
+var _aim_target: Player
+var _aim_point := Vector2.ZERO
+var _aim_locked := false
 var _knob: Area2D
-var _flash := 0.0
-var _max_hp := 3
+var _max_hp := 10
 var _bar: BossBar
+var _animation_time := 0.0
+var _pose_age := 0.0
+var _last_pose := -1
+var _gait_distance := 0.0
 
 
 func _ready() -> void:
@@ -64,23 +75,29 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	_animation_time += delta
+	_pose_age = _pose_age + delta if state == _last_pose else 0.0
+	_last_pose = state
 	if _bar == null:
 		# Made on the first tick, which only comes once its room is the current one.
 		_bar = BossBar.new(self)
 		add_child(_bar)
 	velocity.y += 1800.0 * delta
-	_flash = maxf(_flash - delta, 0.0)
 	_t -= delta
 	var next: State = state
 	match state:
-		State.WALK: next = _walk()
+		State.WALK: next = _walk(delta)
 		State.SHOOT: next = _shoot()
 		State.WINDUP: next = _windup()
-		State.CHARGE: next = _charge()
+		State.CHARGE: next = _charge(delta)
+		State.RAIN: next = State.WALK if _t <= 0.0 else State.RAIN
 		State.DAZED: next = _dazed()
 		State.HURT: next = _hurt()
 		State.DEAD: velocity.x = 0.0
+	var before := position.x
 	move_and_slide()
+	if state in [State.WALK, State.CHARGE] and is_on_floor():
+		_gait_distance += absf(position.x - before)
 	if next != state:
 		_enter(next)
 	queue_redraw()
@@ -88,12 +105,15 @@ func _physics_process(delta: float) -> void:
 
 func _enter(new_state: State) -> void:
 	state = new_state
+	_pose_age = 0.0
+	if state != State.WALK and state != State.CHARGE:
+		velocity.x = 0.0
 	match state:
 		State.WALK:
 			_t = walk_time
 		State.SHOOT:
 			_shots_left = shots
-			_t = 0.3
+			_prepare_aim()
 		State.WINDUP:
 			_t = windup_time
 			_face_target()
@@ -102,34 +122,42 @@ func _enter(new_state: State) -> void:
 			_t = charge_timeout
 		State.HURT:
 			_t = hurt_time
+		State.RAIN:
+			_t = 1.5
+			_call_overhead_snips()
 
 
 # --- States -------------------------------------------------------------------
 
-func _walk() -> State:
+func _walk(delta: float) -> State:
 	_face_target()
 	var target := _nearest_player()
 	var gap := absf(target.global_position.x - global_position.x) if target else keep_distance
-	if gap > keep_distance + 32.0:
-		velocity.x = facing * walk_speed
-	elif gap < keep_distance - 32.0:
-		velocity.x = -facing * walk_speed
-	else:
-		velocity.x = 0.0
+	var desired := facing * walk_speed if gap > keep_distance + 32.0 else 0.0
+	velocity.x = move_toward(velocity.x, desired, ACCELERATION * delta)
 	_hurt_touching_players()
 	if _t > 0.0:
 		return State.WALK
-	_charge_next = not _charge_next
-	return State.WINDUP if _charge_next else State.SHOOT
+	var attack: State = [State.WINDUP, State.SHOOT, State.RAIN][_attack_index % 3]
+	_attack_index += 1
+	return attack
 
 
 func _shoot() -> State:
 	velocity.x = 0.0
-	_face_target()
+	if not _aim_locked and _t <= AIM_LOCK:
+		_aim_locked = true
+	elif not _aim_locked and is_instance_valid(_aim_target) and _aim_target.alive:
+		_aim_point = _aim_target.global_position
+		if absf(_aim_point.x - global_position.x) > 4:
+			facing = signf(_aim_point.x - global_position.x)
 	if _t <= 0.0 and _shots_left > 0:
 		_fire()
 		_shots_left -= 1
-		_t = shot_gap
+		if _shots_left > 0:
+			_prepare_aim()
+		else:
+			_t = 0.35
 	if _shots_left == 0 and _t <= 0.0:
 		return State.WALK
 	return State.SHOOT
@@ -137,12 +165,11 @@ func _shoot() -> State:
 
 func _windup() -> State:
 	velocity.x = 0.0
-	_flash = 0.1
 	return State.CHARGE if _t <= 0.0 else State.WINDUP
 
 
-func _charge() -> State:
-	velocity.x = facing * charge_speed
+func _charge(delta: float) -> State:
+	velocity.x = move_toward(velocity.x, facing * charge_speed, CHARGE_ACCELERATION * delta)
 	_hurt_touching_players()
 	if is_on_wall():
 		daze(crash_daze_time)
@@ -162,7 +189,6 @@ func _dazed() -> State:
 
 func _hurt() -> State:
 	velocity.x = 0.0
-	_flash = 0.1
 	return State.WALK if _t <= 0.0 else State.HURT
 
 
@@ -175,6 +201,7 @@ func daze(seconds: float) -> void:
 		Sound.play("boss_daze")
 	state = State.DAZED
 	_t = seconds
+	velocity.x = 0.0
 
 
 ## Only a parried scissor (stun 3 s) is strong enough to daze it.
@@ -185,6 +212,7 @@ func take_hit(_damage: int, stun_time: float = 0.0, _knockback := Vector2.ZERO) 
 
 func _stomped_by(player: Player) -> void:
 	Sound.play("boss_stomp", 0.0)
+	var previous_phase := phase()
 	hp -= 1
 	player.launch(96.0)
 	player.make_invincible(1.2)
@@ -196,34 +224,67 @@ func _stomped_by(player: Player) -> void:
 		var tween := create_tween()
 		tween.tween_property(self, "modulate:a", 0.0, 0.8)
 		tween.tween_callback(queue_free)
-	elif hp == _max_hp - 1:
-		Level.banner_for(self, "PHASE 2: it calls for backup!", 1.8)
-		backup_called.emit()
-	elif hp == 1:
-		_enrage()
+	elif phase() != previous_phase:
+		if phase() == 2:
+			Level.banner_for(self, "PHASE 2: showers + backup!", 1.8)
+			backup_called.emit()
+		else:
+			_enrage()
+		phase_changed.emit(phase())
 
 
-## Phase 3: one hair left and it's furious.
+## The last 30% of health: furious, with additional arena pressure.
 func _enrage() -> void:
 	Level.banner_for(self, "PHASE 3: it's furious!", 1.8)
 	walk_speed *= 1.35
 	charge_speed *= 1.2
 	windup_time = 0.5
 	shots = 5
-	shot_gap = 0.36
+	shot_gap = 0.40
 
 
 func phase() -> int:
-	return clampi(_max_hp - hp + 1, 1, 3)
+	if hp <= maxi(1, roundi(_max_hp * 0.3)): return 3
+	if hp <= maxi(2, roundi(_max_hp * 0.6)): return 2
+	return 1
 
 
 func _fire() -> void:
 	var scissor := Scissor.new()
 	scissor.restyles = true
-	scissor.direction = Vector2(facing, 0)
-	# Body height of a player standing on the same floor, so it's parriable and dodgeable by jumping.
 	scissor.position = position + Vector2(facing * (SIZE.x / 2 + 16), -30)
+	var offset := _aim_point - (get_parent() as Node2D).to_global(scissor.position)
+	scissor.direction = offset.normalized() if offset.length() > 1.0 else Vector2(facing, 0)
+	# Close shots get at least 0.6 seconds of flight, in addition to the warning.
+	scissor.speed = minf(Scissor.SPEED * (1.15 if phase() == 3 else 1.0), maxf(1.0, offset.length() / 0.6))
 	get_parent().add_child.call_deferred(scissor)
+
+
+func _prepare_aim() -> void:
+	var candidates: Array[Player] = []
+	for player: Player in get_tree().get_nodes_in_group("players"):
+		if player.alive: candidates.append(player)
+	_aim_target = candidates[(shots - _shots_left) % candidates.size()] if not candidates.is_empty() else null
+	_aim_point = _aim_target.global_position if is_instance_valid(_aim_target) else global_position + Vector2(facing * 250, -30)
+	if absf(_aim_point.x - global_position.x) > 4:
+		facing = signf(_aim_point.x - global_position.x)
+	_aim_locked = false
+	_t = maxf(AIM_WARNING - (0.1 if phase() == 3 else 0.0), shot_gap)
+
+
+func _call_overhead_snips() -> void:
+	# Snapshot both positions once: move sideways after the marks appear to escape.
+	# This reaches the high corner shelves without changing their collision.
+	var marks: Array[Vector2] = []
+	for player: Player in get_tree().get_nodes_in_group("players"):
+		if not player.alive: continue
+		if marks.any(func(at: Vector2): return absf(at.x - player.global_position.x) < 80.0): continue
+		marks.append(player.global_position)
+		var warning := Rain.new()
+		warning.boss = self
+		warning.target = player.global_position
+		warning.delay = 0.95 if phase() == 3 else 1.15
+		get_parent().add_child(warning)
 
 
 func _face_target() -> void:
@@ -249,31 +310,21 @@ func _hurt_touching_players() -> void:
 			p.take_hit(1, 0.0, Vector2(signf(p.global_position.x - global_position.x) * 360.0, -300.0))
 
 
-const ART := preload("res://assets/art/enemies/assistant_poster.png")
+const Doodle := preload("res://scenes/enemies/assistant_doodle.gd")
 
 
 func _draw() -> void:
-	# Head down, squashed low while charging: reads as "jump over me".
-	var squash := Vector2(1.15, CHARGE_HEIGHT / SIZE.y) if state == State.CHARGE else Vector2.ONE
-	var frame := 0  # normal | dazed (glowing knob) | hurt flash
-	match state:
-		State.DAZED: frame = 1
-		State.HURT, State.WINDUP: frame = 2 if int(_flash * 40.0) % 2 == 0 else 0
-	draw_set_transform(Vector2.ZERO, 0.0, squash * Vector2(facing, 1.0))
-	# Furious (phase 3): it throbs red.
-	var tint := Color(1, 0.62, 0.6) if phase() == 3 and state != State.DAZED and int(Time.get_ticks_msec() / 150) % 2 == 0 else Color.WHITE
-	if frame == 2: tint = Color(1.8, 1.6, 1.5)
-	draw_texture_rect(ART, Rect2(-72, -140, 144, 144), false, tint)
-	draw_set_transform(Vector2.ZERO, 0.0, squash)
+	Doodle.paint(self, State.keys()[state].to_lower(), _animation_time, _pose_age, facing, absf(velocity.x) > 1.0, phase() == 3, _gait_distance)
+	if state == State.SHOOT and _shots_left > 0:
+		var aim := to_local(_aim_point)
+		var muzzle := Vector2(facing * (SIZE.x / 2 + 16), -30)
+		var tint := Color("df6b72") if _aim_locked else Color("b0306a")
+		for i in 8:
+			draw_line(muzzle.lerp(aim, i / 8.0), muzzle.lerp(aim, (i + 0.45) / 8.0), Color(tint, 0.55), 1.5, true)
+		draw_arc(aim, 13, 0, TAU, 24, tint, 2, true)
 	var top := -SIZE.y
 	if state == State.DAZED:
-		draw_circle(Vector2(0, top), 12, Color("ffdf58"))
-		draw_arc(Vector2(0, top), 15, 0, TAU, 24, Color("fff4b0"), 3, true)
 		draw_string(ThemeDB.fallback_font, Vector2(-44, top - 14), "STOMP!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("f1c40f"))
-	for i in hp:
-		var bar := Rect2(-SIZE.x / 2 + i * 34, top - 34 if state != State.DAZED else top - 44, 28, 7)
-		draw_rect(bar.grow(1.5), Color("2b2140"))
-		draw_rect(bar, Color("e74c3c"))
 
 
 ## Boss health bar at the top of the screen: name, phase and one red block per hair left.
@@ -312,8 +363,8 @@ class BossBar extends CanvasLayer:
 		_panel.draw_style_box(_paper, r)
 		var font := UiTheme.heading_font()
 		_panel.draw_string(font, Vector2(14, 22), "THE ASSISTANT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
-		_panel.draw_string(font, Vector2(14, 22), "PHASE %d" % boss.phase(), HORIZONTAL_ALIGNMENT_RIGHT, _panel.size.x - 28, 16, Color("b0306a"))
-		var w := (_panel.size.x - 28 - 2 * 8) / boss._max_hp
+		_panel.draw_string(font, Vector2(14, 22), "PHASE %d   %d/%d" % [boss.phase(), boss.hp, boss._max_hp], HORIZONTAL_ALIGNMENT_RIGHT, _panel.size.x - 28, 16, Color("b0306a"))
+		var w := (_panel.size.x - 28 - (boss._max_hp - 1) * 8) / boss._max_hp
 		for i in boss._max_hp:
 			var seg := Rect2(14 + i * (w + 8), 30, w, 12)
 			_panel.draw_style_box(_filled if i < boss.hp else _empty, seg)

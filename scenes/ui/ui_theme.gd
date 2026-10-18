@@ -23,6 +23,7 @@ static func body_font() -> Font:
 	if not _body_font:
 		_body_font = FontVariation.new()
 		_body_font.base_font = preload("res://assets/fonts/Nunito.ttf")
+		_body_font.fallbacks = [preload("res://assets/fonts/SalonArrows.ttf"), preload("res://assets/fonts/SalonIcons.ttf")]
 		_body_font.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): 750.0}
 	return _body_font
 
@@ -31,6 +32,7 @@ static func heading_font() -> Font:
 	if not _heading_font:
 		_heading_font = FontVariation.new()
 		_heading_font.base_font = preload("res://assets/fonts/Fredoka.ttf")
+		_heading_font.fallbacks = [preload("res://assets/fonts/SalonArrows.ttf"), preload("res://assets/fonts/SalonIcons.ttf")]
 		_heading_font.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): 600.0}
 	return _heading_font
 

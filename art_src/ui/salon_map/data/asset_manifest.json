@@ -1,0 +1,272 @@
+{
+  "base_resolution": [
+    1672,
+    941
+  ],
+  "ui_assets": [
+    {
+      "name": "button_gold_normal",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_gold_hover",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_gold_pressed",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_cream_normal",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_cream_hover",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_cream_pressed",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_lavender_normal",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_lavender_hover",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_lavender_pressed",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "button_disabled",
+      "logical_size": [
+        320,
+        112
+      ],
+      "png_size": [
+        640,
+        224
+      ],
+      "alpha": true
+    },
+    {
+      "name": "pill_cream",
+      "logical_size": [
+        320,
+        64
+      ],
+      "png_size": [
+        640,
+        128
+      ],
+      "alpha": true
+    },
+    {
+      "name": "pill_gold",
+      "logical_size": [
+        320,
+        64
+      ],
+      "png_size": [
+        640,
+        128
+      ],
+      "alpha": true
+    },
+    {
+      "name": "pill_lavender",
+      "logical_size": [
+        320,
+        64
+      ],
+      "png_size": [
+        640,
+        128
+      ],
+      "alpha": true
+    },
+    {
+      "name": "panel_info",
+      "logical_size": [
+        1588,
+        150
+      ],
+      "png_size": [
+        3176,
+        300
+      ],
+      "alpha": true
+    },
+    {
+      "name": "panel_dialog",
+      "logical_size": [
+        820,
+        420
+      ],
+      "png_size": [
+        1640,
+        840
+      ],
+      "alpha": true
+    },
+    {
+      "name": "badge_gold",
+      "logical_size": [
+        76,
+        76
+      ],
+      "png_size": [
+        152,
+        152
+      ],
+      "alpha": true
+    },
+    {
+      "name": "badge_lavender",
+      "logical_size": [
+        76,
+        76
+      ],
+      "png_size": [
+        152,
+        152
+      ],
+      "alpha": true
+    },
+    {
+      "name": "badge_complete",
+      "logical_size": [
+        76,
+        76
+      ],
+      "png_size": [
+        152,
+        152
+      ],
+      "alpha": true
+    },
+    {
+      "name": "icon_lock",
+      "logical_size": [
+        64,
+        76
+      ],
+      "png_size": [
+        128,
+        152
+      ],
+      "alpha": true
+    },
+    {
+      "name": "icon_check",
+      "logical_size": [
+        64,
+        64
+      ],
+      "png_size": [
+        128,
+        128
+      ],
+      "alpha": true
+    },
+    {
+      "name": "icon_arrow_back",
+      "logical_size": [
+        64,
+        64
+      ],
+      "png_size": [
+        128,
+        128
+      ],
+      "alpha": true
+    },
+    {
+      "name": "selection_ring",
+      "logical_size": [
+        320,
+        140
+      ],
+      "png_size": [
+        640,
+        280
+      ],
+      "alpha": true
+    }
+  ]
+}

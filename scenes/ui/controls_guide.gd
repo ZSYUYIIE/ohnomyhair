@@ -53,8 +53,8 @@ func _ready() -> void:
 		["02  THE DOOR LOCKS", "The robot locks the front door and turns its scissors towards them. Pompadour steps in to protect Twin-Tails. She notices another way through the salon."],
 		["03  TRUST ME", "They choose to run together. Glide, carry, launch and parry through the service rooms. Both friends must reach each green exit; nobody gets left behind."],
 		["04  THE SERVICE ROUTE", "Fresh Cut leads to Return to Sender, then Wash & Blow-Dry. These are rooms along the escape, where the same two friends learn to use their new powers together."],
-		["05  THE ASSISTANT", "The runaway robot and its backup block the back door. Daze it with a parried scissor or a wall crash, then land on its glowing head. Escape together when it powers down."],
-		["CHAIRS & CHECKPOINTS", "Bring both friends near a chair and press S / ↓. Swap the two familiar haircuts or keep your roles. Saving heals, dries off, and keeps your chosen pair on a room restart."],
+		["05  THE ASSISTANT", "The assistant has 10 HP. Parry scissors or bait a wall crash, then stomp its glowing head. At 6 HP, alternating showers and roaming backup join in; at 3 HP they speed up. Dry wet hair in the central warm air. Green tonics restore one heart: up to four appear for a wounded team at phase breaks, after three minion kills, or at critical health, with a cooldown."],
+		["ROOM CHECKPOINTS", "Reaching the next room sets your restart point automatically. R restarts that room with its starting haircuts, health and obstacles restored."],
 		["SOMETHING'S OFF...", "The surprise chair and the assistant's damaging scissors can swap your two haircuts. Your movement keys stay yours; skills follow the haircut. Check your portrait and skill hints, then help each other adapt."],
 	]:
 		styles.add_child(_text(entry[0], entry[1], 18))
@@ -65,10 +65,10 @@ func _ready() -> void:
 	var navigation := _page("Shortcuts")
 	for entry in [
 		["ALL MENUS", "Arrow keys / Tab: move focus. Shift + Tab: previous control.\nEnter / Space: activate the focused button. Mouse: point and click."],
-		["TITLE & CHAPTERS", "I or the chapter menu's Opening button: replay the opening. F1 / H: open this shortcut guide. Esc on the title: quit (desktop).\nChapter menu: ← / → or 1–4 (also numpad) selects an unlocked chapter. P plays it. Esc goes back."],
+		["TITLE & CHAPTERS", "Start Game: intro on the first visit only, then map. I or Story: replay opening / ending (ending unlocks after completion). Rooms unlocks after all chapters are cleared. Room replays keep chapter records unchanged. F1 / H: open this shortcut guide. Esc on the title: quit (desktop).\nChapter menu: ← / → or 1–4 (also numpad) selects an unlocked chapter. P plays it. Esc goes back."],
 		["PLAYING & PAUSING", "Esc: pause / resume. R: restart the current room, including from pause or death.\nF1 / H: pause and open help. Esc from help returns to pause; Esc again resumes."],
-		["CHAIRS & TEAMWORK", "S / ↓ near a chair: open styling and checkpoints when both friends are nearby.\nHold S / ↓ to drop through shelves; press down to let go when carried. In chair menus, Tab / arrows select, Enter confirms, Esc cancels."],
-		["OPENING & HELP", "Any key, mouse click or controller button skips the opening. Replay returns to the title.\nIn help: Page Up / Page Down or mouse wheel scrolls. Focus the tabs and use ← / → to switch pages. Esc / F1 / H closes help."],
+		["CHECKPOINTS & TEAMWORK", "Room checkpoints are automatic. The surprise chair in The Assistant swaps your haircuts when you pass it.\nHold S / ↓ to drop through shelves; press down to let go when carried."],
+		["STORY & HELP", "CGs: click, any key or controller button turns the page. Esc, controller B / Start or Skip ends it. Automatic CGs run once per save; Story replays return to the collection.\nIn help: Page Up / Page Down or mouse wheel scrolls. Focus the tabs and use ← / → to switch pages. Esc / F1 / H closes help."],
 	]:
 		navigation.add_child(_text(entry[0], entry[1], 20))
 	_close = Button.new()

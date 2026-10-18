@@ -6,14 +6,21 @@
 ## Open the project
 1. Install **Godot 4.7.x standard** (not .NET).
 2. Godot Project Manager → **Import** → pick this folder's `project.godot` → **Import & Edit**.
-3. F5 opens the main menu (level cards unlock as you clear levels; best time and fewest deaths
+3. F5 opens the main menu (map stops unlock as you clear levels; best time and fewest deaths
    are saved in `user://progress.cfg`). To play one level directly: open `scenes/levels/level_0N.tscn` and press F6.
 
-The illustrated title uses **Start Game → Salon Map → Play**. Select an unlocked stop;
-the final stop stays a mystery until cleared. A new save plays the supplied 39-second
-opening before the first level; any key, mouse click or controller button skips it.
+Launch opens the painted title. **Start Game → Opening (first visit only) → Salon Map → Play**;
+the intro starts only on the first Start Game per save, including Enter on its focused button.
+Finish or skip the 39-second opening to reach the map without changing saved records.
+Select an unlocked stop; the final stop stays a mystery until cleared. In the opening,
+left click, any key or any pad button turns the page; Esc, pad B / Start or Skip ends it.
 **About** opens team credits, controls and story help.
-**▶ Opening** in chapter selection (or **I** on the title) replays the introduction without changing your save.
+**Story** in chapter selection (or **I** on the title) offers opening and ending replays.
+The ending unlocks after all four chapters are cleared. Replays preserve chapter records
+and return to Story with the same map destination selected.
+After clearing all four chapters, **Rooms** on the map lists the selected chapter's rooms.
+Each room starts with its authored hair pair, ends on a room-results menu, and can be
+retried or followed by another room. Room practice never replaces full-chapter records.
 On desktop, the round button in the corner or **Esc** on the title asks before quitting; web builds have no Quit.
 Menus support arrows / Tab, Shift+Tab and Enter / Space. In chapter selection,
 **1–4** selects an unlocked chapter and **P** plays it; **Esc** goes back.
@@ -48,7 +55,11 @@ gel; a drop-and-ring meter shows the hair drying); a **growth tonic** grows 1 HP
 Pompadour gets one dash per jump in the air; landing recharges it.
 Hot flat irons cycle cold -> warning ("!") -> red-hot; touching a hot one costs a heart and throws
 you clear. The last level ends with **Rush Hour** (three waves of robots dropping from ceiling
-vents, each adding a threat) and a three-phase barber-bot boss with a boss bar.
+vents, each adding a threat) and a 10-HP, three-phase assistant boss. At 6 HP,
+alternating showers and roaming shelf-to-floor minions join the fight; at 3 HP,
+the showers and reinforcements speed up. The central dryer restores wet hair.
+Up to four growth tonics appear for a wounded team at phase breaks, after three
+minion kills, or at critical health, with a 16-second cooldown and one bottle at a time.
 Hair is the health bar: every hit snips a puff of hair off (hearts in the HUD); a soaked friend
 turns a washed-out blue and drips.
 
@@ -57,9 +68,11 @@ Design notes: `docs/design/refinement.md`.
 While carried, press down to let go. Hold down to drop through a one-way platform.
 **Esc** pauses (Resume / Restart room / Main menu). **R** restarts the current room - also from the
 death popup and the pause menu. Clearing a level shows its time and deaths in a banner and goes
-straight on to the next level. Clearing the last level plays the supplied 25-second
+straight on to the next level. The first final clear plays the supplied 25-second
 ending CG, then opens the results screen with **Play again** and **Main menu**.
-Any key, mouse click or controller button skips the ending to those same results.
+Later clears go straight to results. In either CG, any key / click / controller button
+advances a panel; Esc, controller B / Start, or Skip goes straight to the destination.
+Seen flags persist even when skipped; reset progress resets both flags.
 If either friend dies, a popup offers **Restart room** or **Main menu**. Restarting rebuilds the
 whole room - enemies, bells, doors, gel and levers reset - while the level's time and death count
 carry on. The bottom bar shows each friend's haircut, hearts and keys, plus level, room, time and deaths.
@@ -86,8 +99,8 @@ excluded from Godot by `.gdignore`. The playable roster and portraits use only t
 Twin-Tails and Pompadour artwork. Story and visual direction:
 [`docs/design/story_escape.md`](docs/design/story_escape.md).
 
-At a gold-marked chair, bring both friends nearby and press **S / Down** to swap or keep
-roles, heal, dry off and save the current room's checkpoint.
+Room checkpoints are automatic. Restarting restores the authored spawn positions and
+starting haircuts. Only the normal-sized surprise chair in The Assistant remains; it swaps roles.
 
 ### Automated checks
 Each test plays through a level with simulated input; exit code 0 = pass.
@@ -96,6 +109,7 @@ Each test plays through a level with simulated input; exit code 0 = pass.
 godot --headless --path . --script res://tests/test_menu.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_opening.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_ending.gd
+godot --headless --path . --script res://tests/test_postgame.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_navigation.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_levers.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd

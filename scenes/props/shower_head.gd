@@ -10,6 +10,7 @@ extends Area2D
 @export var on_time := 1.6
 @export var phase := 0.0
 @export var wet_seconds := 4.0
+@export var active := true
 
 const ART := preload("res://assets/art/props/prop_shower.png")
 
@@ -24,7 +25,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_t += delta
+	if active: _t += delta
 	if is_active():
 		for body in get_overlapping_bodies():
 			if body is Player:
@@ -33,12 +34,12 @@ func _physics_process(delta: float) -> void:
 
 
 func is_active() -> bool:
-	return off_time <= 0.0 or _cycle_time() >= off_time
+	return active and (off_time <= 0.0 or _cycle_time() >= off_time)
 
 
 func _is_warning() -> bool:
 	var t := _cycle_time()
-	return off_time > 0.0 and t >= off_time - warn_time and t < off_time
+	return active and off_time > 0.0 and t >= off_time - warn_time and t < off_time
 
 
 func _cycle_time() -> float:

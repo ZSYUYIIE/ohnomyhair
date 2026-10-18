@@ -34,6 +34,22 @@ static func mark_opening_seen() -> void:
 	cfg.save(save_path)
 
 
+static func has_seen_ending() -> bool:
+	return _load().get_value("story", "ending_seen", false)
+
+
+static func mark_ending_seen() -> void:
+	var cfg := _load()
+	cfg.set_value("story", "ending_seen", true)
+	cfg.save(save_path)
+
+
+static func campaign_completed() -> bool:
+	for i in LEVELS.size():
+		if not is_cleared(i): return false
+	return true
+
+
 static func index_of(scene_path: String) -> int:
 	for i in LEVELS.size():
 		if LEVELS[i].path == scene_path:

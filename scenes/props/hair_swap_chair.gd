@@ -45,17 +45,18 @@ func _swap() -> void:
 	var level := owner as Level
 	if level:
 		level.flash_screen(1.0, Color("ff5fa2"))
-		level.show_banner("Snip snip...\nWait. What?! Your haircuts got SWAPPED!", 3.5)
+		level.show_banner("Haircuts swapped! Check your skills in the HUD.", 2.0)
 	swapped.emit()
 	queue_redraw()
 
 
 const ART := preload("res://assets/art/props/chair_flat.svg")
+const DRAW_SIZE := Vector2(64, 75)
 
 
 func _draw() -> void:
 	# The shared coral chair stands at the zone's bottom center; used leather darkens.
 	var base := Vector2(size.x / 2.0, size.y)
-	draw_texture_rect(ART, Rect2(base + Vector2(-51, -120), Vector2(102, 120)), false, Color(0.72, 0.72, 0.78) if used else Color.WHITE)
+	draw_texture_rect(ART, Rect2(base - Vector2(DRAW_SIZE.x / 2.0, DRAW_SIZE.y), DRAW_SIZE), false, Color(0.72, 0.72, 0.78) if used else Color.WHITE)
 	if used:
-		draw_string(ThemeDB.fallback_font, base + Vector2(-30, -126), "snip!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("ff5fa2"))
+		draw_string(ThemeDB.fallback_font, base + Vector2(-22, -81), "snip!", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("ff5fa2"))

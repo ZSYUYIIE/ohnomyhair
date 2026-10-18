@@ -6,11 +6,10 @@ extends Node2D
 const SIZE := Vector2(1280, 720)
 
 @export var title := ""
-## The pair (P1, P2) both friends wear when this room starts or restarts; a styling
-## checkpoint takes priority. Empty = keep whatever they wear.
+## The pair (P1, P2) both friends wear when this room starts or restarts.
+## Empty = keep whatever they wear.
 @export var starting_hair := PackedInt32Array()
-## Haircuts this room's styling chair offers, and the only ones Tony's scissors restyle
-## into. Two = the room's own pair (the chair just swaps roles). Fewer than two = no chair.
+## The only haircuts the assistant's scissors can restyle into.
 ## Every distinct pair from this set must pass every gate (tests/test_gates.gd).
 @export var styles := PackedInt32Array()
 ## The room's obstacles for the gate check: {"name": String, "any": PackedStringArray},

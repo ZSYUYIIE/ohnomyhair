@@ -16,11 +16,10 @@ func _pair_route(pair: Array) -> void:
 	var room := level.rooms[3]
 	var origin := room.global_position.x
 	var label := "%s + %s" % [StyleRules.hair_name(pair[0]), StyleRules.hair_name(pair[1])]
-	level.open_styling(room.get_node("StylingStation"))
-	level.styling_menu.choose(0, pair[0])
-	level.styling_menu.choose(1, pair[1])
-	level.styling_menu.commit()
-	check(p1.hair == pair[0] and p2.hair == pair[1], label + ": chair applies the distinct pair")
+	# The scripted chair / boss scissors can produce either distinct pair.
+	p1.set_hair(pair[0])
+	p2.set_hair(pair[1])
+	check(not room.has_node("StylingStation"), label + ": boss arena has no spawn-point chair")
 	var boss: BarberBot = room.get_node("BarberBot")
 	boss.process_mode = Node.PROCESS_MODE_DISABLED
 	boss.position = Vector2(500, 608)

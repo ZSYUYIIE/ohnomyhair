@@ -90,6 +90,13 @@ func close() -> void:
 	hide()
 
 
+func show_room_results(room_title: String, seconds: float, deaths: int) -> void:
+	_can_resume = false
+	_can_restart = false
+	_open(room_title + " - CLEAR!", "Time   %s\nDeaths   %d\nRoom replay · Chapter records unchanged" % [Progress.format_time(seconds), deaths],
+		[["Replay room", "replay"], ["Choose another room", "rooms"], ["Main menu", "menu"]])
+
+
 ## Presses the button with this label (used by tests and by gamepads later).
 func press(label: String) -> void:
 	for b in _box.get_children():

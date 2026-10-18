@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="29_4djnt"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="30_x664p"]
 
+[ext_resource type="Script" path="res://scenes/systems/boss_encounter.gd" id="31_encounter"]
+
 [node name="Level06" type="Node2D" unique_id=1684037625]
 script = ExtResource("1_hlprc")
 level_title = "LEVEL 4 - The Assistant"
@@ -117,29 +119,20 @@ collision_mask = 2
 monitorable = false
 script = ExtResource("12_1hyil")
 
-[node name="Hint8" type="Label" parent="Rooms/Room1" unique_id=711583783]
-offset_left = 40.0
-offset_top = 300.0
-offset_right = 40.0
-offset_bottom = 300.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Closing time. The barber's robot wants to finish the job."
-
 [node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=372407850]
-offset_left = 200.0
-offset_top = 420.0
-offset_right = 200.0
-offset_bottom = 420.0
+offset_left = 40.0
+offset_top = 270.0
+offset_right = 460.0
+offset_bottom = 346.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P2 can parry (L) while hanging from P1's hair"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "{pomp}: {pomp.attack} parries while carried.\nCross the flat iron when it is cool."
 script = ExtResource("13_kgnxl")
-template = "{pomp} can parry ({pomp.attack}) while hanging from {tt}'s hair"
+template = "{pomp}: {pomp.attack} parries while carried.\nCross the flat iron when it is cool."
 
 [node name="Room2" type="Node2D" parent="Rooms" unique_id=529224455]
 position = Vector2(1280, 0)
@@ -301,40 +294,32 @@ script = ExtResource("12_1hyil")
 
 [node name="Hint13" type="Label" parent="Rooms/Room2" unique_id=490266483]
 offset_left = 40.0
-offset_top = 330.0
-offset_right = 40.0
-offset_bottom = 330.0
+offset_top = 280.0
+offset_right = 340.0
+offset_bottom = 356.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "The barber's chair.
-Take a seat...?"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "A surprise haircut..."
 
 [node name="AfterSwapHints" type="Node2D" parent="Rooms/Room2" unique_id=1103891949]
 visible = false
 
 [node name="@Label@10" type="Label" parent="Rooms/Room2/AfterSwapHints" unique_id=13419695]
-offset_left = 760.0
-offset_top = 60.0
-offset_right = 760.0
-offset_bottom = 60.0
+offset_left = 740.0
+offset_top = 140.0
+offset_right = 1100.0
+offset_bottom = 216.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.6901961, 0.1882353, 0.41568628, 1)
-text = "P1 is the POMPADOUR now:  G dash / launch,  F parry"
-script = ExtResource("13_kgnxl")
-template = "{pomp} is the POMPADOUR now:  {pomp.skill} dash / launch,  {pomp.attack} parry"
-
-[node name="@Label@11" type="Label" parent="Rooms/Room2/AfterSwapHints" unique_id=222194927]
-offset_left = 760.0
-offset_top = 92.0
-offset_right = 760.0
-offset_bottom = 92.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.6901961, 0.1882353, 0.41568628, 1)
-text = "P2 is the TWIN-TAILS now:  K glide / grab / lever,  L whip"
-script = ExtResource("13_kgnxl")
-template = "{tt} is the TWIN-TAILS now:  {tt.skill} glide / grab / lever,  {tt.attack} whip"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Haircuts swapped: check the HUD.\nWork together to reach the upper door."
 
 [node name="Room3" type="Node2D" parent="Rooms" unique_id=165687858]
 position = Vector2(2560, 0)
@@ -420,30 +405,17 @@ monitorable = false
 script = ExtResource("12_1hyil")
 
 [node name="Hint9" type="Label" parent="Rooms/Room3" unique_id=835713235]
-offset_left = 130.0
-offset_top = 250.0
-offset_right = 130.0
-offset_bottom = 250.0
+offset_left = 320.0
+offset_top = 230.0
+offset_right = 880.0
+offset_bottom = 306.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Robots incoming!  P1 dash (G) breaks them,  P2 whip (L) stuns them"
-script = ExtResource("13_kgnxl")
-template = "Robots incoming!  {pomp} dash ({pomp.skill}) breaks them,  {tt} whip ({tt.attack}) stuns them"
-
-[node name="Hint10" type="Label" parent="Rooms/Room3" unique_id=1199944750]
-offset_left = 700.0
-offset_top = 330.0
-offset_right = 700.0
-offset_bottom = 330.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Parry (F) the scissors back into the robots"
-script = ExtResource("13_kgnxl")
-template = "Parry ({pomp.attack}) the scissors back into the robots"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Dash breaks robots; whip stuns them.\nParry scissors through the crowd."
 
 [node name="Room4" type="Node2D" parent="Rooms" unique_id=1567327678]
 position = Vector2(3840, 0)
@@ -488,12 +460,22 @@ size = Vector2(32, 576)
 [node name="Backup" type="Node2D" parent="Rooms/Room4" unique_id=1016085069]
 script = ExtResource("26_lmvas")
 waves = Array[Dictionary]([{
-"drops": [3, 34]
+"drops": [2, 17, 34],
+"speed": 100.0
+}, {
+"drops": [3, 13, 25, 34],
+"speed": 115.0
 }])
 auto_start = false
+manual_waves = true
+max_robots = 4
+roam_room = true
 tonic_cols = PackedInt32Array()
 vent_row = 0
-patrol_tiles = 2.0
+patrol_tiles = 40.0
+
+[node name="Encounter" type="Node2D" parent="Rooms/Room4"]
+script = ExtResource("31_encounter")
 
 [node name="Exit" type="Area2D" parent="Rooms/Room4" unique_id=260115274 instance=ExtResource("11_2mbqm")]
 texture_filter = 2
@@ -504,28 +486,17 @@ monitorable = false
 script = ExtResource("12_1hyil")
 
 [node name="Hint7" type="Label" parent="Rooms/Room4" unique_id=1720686340]
-offset_left = 300.0
-offset_top = 230.0
-offset_right = 300.0
-offset_bottom = 230.0
+offset_left = 250.0
+offset_top = 190.0
+offset_right = 1010.0
+offset_bottom = 266.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Daze it (parry its scissors, or make it crash a charge into a wall),
-then land on its glowing head from a high corner ledge."
-
-[node name="Hint8" type="Label" parent="Rooms/Room4" unique_id=2059704255]
-offset_left = 56.0
-offset_top = 270.0
-offset_right = 56.0
-offset_bottom = 270.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Its scissors SWAP YOUR TWO HAIRCUTS.
-Watch your skills. Protect your friend."
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Parry or bait a wall crash, then stomp the knob.\nIts scissors swap your haircuts."
 
 [node name="Players" type="Node2D" parent="." unique_id=748738539]
 
@@ -567,6 +538,7 @@ horizontal_alignment = 1
 [connection signal="swapped" from="Rooms/Room2/HairSwapChair" to="Rooms/Room2/AfterSwapHints" method="show"]
 [connection signal="activated" from="Rooms/Room2/Bell" to="Rooms/Room2/StaffDoor" method="open"]
 [connection signal="cleared" from="Rooms/Room3/Waves" to="Rooms/Room3/ArenaDoor" method="open"]
-[connection signal="backup_called" from="Rooms/Room4/BarberBot" to="Rooms/Room4/Backup" method="start_next"]
 [connection signal="defeated" from="Rooms/Room4/BarberBot" to="Rooms/Room4/BossDoor" method="open"]
 [connection signal="defeated" from="Rooms/Room4/BarberBot" to="Rooms/Room4/Backup" method="scrap_all"]
+
+[connection signal="swapped" from="Rooms/Room2/HairSwapChair" to="Rooms/Room2/Hint13" method="hide"]
