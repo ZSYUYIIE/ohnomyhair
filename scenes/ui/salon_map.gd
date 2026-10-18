@@ -62,8 +62,11 @@ func _ready() -> void:
 	for i in Progress.LEVELS.size():
 		var area := Button.new()
 		area.name = "Stage%dHitArea" % (i + 1)
-		area.position = HIT_RECTS[i].position
-		area.size = HIT_RECTS[i].size
+		# The whole illustrated stop is clickable, including the platform's front edge
+		# and the small space before its name pill. The old art bounds left dead strips.
+		var target: Rect2 = HIT_RECTS[i].merge(PLATFORM_RECTS[i]).merge(NAME_RECTS[i])
+		area.position = target.position
+		area.size = target.size
 		area.focus_mode = Control.FOCUS_NONE
 		for state in ["normal", "hover", "pressed", "focus"]:
 			area.add_theme_stylebox_override(state, StyleBoxEmpty.new())

@@ -372,7 +372,7 @@ func _toggle_controls(tab: int = 3) -> void:
 func _guide_closed() -> void:
 	for b in _menu_buttons + _play_buttons + [_opening_button, _chapter_back, _map_play]: b.focus_mode = Control.FOCUS_ALL
 	if _help_from_chapters:
-		_open_chapters()
+		_open_chapters(_selected_chapter)
 	else:
 		UiTheme.focus_if_visible.call_deferred(_controls_button)
 
