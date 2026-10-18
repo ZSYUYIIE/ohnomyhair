@@ -39,55 +39,47 @@ Each level's playthrough bot, rerun with 130-330 ms reactions, aim off by up to
 
 | Level | Clean runs | Most common first failure |
 |---|---|---|
-| level_01 | 7/12 | R3: twin-tails grabs pompadour on the counter (4x); R2: twin-tails grabs pompadour (1x) |
-| level_02 | 5/12 | R2: hair catch from the far trench rings the second bell (3x); R2: both in the exit clears L2 (2x); R1: both climb the shelves to the door (2x) |
-| level_03 | 6/12 | R2: dry pompadour smashes the gel (5x); flying into the running shower soaks P1 and drops the carry into the dye (1x) |
-| level_04 | 10/12 | R2: the cannonball punches the pompadour through the perm-set gel (1x); Perm Day clear: the results open (1x) |
-| level_05 | 4/12 | R1: Long Straight hooks the ring onto the bar (5x); Extensions clear: the results open (1x); R3: Long Straight lassos the gate lever (1x) |
-| level_06 | 4/12 | R1: twin-tails grabs pompadour on the ledge (3x); standing in its path still gets you hit (3x); R1: pompadour's dash takes out the clipper bot (1x) |
+| level_01 | 24/24 | - |
+| level_02 | 8/24 | R2: hair catch from the far trench rings the second bell (7x); R2: both in the exit clears L2 (4x); R1: both climb the shelves to the door (4x) |
+| level_03 | 24/24 | - |
+| level_04 | 23/24 | R2: the cannonball punches the pompadour through the perm-set gel (1x) |
+| level_05 | 23/24 | R3: Long Straight lassos the gate lever (1x) |
+| level_06 | 17/24 | R1: pompadour's dash takes out the clipper bot (4x); R3: wave 3 drops its robots through the vents (3x) |
 
 ## 3. Play log: where people (and sloppy bots) die, and how long rooms take
 
 | Source | Level | Room | Sessions | Starts | Clears | Deaths | Median time (s) | Top causes |
 |---|---|---|---|---|---|---|---|---|
-| bot-sloppy | level_01 | 1 - Mirror, Mirror | 12 | 12 | 12 | 0 | 10.7 | - |
-| bot-sloppy | level_01 | 2 - The Washing Basin | 12 | 12 | 11 | 1 | 9.8 | DyePool 1 |
-| bot-sloppy | level_01 | 3 - The Gel Curtain | 11 | 11 | 7 | 4 | 10.9 | DyePool 4 |
-| bot-sloppy | level_02 | 1 - Return to Sender | 12 | 12 | 10 | 2 | 29.0 | Scissor 2 |
-| bot-sloppy | level_02 | 2 - Scissor Corridor | 10 | 10 | 5 | 3 | 42.3 | Scissor 3 |
-| bot-sloppy | level_03 | 1 - Blow-Dry Bar | 12 | 12 | 12 | 0 | 12.6 | - |
-| bot-sloppy | level_03 | 2 - Shampoo Station | 12 | 12 | 7 | 5 | 20.2 | DyePool 5 |
-| bot-sloppy | level_03 | 3 - Rinse & Repeat | 7 | 7 | 7 | 0 | 10.5 | - |
-| bot-sloppy | level_04 | 1 - The Perm Rollers | 12 | 12 | 12 | 0 | 17.3 | - |
-| bot-sloppy | level_04 | 2 - Setting Lotion | 12 | 12 | 11 | 0 | 13.9 | - |
-| bot-sloppy | level_04 | 3 - Double Return | 11 | 11 | 11 | 0 | 13.8 | - |
-| bot-sloppy | level_05 | 1 - Extension Bar | 12 | 12 | 7 | 0 | 10.2 | - |
-| bot-sloppy | level_05 | 2 - The Up-Do | 7 | 7 | 7 | 0 | 8.8 | - |
-| bot-sloppy | level_05 | 3 - Tangles | 7 | 7 | 5 | 2 | 15.8 | ClipperBot 1, DyePool 1 |
-| bot-sloppy | level_06 | 1 - Closing Time | 12 | 12 | 8 | 4 | 29.4 | DyePool 3, ClipperBot 1 |
-| bot-sloppy | level_06 | 2 - The Chair | 8 | 8 | 8 | 0 | 23.1 | - |
-| bot-sloppy | level_06 | 3 - Rush Hour | 8 | 8 | 7 | 1 | 23.0 | Scissor 1 |
-| bot-sloppy | level_06 | 4 - The Barber Bot | 7 | 7 | 7 | 0 | 12.1 | - |
-| human | level_01 | 1 - Mirror, Mirror | 2 | 4 | 0 | 0 | - | - |
-| human | level_01 | 3 - The Gel Curtain | 2 | 0 | 2 | 0 | - | - |
-| human | level_02 | 1 - Return to Sender | 2 | 8 | 0 | 0 | - | - |
-| human | level_03 | 1 - Blow-Dry Bar | 2 | 8 | 0 | 0 | - | - |
-| human | level_04 | 1 - The Perm Rollers | 2 | 2 | 0 | 0 | - | - |
-| human | level_05 | 1 - Extension Bar | 2 | 2 | 0 | 0 | - | - |
-| human | level_06 | 1 - Closing Time | 2 | 4 | 0 | 0 | - | - |
-| human | level_06 | 4 - The Barber Bot | 2 | 0 | 2 | 0 | - | - |
+| bot-sloppy | level_01 | 1 - Mirror, Mirror | 24 | 24 | 24 | 0 | 10.6 | - |
+| bot-sloppy | level_01 | 2 - The Washing Basin | 24 | 24 | 24 | 0 | 9.9 | - |
+| bot-sloppy | level_01 | 3 - The Gel Curtain | 24 | 24 | 24 | 0 | 11.0 | - |
+| bot-sloppy | level_02 | 1 - Return to Sender | 24 | 24 | 20 | 4 | 29.0 | Scissor 4 |
+| bot-sloppy | level_02 | 2 - Scissor Corridor | 20 | 20 | 8 | 8 | 42.4 | Scissor 8 |
+| bot-sloppy | level_03 | 1 - Blow-Dry Bar | 24 | 24 | 24 | 0 | 12.7 | - |
+| bot-sloppy | level_03 | 2 - Shampoo Station | 24 | 24 | 24 | 0 | 20.1 | - |
+| bot-sloppy | level_03 | 3 - Rinse & Repeat | 24 | 24 | 24 | 0 | 10.6 | - |
+| bot-sloppy | level_04 | 1 - The Perm Rollers | 24 | 24 | 24 | 0 | 14.9 | - |
+| bot-sloppy | level_04 | 2 - Setting Lotion | 24 | 24 | 23 | 0 | 13.9 | - |
+| bot-sloppy | level_04 | 3 - Double Return | 23 | 23 | 23 | 0 | 13.8 | - |
+| bot-sloppy | level_05 | 1 - Extension Bar | 24 | 24 | 24 | 0 | 9.8 | - |
+| bot-sloppy | level_05 | 2 - The Up-Do | 24 | 24 | 24 | 0 | 8.7 | - |
+| bot-sloppy | level_05 | 3 - Tangles | 24 | 24 | 23 | 1 | 9.9 | ClipperBot 1 |
+| bot-sloppy | level_06 | 1 - Closing Time | 24 | 24 | 20 | 4 | 29.8 | ClipperBot 4 |
+| bot-sloppy | level_06 | 2 - The Chair | 20 | 20 | 20 | 0 | 23.2 | - |
+| bot-sloppy | level_06 | 3 - Rush Hour | 20 | 20 | 17 | 3 | 23.3 | Scissor 3 |
+| bot-sloppy | level_06 | 4 - The Barber Bot | 17 | 17 | 17 | 0 | 12.1 | - |
+| human | level_01 | 1 - Mirror, Mirror | 4 | 8 | 0 | 0 | - | - |
+| human | level_01 | 3 - The Gel Curtain | 4 | 0 | 4 | 0 | - | - |
+| human | level_02 | 1 - Return to Sender | 4 | 16 | 0 | 0 | - | - |
+| human | level_03 | 1 - Blow-Dry Bar | 4 | 16 | 0 | 0 | - | - |
+| human | level_04 | 1 - The Perm Rollers | 4 | 4 | 0 | 0 | - | - |
+| human | level_05 | 1 - Extension Bar | 4 | 4 | 0 | 0 | - | - |
+| human | level_06 | 1 - Closing Time | 4 | 8 | 0 | 0 | - | - |
+| human | level_06 | 4 - The Barber Bot | 4 | 0 | 4 | 0 | - | - |
 
 ### Death heatmaps
 
 Red dots: people. Orange dots: sloppy bots.
-
-**level_01_R2**
-
-![level_01_R2](heatmaps/level_01_R2.png)
-
-**level_01_R3**
-
-![level_01_R3](heatmaps/level_01_R3.png)
 
 **level_02_R1**
 
@@ -96,10 +88,6 @@ Red dots: people. Orange dots: sloppy bots.
 **level_02_R2**
 
 ![level_02_R2](heatmaps/level_02_R2.png)
-
-**level_03_R2**
-
-![level_03_R2](heatmaps/level_03_R2.png)
 
 **level_05_R3**
 

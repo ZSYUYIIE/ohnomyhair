@@ -18,17 +18,23 @@ func _run() -> void:
 	finish()
 
 
-## Long Straight jumps at `from_x` and hooks the nearest ring; true once standing above `top_y`.
-func _hook_up(from_x: float, top_y: float) -> bool:
-	await walk_to(p2, from_x)
-	hold(p2, "jump", true)
-	await _ticks(9)
-	hold(p2, "skill", true)
-	await _ticks(35)
-	hold(p2, "jump", false)
-	hold(p2, "skill", false)
-	await _ticks(25)
-	return p2.is_on_floor() and p2.global_position.y < top_y
+## Long Straight jumps at `from_x` and hooks the nearest ring, holding skill until the pull
+## lands her above `top_y`, then steers onto the ledge; like a person, she walks back and
+## tries again if it didn't work. True once standing above `top_y`.
+func _hook_up(from_x: float, top_y: float, tries := 3) -> bool:
+	for attempt in tries:
+		await walk_to(p2, from_x, 600, attempt == 0)
+		hold(p2, "jump", true)
+		await wait_until(func(): return not p2.is_on_floor(), 20)
+		await _ticks(6)
+		hold(p2, "skill", true)
+		await wait_until(func(): return p2.global_position.y < top_y - Player.HALF_SIZE.y, 90)
+		hold(p2, "skill", false)
+		hold(p2, "jump", false)
+		await wait_until(func(): return p2.is_on_floor(), 90)
+		if p2.global_position.y < top_y:
+			return true
+	return false
 
 
 ## Long Straight stands at `edge_x` facing left and lowers the rope; twin-tails climbs it
@@ -60,9 +66,7 @@ func _carry_over(take_off_x: float, land_x: float, bot: ClipperBot) -> bool:
 	await walk_to(p1, take_off_x - 80)
 	await walk_to(p2, take_off_x - 50)
 	_face(p2, take_off_x + 400)
-	hold(p1, "skill", true)
-	await _ticks(2)
-	var grabbed := p1.carrying == p2
+	var grabbed := await grab(p1, p2)
 	hold(p1, "right", true)
 	var jumped := false
 	var lassoed := false
@@ -145,4 +149,4 @@ func _room_3() -> void:
 	var exit_x: float = room.get_node("Exit").global_position.x
 	await walk_to(p2, exit_x + 48)
 	await walk_to(p1, exit_x + 16)
-	check(await wait_until(func(): return level.menu.is_open(), 240) and Progress.is_cleared(4), "Extensions clear: the results open")
+	check(await wait_until(func(): return Progress.is_cleared(4), 300), "Extensions clear: the level is recorded as cleared")

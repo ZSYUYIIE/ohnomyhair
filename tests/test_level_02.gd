@@ -11,7 +11,7 @@ func _run() -> void:
 	await _room_1()
 	if failed == 0:
 		await _room_2()
-	stop_logging()  # the rest kills P1 on purpose to test the popup
+	begin_counter_checks()  # the rest kills P1 on purpose to test the popup
 	if failed == 0:
 		await _restart_and_pause()
 	finish()

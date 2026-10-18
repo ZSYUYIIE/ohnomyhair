@@ -16,7 +16,7 @@ func _run() -> void:
 		await _room_3()
 	if failed == 0:
 		await _room_4()
-	stop_logging()  # unit checks put players in harm's way on purpose
+	begin_counter_checks()  # unit checks put players in harm's way on purpose
 	if failed == 0:
 		await _boss_unit_checks()
 	finish()
@@ -39,9 +39,7 @@ func _room_1() -> void:
 	# Grab works from beside, never from on top of each other: step next to P2 first
 	# (the hop onto the ledge can land P1 on P2's head).
 	await walk_to(p1, p2.global_position.x - 30.0)
-	hold(p1, "skill", true)
-	await _ticks(2)
-	check(p1.carrying == p2, "R1: twin-tails grabs pompadour on the ledge")
+	check(await grab(p1, p2), "R1: twin-tails grabs pompadour on the ledge")
 	check(await glide_jump(p1, o + 12 * TILE - 4, o + 22 * TILE, false), "R1: carry over the 9-tile pool while the turret is jammed")
 	hold(p1, "skill", false)
 	await _ticks(10)

@@ -141,10 +141,32 @@ func wait_until(cond: Callable, max_ticks: int) -> bool:
 	return cond.call()
 
 
-## Call before counter-checks that die or fail on purpose (a solo jump into the dye, a
-## forced death to test the popup): those must not count as deaths in the play log.
-func stop_logging() -> void:
+## Twin-tails holds skill to grab `friend`, the way a person does: if the friend isn't in
+## reach (a step too far, or on a different step), shuffle to just beside them and try
+## again. Leaves skill held on success, like the single-press grab it replaces.
+func grab(carrier: Player, friend: Player, tries := 4) -> bool:
+	for attempt in tries:
+		hold(carrier, "skill", true)
+		for i in 2:
+			await physics_frame
+		if carrier.carrying == friend:
+			return true
+		hold(carrier, "skill", false)
+		await physics_frame
+		var side := -1.0 if carrier.global_position.x < friend.global_position.x else 1.0
+		if absf(carrier.global_position.y - friend.global_position.y) >= Player.HALF_SIZE.y:
+			# Perched on the friend's head (or a step above): step off first.
+			await walk_to(carrier, friend.global_position.x + side * 64.0, 120, false)
+		await walk_to(carrier, friend.global_position.x + side * 30.0, 120, false)
+	return false
+
+
+## Call before counter-checks (a solo jump into the dye on purpose, a forced death to test
+## the popup, boss unit checks): they test rules, not a person's timing, so they run
+## exactly, and their deaths must not count in the play log.
+func begin_counter_checks() -> void:
 	Telemetry.enabled = false
+	sloppy = false
 
 
 ## A person notices a cue a moment after it happens.
@@ -157,9 +179,9 @@ func _react() -> void:
 ## Walk toward x, hopping up any step in the way. Local x is in level space.
 ## Stops when the level gets busy (room cleared / pan): the target belongs to the old
 ## room, and walking on would steer the player around the next one.
-func walk_to(p: Player, x: float, max_ticks := 600) -> void:
+func walk_to(p: Player, x: float, max_ticks := 600, aim_error := true) -> void:
 	var start_room := level.room_index if is_instance_valid(level) else -1
-	if sloppy:
+	if sloppy and aim_error:
 		x += rng.randf_range(-AIM_JITTER, AIM_JITTER)
 	for i in max_ticks:
 		# Stop once the level is busy (clear / pan) or has moved on: the target point

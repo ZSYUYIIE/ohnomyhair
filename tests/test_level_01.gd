@@ -15,7 +15,7 @@ func _run() -> void:
 		await _room_2()
 	if failed == 0:
 		await _room_3()
-	stop_logging()  # the rest are counter-checks that die on purpose
+	begin_counter_checks()  # the rest are counter-checks that die on purpose
 	if failed == 0:
 		await _carry_alone_fails()
 	if failed == 0:
@@ -48,9 +48,7 @@ func _room_2() -> void:
 	var o: float = room.global_position.x
 	await walk_to(p2, o + 9.5 * TILE)
 	await walk_to(p1, o + 8 * TILE)
-	hold(p1, "skill", true)
-	await _ticks(2)
-	check(p1.carrying == p2, "R2: twin-tails grabs pompadour")
+	check(await grab(p1, p2), "R2: twin-tails grabs pompadour")
 	# Sloppy on purpose (real players did this): P1 only taps jump, P2 mashes jump while carried.
 	hold(p2, "jump", true)
 	check(await glide_jump(p1, o + 12 * TILE - 4, o + 21 * TILE, false, 6), "R2: sloppy carry (tap jump, P2 mashing jump) still crosses the dye")
@@ -80,9 +78,7 @@ func _room_3() -> void:
 	await walk_to(p2, o + 15 * TILE)
 	await walk_to(p1, o + 14 * TILE)
 	check(p1.global_position.y < 13 * TILE and p2.global_position.y < 13 * TILE, "R3: both climb the stairs onto the counter")
-	hold(p1, "skill", true)
-	await _ticks(2)
-	check(p1.carrying == p2, "R3: twin-tails grabs pompadour on the counter")
+	check(await grab(p1, p2), "R3: twin-tails grabs pompadour on the counter")
 	hold(p1, "right", true)
 	await wait_until(func(): return p1.global_position.x >= o + 16 * TILE + 10, 120)
 	hold(p1, "jump", true)
