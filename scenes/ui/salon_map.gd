@@ -90,6 +90,8 @@ func _ready() -> void:
 	opening_button.pressed.connect(func(): opening_requested.emit())
 	rooms_button = _button("Rooms", Rect2(1008, 17, 198, 86), 34)
 	_style_button(rooms_button, "cream")
+	# Keep the supplied button silhouette; focus still uses the button's pop animation.
+	rooms_button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	rooms_button.visible = Progress.campaign_completed()
 	rooms_button.pressed.connect(func(): rooms_requested.emit())
 	# Containers reserve separate space for records and shortcuts, even with large best times.
