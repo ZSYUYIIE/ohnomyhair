@@ -41,8 +41,11 @@ func _room_1() -> RoomBuilder:
 	rb.dryer("BigDryer", 22, 5, 2, 18)
 	rb.solid(26, 8, 38, 18)       # exit ledge, 11 up
 	rb.exit(35, 5)
-	rb.hint("Warm air lifts a glider:\nP1 jump + HOLD G in the dryer", Vector2(40, 330))
-	rb.hint("Too heavy to carry up!\nP2: stand on P1's head and ride", Vector2(560, 330))
+	rb.hint("Warm air lifts a glider:\n{tt}: jump + HOLD {tt.skill} in the dryer", Vector2(40, 330))
+	rb.gate("Lever shelf 10 up", ["glide"])
+	rb.gate("Gate lever", ["lever", "lasso_lever"])
+	rb.gate("Exit ledge 11 up, both friends", ["hair_copter", "spring"])
+	rb.hint("Too heavy to carry up!\nWarm air lifts a glider...\nand whatever stands on one.", Vector2(560, 330))
 	return rb
 
 
@@ -64,6 +67,8 @@ func _room_2() -> RoomBuilder:
 	rb.shower("RinseCurtain", 25, 1, 3, 18, 1.8, 1.6, 0.9)
 	rb.gel_wall("GelWall", 33, 13, 2, 6)
 	rb.exit(36, 16)
+	rb.gate("10-wide dye pool under a shower", ["carry"])
+	rb.gate("Gel wall under a shower", ["dash_gel"])
 	rb.hint("Wet tails can't glide!\nGo between sprays", Vector2(40, 330))
 	rb.hint("A soggy pompadour can't smash gel.\nDry off, then cross between sprays", Vector2(700, 300))
 	return rb
@@ -85,5 +90,8 @@ func _room_3() -> RoomBuilder:
 	rb.gel_wall("GelWall", 30, 3, 2, 6)
 	rb.turret("Dispenser", 38, 8, Vector2.LEFT, 2.5, 1.0)
 	rb.exit(34, 6)
+	rb.gate("Upper ledge 10 up, both friends", ["hair_copter", "spring"])
+	rb.gate("Gel wall", ["dash_gel"])
+	rb.gate("Dispenser behind the gel", ["parry", "shield"])
 	rb.hint("Ride up before the shower soaks you", Vector2(40, 330))
 	return rb

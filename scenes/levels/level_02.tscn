@@ -1,62 +1,72 @@
 [gd_scene format=4]
 
-[ext_resource type="Script" path="res://scenes/systems/level.gd" id="1_km0xc"]
-[ext_resource type="TileSet" path="res://assets/art/l2/salon_tileset.tres" id="2_n536o"]
-[ext_resource type="Script" path="res://scenes/systems/room.gd" id="3_m2jhg"]
-[ext_resource type="Texture2D" path="res://assets/art/l2/bg_l2_01_reception.png" id="4_q6ljp"]
-[ext_resource type="Script" path="res://scenes/enemies/scissor_turret.gd" id="5_4dr30"]
-[ext_resource type="Script" path="res://scenes/props/hit_switch.gd" id="6_dscar"]
-[ext_resource type="Script" path="res://scenes/props/door.gd" id="7_01hg1"]
-[ext_resource type="PackedScene" path="res://scenes/props/room_exit.tscn" id="8_v5pqk"]
-[ext_resource type="Script" path="res://scenes/props/room_exit.gd" id="9_m2te4"]
-[ext_resource type="Texture2D" path="res://assets/art/l2/bg_l2_02_corridor.png" id="10_kxbgd"]
-[ext_resource type="Script" path="res://scenes/enemies/clipper_bot.gd" id="11_lky54"]
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="12_ies7a"]
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="13_kx1rr"]
+[ext_resource type="Script" path="res://scenes/systems/level.gd" id="1_n536o"]
+[ext_resource type="TileSet" path="res://assets/art/l2/salon_tileset.tres" id="2_m2jhg"]
+[ext_resource type="Script" path="res://scenes/systems/room.gd" id="3_q6ljp"]
+[ext_resource type="Texture2D" path="res://assets/art/l2/bg_l2_01_reception.png" id="4_4dr30"]
+[ext_resource type="Script" path="res://scenes/enemies/scissor_turret.gd" id="5_dscar"]
+[ext_resource type="Script" path="res://scenes/props/hit_switch.gd" id="6_01hg1"]
+[ext_resource type="Script" path="res://scenes/props/door.gd" id="7_v5pqk"]
+[ext_resource type="PackedScene" path="res://scenes/props/room_exit.tscn" id="8_m2te4"]
+[ext_resource type="Script" path="res://scenes/props/room_exit.gd" id="9_kxbgd"]
+[ext_resource type="Script" path="res://scenes/ui/hair_hint.gd" id="10_lky54"]
+[ext_resource type="Texture2D" path="res://assets/art/l2/bg_l2_02_corridor.png" id="11_ies7a"]
+[ext_resource type="Script" path="res://scenes/enemies/clipper_bot.gd" id="12_kx1rr"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="13_gus8w"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="14_xwa1x"]
 
-[node name="Level02" type="Node2D" unique_id=23899484]
-script = ExtResource("1_km0xc")
+[node name="Level02" type="Node2D" unique_id=1187707768]
+script = ExtResource("1_n536o")
 next_level = "res://scenes/levels/level_03.tscn"
 level_title = "LEVEL 2 - Return to Sender"
 
-[node name="Tiles" type="TileMapLayer" parent="." unique_id=1246353560]
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=476035962]
 tile_map_data = PackedByteArray("AAAAAAAAAAADAAMAAAABAAAAAAADAAIAAAACAAAAAAADAAIAAAADAAAAAAADAAIAAAAEAAAAAAADAAIAAAAFAAAAAAADAAIAAAAGAAAAAAADAAIAAAAHAAAAAAADAAIAAAAIAAAAAAADAAIAAAAJAAAAAAADAAIAAAAKAAAAAAADAAIAAAALAAAAAAADAAIAAAAMAAAAAAADAAIAAAANAAAAAAADAAIAAAAOAAAAAAADAAIAAAAPAAAAAAADAAIAAAAQAAAAAAADAAIAAAARAAAAAAADAAIAAAASAAAAAAADAAIAAAATAAAAAAADAAIAAAAUAAAAAAADAAIAAAAVAAAAAAADAAIAAAAWAAAAAAADAAIAAAAXAAAAAAADAAIAAAAYAAAAAAADAAIAAAAZAAAAAAADAAIAAAAaAAAAAAADAAIAAAAbAAAAAAADAAIAAAAcAAAAAAADAAIAAAAdAAAAAAADAAIAAAAeAAAAAAADAAIAAAAfAAAAAAADAAIAAAAgAAAAAAADAAMAAAAhAAAAAAADAAIAAAAiAAAAAAADAAIAAAAjAAAAAAADAAIAAAAkAAAAAAADAAIAAAAlAAAAAAADAAIAAAAmAAAAAAADAAIAAAAnAAAAAAAAAAQAAAAAAAEAAAABAAMAAAAgAAEAAAABAAEAAAAnAAEAAAADAAEAAAAAAAIAAAABAAMAAAAgAAIAAAABAAEAAAAnAAIAAAADAAEAAAAAAAMAAAABAAMAAAAgAAMAAAABAAEAAAAnAAMAAAADAAEAAAAAAAQAAAABAAMAAAAgAAQAAAABAAEAAAAnAAQAAAADAAEAAAAAAAUAAAABAAMAAAAgAAUAAAABAAEAAAAnAAUAAAADAAEAAAAAAAYAAAABAAMAAAAgAAYAAAABAAAAAAAnAAYAAAADAAEAAAAAAAcAAAABAAMAAAAnAAcAAAADAAEAAAAAAAgAAAABAAMAAAAnAAgAAAADAAEAAAAAAAkAAAABAAMAAAAnAAkAAAADAAEAAAAAAAoAAAABAAMAAAAcAAoAAAADAAQAAAAdAAoAAAADAAQAAAAeAAoAAAADAAQAAAAfAAoAAAADAAQAAAAgAAoAAAACAAEAAAAhAAoAAAACAAMAAAAiAAoAAAACAAMAAAAjAAoAAAACAAMAAAAkAAoAAAACAAMAAAAlAAoAAAACAAMAAAAmAAoAAAACAAMAAAAnAAoAAAACAAQAAAAAAAsAAAABAAMAAAAgAAsAAAADAAEAAAAhAAsAAAABAAQAAAAiAAsAAAAAAAQAAAAjAAsAAAADAAMAAAAkAAsAAAACAAQAAAAlAAsAAAABAAQAAAAmAAsAAAAAAAQAAAAnAAsAAAADAAMAAAAAAAwAAAABAAMAAAAgAAwAAAADAAAAAAAhAAwAAAADAAIAAAAiAAwAAAADAAIAAAAjAAwAAAADAAIAAAAkAAwAAAADAAIAAAAlAAwAAAADAAIAAAAmAAwAAAADAAIAAAAnAAwAAAAAAAQAAAAAAA0AAAABAAMAAAAaAA0AAAADAAQAAAAbAA0AAAADAAQAAAAcAA0AAAADAAQAAAAdAA0AAAADAAQAAAAnAA0AAAADAAEAAAAAAA4AAAABAAMAAAAnAA4AAAADAAEAAAAAAA8AAAABAAMAAAAnAA8AAAADAAEAAAAAABAAAAABAAMAAAAXABAAAAADAAQAAAAYABAAAAADAAQAAAAZABAAAAADAAQAAAAaABAAAAADAAQAAAAbABAAAAADAAQAAAAnABAAAAADAAEAAAAAABEAAAABAAMAAAAnABEAAAADAAEAAAAAABIAAAABAAMAAAAnABIAAAADAAEAAAAAABMAAAACAAQAAAABABMAAAACAAMAAAACABMAAAACAAMAAAADABMAAAACAAMAAAAEABMAAAACAAMAAAAFABMAAAACAAMAAAAGABMAAAACAAMAAAAHABMAAAACAAMAAAAIABMAAAACAAMAAAAJABMAAAACAAMAAAAKABMAAAACAAMAAAALABMAAAACAAMAAAAMABMAAAACAAMAAAANABMAAAACAAMAAAAOABMAAAACAAMAAAAPABMAAAACAAMAAAAQABMAAAACAAMAAAARABMAAAACAAMAAAASABMAAAACAAMAAAATABMAAAAAAAMAAAAVABMAAAACAAEAAAAWABMAAAACAAMAAAAXABMAAAACAAMAAAAYABMAAAACAAMAAAAZABMAAAACAAMAAAAaABMAAAACAAMAAAAbABMAAAACAAMAAAAcABMAAAACAAMAAAAdABMAAAACAAMAAAAeABMAAAACAAMAAAAfABMAAAACAAMAAAAgABMAAAACAAMAAAAhABMAAAACAAMAAAAiABMAAAACAAMAAAAjABMAAAACAAMAAAAkABMAAAACAAMAAAAlABMAAAACAAMAAAAmABMAAAACAAMAAAAnABMAAAADAAMAAAAAABQAAAADAAMAAAABABQAAAACAAQAAAACABQAAAABAAQAAAADABQAAAAAAAQAAAAEABQAAAADAAMAAAAFABQAAAACAAQAAAAGABQAAAABAAQAAAAHABQAAAAAAAQAAAAIABQAAAADAAMAAAAJABQAAAACAAQAAAAKABQAAAABAAQAAAALABQAAAAAAAQAAAAMABQAAAADAAMAAAANABQAAAACAAQAAAAOABQAAAABAAQAAAAPABQAAAAAAAQAAAAQABQAAAADAAMAAAARABQAAAACAAQAAAASABQAAAABAAQAAAATABQAAAABAAMAAAAVABQAAAADAAEAAAAWABQAAAABAAQAAAAXABQAAAAAAAQAAAAYABQAAAADAAMAAAAZABQAAAACAAQAAAAaABQAAAABAAQAAAAbABQAAAAAAAQAAAAcABQAAAADAAMAAAAdABQAAAACAAQAAAAeABQAAAABAAQAAAAfABQAAAAAAAQAAAAgABQAAAADAAMAAAAhABQAAAACAAQAAAAiABQAAAABAAQAAAAjABQAAAAAAAQAAAAkABQAAAADAAMAAAAlABQAAAACAAQAAAAmABQAAAABAAQAAAAnABQAAAAAAAQAAAAAABUAAAAAAAQAAAABABUAAAADAAMAAAACABUAAAACAAQAAAADABUAAAABAAQAAAAEABUAAAAAAAQAAAAFABUAAAADAAMAAAAGABUAAAACAAQAAAAHABUAAAABAAQAAAAIABUAAAAAAAQAAAAJABUAAAADAAMAAAAKABUAAAACAAQAAAALABUAAAABAAQAAAAMABUAAAAAAAQAAAANABUAAAADAAMAAAAOABUAAAACAAQAAAAPABUAAAABAAQAAAAQABUAAAAAAAQAAAARABUAAAADAAMAAAASABUAAAACAAQAAAATABUAAAABAAQAAAAUABUAAAACAAMAAAAVABUAAAADAAMAAAAWABUAAAACAAQAAAAXABUAAAABAAQAAAAYABUAAAAAAAQAAAAZABUAAAADAAMAAAAaABUAAAACAAQAAAAbABUAAAABAAQAAAAcABUAAAAAAAQAAAAdABUAAAADAAMAAAAeABUAAAACAAQAAAAfABUAAAABAAQAAAAgABUAAAAAAAQAAAAhABUAAAADAAMAAAAiABUAAAACAAQAAAAjABUAAAABAAQAAAAkABUAAAAAAAQAAAAlABUAAAADAAMAAAAmABUAAAACAAQAAAAnABUAAAABAAQAAAAAABYAAAABAAQAAAABABYAAAAAAAQAAAACABYAAAADAAMAAAADABYAAAACAAQAAAAEABYAAAABAAQAAAAFABYAAAAAAAQAAAAGABYAAAADAAMAAAAHABYAAAACAAQAAAAIABYAAAABAAQAAAAJABYAAAAAAAQAAAAKABYAAAADAAMAAAALABYAAAACAAQAAAAMABYAAAABAAQAAAANABYAAAAAAAQAAAAOABYAAAADAAMAAAAPABYAAAACAAQAAAAQABYAAAABAAQAAAARABYAAAAAAAQAAAASABYAAAADAAMAAAATABYAAAACAAQAAAAUABYAAAABAAQAAAAVABYAAAAAAAQAAAAWABYAAAADAAMAAAAXABYAAAACAAQAAAAYABYAAAABAAQAAAAZABYAAAAAAAQAAAAaABYAAAADAAMAAAAbABYAAAACAAQAAAAcABYAAAABAAQAAAAdABYAAAAAAAQAAAAeABYAAAADAAMAAAAfABYAAAACAAQAAAAgABYAAAABAAQAAAAhABYAAAAAAAQAAAAiABYAAAADAAMAAAAjABYAAAACAAQAAAAkABYAAAABAAQAAAAlABYAAAAAAAQAAAAmABYAAAADAAMAAAAnABYAAAACAAQAAAAoAAAAAAADAAMAAAApAAAAAAADAAIAAAAqAAAAAAADAAIAAAArAAAAAAADAAIAAAAsAAAAAAADAAIAAAAtAAAAAAADAAIAAAAuAAAAAAADAAIAAAAvAAAAAAADAAIAAAAwAAAAAAADAAIAAAAxAAAAAAADAAIAAAAyAAAAAAADAAIAAAAzAAAAAAADAAIAAAA0AAAAAAADAAIAAAA1AAAAAAADAAIAAAA2AAAAAAADAAIAAAA3AAAAAAADAAIAAAA4AAAAAAADAAIAAAA5AAAAAAADAAIAAAA6AAAAAAADAAIAAAA7AAAAAAADAAIAAAA8AAAAAAADAAIAAAA9AAAAAAADAAIAAAA+AAAAAAADAAIAAAA/AAAAAAADAAIAAABAAAAAAAADAAIAAABBAAAAAAADAAIAAABCAAAAAAADAAIAAABDAAAAAAADAAIAAABEAAAAAAADAAIAAABFAAAAAAADAAIAAABGAAAAAAADAAIAAABHAAAAAAADAAIAAABIAAAAAAADAAIAAABJAAAAAAADAAIAAABKAAAAAAADAAIAAABLAAAAAAADAAIAAABMAAAAAAADAAIAAABNAAAAAAADAAIAAABOAAAAAAADAAIAAABPAAAAAAAAAAQAAAAoAAEAAAABAAMAAABPAAEAAAADAAEAAAAoAAIAAAABAAMAAABPAAIAAAADAAEAAAAoAAMAAAABAAMAAABPAAMAAAADAAEAAAAoAAQAAAABAAMAAABPAAQAAAADAAEAAAAoAAUAAAABAAMAAABPAAUAAAADAAEAAAAoAAYAAAABAAMAAABPAAYAAAADAAEAAAAoAAcAAAABAAMAAABPAAcAAAADAAEAAAAoAAgAAAABAAMAAABPAAgAAAADAAEAAAAoAAkAAAABAAMAAABPAAkAAAADAAEAAAAoAAoAAAABAAMAAABPAAoAAAADAAEAAAAoAAsAAAABAAMAAABPAAsAAAADAAEAAAAoAAwAAAABAAMAAABPAAwAAAADAAEAAAAoAA0AAAABAAMAAABPAA0AAAADAAEAAAAoAA4AAAABAAMAAABPAA4AAAADAAEAAAAoAA8AAAABAAMAAAA5AA8AAAACAAEAAAA6AA8AAAACAAIAAAA7AA8AAAACAAIAAAA8AA8AAAACAAIAAAA9AA8AAAAAAAIAAAA/AA8AAAACAAAAAABAAA8AAAACAAIAAABBAA8AAAACAAIAAABCAA8AAAACAAIAAABDAA8AAAACAAIAAABEAA8AAAACAAIAAABFAA8AAAAAAAIAAABHAA8AAAACAAAAAABIAA8AAAACAAIAAABJAA8AAAACAAIAAABKAA8AAAAAAAIAAABPAA8AAAADAAEAAAAoABAAAAABAAMAAAA5ABAAAAABAAEAAABPABAAAAADAAEAAAAoABEAAAABAAMAAAA3ABEAAAACAAEAAAA4ABEAAAACAAMAAAA5ABEAAAABAAMAAAA+ABEAAAAAAAAAAABGABEAAAAAAAAAAABPABEAAAADAAEAAAAoABIAAAABAAMAAAA3ABIAAAADAAEAAAA4ABIAAAABAAQAAAA5ABIAAAABAAMAAABLABIAAAADAAQAAABMABIAAAADAAQAAABNABIAAAADAAQAAABOABIAAAADAAQAAABPABIAAAADAAEAAAAoABMAAAABAAMAAAA1ABMAAAACAAEAAAA2ABMAAAACAAMAAAA3ABMAAAADAAMAAAA4ABMAAAACAAQAAAA5ABMAAAABAAMAAABPABMAAAADAAEAAAAoABQAAAABAAMAAAA1ABQAAAADAAEAAAA2ABQAAAABAAQAAAA3ABQAAAAAAAQAAAA4ABQAAAADAAMAAAA5ABQAAAABAAMAAABPABQAAAADAAEAAAAoABUAAAAAAAQAAAApABUAAAACAAMAAAAqABUAAAACAAMAAAArABUAAAACAAMAAAAsABUAAAACAAMAAAAtABUAAAACAAMAAAAuABUAAAACAAMAAAAvABUAAAACAAMAAAAwABUAAAACAAMAAAAxABUAAAACAAMAAAAyABUAAAACAAMAAAAzABUAAAACAAMAAAA0ABUAAAACAAMAAAA1ABUAAAADAAMAAAA2ABUAAAACAAQAAAA3ABUAAAABAAQAAAA4ABUAAAAAAAQAAAA5ABUAAAADAAMAAAA6ABUAAAACAAMAAAA7ABUAAAACAAMAAAA8ABUAAAACAAMAAAA9ABUAAAACAAMAAAA+ABUAAAACAAMAAAA/ABUAAAACAAMAAABAABUAAAACAAMAAABBABUAAAACAAMAAABCABUAAAACAAMAAABDABUAAAACAAMAAABEABUAAAACAAMAAABFABUAAAACAAMAAABGABUAAAACAAMAAABHABUAAAACAAMAAABIABUAAAACAAMAAABJABUAAAACAAMAAABKABUAAAACAAMAAABLABUAAAACAAMAAABMABUAAAACAAMAAABNABUAAAACAAMAAABOABUAAAACAAMAAABPABUAAAABAAQAAAAoABYAAAABAAQAAAApABYAAAAAAAQAAAAqABYAAAADAAMAAAArABYAAAACAAQAAAAsABYAAAABAAQAAAAtABYAAAAAAAQAAAAuABYAAAADAAMAAAAvABYAAAACAAQAAAAwABYAAAABAAQAAAAxABYAAAAAAAQAAAAyABYAAAADAAMAAAAzABYAAAACAAQAAAA0ABYAAAABAAQAAAA1ABYAAAAAAAQAAAA2ABYAAAADAAMAAAA3ABYAAAACAAQAAAA4ABYAAAABAAQAAAA5ABYAAAAAAAQAAAA6ABYAAAADAAMAAAA7ABYAAAACAAQAAAA8ABYAAAABAAQAAAA9ABYAAAAAAAQAAAA+ABYAAAADAAMAAAA/ABYAAAACAAQAAABAABYAAAABAAQAAABBABYAAAAAAAQAAABCABYAAAADAAMAAABDABYAAAACAAQAAABEABYAAAABAAQAAABFABYAAAAAAAQAAABGABYAAAADAAMAAABHABYAAAACAAQAAABIABYAAAABAAQAAABJABYAAAAAAAQAAABKABYAAAADAAMAAABLABYAAAACAAQAAABMABYAAAABAAQAAABNABYAAAAAAAQAAABOABYAAAADAAMAAABPABYAAAACAAQAAAA=")
-tile_set = ExtResource("2_n536o")
+tile_set = ExtResource("2_m2jhg")
 
-[node name="Rooms" type="Node2D" parent="." unique_id=1305681181]
+[node name="Rooms" type="Node2D" parent="." unique_id=7832017]
 
-[node name="Room1" type="Node2D" parent="Rooms" unique_id=2062649469]
-script = ExtResource("3_m2jhg")
+[node name="Room1" type="Node2D" parent="Rooms" unique_id=1937051916]
+script = ExtResource("3_q6ljp")
 title = "1 - Return to Sender"
+starting_hair = PackedInt32Array(0, 1)
+styles = PackedInt32Array(0, 1)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("parry", "shield"),
+"name": "Dispenser on the body line"
+}, {
+"any": PackedStringArray("catch_toss"),
+"name": "Ceiling bell"
+}])
 
-[node name="Backdrop" type="TextureRect" parent="Rooms/Room1" unique_id=1556338613]
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room1" unique_id=1527445481]
 z_index = -10
 mouse_filter = 2
-texture = ExtResource("4_q6ljp")
+texture = ExtResource("4_4dr30")
 
-[node name="SpawnP1" type="Marker2D" parent="Rooms/Room1" unique_id=2116200490]
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room1" unique_id=56295534]
 position = Vector2(112, 586)
 
-[node name="SpawnP2" type="Marker2D" parent="Rooms/Room1" unique_id=1769064354]
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room1" unique_id=890368056]
 position = Vector2(176, 586)
 
-[node name="Dispenser" type="StaticBody2D" parent="Rooms/Room1" unique_id=507885433]
+[node name="Dispenser" type="StaticBody2D" parent="Rooms/Room1" unique_id=1882086153]
 position = Vector2(1232, 592)
-script = ExtResource("5_4dr30")
+script = ExtResource("5_dscar")
 first_shot_delay = 2.0
 
-[node name="Bell" type="Area2D" parent="Rooms/Room1" unique_id=152559984]
+[node name="Bell" type="Area2D" parent="Rooms/Room1" unique_id=787050448]
 position = Vector2(656, 80)
-script = ExtResource("6_dscar")
+script = ExtResource("6_01hg1")
 
-[node name="StaffDoor" type="StaticBody2D" parent="Rooms/Room1" unique_id=559257800]
+[node name="StaffDoor" type="StaticBody2D" parent="Rooms/Room1" unique_id=1619088691]
 position = Vector2(1024, 224)
-script = ExtResource("7_01hg1")
+script = ExtResource("7_v5pqk")
 size = Vector2(32, 96)
 
-[node name="ParryStripes" type="Node2D" parent="Rooms/Room1" unique_id=725479639]
+[node name="ParryStripes" type="Node2D" parent="Rooms/Room1" unique_id=2062668519]
 
-[node name="@ColorRect@2" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1689585536]
+[node name="@ColorRect@2" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1269353866]
 offset_left = 256.0
 offset_top = 608.0
 offset_right = 266.0
@@ -64,7 +74,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@3" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1664657719]
+[node name="@ColorRect@3" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=711994927]
 offset_left = 276.0
 offset_top = 608.0
 offset_right = 286.0
@@ -72,7 +82,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@4" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=378835630]
+[node name="@ColorRect@4" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1138056227]
 offset_left = 296.0
 offset_top = 608.0
 offset_right = 306.0
@@ -80,7 +90,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@5" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1893866107]
+[node name="@ColorRect@5" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1477325820]
 offset_left = 316.0
 offset_top = 608.0
 offset_right = 326.0
@@ -88,7 +98,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@6" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1390637173]
+[node name="@ColorRect@6" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=169065108]
 offset_left = 336.0
 offset_top = 608.0
 offset_right = 346.0
@@ -96,7 +106,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@7" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1870929426]
+[node name="@ColorRect@7" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=89623812]
 offset_left = 356.0
 offset_top = 608.0
 offset_right = 366.0
@@ -104,7 +114,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@8" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1777690127]
+[node name="@ColorRect@8" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=592324957]
 offset_left = 376.0
 offset_top = 608.0
 offset_right = 386.0
@@ -112,7 +122,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@9" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=38122511]
+[node name="@ColorRect@9" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=466524777]
 offset_left = 396.0
 offset_top = 608.0
 offset_right = 406.0
@@ -120,7 +130,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@10" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1362338100]
+[node name="@ColorRect@10" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1997472794]
 offset_left = 416.0
 offset_top = 608.0
 offset_right = 426.0
@@ -128,7 +138,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@11" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=425545220]
+[node name="@ColorRect@11" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=2036186829]
 offset_left = 436.0
 offset_top = 608.0
 offset_right = 446.0
@@ -136,7 +146,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@12" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=993233459]
+[node name="@ColorRect@12" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=799285989]
 offset_left = 456.0
 offset_top = 608.0
 offset_right = 466.0
@@ -144,7 +154,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@13" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1995666424]
+[node name="@ColorRect@13" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1628553309]
 offset_left = 476.0
 offset_top = 608.0
 offset_right = 486.0
@@ -152,7 +162,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@14" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1226941824]
+[node name="@ColorRect@14" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=995671521]
 offset_left = 496.0
 offset_top = 608.0
 offset_right = 506.0
@@ -160,7 +170,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@15" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=2016998237]
+[node name="@ColorRect@15" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1972249369]
 offset_left = 516.0
 offset_top = 608.0
 offset_right = 526.0
@@ -168,7 +178,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@16" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=2075859756]
+[node name="@ColorRect@16" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=2061748122]
 offset_left = 536.0
 offset_top = 608.0
 offset_right = 546.0
@@ -176,7 +186,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@17" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=985684268]
+[node name="@ColorRect@17" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1241438625]
 offset_left = 556.0
 offset_top = 608.0
 offset_right = 566.0
@@ -184,7 +194,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@18" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1275143483]
+[node name="@ColorRect@18" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=11286044]
 offset_left = 576.0
 offset_top = 608.0
 offset_right = 586.0
@@ -192,7 +202,7 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@19" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1690254085]
+[node name="@ColorRect@19" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1022973818]
 offset_left = 596.0
 offset_top = 608.0
 offset_right = 606.0
@@ -200,9 +210,9 @@ offset_bottom = 614.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="CatchMark" type="Node2D" parent="Rooms/Room1" unique_id=1541425801]
+[node name="CatchMark" type="Node2D" parent="Rooms/Room1" unique_id=35381985]
 
-[node name="@ColorRect@20" type="ColorRect" parent="Rooms/Room1/CatchMark" unique_id=1252908205]
+[node name="@ColorRect@20" type="ColorRect" parent="Rooms/Room1/CatchMark" unique_id=706424641]
 offset_left = 640.0
 offset_top = 672.0
 offset_right = 650.0
@@ -210,7 +220,7 @@ offset_bottom = 678.0
 mouse_filter = 2
 color = Color(1, 0.37254903, 0.63529414, 1)
 
-[node name="@ColorRect@21" type="ColorRect" parent="Rooms/Room1/CatchMark" unique_id=2040326699]
+[node name="@ColorRect@21" type="ColorRect" parent="Rooms/Room1/CatchMark" unique_id=1317140305]
 offset_left = 660.0
 offset_top = 672.0
 offset_right = 670.0
@@ -218,15 +228,15 @@ offset_bottom = 678.0
 mouse_filter = 2
 color = Color(1, 0.37254903, 0.63529414, 1)
 
-[node name="Exit" type="Area2D" parent="Rooms/Room1" unique_id=308866991 instance=ExtResource("8_v5pqk")]
+[node name="Exit" type="Area2D" parent="Rooms/Room1" unique_id=2129263408 instance=ExtResource("8_m2te4")]
 texture_filter = 2
 position = Vector2(1120, 224)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("9_m2te4")
+script = ExtResource("9_kxbgd")
 
-[node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=487211536]
+[node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=1348111755]
 offset_left = 48.0
 offset_top = 400.0
 offset_right = 48.0
@@ -236,8 +246,10 @@ theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
 theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
 text = "P2: parry scissors back with  L"
+script = ExtResource("10_lky54")
+template = "{pomp}: parry scissors back with  {pomp.attack}"
 
-[node name="Hint10" type="Label" parent="Rooms/Room1" unique_id=997154809]
+[node name="Hint10" type="Label" parent="Rooms/Room1" unique_id=301559270]
 offset_left = 420.0
 offset_top = 300.0
 offset_right = 420.0
@@ -248,48 +260,60 @@ theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
 text = "P1: wait in the trench and HOLD G
 to catch the BLUE scissor - let go to toss it up"
+script = ExtResource("10_lky54")
+template = "{tt}: wait in the trench and HOLD {tt.skill}
+to catch the BLUE scissor - let go to toss it up"
 
-[node name="Room2" type="Node2D" parent="Rooms" unique_id=1156857312]
+[node name="Room2" type="Node2D" parent="Rooms" unique_id=634765290]
 position = Vector2(1280, 0)
-script = ExtResource("3_m2jhg")
+script = ExtResource("3_q6ljp")
 title = "2 - Scissor Corridor"
+starting_hair = PackedInt32Array(0, 1)
+styles = PackedInt32Array(0, 1)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("catch_toss"),
+"name": "Two ceiling bells"
+}, {
+"any": PackedStringArray("whip", "parry", "lasso_stun", "jump"),
+"name": "Clipper bots"
+}])
 
-[node name="Backdrop" type="TextureRect" parent="Rooms/Room2" unique_id=368926680]
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room2" unique_id=268708511]
 z_index = -10
 mouse_filter = 2
-texture = ExtResource("10_kxbgd")
+texture = ExtResource("11_ies7a")
 
-[node name="SpawnP1" type="Marker2D" parent="Rooms/Room2" unique_id=374269848]
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room2" unique_id=1103024723]
 position = Vector2(80, 650)
 
-[node name="SpawnP2" type="Marker2D" parent="Rooms/Room2" unique_id=639700146]
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room2" unique_id=182625912]
 position = Vector2(112, 650)
 
-[node name="ClipperBot" type="CharacterBody2D" parent="Rooms/Room2" unique_id=1444477172]
+[node name="ClipperBot" type="CharacterBody2D" parent="Rooms/Room2" unique_id=1924286202]
 position = Vector2(272, 672)
-script = ExtResource("11_lky54")
+script = ExtResource("12_kx1rr")
 
-[node name="CorridorBot" type="CharacterBody2D" parent="Rooms/Room2" unique_id=1141319906]
+[node name="CorridorBot" type="CharacterBody2D" parent="Rooms/Room2" unique_id=728727494]
 position = Vector2(848, 480)
-script = ExtResource("11_lky54")
+script = ExtResource("12_kx1rr")
 patrol_range = 48.0
 
-[node name="Dispenser" type="StaticBody2D" parent="Rooms/Room2" unique_id=1042912104]
+[node name="Dispenser" type="StaticBody2D" parent="Rooms/Room2" unique_id=1549213251]
 position = Vector2(1232, 464)
-script = ExtResource("5_4dr30")
+script = ExtResource("5_dscar")
 
-[node name="StaffDoor" type="StaticBody2D" parent="Rooms/Room2" unique_id=703609765]
+[node name="StaffDoor" type="StaticBody2D" parent="Rooms/Room2" unique_id=1677373129]
 position = Vector2(768, 512)
-script = ExtResource("7_01hg1")
+script = ExtResource("7_v5pqk")
 locks = 2
 
-[node name="Bell22" type="Area2D" parent="Rooms/Room2" unique_id=536860388]
+[node name="Bell22" type="Area2D" parent="Rooms/Room2" unique_id=62435814]
 position = Vector2(720, 48)
-script = ExtResource("6_dscar")
+script = ExtResource("6_01hg1")
 
-[node name="CatchMark22" type="Node2D" parent="Rooms/Room2" unique_id=341253194]
+[node name="CatchMark22" type="Node2D" parent="Rooms/Room2" unique_id=1389840360]
 
-[node name="@ColorRect@22" type="ColorRect" parent="Rooms/Room2/CatchMark22" unique_id=1995716837]
+[node name="@ColorRect@22" type="ColorRect" parent="Rooms/Room2/CatchMark22" unique_id=1881653]
 offset_left = 704.0
 offset_top = 544.0
 offset_right = 714.0
@@ -297,7 +321,7 @@ offset_bottom = 550.0
 mouse_filter = 2
 color = Color(1, 0.37254903, 0.63529414, 1)
 
-[node name="@ColorRect@23" type="ColorRect" parent="Rooms/Room2/CatchMark22" unique_id=585608377]
+[node name="@ColorRect@23" type="ColorRect" parent="Rooms/Room2/CatchMark22" unique_id=1847420697]
 offset_left = 724.0
 offset_top = 544.0
 offset_right = 734.0
@@ -305,13 +329,13 @@ offset_bottom = 550.0
 mouse_filter = 2
 color = Color(1, 0.37254903, 0.63529414, 1)
 
-[node name="Bell30" type="Area2D" parent="Rooms/Room2" unique_id=1121678695]
+[node name="Bell30" type="Area2D" parent="Rooms/Room2" unique_id=1760104086]
 position = Vector2(976, 48)
-script = ExtResource("6_dscar")
+script = ExtResource("6_01hg1")
 
-[node name="CatchMark30" type="Node2D" parent="Rooms/Room2" unique_id=1131999446]
+[node name="CatchMark30" type="Node2D" parent="Rooms/Room2" unique_id=46364185]
 
-[node name="@ColorRect@24" type="ColorRect" parent="Rooms/Room2/CatchMark30" unique_id=1708069156]
+[node name="@ColorRect@24" type="ColorRect" parent="Rooms/Room2/CatchMark30" unique_id=1404549092]
 offset_left = 960.0
 offset_top = 544.0
 offset_right = 970.0
@@ -319,7 +343,7 @@ offset_bottom = 550.0
 mouse_filter = 2
 color = Color(1, 0.37254903, 0.63529414, 1)
 
-[node name="@ColorRect@25" type="ColorRect" parent="Rooms/Room2/CatchMark30" unique_id=1817876807]
+[node name="@ColorRect@25" type="ColorRect" parent="Rooms/Room2/CatchMark30" unique_id=426354601]
 offset_left = 980.0
 offset_top = 544.0
 offset_right = 990.0
@@ -327,9 +351,9 @@ offset_bottom = 550.0
 mouse_filter = 2
 color = Color(1, 0.37254903, 0.63529414, 1)
 
-[node name="ParryStripes" type="Node2D" parent="Rooms/Room2" unique_id=997531666]
+[node name="ParryStripes" type="Node2D" parent="Rooms/Room2" unique_id=1321552801]
 
-[node name="@ColorRect@26" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=739175874]
+[node name="@ColorRect@26" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=642805827]
 offset_left = 544.0
 offset_top = 480.0
 offset_right = 554.0
@@ -337,7 +361,7 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@27" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1325561238]
+[node name="@ColorRect@27" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1785154702]
 offset_left = 564.0
 offset_top = 480.0
 offset_right = 574.0
@@ -345,7 +369,7 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@28" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=549709065]
+[node name="@ColorRect@28" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1677257160]
 offset_left = 584.0
 offset_top = 480.0
 offset_right = 594.0
@@ -353,7 +377,7 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@29" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=821490797]
+[node name="@ColorRect@29" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1057750415]
 offset_left = 604.0
 offset_top = 480.0
 offset_right = 614.0
@@ -361,7 +385,7 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@30" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1755341824]
+[node name="@ColorRect@30" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=747540793]
 offset_left = 624.0
 offset_top = 480.0
 offset_right = 634.0
@@ -369,7 +393,7 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@31" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1688993064]
+[node name="@ColorRect@31" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1235277531]
 offset_left = 644.0
 offset_top = 480.0
 offset_right = 654.0
@@ -377,7 +401,7 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@32" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=508682521]
+[node name="@ColorRect@32" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=2061349306]
 offset_left = 664.0
 offset_top = 480.0
 offset_right = 674.0
@@ -385,7 +409,7 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="@ColorRect@33" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=243790819]
+[node name="@ColorRect@33" type="ColorRect" parent="Rooms/Room2/ParryStripes" unique_id=1946470655]
 offset_left = 684.0
 offset_top = 480.0
 offset_right = 694.0
@@ -393,16 +417,16 @@ offset_bottom = 486.0
 mouse_filter = 2
 color = Color(0.94509804, 0.76862746, 0.05882353, 1)
 
-[node name="Exit" type="Area2D" parent="Rooms/Room2" unique_id=1419497305 instance=ExtResource("8_v5pqk")]
+[node name="Exit" type="Area2D" parent="Rooms/Room2" unique_id=1431308952 instance=ExtResource("8_m2te4")]
 texture_filter = 2
 position = Vector2(608, 608)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("9_m2te4")
+script = ExtResource("9_kxbgd")
 size = Vector2(128, 64)
 
-[node name="Hint13" type="Label" parent="Rooms/Room2" unique_id=750111420]
+[node name="Hint13" type="Label" parent="Rooms/Room2" unique_id=936775482]
 offset_left = 440.0
 offset_top = 300.0
 offset_right = 440.0
@@ -413,33 +437,33 @@ theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
 text = "Two bells. The door needs both."
 
-[node name="Players" type="Node2D" parent="." unique_id=118218218]
+[node name="Players" type="Node2D" parent="." unique_id=1449808800]
 
-[node name="P1" type="CharacterBody2D" parent="Players" unique_id=1488820353 instance=ExtResource("12_ies7a")]
+[node name="P1" type="CharacterBody2D" parent="Players" unique_id=1143867263 instance=ExtResource("13_gus8w")]
 collision_layer = 2
 collision_mask = 193
-script = ExtResource("13_kx1rr")
+script = ExtResource("14_xwa1x")
 
-[node name="P2" type="CharacterBody2D" parent="Players" unique_id=803231597 instance=ExtResource("12_ies7a")]
+[node name="P2" type="CharacterBody2D" parent="Players" unique_id=981080657 instance=ExtResource("13_gus8w")]
 collision_layer = 2
 collision_mask = 193
-script = ExtResource("13_kx1rr")
+script = ExtResource("14_xwa1x")
 player_id = 2
 hair = 1
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1590272482]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=50742487]
 anchor_mode = 0
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=2114592029]
+[node name="UI" type="CanvasLayer" parent="." unique_id=615686690]
 
-[node name="Flash" type="ColorRect" parent="UI" unique_id=269532499]
+[node name="Flash" type="ColorRect" parent="UI" unique_id=1893686775]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Banner" type="Label" parent="UI" unique_id=1076294076]
+[node name="Banner" type="Label" parent="UI" unique_id=24948595]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 40.0

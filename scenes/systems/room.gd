@@ -6,10 +6,16 @@ extends Node2D
 const SIZE := Vector2(1280, 720)
 
 @export var title := ""
-## Debug start (--room=N / start_room) in a room that comes after the hair swap.
-@export var starts_with_swapped_hair := false
-## Optional authored pair for experimental rooms; a styling checkpoint takes priority.
+## The pair (P1, P2) both friends wear when this room starts or restarts; a styling
+## checkpoint takes priority. Empty = keep whatever they wear.
 @export var starting_hair := PackedInt32Array()
+## Haircuts this room's styling chair offers, and the only ones Tony's scissors restyle
+## into. Two = the room's own pair (the chair just swaps roles). Fewer than two = no chair.
+## Every distinct pair from this set must pass every gate (tests/test_gates.gd).
+@export var styles := PackedInt32Array()
+## The room's obstacles for the gate check: {"name": String, "any": PackedStringArray},
+## each passable with any one of the verbs in StyleRules.
+@export var gates: Array[Dictionary] = []
 
 @onready var exit: RoomExit = $Exit
 

@@ -15,7 +15,9 @@ func _rooms() -> Array:
 
 func _spring_room() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room1", "1 - The Bounce Studio", Color("f6e7ec"), "res://assets/art/l1/bg_l1_01_mirror.png"))
-	rb.node.starting_hair = PackedInt32Array([Player.Hair.AFRO, Player.Hair.POMPADOUR])
+	rb.styles([Player.Hair.AFRO, Player.Hair.POMPADOUR], [Player.Hair.AFRO, Player.Hair.POMPADOUR])
+	rb.gate("Reinforced gel curtain", ["cannonball"])
+	rb.gate("Shampoo shower", ["walk"])
 	rb.solid(0, 19, 38, 22)
 	rb.spawn(1, 3, 19)
 	rb.spawn(2, 5, 19)
@@ -24,14 +26,17 @@ func _spring_room() -> RoomBuilder:
 	rb.shower("Shampoo", 12, 1, 2, 18, 4.0, 1.0)
 	rb.dryer("Dryer", 15, 13, 2, 18)
 	rb.exit(36, 16)
-	rb.hint("P1 AFRO: hold G to charge; release to bounce a rider.\nP2: jump on Afro's head and hold K as P1 releases G.", Vector2(48, 220))
+	rb.hint("{afro} (Afro): hold {afro.skill} to charge; release to bounce a rider.\n{pomp}: jump on the Afro's head and hold {pomp.skill} as {afro} releases {afro.skill}.", Vector2(48, 220))
 	rb.hint("CANNONBALL!\nOnly the co-op drill breaks orange gel.", Vector2(780, 250))
 	rb.hint("Wet Afro hair collapses.\nDry off before charging.", Vector2(420, 400))
 	return rb
 
 func _rope_room() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room2", "2 - Rapunzel Crossing", Color("e9e0f6"), "res://assets/art/l1/bg_l1_03_gel_curtain.png"))
-	rb.node.starting_hair = PackedInt32Array([Player.Hair.LONG_STRAIGHT, Player.Hair.TWIN_TAILS])
+	rb.styles([Player.Hair.LONG_STRAIGHT, Player.Hair.TWIN_TAILS], [Player.Hair.LONG_STRAIGHT, Player.Hair.TWIN_TAILS])
+	rb.gate("Gold ring to the high shelf", ["hook"])
+	rb.gate("17-wide dye pool", ["rope_glide"])
+	rb.gate("Bridge lever", ["lever", "lasso_lever"])
 	rb.solid(0, 19, 9, 22)
 	rb.solid(27, 19, 38, 22)
 	rb.one_way(7, 10, 10)
@@ -44,14 +49,17 @@ func _rope_room() -> RoomBuilder:
 	var lever := rb.lever("BridgeLever", 31, 18)
 	rb.block("Bridge", 10, 2, 17, 1, Vector2i(0, 17), lever)
 	rb.exit(36, 16)
-	rb.hint("P1 LONG STRAIGHT: jump, then hold G to hook the gold ring.\nOn the ledge, face right and hold G to lower a rope.", Vector2(48, 100))
-	rb.hint("P2: hold UP beside the rope to climb.\nMove right to release; hold K to glide to the far side.", Vector2(400, 255))
-	rb.hint("P2: K pulls the lever.\nThe bridge lets P1 cross too.", Vector2(890, 385))
+	rb.hint("{long} (Long Straight): jump, then hold {long.skill} to hook the gold ring.\nOn the ledge, face right and hold {long.skill} to lower a rope.", Vector2(48, 100))
+	rb.hint("{tt}: hold jump beside the rope to climb.\nMove right to release; hold {tt.skill} to glide to the far side.", Vector2(400, 255))
+	rb.hint("{tt}: {tt.skill} pulls the lever.\nThe bridge lets {long} cross too.", Vector2(890, 385))
 	return rb
 
 func _boss_room() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room3", "3 - Tony's Makeover", Color("e2d6d6"), "res://assets/art/l4/bg_l4_03_workshop.png"))
-	rb.node.starting_hair = PackedInt32Array([Player.Hair.AFRO, Player.Hair.POMPADOUR])
+	rb.styles([Player.Hair.TWIN_TAILS, Player.Hair.POMPADOUR, Player.Hair.AFRO, Player.Hair.LONG_STRAIGHT],
+			[Player.Hair.AFRO, Player.Hair.POMPADOUR])
+	rb.gate("Daze Tony", ["crash", "parry", "catch_return", "cannonball"])
+	rb.gate("Corner ledge 7 up, above the knob", ["launch", "spring", "hook"])
 	rb.solid(0, 19, 38, 22)
 	rb.one_way(1, 4, 16)
 	rb.one_way(1, 3, 12)

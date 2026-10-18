@@ -72,9 +72,11 @@ func _room_1() -> RoomBuilder:
 	rb.link(bell, "activated", door, "open")
 	rb.stripes("ParryStripes", 8, 18, 19)
 	rb.stripes("CatchMark", 20, 20, 21, PINK)
+	rb.gate("Dispenser on the body line", ["parry", "shield"])
+	rb.gate("Ceiling bell", ["catch_toss"])
 	rb.exit(35, 7)
-	rb.hint("P2: parry scissors back with  L", Vector2(48, 400))
-	rb.hint("P1: wait in the trench and HOLD G\nto catch the BLUE scissor - let go to toss it up", Vector2(420, 300))
+	rb.hint("{pomp}: parry scissors back with  {pomp.attack}", Vector2(48, 400))
+	rb.hint("{tt}: wait in the trench and HOLD {tt.skill}\nto catch the BLUE scissor - let go to toss it up", Vector2(420, 300))
 	return rb
 
 
@@ -96,4 +98,6 @@ func _room_2() -> RoomBuilder:
 	rb.stripes("ParryStripes", 17, 21, 15)
 	rb.exit(19, 19, 4, 2)
 	rb.hint("Two bells. The door needs both.", Vector2(440, 300))
+	rb.gate("Two ceiling bells", ["catch_toss"])
+	rb.gate("Clipper bots", ["whip", "parry", "lasso_stun", "jump"])
 	return rb

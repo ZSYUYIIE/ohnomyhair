@@ -3,7 +3,10 @@ extends Control
 ## Salon title screen with the two friends beside a chapter grid.
 
 const Guide := preload("res://scenes/ui/controls_guide.gd")
-const DESCRIPTIONS := ["Glide, carry & sling your friend", "Parry scissors & ring the bells", "Ride warm air. Watch the shampoo!", "Swap haircuts & face the barber"]
+const DESCRIPTIONS := ["Glide, carry & sling your friend", "Parry scissors & ring the bells", "Ride warm air. Watch the shampoo!",
+	"Afro springs & cannonballs", "Hooks, hair ropes & lassos", "Swap haircuts & face the barber"]
+## Chapter cards per row: six chapters fit as two rows of three.
+const CARD_COLUMNS := 3
 
 var _cards: Array[PanelContainer] = []
 var _play_buttons: Array[Button] = []
@@ -42,7 +45,7 @@ func _ready() -> void:
 	content.add_child(levels)
 	levels.add_child(UiTheme.label("CHOOSE YOUR CHAPTER", 17, UiTheme.MUTED))
 	var grid := GridContainer.new()
-	grid.columns = 2
+	grid.columns = CARD_COLUMNS
 	grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	grid.add_theme_constant_override("h_separation", 16)
 	grid.add_theme_constant_override("v_separation", 16)
@@ -84,7 +87,8 @@ func _wire_focus() -> void:
 		var b := _play_buttons[i]
 		if b.disabled:
 			continue
-		for entry in [["left", i - 1 if i % 2 == 1 else -1], ["right", i + 1 if i % 2 == 0 else -1], ["top", i - 2], ["bottom", i + 2]]:
+		for entry in [["left", i - 1 if i % CARD_COLUMNS > 0 else -1], ["right", i + 1 if i % CARD_COLUMNS < CARD_COLUMNS - 1 else -1],
+				["top", i - CARD_COLUMNS], ["bottom", i + CARD_COLUMNS]]:
 			var target: int = entry[1]
 			if target >= 0 and target < _play_buttons.size() and not _play_buttons[target].disabled:
 				b.set("focus_neighbor_" + entry[0], _play_buttons[target].get_path())
@@ -110,7 +114,7 @@ func _play_lab() -> void:
 func _level_card(i: int) -> PanelContainer:
 	var unlocked := Progress.is_unlocked(i)
 	var card := PanelContainer.new()
-	card.custom_minimum_size = Vector2(350, 0)
+	card.custom_minimum_size = Vector2(220, 0)
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	card.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM if unlocked else Color("eee6e1"), UiTheme.WALNUT if unlocked else Color("c5b9c5"), 2, 14, 16))
@@ -118,11 +122,12 @@ func _level_card(i: int) -> PanelContainer:
 	box.add_theme_constant_override("separation", 5)
 	card.add_child(box)
 	box.add_child(UiTheme.label("CHAPTER 0%d  /  %s" % [i + 1, ("CLEARED" if Progress.is_cleared(i) else "READY") if unlocked else "LOCKED"], 14, UiTheme.MUTED))
-	box.add_child(UiTheme.label(Progress.LEVELS[i].title, 27, UiTheme.INK if unlocked else UiTheme.MUTED))
+	box.add_child(UiTheme.label(Progress.LEVELS[i].title, 22, UiTheme.INK if unlocked else UiTheme.MUTED))
 	var info := "Finish chapter 1 to unlock" if i == 1 else "Finish chapters 1–%d to unlock" % i
 	if unlocked:
 		info = "Best %s  /  %d deaths" % [Progress.format_time(Progress.best_time(i)), Progress.best_deaths(i)] if Progress.is_cleared(i) else DESCRIPTIONS[i]
-	var detail := UiTheme.label(info, 16, UiTheme.MUTED)
+	var detail := UiTheme.label(info, 14, UiTheme.MUTED)
+	detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	detail.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	box.add_child(detail)
 	var button := _button(("Play again" if Progress.is_cleared(i) else "Play together") if unlocked else "Locked", play.bind(i))

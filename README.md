@@ -65,6 +65,14 @@ to choose styles, heal and save a checkpoint for the current room/run.
 Style Lab does not unlock campaign chapters. Design details and scope:
 [`docs/design/four_haircut_expansion.md`](docs/design/four_haircut_expansion.md).
 
+In the campaign each chapter has one pair: Twin-Tails + Pompadour (chapters 1-3), **Afro +
+Pompadour** (4, Perm Day), **Twin-Tails + Long Straight** (5, Extensions), and the finale's
+arena lets you pick any two different haircuts. A room's chair only offers the haircuts that
+room was built for, and `tests/test_gates.gd` checks every allowed pair can get through.
+How and why: [`docs/design/roster_and_chapters.md`](docs/design/roster_and_chapters.md);
+every room's obstacles: [`docs/levels/gate_graph.md`](docs/levels/gate_graph.md)
+(regenerate with `godot --headless --path . --script res://tools/gate_graph.gd`).
+
 ### Automated checks
 Each test plays through a level with simulated input; exit code 0 = pass.
 `test_combos.gd` checks each hair combo (and that the solo shortcut fails) in a bare arena.
@@ -75,6 +83,9 @@ godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_03.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_04.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_level_05.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_level_06.gd
+godot --headless --path . --script res://tests/test_gates.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_haircuts.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_style_lab.gd
 ```

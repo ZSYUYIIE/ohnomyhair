@@ -143,11 +143,23 @@ func set_hair(new_hair: Hair) -> void:
 
 
 ## Boss scissors change abilities without healing or replacing the player body.
+## The new haircut stays inside the room's style set and never copies the friend's
+## (StyleRules.next_style); when the set is just the pair, the two friends swap.
 func restyle_next() -> void:
 	if not alive:
 		return
-	set_hair((int(hair) + 1) % HAIR_INFO.size())
 	var level := get_parent().get_parent() as Level
+	var styles := PackedInt32Array([0, 1, 2, 3])
+	if level and level.rooms.size() > 0:
+		styles = level.rooms[level.room_index].styles
+	var mate := teammate()
+	var next: int = StyleRules.next_style(hair, mate.hair if mate else -1, styles)
+	if next >= 0:
+		set_hair(next)
+	elif mate and mate.alive:
+		var mine := hair
+		set_hair(mate.hair)
+		mate.set_hair(mine)
 	if level:
 		level.show_banner("SNIP!  P%d → %s\n%s %s / %s %s" % [player_id, ability.display_name, "G" if player_id == 1 else "K", HAIR_INFO[hair].skill, "F" if player_id == 1 else "L", HAIR_INFO[hair].attack], 2.0)
 

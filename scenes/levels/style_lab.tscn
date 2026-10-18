@@ -1,86 +1,95 @@
 [gd_scene format=4]
 
-[ext_resource type="Script" path="res://scenes/systems/level.gd" id="1_caje7"]
-[ext_resource type="TileSet" path="res://assets/art/lab/salon_tileset.tres" id="2_avdci"]
-[ext_resource type="Script" path="res://scenes/systems/room.gd" id="3_ais5v"]
-[ext_resource type="Texture2D" path="res://assets/art/l1/bg_l1_01_mirror.png" id="4_pd3rx"]
-[ext_resource type="PackedScene" path="res://scenes/props/breakable_wall.tscn" id="5_6gwee"]
-[ext_resource type="Script" path="res://scenes/props/breakable_wall.gd" id="6_uxden"]
-[ext_resource type="Script" path="res://scenes/props/shower_head.gd" id="7_lv7cd"]
-[ext_resource type="Script" path="res://scenes/props/hair_dryer.gd" id="8_tkr6q"]
-[ext_resource type="PackedScene" path="res://scenes/props/room_exit.tscn" id="9_fc0v8"]
-[ext_resource type="Script" path="res://scenes/props/room_exit.gd" id="10_ctdi7"]
-[ext_resource type="Texture2D" path="res://assets/art/l1/bg_l1_03_gel_curtain.png" id="11_kjcan"]
-[ext_resource type="PackedScene" path="res://scenes/props/hazard.tscn" id="12_txw68"]
-[ext_resource type="Script" path="res://scenes/props/hazard.gd" id="13_0u5tb"]
-[ext_resource type="Script" path="res://scenes/props/hair_anchor.gd" id="14_72q48"]
-[ext_resource type="PackedScene" path="res://scenes/props/lever.tscn" id="15_4rpvf"]
-[ext_resource type="Script" path="res://scenes/props/lever.gd" id="16_a3g5e"]
-[ext_resource type="PackedScene" path="res://scenes/props/moving_block.tscn" id="17_1xj55"]
-[ext_resource type="Script" path="res://scenes/props/moving_block.gd" id="18_t4nup"]
-[ext_resource type="Texture2D" path="res://assets/art/l4/bg_l4_03_workshop.png" id="19_72vwu"]
-[ext_resource type="Script" path="res://scenes/enemies/barber_bot.gd" id="20_j175o"]
-[ext_resource type="Script" path="res://scenes/props/door.gd" id="21_t7tgd"]
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="22_a0dma"]
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="23_s35wg"]
+[ext_resource type="Script" path="res://scenes/systems/level.gd" id="1_avdci"]
+[ext_resource type="TileSet" path="res://assets/art/lab/salon_tileset.tres" id="2_ais5v"]
+[ext_resource type="Script" path="res://scenes/systems/room.gd" id="3_pd3rx"]
+[ext_resource type="Texture2D" path="res://assets/art/l1/bg_l1_01_mirror.png" id="4_6gwee"]
+[ext_resource type="PackedScene" path="res://scenes/props/breakable_wall.tscn" id="5_uxden"]
+[ext_resource type="Script" path="res://scenes/props/breakable_wall.gd" id="6_lv7cd"]
+[ext_resource type="Script" path="res://scenes/props/shower_head.gd" id="7_tkr6q"]
+[ext_resource type="Script" path="res://scenes/props/hair_dryer.gd" id="8_fc0v8"]
+[ext_resource type="PackedScene" path="res://scenes/props/room_exit.tscn" id="9_ctdi7"]
+[ext_resource type="Script" path="res://scenes/props/room_exit.gd" id="10_kjcan"]
+[ext_resource type="Script" path="res://scenes/ui/hair_hint.gd" id="11_txw68"]
+[ext_resource type="Texture2D" path="res://assets/art/l1/bg_l1_03_gel_curtain.png" id="12_0u5tb"]
+[ext_resource type="PackedScene" path="res://scenes/props/hazard.tscn" id="13_72q48"]
+[ext_resource type="Script" path="res://scenes/props/hazard.gd" id="14_4rpvf"]
+[ext_resource type="Script" path="res://scenes/props/hair_anchor.gd" id="15_a3g5e"]
+[ext_resource type="PackedScene" path="res://scenes/props/lever.tscn" id="16_1xj55"]
+[ext_resource type="Script" path="res://scenes/props/lever.gd" id="17_t4nup"]
+[ext_resource type="PackedScene" path="res://scenes/props/moving_block.tscn" id="18_72vwu"]
+[ext_resource type="Script" path="res://scenes/props/moving_block.gd" id="19_j175o"]
+[ext_resource type="Texture2D" path="res://assets/art/l4/bg_l4_03_workshop.png" id="20_t7tgd"]
+[ext_resource type="Script" path="res://scenes/enemies/barber_bot.gd" id="21_a0dma"]
+[ext_resource type="Script" path="res://scenes/props/door.gd" id="22_s35wg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="23_akssg"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="24_2kb4r"]
 
-[node name="StyleLab" type="Node2D" unique_id=746511383]
-script = ExtResource("1_caje7")
+[node name="StyleLab" type="Node2D" unique_id=915958114]
+script = ExtResource("1_avdci")
 level_title = "STYLE LAB - Four Haircuts"
 ending_text = "STYLE LAB CLEAR!
 Four haircuts. Better together."
 
-[node name="Tiles" type="TileMapLayer" parent="." unique_id=1743394152]
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=89148127]
 tile_map_data = PackedByteArray("AAAAAAAAAAADAAMAAAABAAAAAAADAAIAAAACAAAAAAADAAIAAAADAAAAAAADAAIAAAAEAAAAAAADAAIAAAAFAAAAAAADAAIAAAAGAAAAAAADAAIAAAAHAAAAAAADAAIAAAAIAAAAAAADAAIAAAAJAAAAAAADAAIAAAAKAAAAAAADAAIAAAALAAAAAAADAAIAAAAMAAAAAAADAAIAAAANAAAAAAADAAIAAAAOAAAAAAADAAIAAAAPAAAAAAADAAIAAAAQAAAAAAADAAIAAAARAAAAAAADAAIAAAASAAAAAAADAAIAAAATAAAAAAADAAIAAAAUAAAAAAADAAIAAAAVAAAAAAADAAIAAAAWAAAAAAADAAIAAAAXAAAAAAADAAIAAAAYAAAAAAADAAIAAAAZAAAAAAADAAIAAAAaAAAAAAADAAIAAAAbAAAAAAADAAIAAAAcAAAAAAADAAIAAAAdAAAAAAADAAIAAAAeAAAAAAADAAIAAAAfAAAAAAADAAIAAAAgAAAAAAADAAIAAAAhAAAAAAADAAIAAAAiAAAAAAADAAIAAAAjAAAAAAADAAIAAAAkAAAAAAADAAIAAAAlAAAAAAADAAIAAAAmAAAAAAADAAIAAAAnAAAAAAAAAAQAAAAAAAEAAAABAAMAAAAnAAEAAAADAAEAAAAAAAIAAAABAAMAAAAnAAIAAAADAAEAAAAAAAMAAAABAAMAAAAnAAMAAAADAAEAAAAAAAQAAAABAAMAAAAnAAQAAAADAAEAAAAAAAUAAAABAAMAAAAnAAUAAAADAAEAAAAAAAYAAAABAAMAAAAnAAYAAAADAAEAAAAAAAcAAAABAAMAAAAnAAcAAAADAAEAAAAAAAgAAAABAAMAAAAnAAgAAAADAAEAAAAAAAkAAAABAAMAAAAnAAkAAAADAAEAAAAAAAoAAAABAAMAAAAnAAoAAAADAAEAAAAAAAsAAAABAAMAAAAnAAsAAAADAAEAAAAAAAwAAAABAAMAAAAnAAwAAAADAAEAAAAAAA0AAAABAAMAAAAnAA0AAAADAAEAAAAAAA4AAAABAAMAAAAnAA4AAAADAAEAAAAAAA8AAAABAAMAAAAnAA8AAAADAAEAAAAAABAAAAABAAMAAAAnABAAAAADAAEAAAAAABEAAAABAAMAAAAnABEAAAADAAEAAAAAABIAAAABAAMAAAAnABIAAAADAAEAAAAAABMAAAACAAQAAAABABMAAAACAAMAAAACABMAAAACAAMAAAADABMAAAACAAMAAAAEABMAAAACAAMAAAAFABMAAAACAAMAAAAGABMAAAACAAMAAAAHABMAAAACAAMAAAAIABMAAAACAAMAAAAJABMAAAACAAMAAAAKABMAAAACAAMAAAALABMAAAACAAMAAAAMABMAAAACAAMAAAANABMAAAACAAMAAAAOABMAAAACAAMAAAAPABMAAAACAAMAAAAQABMAAAACAAMAAAARABMAAAACAAMAAAASABMAAAACAAMAAAATABMAAAACAAMAAAAUABMAAAACAAMAAAAVABMAAAACAAMAAAAWABMAAAACAAMAAAAXABMAAAACAAMAAAAYABMAAAACAAMAAAAZABMAAAACAAMAAAAaABMAAAACAAMAAAAbABMAAAACAAMAAAAcABMAAAACAAMAAAAdABMAAAACAAMAAAAeABMAAAACAAMAAAAfABMAAAACAAMAAAAgABMAAAACAAMAAAAhABMAAAACAAMAAAAiABMAAAACAAMAAAAjABMAAAACAAMAAAAkABMAAAACAAMAAAAlABMAAAACAAMAAAAmABMAAAACAAMAAAAnABMAAAADAAMAAAAAABQAAAADAAMAAAABABQAAAACAAQAAAACABQAAAABAAQAAAADABQAAAAAAAQAAAAEABQAAAADAAMAAAAFABQAAAACAAQAAAAGABQAAAABAAQAAAAHABQAAAAAAAQAAAAIABQAAAADAAMAAAAJABQAAAACAAQAAAAKABQAAAABAAQAAAALABQAAAAAAAQAAAAMABQAAAADAAMAAAANABQAAAACAAQAAAAOABQAAAABAAQAAAAPABQAAAAAAAQAAAAQABQAAAADAAMAAAARABQAAAACAAQAAAASABQAAAABAAQAAAATABQAAAAAAAQAAAAUABQAAAADAAMAAAAVABQAAAACAAQAAAAWABQAAAABAAQAAAAXABQAAAAAAAQAAAAYABQAAAADAAMAAAAZABQAAAACAAQAAAAaABQAAAABAAQAAAAbABQAAAAAAAQAAAAcABQAAAADAAMAAAAdABQAAAACAAQAAAAeABQAAAABAAQAAAAfABQAAAAAAAQAAAAgABQAAAADAAMAAAAhABQAAAACAAQAAAAiABQAAAABAAQAAAAjABQAAAAAAAQAAAAkABQAAAADAAMAAAAlABQAAAACAAQAAAAmABQAAAABAAQAAAAnABQAAAAAAAQAAAAAABUAAAAAAAQAAAABABUAAAADAAMAAAACABUAAAACAAQAAAADABUAAAABAAQAAAAEABUAAAAAAAQAAAAFABUAAAADAAMAAAAGABUAAAACAAQAAAAHABUAAAABAAQAAAAIABUAAAAAAAQAAAAJABUAAAADAAMAAAAKABUAAAACAAQAAAALABUAAAABAAQAAAAMABUAAAAAAAQAAAANABUAAAADAAMAAAAOABUAAAACAAQAAAAPABUAAAABAAQAAAAQABUAAAAAAAQAAAARABUAAAADAAMAAAASABUAAAACAAQAAAATABUAAAABAAQAAAAUABUAAAAAAAQAAAAVABUAAAADAAMAAAAWABUAAAACAAQAAAAXABUAAAABAAQAAAAYABUAAAAAAAQAAAAZABUAAAADAAMAAAAaABUAAAACAAQAAAAbABUAAAABAAQAAAAcABUAAAAAAAQAAAAdABUAAAADAAMAAAAeABUAAAACAAQAAAAfABUAAAABAAQAAAAgABUAAAAAAAQAAAAhABUAAAADAAMAAAAiABUAAAACAAQAAAAjABUAAAABAAQAAAAkABUAAAAAAAQAAAAlABUAAAADAAMAAAAmABUAAAACAAQAAAAnABUAAAABAAQAAAAAABYAAAABAAQAAAABABYAAAAAAAQAAAACABYAAAADAAMAAAADABYAAAACAAQAAAAEABYAAAABAAQAAAAFABYAAAAAAAQAAAAGABYAAAADAAMAAAAHABYAAAACAAQAAAAIABYAAAABAAQAAAAJABYAAAAAAAQAAAAKABYAAAADAAMAAAALABYAAAACAAQAAAAMABYAAAABAAQAAAANABYAAAAAAAQAAAAOABYAAAADAAMAAAAPABYAAAACAAQAAAAQABYAAAABAAQAAAARABYAAAAAAAQAAAASABYAAAADAAMAAAATABYAAAACAAQAAAAUABYAAAABAAQAAAAVABYAAAAAAAQAAAAWABYAAAADAAMAAAAXABYAAAACAAQAAAAYABYAAAABAAQAAAAZABYAAAAAAAQAAAAaABYAAAADAAMAAAAbABYAAAACAAQAAAAcABYAAAABAAQAAAAdABYAAAAAAAQAAAAeABYAAAADAAMAAAAfABYAAAACAAQAAAAgABYAAAABAAQAAAAhABYAAAAAAAQAAAAiABYAAAADAAMAAAAjABYAAAACAAQAAAAkABYAAAABAAQAAAAlABYAAAAAAAQAAAAmABYAAAADAAMAAAAnABYAAAACAAQAAAAoAAAAAAADAAMAAAApAAAAAAADAAIAAAAqAAAAAAADAAIAAAArAAAAAAADAAIAAAAsAAAAAAADAAIAAAAtAAAAAAADAAIAAAAuAAAAAAADAAIAAAAvAAAAAAADAAIAAAAwAAAAAAADAAIAAAAxAAAAAAADAAIAAAAyAAAAAAADAAIAAAAzAAAAAAADAAIAAAA0AAAAAAADAAIAAAA1AAAAAAADAAIAAAA2AAAAAAADAAIAAAA3AAAAAAADAAIAAAA4AAAAAAADAAIAAAA5AAAAAAADAAIAAAA6AAAAAAADAAIAAAA7AAAAAAADAAIAAAA8AAAAAAADAAIAAAA9AAAAAAADAAIAAAA+AAAAAAADAAIAAAA/AAAAAAADAAIAAABAAAAAAAADAAIAAABBAAAAAAADAAIAAABCAAAAAAADAAIAAABDAAAAAAADAAIAAABEAAAAAAADAAIAAABFAAAAAAADAAIAAABGAAAAAAADAAIAAABHAAAAAAADAAIAAABIAAAAAAADAAIAAABJAAAAAAADAAIAAABKAAAAAAADAAIAAABLAAAAAAADAAIAAABMAAAAAAADAAIAAABNAAAAAAADAAIAAABOAAAAAAADAAIAAABPAAAAAAAAAAQAAAAoAAEAAAABAAMAAABPAAEAAAADAAEAAAAoAAIAAAABAAMAAABPAAIAAAADAAEAAAAoAAMAAAABAAMAAABPAAMAAAADAAEAAAAoAAQAAAABAAMAAABPAAQAAAADAAEAAAAoAAUAAAABAAMAAABPAAUAAAADAAEAAAAoAAYAAAABAAMAAABPAAYAAAADAAEAAAAoAAcAAAABAAMAAABPAAcAAAADAAEAAAAoAAgAAAABAAMAAABPAAgAAAADAAEAAAAoAAkAAAABAAMAAABPAAkAAAADAAEAAAAoAAoAAAABAAMAAAAvAAoAAAADAAQAAAAwAAoAAAADAAQAAAAxAAoAAAADAAQAAAAyAAoAAAADAAQAAABPAAoAAAADAAEAAAAoAAsAAAABAAMAAABPAAsAAAADAAEAAAAoAAwAAAABAAMAAABPAAwAAAADAAEAAAAoAA0AAAABAAMAAABPAA0AAAADAAEAAAAoAA4AAAABAAMAAABPAA4AAAADAAEAAAAoAA8AAAABAAMAAABPAA8AAAADAAEAAAAoABAAAAABAAMAAABPABAAAAADAAEAAAAoABEAAAABAAMAAABPABEAAAADAAEAAAAoABIAAAABAAMAAABPABIAAAADAAEAAAAoABMAAAACAAQAAAApABMAAAACAAMAAAAqABMAAAACAAMAAAArABMAAAACAAMAAAAsABMAAAACAAMAAAAtABMAAAACAAMAAAAuABMAAAACAAMAAAAvABMAAAACAAMAAAAwABMAAAACAAMAAAAxABMAAAAAAAMAAABDABMAAAACAAEAAABEABMAAAACAAMAAABFABMAAAACAAMAAABGABMAAAACAAMAAABHABMAAAACAAMAAABIABMAAAACAAMAAABJABMAAAACAAMAAABKABMAAAACAAMAAABLABMAAAACAAMAAABMABMAAAACAAMAAABNABMAAAACAAMAAABOABMAAAACAAMAAABPABMAAAADAAMAAAAoABQAAAADAAMAAAApABQAAAACAAQAAAAqABQAAAABAAQAAAArABQAAAAAAAQAAAAsABQAAAADAAMAAAAtABQAAAACAAQAAAAuABQAAAABAAQAAAAvABQAAAAAAAQAAAAwABQAAAADAAMAAAAxABQAAAABAAMAAABDABQAAAADAAEAAABEABQAAAADAAMAAABFABQAAAACAAQAAABGABQAAAABAAQAAABHABQAAAAAAAQAAABIABQAAAADAAMAAABJABQAAAACAAQAAABKABQAAAABAAQAAABLABQAAAAAAAQAAABMABQAAAADAAMAAABNABQAAAACAAQAAABOABQAAAABAAQAAABPABQAAAAAAAQAAAAoABUAAAAAAAQAAAApABUAAAADAAMAAAAqABUAAAACAAQAAAArABUAAAABAAQAAAAsABUAAAAAAAQAAAAtABUAAAADAAMAAAAuABUAAAACAAQAAAAvABUAAAABAAQAAAAwABUAAAAAAAQAAAAxABUAAAABAAMAAABDABUAAAADAAEAAABEABUAAAAAAAQAAABFABUAAAADAAMAAABGABUAAAACAAQAAABHABUAAAABAAQAAABIABUAAAAAAAQAAABJABUAAAADAAMAAABKABUAAAACAAQAAABLABUAAAABAAQAAABMABUAAAAAAAQAAABNABUAAAADAAMAAABOABUAAAACAAQAAABPABUAAAABAAQAAAAoABYAAAABAAQAAAApABYAAAAAAAQAAAAqABYAAAADAAMAAAArABYAAAACAAQAAAAsABYAAAABAAQAAAAtABYAAAAAAAQAAAAuABYAAAADAAMAAAAvABYAAAACAAQAAAAwABYAAAABAAQAAAAxABYAAAAAAAQAAAAyABYAAAACAAMAAAAzABYAAAACAAMAAAA0ABYAAAACAAMAAAA1ABYAAAACAAMAAAA2ABYAAAACAAMAAAA3ABYAAAACAAMAAAA4ABYAAAACAAMAAAA5ABYAAAACAAMAAAA6ABYAAAACAAMAAAA7ABYAAAACAAMAAAA8ABYAAAACAAMAAAA9ABYAAAACAAMAAAA+ABYAAAACAAMAAAA/ABYAAAACAAMAAABAABYAAAACAAMAAABBABYAAAACAAMAAABCABYAAAACAAMAAABDABYAAAACAAQAAABEABYAAAABAAQAAABFABYAAAAAAAQAAABGABYAAAADAAMAAABHABYAAAACAAQAAABIABYAAAABAAQAAABJABYAAAAAAAQAAABKABYAAAADAAMAAABLABYAAAACAAQAAABMABYAAAABAAQAAABNABYAAAAAAAQAAABOABYAAAADAAMAAABPABYAAAACAAQAAABQAAAAAAADAAMAAABRAAAAAAADAAIAAABSAAAAAAADAAIAAABTAAAAAAADAAIAAABUAAAAAAADAAIAAABVAAAAAAADAAIAAABWAAAAAAADAAIAAABXAAAAAAADAAIAAABYAAAAAAADAAIAAABZAAAAAAADAAIAAABaAAAAAAADAAIAAABbAAAAAAADAAIAAABcAAAAAAADAAIAAABdAAAAAAADAAIAAABeAAAAAAADAAIAAABfAAAAAAADAAIAAABgAAAAAAADAAIAAABhAAAAAAADAAIAAABiAAAAAAADAAIAAABjAAAAAAADAAIAAABkAAAAAAADAAIAAABlAAAAAAADAAIAAABmAAAAAAADAAIAAABnAAAAAAADAAIAAABoAAAAAAADAAIAAABpAAAAAAADAAIAAABqAAAAAAADAAIAAABrAAAAAAADAAIAAABsAAAAAAADAAIAAABtAAAAAAADAAIAAABuAAAAAAADAAIAAABvAAAAAAADAAIAAABwAAAAAAADAAIAAABxAAAAAAADAAIAAAByAAAAAAADAAIAAABzAAAAAAADAAIAAAB0AAAAAAADAAIAAAB1AAAAAAADAAIAAAB2AAAAAAADAAIAAAB3AAAAAAAAAAQAAABQAAEAAAABAAMAAAB3AAEAAAADAAEAAABQAAIAAAABAAMAAAB3AAIAAAADAAEAAABQAAMAAAABAAMAAAB3AAMAAAADAAEAAABQAAQAAAABAAMAAAB3AAQAAAADAAEAAABQAAUAAAABAAMAAAB3AAUAAAADAAEAAABQAAYAAAABAAMAAAB3AAYAAAADAAEAAABQAAcAAAABAAMAAAB3AAcAAAADAAEAAABQAAgAAAABAAMAAAB3AAgAAAADAAEAAABQAAkAAAABAAMAAAB3AAkAAAADAAEAAABQAAoAAAABAAMAAAB3AAoAAAADAAEAAABQAAsAAAABAAMAAAB3AAsAAAADAAEAAABQAAwAAAABAAMAAABRAAwAAAADAAQAAABSAAwAAAADAAQAAABTAAwAAAADAAQAAABxAAwAAAADAAQAAAByAAwAAAADAAQAAABzAAwAAAADAAQAAAB3AAwAAAADAAEAAABQAA0AAAABAAMAAAB3AA0AAAADAAEAAABQAA4AAAABAAMAAAB3AA4AAAADAAEAAABQAA8AAAABAAMAAAB3AA8AAAADAAEAAABQABAAAAABAAMAAABRABAAAAADAAQAAABSABAAAAADAAQAAABTABAAAAADAAQAAABUABAAAAADAAQAAABwABAAAAADAAQAAABxABAAAAADAAQAAAByABAAAAADAAQAAABzABAAAAADAAQAAAB3ABAAAAADAAEAAABQABEAAAABAAMAAAB3ABEAAAADAAEAAABQABIAAAABAAMAAAB3ABIAAAADAAEAAABQABMAAAACAAQAAABRABMAAAACAAMAAABSABMAAAACAAMAAABTABMAAAACAAMAAABUABMAAAACAAMAAABVABMAAAACAAMAAABWABMAAAACAAMAAABXABMAAAACAAMAAABYABMAAAACAAMAAABZABMAAAACAAMAAABaABMAAAACAAMAAABbABMAAAACAAMAAABcABMAAAACAAMAAABdABMAAAACAAMAAABeABMAAAACAAMAAABfABMAAAACAAMAAABgABMAAAACAAMAAABhABMAAAACAAMAAABiABMAAAACAAMAAABjABMAAAACAAMAAABkABMAAAACAAMAAABlABMAAAACAAMAAABmABMAAAACAAMAAABnABMAAAACAAMAAABoABMAAAACAAMAAABpABMAAAACAAMAAABqABMAAAACAAMAAABrABMAAAACAAMAAABsABMAAAACAAMAAABtABMAAAACAAMAAABuABMAAAACAAMAAABvABMAAAACAAMAAABwABMAAAACAAMAAABxABMAAAACAAMAAAByABMAAAACAAMAAABzABMAAAACAAMAAAB0ABMAAAACAAMAAAB1ABMAAAACAAMAAAB2ABMAAAACAAMAAAB3ABMAAAADAAMAAABQABQAAAADAAMAAABRABQAAAACAAQAAABSABQAAAABAAQAAABTABQAAAAAAAQAAABUABQAAAADAAMAAABVABQAAAACAAQAAABWABQAAAABAAQAAABXABQAAAAAAAQAAABYABQAAAADAAMAAABZABQAAAACAAQAAABaABQAAAABAAQAAABbABQAAAAAAAQAAABcABQAAAADAAMAAABdABQAAAACAAQAAABeABQAAAABAAQAAABfABQAAAAAAAQAAABgABQAAAADAAMAAABhABQAAAACAAQAAABiABQAAAABAAQAAABjABQAAAAAAAQAAABkABQAAAADAAMAAABlABQAAAACAAQAAABmABQAAAABAAQAAABnABQAAAAAAAQAAABoABQAAAADAAMAAABpABQAAAACAAQAAABqABQAAAABAAQAAABrABQAAAAAAAQAAABsABQAAAADAAMAAABtABQAAAACAAQAAABuABQAAAABAAQAAABvABQAAAAAAAQAAABwABQAAAADAAMAAABxABQAAAACAAQAAAByABQAAAABAAQAAABzABQAAAAAAAQAAAB0ABQAAAADAAMAAAB1ABQAAAACAAQAAAB2ABQAAAABAAQAAAB3ABQAAAAAAAQAAABQABUAAAAAAAQAAABRABUAAAADAAMAAABSABUAAAACAAQAAABTABUAAAABAAQAAABUABUAAAAAAAQAAABVABUAAAADAAMAAABWABUAAAACAAQAAABXABUAAAABAAQAAABYABUAAAAAAAQAAABZABUAAAADAAMAAABaABUAAAACAAQAAABbABUAAAABAAQAAABcABUAAAAAAAQAAABdABUAAAADAAMAAABeABUAAAACAAQAAABfABUAAAABAAQAAABgABUAAAAAAAQAAABhABUAAAADAAMAAABiABUAAAACAAQAAABjABUAAAABAAQAAABkABUAAAAAAAQAAABlABUAAAADAAMAAABmABUAAAACAAQAAABnABUAAAABAAQAAABoABUAAAAAAAQAAABpABUAAAADAAMAAABqABUAAAACAAQAAABrABUAAAABAAQAAABsABUAAAAAAAQAAABtABUAAAADAAMAAABuABUAAAACAAQAAABvABUAAAABAAQAAABwABUAAAAAAAQAAABxABUAAAADAAMAAAByABUAAAACAAQAAABzABUAAAABAAQAAAB0ABUAAAAAAAQAAAB1ABUAAAADAAMAAAB2ABUAAAACAAQAAAB3ABUAAAABAAQAAABQABYAAAABAAQAAABRABYAAAAAAAQAAABSABYAAAADAAMAAABTABYAAAACAAQAAABUABYAAAABAAQAAABVABYAAAAAAAQAAABWABYAAAADAAMAAABXABYAAAACAAQAAABYABYAAAABAAQAAABZABYAAAAAAAQAAABaABYAAAADAAMAAABbABYAAAACAAQAAABcABYAAAABAAQAAABdABYAAAAAAAQAAABeABYAAAADAAMAAABfABYAAAACAAQAAABgABYAAAABAAQAAABhABYAAAAAAAQAAABiABYAAAADAAMAAABjABYAAAACAAQAAABkABYAAAABAAQAAABlABYAAAAAAAQAAABmABYAAAADAAMAAABnABYAAAACAAQAAABoABYAAAABAAQAAABpABYAAAAAAAQAAABqABYAAAADAAMAAABrABYAAAACAAQAAABsABYAAAABAAQAAABtABYAAAAAAAQAAABuABYAAAADAAMAAABvABYAAAACAAQAAABwABYAAAABAAQAAABxABYAAAAAAAQAAAByABYAAAADAAMAAABzABYAAAACAAQAAAB0ABYAAAABAAQAAAB1ABYAAAAAAAQAAAB2ABYAAAADAAMAAAB3ABYAAAACAAQAAAA=")
-tile_set = ExtResource("2_avdci")
+tile_set = ExtResource("2_ais5v")
 
-[node name="Rooms" type="Node2D" parent="." unique_id=74341441]
+[node name="Rooms" type="Node2D" parent="." unique_id=1241933097]
 
-[node name="Room1" type="Node2D" parent="Rooms" unique_id=383766432]
-script = ExtResource("3_ais5v")
+[node name="Room1" type="Node2D" parent="Rooms" unique_id=1224918125]
+script = ExtResource("3_pd3rx")
 title = "1 - The Bounce Studio"
 starting_hair = PackedInt32Array(2, 1)
+styles = PackedInt32Array(2, 1)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("cannonball"),
+"name": "Reinforced gel curtain"
+}, {
+"any": PackedStringArray("walk"),
+"name": "Shampoo shower"
+}])
 
-[node name="Backdrop" type="TextureRect" parent="Rooms/Room1" unique_id=647282508]
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room1" unique_id=524247628]
 z_index = -10
 mouse_filter = 2
-texture = ExtResource("4_pd3rx")
+texture = ExtResource("4_6gwee")
 
-[node name="SpawnP1" type="Marker2D" parent="Rooms/Room1" unique_id=985414364]
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room1" unique_id=1227314797]
 position = Vector2(112, 586)
 
-[node name="SpawnP2" type="Marker2D" parent="Rooms/Room1" unique_id=985290365]
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room1" unique_id=1745497430]
 position = Vector2(176, 586)
 
-[node name="ReinforcedGel" type="StaticBody2D" parent="Rooms/Room1" unique_id=1672246749 groups=["breakable"] instance=ExtResource("5_6gwee")]
+[node name="ReinforcedGel" type="StaticBody2D" parent="Rooms/Room1" unique_id=699127870 groups=["breakable"] instance=ExtResource("5_uxden")]
 texture_filter = 2
 position = Vector2(736, 32)
 collision_mask = 0
-script = ExtResource("6_uxden")
+script = ExtResource("6_lv7cd")
 size = Vector2(64, 576)
 requires_cannonball = true
 
-[node name="Shampoo" type="Area2D" parent="Rooms/Room1" unique_id=1875095666]
+[node name="Shampoo" type="Area2D" parent="Rooms/Room1" unique_id=163505229]
 position = Vector2(384, 32)
-script = ExtResource("7_lv7cd")
+script = ExtResource("7_tkr6q")
 size = Vector2(64, 576)
 off_time = 4.0
 on_time = 1.0
 
-[node name="Dryer" type="Area2D" parent="Rooms/Room1" unique_id=1746858298]
+[node name="Dryer" type="Area2D" parent="Rooms/Room1" unique_id=1515486375]
 position = Vector2(480, 416)
-script = ExtResource("8_tkr6q")
+script = ExtResource("8_fc0v8")
 size = Vector2(64, 192)
 
-[node name="Exit" type="Area2D" parent="Rooms/Room1" unique_id=468029855 instance=ExtResource("9_fc0v8")]
+[node name="Exit" type="Area2D" parent="Rooms/Room1" unique_id=512454283 instance=ExtResource("9_ctdi7")]
 texture_filter = 2
 position = Vector2(1152, 512)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("10_ctdi7")
+script = ExtResource("10_kjcan")
 
-[node name="Hint7" type="Label" parent="Rooms/Room1" unique_id=1911083538]
+[node name="Hint7" type="Label" parent="Rooms/Room1" unique_id=869220578]
 offset_left = 48.0
 offset_top = 220.0
 offset_right = 48.0
@@ -89,10 +98,13 @@ theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
 theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
-text = "P1 AFRO: hold G to charge; release to bounce a rider.
-P2: jump on Afro's head and hold K as P1 releases G."
+text = "P1 (Afro): hold G to charge; release to bounce a rider.
+P2: jump on the Afro's head and hold K as P1 releases G."
+script = ExtResource("11_txw68")
+template = "{afro} (Afro): hold {afro.skill} to charge; release to bounce a rider.
+{pomp}: jump on the Afro's head and hold {pomp.skill} as {afro} releases {afro.skill}."
 
-[node name="Hint8" type="Label" parent="Rooms/Room1" unique_id=907799291]
+[node name="Hint8" type="Label" parent="Rooms/Room1" unique_id=814699995]
 offset_left = 780.0
 offset_top = 250.0
 offset_right = 780.0
@@ -104,7 +116,7 @@ theme_override_constants/outline_size = 6
 text = "CANNONBALL!
 Only the co-op drill breaks orange gel."
 
-[node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=1728700991]
+[node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=59238513]
 offset_left = 420.0
 offset_top = 400.0
 offset_right = 420.0
@@ -116,62 +128,73 @@ theme_override_constants/outline_size = 6
 text = "Wet Afro hair collapses.
 Dry off before charging."
 
-[node name="Room2" type="Node2D" parent="Rooms" unique_id=68847792]
+[node name="Room2" type="Node2D" parent="Rooms" unique_id=536893908]
 position = Vector2(1280, 0)
-script = ExtResource("3_ais5v")
+script = ExtResource("3_pd3rx")
 title = "2 - Rapunzel Crossing"
 starting_hair = PackedInt32Array(3, 0)
+styles = PackedInt32Array(3, 0)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("hook"),
+"name": "Gold ring to the high shelf"
+}, {
+"any": PackedStringArray("rope_glide"),
+"name": "17-wide dye pool"
+}, {
+"any": PackedStringArray("lever", "lasso_lever"),
+"name": "Bridge lever"
+}])
 
-[node name="Backdrop" type="TextureRect" parent="Rooms/Room2" unique_id=1397564049]
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room2" unique_id=1750189094]
 z_index = -10
 mouse_filter = 2
-texture = ExtResource("11_kjcan")
+texture = ExtResource("12_0u5tb")
 
-[node name="DyePool" type="Area2D" parent="Rooms/Room2" unique_id=1230110910 instance=ExtResource("12_txw68")]
+[node name="DyePool" type="Area2D" parent="Rooms/Room2" unique_id=2050874060 instance=ExtResource("13_72q48")]
 texture_filter = 2
 position = Vector2(320, 672)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("13_0u5tb")
+script = ExtResource("14_4rpvf")
 size = Vector2(544, 32)
 
-[node name="SpawnP1" type="Marker2D" parent="Rooms/Room2" unique_id=1000474179]
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room2" unique_id=1723853174]
 position = Vector2(112, 586)
 
-[node name="SpawnP2" type="Marker2D" parent="Rooms/Room2" unique_id=1024330510]
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room2" unique_id=1916875114]
 position = Vector2(176, 586)
 
-[node name="GoldRing" type="Node2D" parent="Rooms/Room2" unique_id=730978674]
+[node name="GoldRing" type="Node2D" parent="Rooms/Room2" unique_id=1220126512]
 position = Vector2(328, 285)
-script = ExtResource("14_72q48")
+script = ExtResource("15_a3g5e")
 
-[node name="BridgeLever" type="Area2D" parent="Rooms/Room2" unique_id=1236696739 instance=ExtResource("15_4rpvf")]
+[node name="BridgeLever" type="Area2D" parent="Rooms/Room2" unique_id=947129641 instance=ExtResource("16_1xj55")]
 texture_filter = 2
 position = Vector2(1008, 592)
 collision_layer = 32
 collision_mask = 0
 monitoring = false
-script = ExtResource("16_a3g5e")
+script = ExtResource("17_t4nup")
 
-[node name="Bridge" type="AnimatableBody2D" parent="Rooms/Room2" unique_id=161809620 node_paths=PackedStringArray("trigger") instance=ExtResource("17_1xj55")]
+[node name="Bridge" type="AnimatableBody2D" parent="Rooms/Room2" unique_id=1253962010 node_paths=PackedStringArray("trigger") instance=ExtResource("18_72vwu")]
 texture_filter = 2
 position = Vector2(320, 64)
 collision_mask = 0
-script = ExtResource("18_t4nup")
+script = ExtResource("19_j175o")
 size = Vector2(544, 32)
 move_offset = Vector2(0, 544)
 trigger = NodePath("../BridgeLever")
 
-[node name="Exit" type="Area2D" parent="Rooms/Room2" unique_id=1479202761 instance=ExtResource("9_fc0v8")]
+[node name="Exit" type="Area2D" parent="Rooms/Room2" unique_id=1930264177 instance=ExtResource("9_ctdi7")]
 texture_filter = 2
 position = Vector2(1152, 512)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("10_ctdi7")
+script = ExtResource("10_kjcan")
 
-[node name="Hint8" type="Label" parent="Rooms/Room2" unique_id=1994306229]
+[node name="Hint8" type="Label" parent="Rooms/Room2" unique_id=899430463]
 offset_left = 48.0
 offset_top = 100.0
 offset_right = 48.0
@@ -180,10 +203,13 @@ theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
 theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
-text = "P1 LONG STRAIGHT: jump, then hold G to hook the gold ring.
+text = "P1 (Long Straight): jump, then hold G to hook the gold ring.
 On the ledge, face right and hold G to lower a rope."
+script = ExtResource("11_txw68")
+template = "{long} (Long Straight): jump, then hold {long.skill} to hook the gold ring.
+On the ledge, face right and hold {long.skill} to lower a rope."
 
-[node name="Hint9" type="Label" parent="Rooms/Room2" unique_id=2012958262]
+[node name="Hint9" type="Label" parent="Rooms/Room2" unique_id=1571104599]
 offset_left = 400.0
 offset_top = 255.0
 offset_right = 400.0
@@ -192,10 +218,13 @@ theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
 theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
-text = "P2: hold UP beside the rope to climb.
+text = "P2: hold jump beside the rope to climb.
 Move right to release; hold K to glide to the far side."
+script = ExtResource("11_txw68")
+template = "{tt}: hold jump beside the rope to climb.
+Move right to release; hold {tt.skill} to glide to the far side."
 
-[node name="Hint10" type="Label" parent="Rooms/Room2" unique_id=1091060894]
+[node name="Hint10" type="Label" parent="Rooms/Room2" unique_id=630915681]
 offset_left = 890.0
 offset_top = 385.0
 offset_right = 890.0
@@ -206,42 +235,53 @@ theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
 theme_override_constants/outline_size = 6
 text = "P2: K pulls the lever.
 The bridge lets P1 cross too."
+script = ExtResource("11_txw68")
+template = "{tt}: {tt.skill} pulls the lever.
+The bridge lets {long} cross too."
 
-[node name="Room3" type="Node2D" parent="Rooms" unique_id=1321209318]
+[node name="Room3" type="Node2D" parent="Rooms" unique_id=23176170]
 position = Vector2(2560, 0)
-script = ExtResource("3_ais5v")
+script = ExtResource("3_pd3rx")
 title = "3 - Tony's Makeover"
 starting_hair = PackedInt32Array(2, 1)
+styles = PackedInt32Array(0, 1, 2, 3)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("crash", "parry", "catch_return", "cannonball"),
+"name": "Daze Tony"
+}, {
+"any": PackedStringArray("launch", "spring", "hook"),
+"name": "Corner ledge 7 up, above the knob"
+}])
 
-[node name="Backdrop" type="TextureRect" parent="Rooms/Room3" unique_id=1894037804]
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room3" unique_id=180703910]
 z_index = -10
 mouse_filter = 2
-texture = ExtResource("19_72vwu")
+texture = ExtResource("20_t7tgd")
 
-[node name="SpawnP1" type="Marker2D" parent="Rooms/Room3" unique_id=1300735589]
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room3" unique_id=545884674]
 position = Vector2(112, 586)
 
-[node name="SpawnP2" type="Marker2D" parent="Rooms/Room3" unique_id=748927307]
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room3" unique_id=1697876488]
 position = Vector2(176, 586)
 
-[node name="BarberBot" type="CharacterBody2D" parent="Rooms/Room3" unique_id=1967021796]
+[node name="BarberBot" type="CharacterBody2D" parent="Rooms/Room3" unique_id=596266351]
 position = Vector2(800, 608)
-script = ExtResource("20_j175o")
+script = ExtResource("21_a0dma")
 
-[node name="BossDoor" type="StaticBody2D" parent="Rooms/Room3" unique_id=1486918264]
+[node name="BossDoor" type="StaticBody2D" parent="Rooms/Room3" unique_id=573735581]
 position = Vector2(1152, 32)
-script = ExtResource("21_t7tgd")
+script = ExtResource("22_s35wg")
 size = Vector2(32, 576)
 
-[node name="Exit" type="Area2D" parent="Rooms/Room3" unique_id=1858811614 instance=ExtResource("9_fc0v8")]
+[node name="Exit" type="Area2D" parent="Rooms/Room3" unique_id=1001757586 instance=ExtResource("9_ctdi7")]
 texture_filter = 2
 position = Vector2(1184, 512)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("10_ctdi7")
+script = ExtResource("10_kjcan")
 
-[node name="Hint6" type="Label" parent="Rooms/Room3" unique_id=2007414081]
+[node name="Hint6" type="Label" parent="Rooms/Room3" unique_id=1290234312]
 offset_left = 240.0
 offset_top = 60.0
 offset_right = 240.0
@@ -253,7 +293,7 @@ theme_override_constants/outline_size = 6
 text = "Tony's scissors FORCE A NEW HAIRCUT when they hurt you.
 Parry, return a caught scissor, or cannonball to daze him. Then stomp!"
 
-[node name="Hint7" type="Label" parent="Rooms/Room3" unique_id=244469674]
+[node name="Hint7" type="Label" parent="Rooms/Room3" unique_id=2132216974]
 offset_left = 56.0
 offset_top = 240.0
 offset_right = 56.0
@@ -265,33 +305,33 @@ theme_override_constants/outline_size = 6
 text = "A style chair saves your chosen pair.
 Regroup and adapt!"
 
-[node name="Players" type="Node2D" parent="." unique_id=1303235663]
+[node name="Players" type="Node2D" parent="." unique_id=2083194644]
 
-[node name="P1" type="CharacterBody2D" parent="Players" unique_id=811633512 instance=ExtResource("22_a0dma")]
+[node name="P1" type="CharacterBody2D" parent="Players" unique_id=1638602944 instance=ExtResource("23_akssg")]
 collision_layer = 2
 collision_mask = 193
-script = ExtResource("23_s35wg")
+script = ExtResource("24_2kb4r")
 
-[node name="P2" type="CharacterBody2D" parent="Players" unique_id=914458148 instance=ExtResource("22_a0dma")]
+[node name="P2" type="CharacterBody2D" parent="Players" unique_id=1243199994 instance=ExtResource("23_akssg")]
 collision_layer = 2
 collision_mask = 193
-script = ExtResource("23_s35wg")
+script = ExtResource("24_2kb4r")
 player_id = 2
 hair = 1
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=198638866]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1169004486]
 anchor_mode = 0
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=501273049]
+[node name="UI" type="CanvasLayer" parent="." unique_id=868110647]
 
-[node name="Flash" type="ColorRect" parent="UI" unique_id=1188761364]
+[node name="Flash" type="ColorRect" parent="UI" unique_id=1302689446]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Banner" type="Label" parent="UI" unique_id=1414210329]
+[node name="Banner" type="Label" parent="UI" unique_id=250963818]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 40.0

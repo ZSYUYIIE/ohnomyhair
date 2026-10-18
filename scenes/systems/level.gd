@@ -76,9 +76,6 @@ func _ready() -> void:
 	room_index = clampi(start_room, 0, rooms.size() - 1)
 	_activate_room(room_index)
 	camera.position = rooms[room_index].position
-	if rooms[room_index].starts_with_swapped_hair:
-		for player in players:
-			player.set_hair(Player.Hair.POMPADOUR if player.player_id == 1 else Player.Hair.TWIN_TAILS)
 	_place_players()
 	_install_stations()
 	show_banner(level_title + "\n" + rooms[room_index].title)
@@ -208,6 +205,8 @@ func _on_room_cleared(room: Room) -> void:
 
 func _install_stations() -> void:
 	for room in rooms:
+		if room.styles.size() < 2:
+			continue
 		var station := StyleChair.new()
 		station.level = self
 		station.name = "StylingStation"
@@ -229,12 +228,14 @@ func open_styling(chair: Area2D) -> void:
 			return
 	_active_chair = chair
 	get_tree().paused = true
-	styling_menu.open(players)
+	styling_menu.open(players, rooms[room_index].styles)
 
 
 func _save_styles(styles: Array[int]) -> void:
 	get_tree().paused = false
 	if not is_instance_valid(_active_chair) or styles.size() != players.size(): return
+	# Two friends never share a haircut, and only the room's own styles are on offer.
+	if styles[0] == styles[1] or styles.any(func(s): return s not in rooms[room_index].styles): return
 	var positions: Array[Vector2] = []
 	for i in players.size():
 		players[i].set_hair(styles[i])
