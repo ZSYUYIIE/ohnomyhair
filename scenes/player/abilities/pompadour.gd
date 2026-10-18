@@ -2,7 +2,8 @@ class_name Pompadour
 extends HairAbility
 ## Pompadour "The Parry".
 ## Skill: launch a friend standing on your head; otherwise dash forward, smashing
-## hair-gel walls and ramming enemies.
+## hair-gel walls and ramming enemies. One dash per jump in the air (landing recharges
+## it): chained air dashes zero the fall each time and let her hover over any gap.
 ## Attack: parry (0.15 s window) that sends scissors back the way they came.
 ## Combo "Sling Dash": press skill while dangling from twin-tails' hair to be flung
 ## forward: a long, gravity-free air dash that smashes gel; the carrier bobs up.
@@ -27,6 +28,7 @@ var _parry := 0.0
 var _parry_cooldown := 0.0
 var _struck: Array[Node] = []
 var _parry_pose := 0.0  # how long the parry animation still shows
+var _air_dash_used := false
 
 
 func _init() -> void:
@@ -37,12 +39,15 @@ func _init() -> void:
 
 func tick(delta: float) -> void:
 	_cooldown -= delta
+	if player.is_on_floor():
+		_air_dash_used = false
 	if player.pressed("skill"):
 		var rider := _rider()
 		if rider:
 			rider.launch(launch_height)
 			player.bounce(Vector2(1.3, 0.7))
-		elif _cooldown <= 0.0 and player.carried_by == null:
+		elif _cooldown <= 0.0 and player.carried_by == null and (player.is_on_floor() or not _air_dash_used):
+			_air_dash_used = not player.is_on_floor()
 			_start_dash(player.facing, dash_time)
 
 	if _dash_left > 0.0:
@@ -68,6 +73,7 @@ func tick_carried(delta: float) -> void:
 		carrier.velocity.y = minf(carrier.velocity.y, -sling_lift)
 		_start_dash(carrier.facing, sling_time)
 		_slinging = true
+		_air_dash_used = true  # the fling is her air dash for this flight
 		return
 	tick_attack(delta)
 
@@ -142,6 +148,7 @@ func reset() -> void:
 	_cooldown = 0.0
 	_parry = 0.0
 	_parry_pose = 0.0
+	_air_dash_used = false
 
 
 func _rider() -> Player:

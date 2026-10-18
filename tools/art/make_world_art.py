@@ -296,6 +296,32 @@ def bg_l4_closing() -> None:
     save(wall, "l4", "bg_l4_01_closing.png")
 
 
+def bg_l4_rush() -> None:
+    """Rush Hour: the shop's back room, where the robots charge. Ducts run from the ceiling
+    vents, spare clipper bots sit in wall docks, amber warning lamps hang between them."""
+    wall = Wall((232, 214, 206), 64)
+    pinstripes(wall, 36)
+    duct = wall.tint(CHROME, 0.35)
+    for x in (464, 784):                      # ducts down to the vents the waves use
+        wall.shape(rect_pts(x - 18, 0, 36, 70, 6), duct)
+        wall.shape(rect_pts(x - 26, 62, 52, 14, 4), wall.shade)
+    wall.shape(rect_pts(0, 18, 1280, 22, 0), duct, line=False)   # ceiling duct run
+    for cx in (150, 330, 960, 1120):            # charging docks with spare robots asleep
+        wall.shape(rect_pts(cx - 46, 150, 92, 120, 10), wall.shade)
+        wall.shape(rect_pts(cx - 30, 205, 60, 44, 10), wall.tint((70, 80, 95), 0.25))
+        wall.shape(ellipse_pts(cx + 14, 222, 6, 6, 12), wall.tint(EXIT, 0.3), line=False)
+        wall.path([(cx, 150), (cx, 120), (cx + 20, 100)], wall.line, 2.0, amp=0.3)
+    for cx in (640,):                            # amber warning lamp
+        wall.path([(cx, 40), (cx, 96)], wall.line, 2.0, amp=0)
+        wall.shape(ellipse_pts(cx, 112, 22, 18, 24), wall.tint(INTERACT, 0.45))
+        for a in (-0.6, 0.0, 0.6):
+            wall.path([(cx + 30 * math.sin(a), 112 + 30 * math.cos(a)), (cx + 48 * math.sin(a), 112 + 48 * math.cos(a))],
+                      wall.tint(INTERACT, 0.45), 3.0, amp=0)
+    gear(wall, 220, 420, 46, 9, wall.tint(CHROME, 0.3))
+    gear(wall, 1060, 430, 38, 8, wall.tint(WOOD, 0.25))
+    save(wall, "l4", "bg_l4_rush.png")
+
+
 def bg_l4_chair() -> None:
     wall = Wall((246, 221, 228), 62)
     pinstripes(wall, 40)
@@ -478,7 +504,7 @@ def main() -> None:
         make_tiles(level)
     ENEMIES.mkdir(parents=True, exist_ok=True)
     for bg in (bg_l2_reception, bg_l2_corridor, bg_l3_blow_dry, bg_l3_shampoo, bg_l3_rinse,
-               bg_l4_closing, bg_l4_chair, bg_l4_workshop):
+               bg_l4_closing, bg_l4_chair, bg_l4_rush, bg_l4_workshop):
         bg()
     for prop in (clipper_bot, scissors, dispenser, barber_bot, bell, staff_door, chair):
         prop()

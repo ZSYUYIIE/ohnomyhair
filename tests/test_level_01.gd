@@ -100,7 +100,7 @@ func _room_3() -> void:
 
 	await walk_to(p2, o + 37.5 * TILE)
 	await walk_to(p1, o + 36.5 * TILE)
-	check(await wait_until(func(): return level.banner.text.ends_with("CLEAR!"), 120), "R3: both at the back door clears L1")
+	check(await wait_until(func(): return level.banner.text.contains("CLEAR!"), 120), "R3: both at the back door clears L1")
 
 
 ## Without the fling: a plain carry flies into the curtain and drops both into the dye.

@@ -28,11 +28,14 @@ func _run() -> void:
 	await _respawn_out_of_a_hazard_dies_once()
 	await _golden_scissor_dazes_the_boss_longer()
 	await _dryer_lifts_a_glider()
-	await _dryer_only_hovers_a_carry()
+	await _dryer_lifts_a_carry_slower()
 	await _hair_copter_lifts_the_rider()
 	await _shower_soaks_and_dryer_dries()
 	await _wet_pompadour_bounces_off_gel()
 	await _tonic_grows_hair_back()
+	await _one_air_dash_per_jump()
+	await _running_shower_beats_the_dryer()
+	await _hot_iron_burns_a_heart_not_a_life()
 	for action in InputMap.get_actions():
 		Input.action_release(action)
 	print("Results: %d passed, %d failed" % [passed, failed])
@@ -280,7 +283,9 @@ func _dryer_lifts_a_glider() -> void:
 	_check(b.velocity.y <= 262.0, "dryer: a non-glider falls slower in the warm air")
 
 
-func _dryer_only_hovers_a_carry() -> void:
+## Playtest 5: players expect the warm air to lift a carry too. It does, at about half
+## the solo speed (the friend's weight), so riding on her head stays the fast way up.
+func _dryer_lifts_a_carry_slower() -> void:
 	_new_arena()
 	_box(Rect2(-2000, 0, 4000, 64))
 	_dryer_column()
@@ -295,7 +300,8 @@ func _dryer_only_hovers_a_carry() -> void:
 	await _ticks(60)
 	_hold(a, "jump", false)
 	_hold(a, "skill", false)
-	_check(a.carrying == b and absf(a.global_position.y - y0) < 0.6 * TILE, "dryer: carrying a friend she only hovers (dy=%.0f)" % (a.global_position.y - y0))
+	var rose := y0 - a.global_position.y   # one second of climbing
+	_check(a.carrying == b and rose > 0.8 * 160.0 and rose < 1.2 * 160.0, "dryer: carrying a friend she still rises, slower (%.0f px/s, solo 300)" % rose)
 
 
 ## Combo "Hair-copter": pompadour stands on the gliding twin-tails' head and rides up.
@@ -338,6 +344,77 @@ func _shower_soaks_and_dryer_dries() -> void:
 	_arena.add_child(dryer)
 	await _ticks(5)
 	_check(not a.is_wet(), "dryer: drying off is instant")
+
+
+## Playtest 5: every air dash zeroed the fall, so chaining them let pompadour hover over
+## any gap on her own (no carry needed). Now one dash per jump; landing recharges it.
+func _one_air_dash_per_jump() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	# A long fall, so the second try is well inside the same flight.
+	var b := _spawn(2, Player.Hair.POMPADOUR, Vector2(0, -40 * TILE))
+	await _ticks(3)
+	await _tap(b, "skill")
+	_check(b.ability.is_driving(), "air dash: the first dash in the air works")
+	await _ticks(30)   # past the 0.4 s cooldown
+	_check(not b.is_on_floor(), "air dash: (still airborne for the second try)")
+	await _tap(b, "skill")
+	_check(not b.ability.is_driving(), "air dash: a second dash in the same flight does nothing")
+	await _wait(func(): return b.is_on_floor(), 240)
+	await _ticks(30)
+	await _tap(b, "skill")
+	_check(b.ability.is_driving(), "air dash: landing recharges it (ground dash works)")
+	await _ticks(30)
+	_hold(b, "jump", true)
+	await _ticks(6)
+	await _tap(b, "skill")
+	_check(b.ability.is_driving(), "air dash: the next jump gets its air dash back")
+	_hold(b, "jump", false)
+	await _wait(func(): return b.is_on_floor(), 120)
+
+
+## Where a running shower pours over a dryer column, the shower wins: you stay wet (and
+## can't glide) until it stops, then the warm air dries you at once.
+func _running_shower_beats_the_dryer() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	_dryer_column()
+	var shower := ShowerHead.new()
+	shower.off_time = 0.0
+	shower.position = Vector2(-2 * TILE, -12 * TILE)
+	shower.size = Vector2(4 * TILE, 12 * TILE)
+	_arena.add_child(shower)
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(0, 0))
+	await _ticks(10)
+	_check(a.is_wet(), "shower over dryer: the running spray keeps her wet in the warm air")
+	shower.queue_free()
+	await _ticks(3)
+	_check(not a.is_wet(), "shower over dryer: once it stops, the dryer dries her at once")
+
+
+## Playtest 6: touching the flat iron restarted the room. Now it costs one heart and
+## throws you off it; cold or warming it's harmless.
+func _hot_iron_burns_a_heart_not_a_life() -> void:
+	_new_arena()
+	_box(Rect2(-2000, 0, 4000, 64))
+	var iron: HotIron = load("res://scenes/props/hot_iron.tscn").instantiate()
+	iron.size = Vector2(2 * TILE, 24)
+	iron.position = Vector2(-TILE, -24)
+	_arena.add_child(iron)
+	var a := _spawn(1, Player.Hair.TWIN_TAILS, Vector2(0, 0))
+	await _ticks(5)
+	iron._t = 0.0
+	await _ticks(5)
+	_check(a.alive and a.hp == a.max_hp, "iron: cold, it's harmless")
+	iron._t = iron.off_time - 0.2
+	await _ticks(3)
+	_check(iron._is_warning() and a.hp == a.max_hp, "iron: warming up (the '!'), still harmless")
+	a.global_position = Vector2(0, -Player.HALF_SIZE.y)
+	await _wait(func(): return iron.is_active(), 60)
+	await _ticks(3)
+	_check(a.alive and a.hp == a.max_hp - 1, "iron: red-hot, it costs one heart - not a restart (hp=%d)" % a.hp)
+	await _ticks(40)
+	_check(absf(a.global_position.x) > iron.size.x / 2.0 + Player.HALF_SIZE.x, "iron: the burn throws you clear of it")
 
 
 func _wet_pompadour_bounces_off_gel() -> void:

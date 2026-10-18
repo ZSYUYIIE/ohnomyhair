@@ -94,6 +94,6 @@ func _room_2() -> RoomBuilder:
 		rb.link(bell, "activated", door, "open")
 		rb.stripes("CatchMark%d" % col, col, col, 17, PINK)
 	rb.stripes("ParryStripes", 17, 21, 15)
-	rb.exit(19, 19, 4, 2)
+	rb.exit(19, 18)
 	rb.hint("Two bells. The door needs both.", Vector2(440, 300))
 	return rb
