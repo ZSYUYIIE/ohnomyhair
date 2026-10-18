@@ -95,6 +95,13 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if menu.is_open():
 		return
+	if event.is_action_pressed("show_help") and not _busy:
+		get_viewport().set_input_as_handled()
+		get_tree().paused = true
+		menu.show_pause(level_title, rooms[room_index].title)
+		menu.press("How to play & combos")
+		menu._guide._tabs.current_tab = 4
+		return
 	if (event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel")) and not _busy:
 		get_viewport().set_input_as_handled()
 		get_tree().paused = true
@@ -185,8 +192,10 @@ func _on_room_cleared(room: Room) -> void:
 		player.set_frozen(true)
 
 	if room_index == rooms.size() - 1:
+		Sound.play("level_clear", 0.0)
 		_on_level_cleared()
 		return
+	Sound.play("room_clear", 0.0)
 
 	room_index += 1
 	_checkpoint = {}

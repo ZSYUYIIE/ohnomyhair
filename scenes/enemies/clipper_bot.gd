@@ -54,6 +54,7 @@ func take_hit(damage: int, stun_time: float = 0.0, knockback := Vector2.ZERO) ->
 	if knockback != Vector2.ZERO:
 		velocity = knockback
 	if hp <= 0:
+		Sound.play("robot_break")
 		queue_free()
 
 

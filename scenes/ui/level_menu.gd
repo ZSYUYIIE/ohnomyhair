@@ -146,6 +146,11 @@ func _on_pressed(action: String) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible or _guide.visible:
 		return
+	if _can_resume and event.is_action_pressed("show_help"):
+		get_viewport().set_input_as_handled()
+		_on_pressed("help")
+		_guide._tabs.current_tab = 4
+		return
 	if _can_restart and event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
 		_on_pressed("restart")

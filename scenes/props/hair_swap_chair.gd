@@ -34,6 +34,7 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _swap() -> void:
+	Sound.play("swap", 0.0)
 	var players := get_tree().get_nodes_in_group("players")
 	for p: Player in players:
 		p.drop()
@@ -49,12 +50,12 @@ func _swap() -> void:
 	queue_redraw()
 
 
-const ART := preload("res://assets/art/props/prop_chair.png")
+const ART := preload("res://assets/art/props/chair_salon.tres")
 
 
 func _draw() -> void:
-	# Frames: waiting | used (darker leather). The chair stands at the zone's bottom center.
+	# The shared coral chair stands at the zone's bottom center; used leather darkens.
 	var base := Vector2(size.x / 2.0, size.y)
-	draw_texture_rect_region(ART, Rect2(base + Vector2(-56, -120), Vector2(112, 120)), Rect2(112 if used else 0, 0, 112, 120))
+	draw_texture_rect(ART, Rect2(base + Vector2(-51, -120), Vector2(102, 120)), false, Color(0.72, 0.72, 0.78) if used else Color.WHITE)
 	if used:
 		draw_string(ThemeDB.fallback_font, base + Vector2(-30, -126), "snip!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("ff5fa2"))

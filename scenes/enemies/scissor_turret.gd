@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 
 
 func fire() -> void:
+	Sound.play("scissor_fire", 0.08, -3.0)
 	var scissor := Scissor.new()
 	scissor.direction = direction
 	scissor.position = position + direction * 24.0

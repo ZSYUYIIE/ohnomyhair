@@ -13,6 +13,12 @@ The illustrated title uses **Start Game → Salon Map → Play**. Select an unlo
 the final stop stays a mystery until cleared. A new save plays the supplied 39-second
 opening before the first level; any key, mouse click or controller button skips it.
 **About** opens team credits, controls and story help.
+**Watch opening / I** replays the introduction without changing your save.
+Menus support arrows / Tab, Shift+Tab and Enter / Space. In chapter selection,
+**1–4** selects an unlocked chapter and **P** plays it; **Esc** goes back.
+**F1 / H** opens the shortcut guide from the title, chapters, gameplay or pause.
+In gameplay, **Esc** pauses and **R** restarts the current room. The guide lists
+both players' movement, abilities, chair interactions and help scrolling controls.
 UI art sources, licenses and integration details: [poster_ui.md](docs/art/poster_ui.md).
 
 From a terminal (`--room=N` starts in room N of that level):
@@ -86,6 +92,7 @@ Each test plays through a level with simulated input; exit code 0 = pass.
 ```
 godot --headless --path . --script res://tests/test_menu.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_opening.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_navigation.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd

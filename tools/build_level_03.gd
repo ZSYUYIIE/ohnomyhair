@@ -17,7 +17,7 @@ func _configure() -> void:
 	level_title = "LEVEL 3 - Wash & Blow-Dry"
 	next_level = "res://scenes/levels/level_06.tscn"
 	scene_path = "res://scenes/levels/level_03.tscn"
-	tile_atlas = "res://assets/art/l3/tiles_l3.png"
+	tile_atlas = "res://assets/art/l3/tiles_poster.svg"
 	tileset_path = "res://assets/art/l3/salon_tileset.tres"
 
 

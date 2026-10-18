@@ -98,6 +98,7 @@ func _enter(new_state: State) -> void:
 			_t = windup_time
 			_face_target()
 		State.CHARGE:
+			Sound.play("boss_charge", 0.0)
 			_t = charge_timeout
 		State.HURT:
 			_t = hurt_time
@@ -145,6 +146,7 @@ func _charge() -> State:
 	_hurt_touching_players()
 	if is_on_wall():
 		daze(crash_daze_time)
+		Sound.play("boss_stomp", 0.05, -4.0)  # the crash into the wall
 		return State.DAZED
 	return State.WALK if _t <= 0.0 else State.CHARGE
 
@@ -169,6 +171,8 @@ func _hurt() -> State:
 func daze(seconds: float) -> void:
 	if state == State.DEAD or state == State.HURT:
 		return
+	if state != State.DAZED:
+		Sound.play("boss_daze")
 	state = State.DAZED
 	_t = seconds
 
@@ -180,6 +184,7 @@ func take_hit(_damage: int, stun_time: float = 0.0, _knockback := Vector2.ZERO) 
 
 
 func _stomped_by(player: Player) -> void:
+	Sound.play("boss_stomp", 0.0)
 	hp -= 1
 	player.launch(96.0)
 	player.make_invincible(1.2)
@@ -244,7 +249,7 @@ func _hurt_touching_players() -> void:
 			p.take_hit(1, 0.0, Vector2(signf(p.global_position.x - global_position.x) * 360.0, -300.0))
 
 
-const ART := preload("res://assets/art/enemies/enemy_barber_bot.png")
+const ART := preload("res://assets/art/enemies/assistant_poster.png")
 
 
 func _draw() -> void:
@@ -257,10 +262,13 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO, 0.0, squash * Vector2(facing, 1.0))
 	# Furious (phase 3): it throbs red.
 	var tint := Color(1, 0.62, 0.6) if phase() == 3 and state != State.DAZED and int(Time.get_ticks_msec() / 150) % 2 == 0 else Color.WHITE
-	draw_texture_rect_region(ART, Rect2(-72, -140, 144, 144), Rect2(frame * 144, 0, 144, 144), tint)
+	if frame == 2: tint = Color(1.8, 1.6, 1.5)
+	draw_texture_rect(ART, Rect2(-72, -140, 144, 144), false, tint)
 	draw_set_transform(Vector2.ZERO, 0.0, squash)
 	var top := -SIZE.y
 	if state == State.DAZED:
+		draw_circle(Vector2(0, top), 12, Color("ffdf58"))
+		draw_arc(Vector2(0, top), 15, 0, TAU, 24, Color("fff4b0"), 3, true)
 		draw_string(ThemeDB.fallback_font, Vector2(-44, top - 14), "STOMP!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("f1c40f"))
 	for i in hp:
 		var bar := Rect2(-SIZE.x / 2 + i * 34, top - 34 if state != State.DAZED else top - 44, 28, 7)

@@ -15,6 +15,7 @@ const SHOTS := [
 ]
 
 var target_index := 0
+var return_to_menu := false
 var _shot_index := 0
 var _shot_elapsed := 0.0
 var _elapsed := 0.0
@@ -109,6 +110,9 @@ func _try_skip() -> void:
 func _finish() -> void:
 	if _finished: return
 	_finished = true
+	if return_to_menu:
+		get_tree().change_scene_to_file(Progress.MAIN_MENU)
+		return
 	Progress.mark_opening_seen()
 	var destination := target_index if Progress.is_unlocked(target_index) else 0
 	get_tree().change_scene_to_file(Progress.LEVELS[destination].path)

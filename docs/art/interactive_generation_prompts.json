@@ -1,0 +1,12 @@
+{
+  "tool": "built-in image_gen",
+  "title_interactive_backdrop": {
+    "reference": "assets/art/ui/poster/title_main_menu.png",
+    "prompt": "Edit this exact supplied game title illustration. Remove ONLY the two baked menu buttons and their lettering/icons (Start Game and About), including button outlines and yellow rays around the Start button, in the left lower middle region. Reconstruct the salon furniture/wall naturally behind those deleted buttons. Preserve the gold 'Oh No My Hair!' logo in the upper left, both pink and blue characters holding hands on the right, their exact mouthless stick-figure identity, every other salon detail, lighting, palette and composition. Do not change the logo or characters. Leave the area formerly occupied by the buttons quiet enough for real game-native buttons to be placed there. No new words, no new buttons, no interface. Keep 16:9. This is an edit of supplied production artwork, not a redesigned scene."
+  },
+  "assistant_poster": {
+    "reference": "assets/art/opening/cutscene_02_robot_assistant.png",
+    "transparent_background": true,
+    "prompt": "Extract/redraw ONLY the red salon robot assistant from the provided illustration as ONE production game sprite on a truly transparent background. Preserve its exact friendly-turned-dangerous design: red rectangular chest, dark purple rounded head with one glowing yellow eye, small red antenna, segmented gray scissor arms on BOTH sides, red oval boots, thick deep-purple outlines and soft glossy cel-shading. Same robot as the reference, not a new character. Full body in a clear broad standing combat silhouette, facing slightly right, both scissors visible and separated from body, boots on the same baseline. No human characters, no pink/blue hair, no room, no shadow on ground, no text, no panel or border. Center on a square canvas with comfortable transparent padding. The sprite must read at 100 pixels high. Single robot only, not a sprite sheet."
+  }
+}

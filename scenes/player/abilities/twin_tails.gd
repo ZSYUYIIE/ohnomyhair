@@ -49,6 +49,8 @@ func tick(delta: float) -> void:
 		player.drop()
 
 	var gliding := player.held("skill") and not player.is_on_floor() and not player.is_wet()
+	if gliding and not _gliding:
+		Sound.play("glide", 0.1, -3.0)
 	_gliding = gliding
 	if gliding:
 		player.fall_cap = carry_fall_speed if player.carrying else glide_fall_speed
@@ -64,6 +66,7 @@ func tick_attack(delta: float) -> void:
 	_pose_left -= delta
 	if player.pressed("attack") and _whip_cooldown <= 0.0:
 		_show(&"attack", 0.3)
+		Sound.play("whip")
 		_whip = whip_time
 		_whip_cooldown = whip_cooldown
 		_whipped.clear()

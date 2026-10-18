@@ -32,6 +32,7 @@ func smash(powered := false) -> void:
 	if _broken or (requires_cannonball and not powered):
 		return
 	_broken = true
+	Sound.play("gel_smash")
 	$Shape.set_deferred("disabled", true)
 	var tween := create_tween()
 	if regrow_time > 0.0:
@@ -53,6 +54,7 @@ func _physics_process(delta: float) -> void:
 	if _regrow_left > 0.0 or _player_inside():
 		return
 	_broken = false
+	Sound.play("gel_regrow", 0.05, -4.0)
 	$Shape.set_deferred("disabled", false)
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.3)
 
@@ -67,7 +69,10 @@ func _player_inside() -> bool:
 
 func _draw() -> void:
 	var gel := Color("9be7d8")
-	draw_style_box(PropArt.nine_slice("res://assets/art/props/prop_gel.png", 14.0), Rect2(Vector2.ZERO, size))
+	PropArt.gloss(self, Rect2(Vector2.ZERO, size), Color("68d8c3"), 13)
+	draw_line(Vector2(8, 17), Vector2(8, size.y - 15), Color("cefff1"), 3, true)
+	for i in range(19, int(size.y) - 10, 27):
+		draw_circle(Vector2(size.x * 0.65, i), 3.2, Color("cafff0"))
 	if requires_cannonball:
 		for y in range(12, int(size.y) - 8, 36):
 			draw_line(Vector2(6, y), Vector2(size.x - 6, y), Color("ee9a42"), 7)

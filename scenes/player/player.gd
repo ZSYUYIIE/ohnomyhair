@@ -171,6 +171,7 @@ func _process(_delta: float) -> void:
 	var grounded := is_on_floor() and carried_by == null
 	if grounded and not _was_on_floor and _peak_fall > 250.0:
 		bounce(Vector2(1.25, 0.78))
+		Sound.play("land", 0.1, -4.0)
 	_peak_fall = 0.0 if grounded else maxf(_peak_fall, velocity.y)
 	_was_on_floor = grounded
 	label.visible = carried_by == null  # hanging below the carrier, it would cover their face
@@ -280,6 +281,8 @@ func _jump(v: float, can_cut: bool) -> void:
 	_buffer = 0.0
 	_coyote = 0.0
 	_can_cut_jump = can_cut
+	if can_cut:  # a player's own jump (a launch makes its own sound)
+		Sound.play("jump")
 
 
 ## Thrown upward by a friend; rises `height` pixels and can't be cut short.
@@ -317,6 +320,7 @@ func take_hit(damage: int, _stun_time: float = 0.0, knockback := Vector2.ZERO) -
 	hp -= damage
 	_invincible = invincible_time
 	_snip_hair()
+	Sound.play("hurt")
 	if knockback != Vector2.ZERO and carried_by == null:
 		velocity = knockback
 		control_lock = 0.2
@@ -329,10 +333,13 @@ func heal(amount: int) -> bool:
 	if not alive or hp >= max_hp:
 		return false
 	hp = mini(hp + amount, max_hp)
+	Sound.play("tonic", 0.0)
 	return true
 
 
 func soak(seconds: float) -> void:
+	if not is_wet():
+		Sound.play("soak")
 	_sprayed_at = Engine.get_physics_frames()
 	if seconds >= wet_time:
 		wet_time = seconds
@@ -369,6 +376,7 @@ func make_invincible(seconds: float) -> void:
 # --- Carrying (twin-tails grab) ---------------------------------------------
 
 func grab(other: Player) -> void:
+	Sound.play("grab")
 	carrying = other
 	other.carried_by = self
 	other.velocity = Vector2.ZERO
@@ -429,6 +437,7 @@ func die() -> void:
 	if not alive:
 		return
 	alive = false
+	Sound.play("death", 0.0)
 	rope_provider = null
 	drop()
 	if carried_by:

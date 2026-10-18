@@ -23,6 +23,7 @@ func _ready() -> void:
 
 
 func interact(_by: Node) -> void:
+	Sound.play("lever")
 	if spring_time > 0.0:
 		_remaining = spring_time
 		if not is_on:

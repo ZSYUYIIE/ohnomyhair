@@ -2,15 +2,13 @@ class_name MainMenu
 extends Control
 ## Illustrated salon cover; the escape route lives in a separate chapter sheet.
 const Guide := preload("res://scenes/ui/controls_guide.gd")
-const DESCRIPTIONS := ["Find the service route together", "Turn the robot's scissors against it",
-	"Escape through the wash room", "Face the runaway assistant. Reach the back door."]
-const MapBackdrop := preload("res://scenes/ui/salon_map_backdrop.gd")
 const Opening := preload("res://scenes/ui/opening_cutscene.gd")
 var _play_buttons: Array[Button] = []
 var _menu_buttons: Array[Button] = []
 var _controls: Control
 var _controls_button: Button
 var _start_button: Button
+var _opening_button: Button
 var _chapters_button: Button
 var _chapters: Control
 var _chapter_back: Button
@@ -19,17 +17,16 @@ var _selected_chapter := 0
 var _map_play: Button
 var _map_title: Label
 var _map_detail: Label
-var _map_backdrop: Control
-var _friends: TextureRect
-var _tags: Array[PanelContainer] = []
+var _card_states: Array[Label] = []
 
 func _ready() -> void:
 	get_tree().paused = false
 	Engine.time_scale = 1.0
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	theme = UiTheme.get_theme()
+	Sound.music("menu")
 	var art := TextureRect.new()
-	art.texture = preload("res://assets/art/ui/poster/title_main_menu.png")
+	art.texture = preload("res://assets/art/ui/poster/title_interactive_backdrop.png")
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	art.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
@@ -40,15 +37,30 @@ func _ready() -> void:
 	cover.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	cover.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(cover)
-	# The teammate's image includes the button lettering. Transparent native hit
-	# areas preserve the exact artwork and supply mouse/keyboard focus feedback.
-	_start_button = _art_button("Start Game", Rect2(118, 370, 392, 94), _open_chapters)
+	_start_button = _button("▶  Start Game", _open_chapters)
+	_start_button.position = Vector2(94, 374)
+	_start_button.size = Vector2(382, 76)
+	_start_button.add_theme_font_size_override("font_size", 32)
+	UiTheme.primary(_start_button)
 	cover.add_child(_start_button)
 	_menu_buttons.append(_start_button)
 	_chapters_button = _start_button
-	_controls_button = _art_button("About", Rect2(145, 482, 335, 70), _toggle_controls)
+	_controls_button = _button("About & controls", _toggle_controls)
+	_controls_button.position = Vector2(112, 472)
+	_controls_button.size = Vector2(346, 62)
 	cover.add_child(_controls_button)
 	_menu_buttons.append(_controls_button)
+	_opening_button = _button("Watch opening", _watch_opening)
+	_opening_button.position = Vector2(125, 554)
+	_opening_button.size = Vector2(320, 50)
+	cover.add_child(_opening_button)
+	_menu_buttons.append(_opening_button)
+	var keys := UiTheme.label("↑ ↓ / Tab  Navigate   ·   Enter  Choose   ·   I  Opening   ·   F1 / H  Help", 16, UiTheme.CREAM)
+	keys.position = Vector2(58, 674)
+	keys.add_theme_color_override("font_outline_color", UiTheme.INK)
+	keys.add_theme_constant_override("outline_size", 6)
+	keys.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	cover.add_child(keys)
 	var quit_button := _button("Quit", func(): get_tree().quit())
 	quit_button.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	quit_button.offset_left = -134
@@ -69,81 +81,100 @@ func _build_chapters() -> void:
 	_chapters = Control.new()
 	_chapters.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(_chapters)
-	var paper := ColorRect.new()
-	paper.color = UiTheme.CREAM
-	paper.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_chapters.add_child(paper)
-	_map_backdrop = MapBackdrop.new()
-	_map_backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for i in Progress.LEVELS.size(): _map_backdrop.unlocked.append(Progress.is_unlocked(i))
-	_chapters.add_child(_map_backdrop)
-	var title := UiTheme.heading("SALON MAP", 56)
-	title.position = Vector2(65, 42)
+	var salon := TextureRect.new()
+	salon.texture = preload("res://assets/art/salon_v2/landing_background.png")
+	salon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	salon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	salon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	salon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_chapters.add_child(salon)
+	var shade := ColorRect.new()
+	shade.color = Color(0.12, 0.07, 0.21, 0.86)
+	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_chapters.add_child(shade)
+	var title := UiTheme.heading("Find your way out", 48, UiTheme.CREAM)
+	title.position = Vector2(54, 36)
 	_chapters.add_child(title)
-	_chapter_back = _button("Back", _close_chapters)
-	_chapter_back.position = Vector2(1100, 48)
-	_chapter_back.custom_minimum_size = Vector2(110, 44)
+	var intro := UiTheme.label("ONE SALON. TWO FRIENDS.  Choose a chapter to escape together.", 20, Color("dbc9e7"))
+	intro.position = Vector2(57, 103)
+	_chapters.add_child(intro)
+	_chapter_back = _button("‹  Back", _close_chapters)
+	_chapter_back.position = Vector2(1090, 48)
+	_chapter_back.size = Vector2(132, 56)
 	_chapters.add_child(_chapter_back)
+	var previews := [preload("res://assets/art/ui/chapters/fresh_cut.png"),
+		preload("res://assets/art/ui/chapters/return_to_sender.png"),
+		preload("res://assets/art/ui/chapters/wash_blow_dry.png"),
+		preload("res://assets/art/ui/chapters/mystery.png")]
 	for i in Progress.LEVELS.size():
-		var at: Vector2 = MapBackdrop.STOPS[i]
-		var button := _button("?" if i == 3 and not Progress.is_cleared(i) else str(i + 1), _select_chapter.bind(i))
+		var button := _button("", _select_chapter.bind(i))
+		button.position = Vector2(54 + i * 298, 180)
+		button.size = Vector2(278, 351)
+		button.clip_contents = true
 		button.disabled = not Progress.is_unlocked(i)
-		button.position = at - Vector2(115 if i == 0 else 70, 30)
-		button.custom_minimum_size = Vector2(230, 82) if i == 0 else Vector2(140, 70)
-		button.add_theme_font_size_override("font_size", 34)
-		var locked_style := UiTheme.card(Color("d8c6e5"), UiTheme.INK, 3, 32, 8)
-		if i == 3:
-			button.position = at - Vector2(43, 60)
-			button.custom_minimum_size = Vector2(86, 98)
-			locked_style.bg_color = Color("79568d")
-			locked_style.corner_radius_bottom_left = 10
-			locked_style.corner_radius_bottom_right = 10
-			button.add_theme_color_override("font_disabled_color", UiTheme.CREAM)
-		button.add_theme_stylebox_override("disabled", locked_style)
-		button.tooltip_text = "Finish every earlier stage to unlock" if button.disabled else "Choose this stage"
+		button.tooltip_text = "Select " + _chapter_name(i) if not button.disabled else "Complete the previous chapter first"
+		button.add_theme_stylebox_override("disabled", UiTheme.button_skin(Color("b9a9bd")))
 		_chapters.add_child(button)
 		_play_buttons.append(button)
-		var tag := PanelContainer.new()
-		tag.position = at + Vector2(-120, 44)
-		tag.custom_minimum_size = Vector2(240, 38)
-		tag.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 3, 14, 4))
-		_chapters.add_child(tag)
-		_tags.append(tag)
-		var label := UiTheme.heading(_chapter_name(i), 19)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		tag.add_child(label)
-	_friends = TextureRect.new()
-	var pair := AtlasTexture.new()
-	pair.atlas = preload("res://assets/art/ui/poster/map_friends.png")
-	pair.region = Rect2(412, 280, 456, 255)
-	_friends.texture = pair
-	_friends.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_friends.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_friends.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-	_friends.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_friends.size = Vector2(210, 118)
-	_chapters.add_child(_friends)
+		button.focus_entered.connect(_select_chapter.bind(i))
+		var frame := Control.new()
+		frame.name = "PreviewFrame"
+		frame.position = Vector2(12, 12)
+		frame.size = Vector2(254, 166)
+		frame.clip_contents = true
+		frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(frame)
+		var image := TextureRect.new()
+		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		image.stretch_mode = TextureRect.STRETCH_SCALE
+		image.texture = previews[i]
+		image.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		image.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		image.modulate = Color(0.53, 0.46, 0.58) if button.disabled else Color.WHITE
+		frame.add_child(image)
+		var step := UiTheme.label("CHAPTER  %02d" % [i + 1], 16, UiTheme.MUTED)
+		step.position = Vector2(18, 194)
+		step.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(step)
+		var name_label := UiTheme.heading(_chapter_name(i), 25)
+		name_label.position = Vector2(18, 221)
+		name_label.size = Vector2(245, 68)
+		name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(name_label)
+		var state := UiTheme.heading("", 20)
+		state.position = Vector2(18, 296)
+		state.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(state)
+		_card_states.append(state)
+		if button.disabled:
+			var locked := UiTheme.heading("LOCKED", 25, UiTheme.CREAM)
+			locked.position = Vector2(76, 80)
+			locked.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			button.add_child(locked)
 	var panel := PanelContainer.new()
-	panel.position = Vector2(55, 594)
-	panel.size = Vector2(1170, 92)
-	panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 4, 22, 13))
+	panel.position = Vector2(54, 577)
+	panel.size = Vector2(1172, 104)
+	panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 3, 22, 15))
 	_chapters.add_child(panel)
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 20)
+	row.add_theme_constant_override("separation", 24)
 	panel.add_child(row)
 	var col := VBoxContainer.new()
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	col.add_theme_constant_override("separation", 0)
 	row.add_child(col)
 	_map_title = UiTheme.heading("", 30)
 	col.add_child(_map_title)
-	_map_detail = UiTheme.label("", 17)
+	_map_detail = UiTheme.label("", 18, UiTheme.MUTED)
 	col.add_child(_map_detail)
-	_map_play = _button("Play  ▶", func(): play(_selected_chapter))
-	_map_play.custom_minimum_size = Vector2(185, 54)
-	_map_play.add_theme_font_size_override("font_size", 28)
-	_map_play.add_theme_stylebox_override("normal", UiTheme.card(UiTheme.GOLD, UiTheme.INK, 3, 24, 10))
+	_map_play = _button("Play chapter  ▶", func(): play(_selected_chapter))
+	_map_play.custom_minimum_size = Vector2(250, 64)
+	UiTheme.primary(_map_play)
 	row.add_child(_map_play)
+	var keys := UiTheme.label("← → / Tab  Select   ·   1–4  Chapter   ·   P  Play   ·   Esc  Back   ·   F1 / H  Help", 16, Color("e7d8ef"))
+	keys.position = Vector2(59, 692)
+	keys.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_chapters.add_child(keys)
 	_select_chapter(_latest_unlocked())
 	_chapters.hide()
 
@@ -156,17 +187,14 @@ func _select_chapter(index: int) -> void:
 	_map_title.text = _chapter_name(index)
 	_map_detail.text = "Stage %d / %d" % [index + 1, Progress.LEVELS.size()]
 	if Progress.is_cleared(index):
-		_map_detail.text += "  ·  Best %s  ·  %d deaths" % [Progress.format_time(Progress.best_time(index)), Progress.best_deaths(index)]
+		_map_detail.text += "  Â·  Best %s  Â·  %d deaths" % [Progress.format_time(Progress.best_time(index)), Progress.best_deaths(index)]
 	for i in _play_buttons.size():
-		var style := UiTheme.card(UiTheme.GOLD if i == index else UiTheme.LILAC, UiTheme.INK, 4, 36, 8)
-		if i == 3:
-			style.corner_radius_bottom_left = 10
-			style.corner_radius_bottom_right = 10
-		_play_buttons[i].add_theme_stylebox_override("normal", style)
-		_tags[i].add_theme_stylebox_override("panel", UiTheme.card(UiTheme.GOLD if i == index else UiTheme.CREAM, UiTheme.INK, 3, 14, 4))
-	_friends.position = MapBackdrop.STOPS[index] + Vector2(-105, -132)
-	_map_backdrop.selected = index
-	_map_backdrop.queue_redraw()
+		var button := _play_buttons[i]
+		button.add_theme_stylebox_override("normal", UiTheme.button_skin(UiTheme.GOLD if i == index else UiTheme.CREAM))
+		button.add_theme_stylebox_override("hover", UiTheme.button_skin(Color("fff0af"), true))
+		button.add_theme_stylebox_override("pressed", UiTheme.button_skin(Color("edc95d"), false, true))
+		_card_states[i].text = "Complete chapter %d" % i if button.disabled else ("Selected  ✓" if i == index else "Choose chapter  →")
+		_card_states[i].add_theme_color_override("font_color", UiTheme.MUTED if button.disabled else UiTheme.INK)
 
 func _latest_unlocked() -> int:
 	for i in range(Progress.LEVELS.size() - 1, -1, -1):
@@ -213,22 +241,51 @@ func play(index: int) -> void:
 		else:
 			get_tree().change_scene_to_file(Progress.LEVELS[index].path)
 
-func _toggle_controls() -> void:
+func _watch_opening() -> void:
+	if _controls.visible or _chapters.visible: return
+	var opening := Opening.new()
+	opening.return_to_menu = true
+	get_tree().root.add_child(opening)
+	get_tree().current_scene = opening
+	queue_free()
+
+func _toggle_controls(tab: int = 3) -> void:
 	if _controls.visible:
 		_controls.dismiss()
 		return
 	_help_from_chapters = _chapters.visible
-	for b in _menu_buttons + _play_buttons + [_chapter_back]: b.focus_mode = Control.FOCUS_NONE
-	_controls.open(3)
+	for b in _menu_buttons + _play_buttons + [_chapter_back, _map_play]: b.focus_mode = Control.FOCUS_NONE
+	_controls.open(tab)
 
 func _guide_closed() -> void:
-	for b in _menu_buttons + _play_buttons + [_chapter_back]: b.focus_mode = Control.FOCUS_ALL
+	for b in _menu_buttons + _play_buttons + [_chapter_back, _map_play]: b.focus_mode = Control.FOCUS_ALL
 	if _help_from_chapters:
 		_open_chapters()
 	else:
 		UiTheme.focus_if_visible.call_deferred(_controls_button)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _controls.visible: return
+	if event.is_action_pressed("show_help"):
+		_toggle_controls(4)
+		get_viewport().set_input_as_handled()
+		return
+	if not _chapters.visible and event.is_action_pressed("menu_opening"):
+		get_viewport().set_input_as_handled()
+		_watch_opening()
+		return
+	if _chapters.visible:
+		if event.is_action_pressed("menu_play"):
+			get_viewport().set_input_as_handled()
+			play(_selected_chapter)
+			return
+		for i in _play_buttons.size():
+			if event.is_action_pressed("chapter_%d" % [i + 1]):
+				if not _play_buttons[i].disabled:
+					_select_chapter(i)
+					_play_buttons[i].grab_focus()
+				get_viewport().set_input_as_handled()
+				return
 	if _chapters.visible and not _controls.visible and event.is_action_pressed("ui_cancel"):
 		_close_chapters()
 		get_viewport().set_input_as_handled()
@@ -237,18 +294,6 @@ func _button(text: String, action: Callable) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.custom_minimum_size.y = 44
+	UiTheme.wire_button(b)
 	b.pressed.connect(action)
-	return b
-
-func _art_button(text: String, area: Rect2, action: Callable) -> Button:
-	var b := _button(text, action)
-	b.position = area.position
-	b.size = area.size
-	b.tooltip_text = text
-	for state in ["normal", "hover", "pressed", "focus"]:
-		var style := UiTheme.card(Color(1, 1, 1, 0.10) if state == "hover" else Color.TRANSPARENT,
-			UiTheme.CREAM if state == "focus" else Color.TRANSPARENT, 3, 38, 0)
-		b.add_theme_stylebox_override(state, style)
-	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color", "font_outline_color"]:
-		b.add_theme_color_override(state, Color.TRANSPARENT)
 	return b

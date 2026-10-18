@@ -1,68 +1,88 @@
-# Asset Library v1: title, Salon Map and opening
+# Interactive UI and asset refresh
 
-The teammate bundle supplied by the user on 2026-10-18 replaces the generated title
-draft. The source folder is `C:/Users/drdot/Downloads/ohnomyhair_asset_library_v1`.
-The project contains every runtime asset it needs; it does not depend on that Downloads path.
+The supplied Asset Library v1 establishes the warm cartoon salon style: peach, cream,
+lilac, coral upholstery, chrome, blue glass and clean purple outlines with cel shading.
+The existing playable characters, room backdrops and level layouts are preserved.
 
-## Runtime integration
+## Menus and chapter art
 
-- `assets/art/ui/poster/title_main_menu.png`: exact 1280×720 supplied title preview.
-  Its logo and Start Game / About lettering are baked in. Transparent native Buttons
-  align with those painted buttons, adding focus/hover feedback without duplicate text.
-  Quit remains a native button. A future localization pass needs separated title layers.
-- Start Game opens a native four-stop Salon Map. The teammate map is a static mockup
-  with locked progress baked in, so native controls/drawing implement its road, labels,
-  stage selection, padlocks and Play footer. Every earlier chapter must be cleared.
-  The final stop remains `?` / `???` until cleared; no boss illustration is shown.
-- `map_friends.png` is the exact supplied earlier transparent pair layer. An AtlasTexture
-  selects its occupied region (412,280,456,255); both friends move to the selected stop.
-  This reuses the standing pair intentionally, rather than treating it as a new-menu layer.
-- Map Play starts the opening on a fresh save, then loads Fresh Cut. Existing clears
-  count as having seen the opening. Natural completion and skipping persist
-  `story/opening_seen` in the existing save without changing chapter records.
-- `assets/art/opening/`: all 11 clean supplied panels, each 1280×720. The 39-second
-  timeline and English subtitles match the teammate JSON. Transitions are included
-  in each shot's duration. Wide shots push in at most 2.5%; close-ups keep their framing.
-  Subtitles use the bottom 140 px. Any key/click/controller button skips after a short
-  input guard so the opening Play click cannot skip it accidentally.
-- About opens the credits tab (GameJamPlus 26/27 / NPC Union / Singapore), with the
-  existing controls, combos and story help available alongside it.
-- HUD, pause, death, results, help, chair selection and boss bar share cream panels,
-  purple outlines, gold highlights and rounded fonts. Gameplay art is unchanged.
+The title background derives from the supplied gold title. Its baked Start Game and
+About buttons were removed with built-in image generation, then replaced by real
+Godot Buttons. Raised surfaces, shadows, hover/focus motion, depressed press states,
+a hand cursor and Claude's menu SFX provide feedback. The title includes Watch opening.
 
-## Provenance and imports
+Start Game opens four native chapter cards. Four dedicated 3:2 illustrations under
+`assets/art/ui/chapters` replace the cropped opening frames. The image viewport is a
+clipped 254×166 Control; titles and state labels occupy a separate opaque card area.
+The final card shows a mysterious door with no boss artwork. Sequential progress
+locks and the finale's `???` name remain. Focus and number shortcuts select unlocked
+cards; the Play button or P launches the selected chapter.
 
-`poster_ui_manifest.json` records runtime paths, source paths, dimensions and SHA-256.
-The supplied image hashes were checked against the teammate manifest, and the 13
-runtime copies are byte-for-byte identical. The original design metadata, timeline,
-SRT, generation prompts and README are retained under `docs/art/teammate_library_v1`.
-Those files describe the teammate delivery, not the current implementation status.
-The source specification calls the final chapter The Barber; the game's story name
-remains The Assistant, with the stable save ID `the_barber` retained.
+## Gameplay assets
 
-The map reference is archived under `art_src/ui/teammate_library_v1`. Generated pink
-and gold draft titles are retained under `art_src/ui`, excluded from Godot imports;
-`generated_drafts.md` records their earlier prompt and provenance. Unused native-size
-previews, optional SNIP variants and other reusable slices remain in the supplied
-bundle and are not shipped as runtime textures.
+- Four editable `tiles_poster.svg` atlases redraw the floor/platform material with
+  cream caps, shaded checker surfaces and chapter palettes. Each retains the old
+  128×160 / 4×5 atlas layout, 32px cells, tile IDs and collision polygons.
+  `tools/art/make_poster_tiles.py` writes SVG source, without editing bitmap images.
+- The assistant sprite derives from the supplied robot illustration using built-in
+  image generation with transparent output. Its red chest, yellow eye, scissor arms,
+  chrome joints and red boots follow that reference. Charge squash, hurt flashes,
+  dazed target glow and all boss collision/timing rules remain in code.
+- `chair_salon.png` is a new transparent coral-and-chrome styling chair derived from
+  the supplied salon reference. `chair_salon.tres` selects its occupied area without
+  modifying the source PNG. Both styling checkpoints and the surprise swap chair
+  use it; the used swap chair darkens. Trigger areas and gameplay behavior remain.
+- Gel, moving platforms and exit doors have glossy native drawing. The two original
+  player animation sets and all room background PNGs are unchanged.
 
-Texture import: lossless, no mipmaps, linear filtering. Godot uses a 1280×720 reference
-viewport and letterboxes other aspect ratios. The opening has no supplied audio;
-this implementation is illustrated panels with subtle motion, subtitles and transitions.
+## Opening and navigation
 
-Fonts are unmodified [Fredoka](https://github.com/google/fonts/tree/main/ofl/fredoka)
-and [Nunito](https://github.com/google/fonts/tree/main/ofl/nunito) from Google Fonts.
-Their accompanying SIL OFL licenses are under `assets/fonts`. Numeric OpenType tags
-select the intended variable-font weights. License wording is preserved.
+The eleven clean supplied opening panels and English subtitles total 39 seconds.
+First play on a fresh save shows them automatically; existing chapter records skip
+the mandatory opening. Watch opening / I replays the complete introduction and
+returns to the title. Neither replaying nor skipping a replay alters saved progress.
 
-## Verification
+Navigation shortcuts are named actions in `navigation_shortcuts.gd`. The title,
+chapter menu and HUD show relevant keys; the Shortcuts guide lists the full set:
 
-`tests/test_opening.gd` checks source timeline parity, all 11 frames, exact boundaries,
-natural completion, initial-click protection, keyboard/mouse/controller skipping,
-persisted seen state, existing-save continuation and locked-destination rejection.
-`tests/test_menu.gd` covers cover → map → Play, map selection, locks, mystery naming,
-Back/Esc and keyboard focus, plus campaign and HUD regressions.
+| Context | Keys |
+|---|---|
+| Menus | Arrows / Tab, Shift+Tab; Enter / Space activates; mouse point and click |
+| Title | I watches the opening; F1 / H opens help |
+| Chapters | Left / right or 1–4 / numpad selects unlocked chapters; P plays; Esc backs out |
+| Gameplay | Esc pauses/resumes; R restarts the room; F1 / H pauses and opens help |
+| Pause / death | R restarts; Esc resumes a pause but cannot dismiss death |
+| Help | Tab to the tabs, left/right switches; wheel / Page Up / Page Down scrolls; Esc / F1 / H closes |
+| Chair | S / Down opens near both friends; arrows / Tab select, Enter confirms, Esc cancels |
+| Opening | Any key / mouse click / controller button skips |
+| P1 | A/D move; W jump; G skill/glide/carry/lever; F whip; S drop/release/interact |
+| P2 | Left/right move; Up jump; K dash/launch; L parry; Down drop/release/interact |
 
-GPU captures include every opening panel, cover/map at 1280×720 and 960×540, the
-letterboxed 1280×960 window, credits/help, HUD, pause, death, results and chairs.
-Review captures are in `.godot/poster-shots/`; logs are `.godot/teammate-*.log`.
+The in-game Hair combos page documents carry-and-glide, launch, sling dash, hair catch
+and warm-air interactions. Abilities follow the haircut; movement keys follow the player.
+
+## Audio and provenance
+
+Claude's existing audio work was copied from the sibling `ohnomyhair-audio` worktree,
+including its 38 gameplay event hooks and original `tools/audio` synthesizers. That
+worktree was not edited. Audio uses a bounded 12-voice pool, UI/SFX/Music buses, pitch
+variation, a retrigger guard and music changes for the active level/boss. Headless
+runs are silent. The audio is synthesized locally; no external music was downloaded.
+
+Generated assets use the built-in image tool. Exact prompts for the four chapter
+illustrations and chair are in `chapter_chair_generation_prompts.json`; the title edit
+and robot prompts are in `interactive_generation_prompts.json`. The updated manifest
+records their hashes and dimensions. Supplied source metadata and timing remain in
+`teammate_library_v1`; that folder describes the original delivery. Earlier generated
+title drafts remain in `art_src/ui`, excluded from imports. Textures use lossless
+compression, linear filtering and no mipmaps. Fonts are unmodified Google Fonts
+[Fredoka](https://github.com/google/fonts/tree/main/ofl/fredoka) and
+[Nunito](https://github.com/google/fonts/tree/main/ofl/nunito), with their SIL OFL licenses.
+
+## Validation
+
+Twelve headless suites pass 500 checks: menu 81, opening 51, navigation 13, combos 50,
+gates 108, checkpoints 36, boss pairs 4, story roster 8, and campaign levels 30/29/27/63.
+Tests use isolated saves. Logs are `.godot/final-art-*.log`. GPU renders cover all
+opening panels, title/chapter cards at 1280×720 and 960×540, a letterboxed 1280×960
+window, help/shortcuts, HUD and overlays; captures are `.godot/poster-shots`.

@@ -17,7 +17,7 @@ func _configure() -> void:
 	level_name = "Level06"
 	level_title = "LEVEL 4 - The Assistant"
 	scene_path = "res://scenes/levels/level_06.tscn"
-	tile_atlas = "res://assets/art/l4/tiles_l4.png"
+	tile_atlas = "res://assets/art/l4/tiles_poster.svg"
 	tileset_path = "res://assets/art/l4/salon_tileset.tres"
 	ending_text = "THE END\n\nThe assistant powers down. The back door clicks open.\nYou take your friend's hand and run.\nBad hair. Good friends."
 

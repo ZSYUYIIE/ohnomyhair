@@ -51,6 +51,7 @@ func tick(delta: float) -> void:
 		elif rider:
 			rider.launch(launch_height)
 			player.bounce(Vector2(1.3, 0.7))
+			Sound.play("launch")
 		elif _cooldown <= 0.0 and player.carried_by == null and (player.is_on_floor() or not _air_dash_used):
 			_air_dash_used = not player.is_on_floor()
 			_start_dash(player.facing, dash_time)
@@ -78,6 +79,7 @@ func tick_carried(delta: float) -> void:
 		carrier.velocity.y = minf(carrier.velocity.y, -sling_lift)
 		_start_dash(carrier.facing, sling_time)
 		_slinging = true
+		Sound.play("sling")
 		_air_dash_used = true  # the fling is her air dash for this flight
 		return
 	tick_attack(delta)
@@ -88,6 +90,7 @@ func is_slinging() -> bool:
 
 
 func _start_dash(direction: float, seconds: float) -> void:
+	Sound.play("dash")
 	_cannonball = false
 	_dash_left = seconds
 	_dash_dir = direction

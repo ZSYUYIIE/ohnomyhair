@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "direction": "Teammate Asset Library v1",
   "viewport": [
     1280,
@@ -149,7 +149,8 @@
       "sha256": "aa1b500fc6b84c1f878c3531162e664a0e828621d8bad372cb328e0f5690af8b",
       "filter": "linear",
       "mipmaps": false,
-      "source_modified": false
+      "source_modified": false,
+      "status": "superseded source/reference retained; not used by the current interactive menu"
     },
     {
       "path": "assets/art/ui/poster/title_main_menu.png",
@@ -161,12 +162,13 @@
       "sha256": "6c10862e78cb57ae339611c19c9dbf9b7cf5cc6c1ef3e96c6d061ea5b54b1db0",
       "filter": "linear",
       "mipmaps": false,
-      "source_modified": false
+      "source_modified": false,
+      "status": "superseded source/reference retained; not used by the current interactive menu"
     },
     {
       "path": "scenes/ui/salon_map_backdrop.gd",
       "source": "Native Godot implementation of teammate salon_map_preview.png",
-      "status": "interactive shared progression; map mockup retained under art_src/ui/teammate_library_v1"
+      "status": "superseded source/reference retained; not used by the current interactive menu"
     },
     {
       "path": "assets/fonts/Fredoka.ttf",
@@ -181,6 +183,162 @@
       "license": "SIL OFL 1.1",
       "license_file": "assets/fonts/Nunito-OFL.txt",
       "modified": false
+    },
+    {
+      "path": "assets/art/ui/chapters/fresh_cut.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "d2e73dba213a250c8fa8d1eb4cee44f0b48f54baf26253ed79f0c735a906f0b1",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/chapters/mystery.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "f2ccb47ed125c53f5750763a8e2698e3ae56dab6d029095a70a06268ed1478bb",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/chapters/return_to_sender.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "de5ca68d8f768d15e0fd3f7447490099cbdd9691f44bf412df53b848fe445324",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/chapters/wash_blow_dry.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "transparency": false,
+      "sha256": "766761f989dae93fde1a082b8d17e8d2c1dcf9640de6fe1155e2ecf946382db3",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/props/chair_salon.png",
+      "dimensions": [
+        1211,
+        1299
+      ],
+      "transparency": true,
+      "sha256": "c302e8af791f9bcde4210a3f538c32797991f427a3b4573b3d957b9b5a89c5d3",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/enemies/assistant_poster.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparency": true,
+      "sha256": "7350174388f4f75beb6fe4aa27d2aeeaeaf1c67d13d57136582dbb60ab94f5ea",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/ui/poster/title_interactive_backdrop.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "transparency": false,
+      "sha256": "70f81241dd68310a54d0f35b7fc25e8b70745e2d7d248d6970cc299567cef9f8",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "built-in image_gen; see generation prompt JSON files"
+    },
+    {
+      "path": "assets/art/salon_v2/landing_background.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "transparency": false,
+      "sha256": "57f5d8c618cfccdf1ab141b78512ae435b6162a9fda12ff828489c029467543a",
+      "filter": "linear",
+      "mipmaps": false,
+      "source": "supplied teammate layer"
+    },
+    {
+      "path": "assets/art/l1/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "a6c8fe923a1b7ce8b0132eb4cf6e5c013eba6e58085dce35df87775859fc17f3",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/l2/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "6e9f129e14e93a833b3e6bf687871053e4ca858981b081454dcea7bc2ed4e7bf",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/l3/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "912ed4b355f05bd51e830b398e4d73097a098c94197bbe2290d53da0fe321899",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/l4/tiles_poster.svg",
+      "dimensions": [
+        128,
+        160
+      ],
+      "sha256": "1a9c7fae1e12403d59f4986678956383d93e7478f2409b9b7107b7de2e00a004",
+      "source": "tools/art/make_poster_tiles.py",
+      "format": "editable SVG",
+      "tile_size": [
+        32,
+        32
+      ],
+      "collision": "existing TileSet polygons unchanged"
     }
   ]
 }

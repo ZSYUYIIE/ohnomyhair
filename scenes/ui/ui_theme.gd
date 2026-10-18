@@ -36,6 +36,7 @@ static func heading_font() -> Font:
 
 
 static func get_theme() -> Theme:
+	NavigationShortcuts.install()
 	if _theme:
 		return _theme
 	var t := Theme.new()
@@ -44,9 +45,9 @@ static func get_theme() -> Theme:
 	t.set_stylebox("panel", "PanelContainer", card(CREAM, WALNUT))
 	t.set_color("font_color", "Label", INK)
 
-	t.set_stylebox("normal", "Button", card(CREAM, WALNUT, 3, 18, 10))
-	t.set_stylebox("hover", "Button", card(Color("ffe1ef"), WALNUT, 3, 18, 10))
-	t.set_stylebox("pressed", "Button", card(Color("ffb9d8"), WALNUT, 3, 18, 10))
+	t.set_stylebox("normal", "Button", button_skin(CREAM))
+	t.set_stylebox("hover", "Button", button_skin(Color("fffdf5"), true))
+	t.set_stylebox("pressed", "Button", button_skin(Color("ecd3b5"), false, true))
 	t.set_stylebox("disabled", "Button", card(Color("e8ded6"), Color("ae99aa"), 2, 18, 10))
 	var focus := StyleBoxFlat.new()
 	focus.draw_center = false
@@ -68,6 +69,45 @@ static func get_theme() -> Theme:
 	t.set_color("font_unselected_color", "TabBar", MUTED)
 	_theme = t
 	return t
+
+
+static func button_skin(fill: Color, hover := false, pressed := false) -> StyleBoxFlat:
+	var s := card(fill, INK, 3, 18, 12)
+	s.border_width_bottom = 3 if pressed else 7
+	s.shadow_color = Color(0.12, 0.05, 0.20, 0.36)
+	s.shadow_size = 2 if pressed else 4
+	s.shadow_offset = Vector2(0, 1 if pressed else 6)
+	if hover: s.border_color = Color("9b426a")
+	return s
+
+
+static func primary(button: Button) -> void:
+	button.add_theme_stylebox_override("normal", button_skin(GOLD))
+	button.add_theme_stylebox_override("hover", button_skin(Color("ffe77b"), true))
+	button.add_theme_stylebox_override("pressed", button_skin(Color("eab332"), false, true))
+
+
+static func wire_button(button: BaseButton) -> void:
+	if button.has_meta("animated_button"): return
+	button.set_meta("animated_button", true)
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	button.resized.connect(func(): button.pivot_offset = button.size / 2.0)
+	button.mouse_entered.connect(func(): _button_pop(button, 1.025))
+	button.mouse_exited.connect(func(): _button_pop(button, 1.0))
+	button.focus_entered.connect(func(): _button_pop(button, 1.025))
+	button.focus_exited.connect(func(): _button_pop(button, 1.0))
+	button.button_down.connect(func(): _button_pop(button, 0.965))
+	button.button_up.connect(func(): _button_pop(button, 1.025 if button.is_hovered() or button.has_focus() else 1.0))
+
+
+static func _button_pop(button: BaseButton, amount: float) -> void:
+	if not is_instance_valid(button) or not button.is_inside_tree() or button.disabled: return
+	button.pivot_offset = button.size / 2.0
+	var old = button.get_meta("button_tween") if button.has_meta("button_tween") else null
+	if old is Tween and old.is_valid(): old.kill()
+	var tween := button.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(button, "scale", Vector2.ONE * amount, 0.13)
+	button.set_meta("button_tween", tween)
 
 
 ## Rounded card style used by panels, buttons and HUD plates.

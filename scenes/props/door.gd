@@ -22,6 +22,7 @@ func open() -> void:
 	if locks > 0 or is_open:
 		return
 	is_open = true
+	Sound.play("door", 0.0)
 	_shape.set_deferred("disabled", true)
 	queue_redraw()
 

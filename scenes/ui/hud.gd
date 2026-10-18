@@ -53,7 +53,7 @@ func _process(_delta: float) -> void:
 		var room := level.rooms[level.room_index] if level.rooms.size() > 0 else null
 		var room_name: String = room.title.get_slice(" - ", 1) if room and " - " in room.title else (room.title if room else "")
 		_stage.text = "ROOM %d/%d  /  %s" % [level.room_index + 1, level.rooms.size(), room_name]
-		_stats.text = "%s   /   %d deaths   /   Esc help & pause" % [Progress.format_time(level.level_time), level.deaths]
+		_stats.text = "%s  /  %d deaths  /  Esc pause · R retry · F1 help" % [Progress.format_time(level.level_time), level.deaths]
 
 
 func _player_card(id: int) -> Control:

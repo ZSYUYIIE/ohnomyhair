@@ -61,6 +61,15 @@ func _ready() -> void:
 	about.add_child(UiTheme.heading("Oh No My Hair!", 38))
 	about.add_child(_text("CREATED FOR", "GameJamPlus 26/27\nNPC Union\nSingapore", 26))
 	about.add_child(_text("BAD HAIR. GOOD FRIENDS.", "One bad haircut. Two good friends. Escape the salon together.\nUse the other tabs for controls, hair combos and checkpoints.", 23))
+	var navigation := _page("Shortcuts")
+	for entry in [
+		["ALL MENUS", "Arrow keys / Tab: move focus. Shift + Tab: previous control.\nEnter / Space: activate the focused button. Mouse: point and click."],
+		["TITLE & CHAPTERS", "I: watch the opening from the title. F1 / H: open this shortcut guide.\nChapter menu: ← / → or 1–4 (also numpad) selects an unlocked chapter. P plays it. Esc goes back."],
+		["PLAYING & PAUSING", "Esc: pause / resume. R: restart the current room, including from pause or death.\nF1 / H: pause and open help. Esc from help returns to pause; Esc again resumes."],
+		["CHAIRS & TEAMWORK", "S / ↓ near a chair: open styling and checkpoints when both friends are nearby.\nHold S / ↓ to drop through shelves; press down to let go when carried. In chair menus, Tab / arrows select, Enter confirms, Esc cancels."],
+		["OPENING & HELP", "Any key, mouse click or controller button skips the opening. Replay returns to the title.\nIn help: Page Up / Page Down or mouse wheel scrolls. Focus the tabs and use ← / → to switch pages. Esc / F1 / H closes help."],
+	]:
+		navigation.add_child(_text(entry[0], entry[1], 20))
 	_close = Button.new()
 	_close.text = "Got it  /  Esc"
 	_close.custom_minimum_size.y = 48
@@ -97,7 +106,7 @@ func dismiss() -> void:
 
 func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree(): return
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("show_help"):
 		dismiss()
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("ui_page_down") or event.is_action_pressed("ui_page_up"):

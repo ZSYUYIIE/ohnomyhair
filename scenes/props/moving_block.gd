@@ -44,6 +44,7 @@ func _on_trigger_toggled(on: bool) -> void:
 
 func _draw() -> void:
 	# A hydraulic salon lift in the lever's yellow, with a chrome top rail.
-	draw_style_box(PropArt.nine_slice("res://assets/art/props/prop_lift.png", 14.0), Rect2(Vector2.ZERO, size))
+	PropArt.gloss(self, Rect2(Vector2.ZERO, size), UiTheme.GOLD, 8)
+	draw_line(Vector2(5, 8), Vector2(size.x - 5, 8), Color("fff8dc"), 5, true)
 	if Engine.is_editor_hint() and move_offset != Vector2.ZERO:
 		draw_rect(Rect2(move_offset, size), Color(color, 0.35), false, 2.0)
