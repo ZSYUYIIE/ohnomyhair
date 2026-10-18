@@ -41,6 +41,8 @@ const HairAnchor := preload("res://scenes/props/hair_anchor.gd")
 var styling_menu: CanvasLayer
 var _active_chair: Area2D
 var _checkpoint := {}
+## level_time when the current room (re)started, for the play log's room times.
+var _room_t0 := 0.0
 
 
 func _ready() -> void:
@@ -65,7 +67,8 @@ func _ready() -> void:
 	for player in $Players.get_children():
 		players.append(player)
 		player.died.connect(_on_player_died)
-	if _carry_over.get("path", "") == scene_file_path:
+	var restarted: bool = _carry_over.get("path", "") == scene_file_path
+	if restarted:
 		start_room = _carry_over.room
 		level_time = _carry_over.time
 		deaths = _carry_over.deaths
@@ -82,6 +85,7 @@ func _ready() -> void:
 	_place_players()
 	_install_stations()
 	show_banner(level_title + "\n" + rooms[room_index].title)
+	_log_room_start(restarted)
 
 
 func _process(delta: float) -> void:
@@ -105,6 +109,10 @@ func _on_player_died(player: Player) -> void:
 		return
 	_busy = true
 	deaths += 1
+	var at := player.global_position - rooms[room_index].global_position
+	Telemetry.log_event("death", self, {"player": player.player_id, "hair": player.ability.display_name,
+		"x": snappedf(at.x, 0.1), "y": snappedf(at.y, 0.1), "wet": player.is_wet(),
+		"cause": Telemetry.death_cause(player, rooms[room_index]), "room_time": snappedf(level_time - _room_t0, 0.01)})
 	flash_screen(0.8, Color("ff5a5a"))
 	await get_tree().create_timer(0.5).timeout
 	get_tree().paused = true
@@ -173,6 +181,7 @@ func _on_room_cleared(room: Room) -> void:
 	if _busy or room != rooms[room_index]:
 		return
 	_busy = true
+	Telemetry.log_event("room_clear", self, {"room_time": snappedf(level_time - _room_t0, 0.01)})
 	for player in players:
 		player.set_frozen(true)
 
@@ -190,7 +199,14 @@ func _on_room_cleared(room: Room) -> void:
 	for player in players:
 		player.set_frozen(false)
 	show_banner(rooms[room_index].title)
+	_log_room_start(false)
 	_busy = false
+
+
+func _log_room_start(restarted: bool) -> void:
+	_room_t0 = level_time
+	Telemetry.log_event("room_start", self, {"restart": restarted,
+		"pair": [Player.HAIR_INFO[players[0].hair].name, Player.HAIR_INFO[players[1].hair].name]})
 
 
 func _install_stations() -> void:

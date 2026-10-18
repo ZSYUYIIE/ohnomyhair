@@ -239,8 +239,13 @@ class RoomBuilder:
 			node.starting_hair = PackedInt32Array(start)
 
 	## An obstacle for the gate check, passable with any one of `verbs` (StyleRules).
-	func gate(name: String, verbs: Array) -> void:
-		node.gates.append({"name": name, "any": PackedStringArray(verbs)})
+	## `spec` sizes it for the margin table (tools/difficulty/margins.gd), in tiles:
+	## {"gap": width, "drop": take-off height above the landing} or {"rise": height}.
+	func gate(name: String, verbs: Array, spec := {}) -> void:
+		var entry := {"name": name, "any": PackedStringArray(verbs)}
+		if not spec.is_empty():
+			entry["spec"] = spec
+		node.gates.append(entry)
 
 	## Hints may use haircut tokens ({tt}, {tt.skill}... see HairHint); they resolve
 	## at runtime to whoever wears that haircut.

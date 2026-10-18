@@ -44,7 +44,7 @@ func _room_1() -> RoomBuilder:
 	rb.hot_iron("FlatIron", 5, 19, 2, 0.8)
 	rb.exit(36, 16)
 	rb.hint("Closing time. The barber's robot wants to finish the job.", Vector2(40, 300))
-	rb.gate("9-wide dye pool, both friends", ["carry"])
+	rb.gate("9-wide dye pool, both friends", ["carry"], {"gap": 9, "drop": 2})
 	rb.gate("Turret on the flight line", ["parry", "shield"])
 	rb.gate("Clipper bot on the landing", ["whip", "parry", "lasso_stun", "jump"])
 	rb.gate("Flat iron", ["walk"])
@@ -99,7 +99,7 @@ func _room_2() -> RoomBuilder:
 	rb.gate("Barber's chair tunnel (swaps roles)", ["walk"])
 	rb.gate("Gel wall shielding the room", ["dash_gel"])
 	rb.gate("Ceiling bell", ["catch_toss"])
-	rb.gate("6-up cliff", ["launch", "spring"])
+	rb.gate("6-up cliff", ["launch", "spring"], {"rise": 6})
 	rb.gate("Step lever", ["lever", "lasso_lever"])
 	return rb
 
@@ -183,7 +183,7 @@ func _room_4() -> RoomBuilder:
 	rb.link(boss, "defeated", backup, "scrap_all")
 	rb.exit(37, 16)
 	rb.gate("Daze Tony", ["crash", "parry", "catch_return", "cannonball"])
-	rb.gate("Corner ledge 7 up, above the knob", ["launch", "spring", "hook"])
+	rb.gate("Corner ledge 7 up, above the knob", ["launch", "spring", "hook"], {"rise": 7})
 	rb.gate("Backup robots (phase 2)", ["dash_gel", "parry", "whip", "lasso_stun", "shield", "jump"])
 	rb.hint("Daze it (parry its scissors, or make it crash a charge into a wall),\nthen land on its glowing head from a high corner ledge.", Vector2(300, 230))
 	rb.hint("Its scissors CHANGE YOUR HAIRCUT.\nThe chair lets you pick a pair again.", Vector2(56, 270))

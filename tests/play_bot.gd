@@ -5,6 +5,18 @@ extends SceneTree
 ## with finish().
 
 const TILE := 32.0
+## Sloppy-player mode (tools/difficulty/sweep.py sets SLOPPY=1 and SEED=n): the same
+## playthrough, played like a person. After every cue the bot waits for (a shower
+## stopping, a scissor arriving...) it reacts 130-330 ms late; it aims for spots a little
+## off (6 px); and it holds buttons a little too long or short. Failing more often under this is
+## a sign a step asks for frame-perfect play.
+const REACTION_FRAMES := Vector2i(8, 20)
+const AIM_JITTER := 6.0
+const HOLD_JITTER := 0.25
+const CUE_WAIT_FRAMES := 45
+
+var sloppy := OS.get_environment("SLOPPY") == "1"
+var rng := RandomNumberGenerator.new()
 
 var passed := 0
 var failed := 0
@@ -17,6 +29,15 @@ func _initialize() -> void:
 	# Level clears record best times: keep them out of the player's real save.
 	Progress.save_path = "user://test_progress.cfg"
 	Progress.reset()
+	# Bot runs log to their own folder, so they never mix with real play sessions.
+	Telemetry.dir = "user://telemetry_bots"
+	Telemetry.source = "bot-sloppy" if sloppy else "bot"
+	Telemetry.enabled = sloppy or OS.get_environment("BOT_TELEMETRY") == "1"
+	var seed_text := OS.get_environment("SEED")
+	if seed_text != "":
+		rng.seed = seed_text.to_int()
+	else:
+		rng.randomize()
 	_run.call_deferred()
 
 
@@ -101,6 +122,8 @@ func tap(p: Player, action: String) -> void:
 
 
 func _ticks(n: int) -> void:
+	if sloppy:
+		n = maxi(1, roundi(n * rng.randf_range(1.0 - HOLD_JITTER, 1.0 + HOLD_JITTER)))
 	for i in n:
 		await physics_frame
 
@@ -108,9 +131,21 @@ func _ticks(n: int) -> void:
 func wait_until(cond: Callable, max_ticks: int) -> bool:
 	for i in max_ticks:
 		if cond.call():
+			# Only a wait for something OUTSIDE the player's control (a timer, an enemy,
+			# a shower) gets a reaction delay. Short waits are the bot steering its own
+			# move, which a person does continuously, not by reacting late.
+			if i >= CUE_WAIT_FRAMES:
+				await _react()
 			return true
 		await physics_frame
 	return cond.call()
+
+
+## A person notices a cue a moment after it happens.
+func _react() -> void:
+	if sloppy:
+		for i in rng.randi_range(REACTION_FRAMES.x, REACTION_FRAMES.y):
+			await physics_frame
 
 
 ## Walk toward x, hopping up any step in the way. Local x is in level space.
@@ -118,6 +153,8 @@ func wait_until(cond: Callable, max_ticks: int) -> bool:
 ## room, and walking on would steer the player around the next one.
 func walk_to(p: Player, x: float, max_ticks := 600) -> void:
 	var start_room := level.room_index if is_instance_valid(level) else -1
+	if sloppy:
+		x += rng.randf_range(-AIM_JITTER, AIM_JITTER)
 	for i in max_ticks:
 		# Stop once the level is busy (clear / pan) or has moved on: the target point
 		# belongs to the old room, and steering back would walk around the next one.

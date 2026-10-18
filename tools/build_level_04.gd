@@ -44,7 +44,7 @@ func _room_1() -> RoomBuilder:
 	rb.link(bell, "activated", door, "open")
 	rb.stripes("ParryStripes", 19, 22, 8)
 	rb.exit(35, 16)
-	rb.gate("Roller shelf 11 up", ["spring", "hook", "hair_copter"])
+	rb.gate("Roller shelf 11 up", ["spring", "hook", "hair_copter"], {"rise": 11})
 	rb.gate("Bell on the shelf", ["parry", "catch_return"])
 	rb.hint("{afro}: HOLD {afro.skill} to wind your perm up like a spring.\nLet go, and whoever stands on your head goes sky-high.", Vector2(48, 300))
 	rb.hint("A Pompadour launch won't reach.\nA wound-up Afro will.", Vector2(470, 420))

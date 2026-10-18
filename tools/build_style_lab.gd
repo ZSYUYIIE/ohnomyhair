@@ -35,7 +35,7 @@ func _rope_room() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room2", "2 - Rapunzel Crossing", Color("e9e0f6"), "res://assets/art/l1/bg_l1_03_gel_curtain.png"))
 	rb.styles([Player.Hair.LONG_STRAIGHT, Player.Hair.TWIN_TAILS], [Player.Hair.LONG_STRAIGHT, Player.Hair.TWIN_TAILS])
 	rb.gate("Gold ring to the high shelf", ["hook"])
-	rb.gate("17-wide dye pool", ["rope_glide"])
+	rb.gate("17-wide dye pool", ["rope_glide"], {"gap": 17, "drop": 9})
 	rb.gate("Bridge lever", ["lever", "lasso_lever"])
 	rb.solid(0, 19, 9, 22)
 	rb.solid(27, 19, 38, 22)
@@ -59,7 +59,7 @@ func _boss_room() -> RoomBuilder:
 	rb.styles([Player.Hair.TWIN_TAILS, Player.Hair.POMPADOUR, Player.Hair.AFRO, Player.Hair.LONG_STRAIGHT],
 			[Player.Hair.AFRO, Player.Hair.POMPADOUR])
 	rb.gate("Daze Tony", ["crash", "parry", "catch_return", "cannonball"])
-	rb.gate("Corner ledge 7 up, above the knob", ["launch", "spring", "hook"])
+	rb.gate("Corner ledge 7 up, above the knob", ["launch", "spring", "hook"], {"rise": 7})
 	rb.solid(0, 19, 38, 22)
 	rb.one_way(1, 4, 16)
 	rb.one_way(1, 3, 12)

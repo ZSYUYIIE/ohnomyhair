@@ -43,7 +43,7 @@ func _room_1() -> RoomBuilder:
 	rb.exit(35, 5)
 	rb.gate("Lever shelf 10 up", ["glide"])
 	rb.gate("Gate lever", ["lever", "lasso_lever"])
-	rb.gate("Exit ledge 11 up, both friends", ["hair_copter", "spring"])
+	rb.gate("Exit ledge 11 up, both friends", ["hair_copter", "spring"], {"rise": 11})
 	rb.hint("Warm air lifts a glider:
 {tt}: jump + HOLD {tt.skill} in the dryer", Vector2(40, 330))
 	rb.hint("It lifts you both too!
@@ -74,7 +74,7 @@ func _room_2() -> RoomBuilder:
 	rb.shower("RinseCurtain", 32, 1, 3, 18, 1.8, 1.6, 0.9)
 	rb.gel_wall("GelWall", 35, 13, 2, 6)
 	rb.exit(37, 16)
-	rb.gate("17-wide dye pool from 9 up, both friends", ["carry"])
+	rb.gate("17-wide dye pool from 9 up, both friends", ["carry"], {"gap": 17, "drop": 9})
 	rb.gate("Shower over the take-off counter", ["walk"])
 	rb.gate("Gel wall behind a shower", ["dash_gel"])
 	rb.hint("Wet tails can't glide - or carry!
@@ -106,7 +106,7 @@ func _room_3() -> RoomBuilder:
 	rb.solid(34, 19, 38, 22)      # landing
 	rb.exit(36, 16)
 	rb.gate("Dryer column under a timed shower, both friends", ["hair_copter", "spring"])
-	rb.gate("18-wide dye pool from 12 up under a shower, both friends", ["carry"])
+	rb.gate("18-wide dye pool from 12 up under a shower, both friends", ["carry"], {"gap": 18, "drop": 12})
 	rb.hint("Carry {pomp} up the warm air.
 Soaked? You drop back in -
 wait for the spray to stop", Vector2(296, 262))

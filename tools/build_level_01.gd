@@ -44,7 +44,7 @@ func _room_1() -> RoomBuilder:
 	rb.hint("Too far for {pomp}...\n{tt}: jump, then HOLD {tt.skill} to glide", Vector2(740, 190))
 	rb.hint("{tt}: press {tt.skill}\nat the lever", Vector2(1040, 300))
 	rb.gate("Gel wall", ["dash_gel", "cannonball"])
-	rb.gate("10-wide pit to the lever", ["glide"])
+	rb.gate("10-wide pit to the lever", ["glide"], {"gap": 10, "drop": 0})
 	rb.gate("Bridge lever", ["lever", "lasso_lever"])
 	return rb
 
@@ -66,8 +66,8 @@ func _room_2() -> RoomBuilder:
 	rb.hint("^ take off here", Vector2(236, 500))
 	rb.hint("Too high!\nA Pompadour launches whoever\nstands on its head:  {pomp.skill}", Vector2(612, 420))
 	rb.hint("{tt}: {tt.skill} pulls the lever", Vector2(880, 300))
-	rb.gate("8-wide dye pool, both friends", ["carry"])
-	rb.gate("6-up cliff", ["launch", "spring"])
+	rb.gate("8-wide dye pool, both friends", ["carry"], {"gap": 8, "drop": 2})
+	rb.gate("6-up cliff", ["launch", "spring"], {"rise": 6})
 	rb.gate("Step lever", ["lever", "lasso_lever"])
 	return rb
 
