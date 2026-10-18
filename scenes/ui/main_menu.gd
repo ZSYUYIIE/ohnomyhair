@@ -119,7 +119,8 @@ func _controls_panel() -> Control:
 		"Carry - Twin-Tails holds skill next to Pompadour and glides with her.\n" +
 		"Launch - Twin-Tails stands on Pompadour's head; Pompadour presses skill.\n" +
 		"Sling Dash - while hanging, Pompadour presses skill: flung through the air and through gel.\n" +
-		"Volley - Pompadour parries (scissor turns blue), Twin-Tails whips it straight up (gold).", 18))
+		"Hair Catch - Pompadour parries (scissor turns blue); Twin-Tails holds skill to catch it, lets go to toss it up.\n" +
+		"Hair-copter - Pompadour stands on Twin-Tails' head; she glides in a hair dryer and lifts them both.", 18))
 	_close_button = _button("Close", _toggle_controls)
 	box.add_child(_close_button)
 	return overlay

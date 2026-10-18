@@ -14,6 +14,8 @@ const HAIR_SCRIPTS := {
 	Hair.POMPADOUR: preload("res://scenes/player/abilities/pompadour.gd"),
 }
 const HALF_SIZE := Vector2(14, 22)  # keep in sync with CollisionShape2D (28x44)
+## Sprite tint while soaked by a shampoo shower.
+const WET_TINT := Color(0.72, 0.86, 1.0)
 ## Carried friend is drawn this far below the carrier. Visual only: their collision
 ## box sits exactly on the carrier's, so they can never snag on a ledge the carrier clears.
 const CARRY_HANG := Vector2(0, 30)
@@ -68,6 +70,10 @@ var _can_cut_jump := false
 var _invincible := 0.0
 var _drop_through := 0.0
 var _separating: Player = null  # pads are re-enabled once we no longer overlap this friend
+## Seconds left soaked by a shampoo shower (twin-tails can't glide, pompadour can't smash gel).
+var wet_time := 0.0
+## Hair dryers whose warm-air column we're standing in (they add / remove themselves).
+var updrafts: Array[Node] = []
 var _was_on_floor := true
 var _peak_fall := 0.0
 var _squash_tween: Tween
@@ -81,6 +87,7 @@ func _ready() -> void:
 	label.text = "P%d" % player_id
 	hp = max_hp
 	set_hair(hair)
+	visual.add_child(WetDrips.new(self))
 
 
 func act(action: String) -> StringName:
@@ -141,6 +148,8 @@ func _process(_delta: float) -> void:
 			anim = &"jump" if velocity.y < 0.0 else &"fall"
 	if sprite.animation != anim:
 		sprite.play(anim)
+	# Soaked by a shampoo shower: a cool, washed-out tint (the drips are WetDrips).
+	sprite.modulate = WET_TINT if is_wet() else Color.WHITE
 
 
 ## Cartoon squash & stretch: snap to `amount`, spring back to normal.
@@ -157,6 +166,7 @@ func _physics_process(delta: float) -> void:
 		_set_pads_with(_separating, true)
 		_separating = null
 	_invincible = maxf(_invincible - delta, 0.0)
+	wet_time = maxf(wet_time - delta, 0.0)
 	visual.modulate.a = 0.35 if _invincible > 0.0 and int(_invincible * 20.0) % 2 == 0 else 1.0
 	if not alive:
 		return
@@ -196,8 +206,16 @@ func _physics_process(delta: float) -> void:
 		velocity.y *= jump_cut
 		_can_cut_jump = false
 
-	var g := gravity * (fall_multiplier if velocity.y > 0.0 else 1.0)
-	velocity.y += g * delta
+	if not updrafts.is_empty() and ability.is_gliding():
+		# Hair dryer: warm air lifts a glider. With a friend hanging on, it's only enough to hover.
+		var dryer: HairDryer = updrafts[0]
+		var target: float = 0.0 if carrying else -dryer.lift_speed
+		velocity.y = move_toward(velocity.y, target, dryer.lift_accel * delta)
+	else:
+		var g := gravity * (fall_multiplier if velocity.y > 0.0 else 1.0)
+		velocity.y += g * delta
+		if not updrafts.is_empty():
+			fall_cap = minf(fall_cap, (updrafts[0] as HairDryer).warm_fall_speed)
 	if velocity.y > fall_cap:
 		velocity.y = move_toward(velocity.y, fall_cap, 4000.0 * delta)
 	if control_lock > 0.0:
@@ -206,7 +224,14 @@ func _physics_process(delta: float) -> void:
 		var accel := ground_accel if is_on_floor() else air_accel
 		velocity.x = move_toward(velocity.x, dir * run_speed, accel * delta)
 
+	var rider := _rider_on_head()
+	var y_before := global_position.y
 	move_and_slide()
+	# A friend standing on my head rises with me (the head pad is one-way, so a rising pad
+	# would slide up through them otherwise). This is the hair-copter lift.
+	if rider and global_position.y < y_before:
+		rider.global_position.y += global_position.y - y_before
+		rider.velocity.y = minf(rider.velocity.y, 0.0)
 	ability.after_move()
 
 
@@ -223,6 +248,18 @@ func launch(height: float) -> void:
 	_jump(-sqrt(2.0 * gravity * height), false)
 
 
+## Who to carry up as I rise: a friend whose feet rest on my head (geometric, so it holds
+## even on the frames their own floor check flickers, e.g. standing near the pad's edge).
+func _rider_on_head() -> Player:
+	var mate := teammate()
+	if mate == null or not mate.alive or mate.carried_by or carried_by:
+		return null
+	var feet := mate.global_position.y + HALF_SIZE.y
+	var head := global_position.y - HALF_SIZE.y
+	var on_top := absf(feet - head) < 8.0 and absf(mate.global_position.x - global_position.x) < HALF_SIZE.x * 2.0
+	return mate if on_top and mate.velocity.y >= -1.0 else null
+
+
 ## True when `other` is standing on this player's head pad.
 func has_rider(other: Player) -> bool:
 	var feet := other.global_position.y + HALF_SIZE.y
@@ -237,11 +274,40 @@ func take_hit(damage: int, _stun_time: float = 0.0, knockback := Vector2.ZERO) -
 		return
 	hp -= damage
 	_invincible = invincible_time
+	_snip_hair()
 	if knockback != Vector2.ZERO and carried_by == null:
 		velocity = knockback
 		control_lock = 0.2
 	if hp <= 0:
 		die()
+
+
+## Growth tonic: hair grows back one notch. Returns false at full health.
+func heal(amount: int) -> bool:
+	if not alive or hp >= max_hp:
+		return false
+	hp = mini(hp + amount, max_hp)
+	return true
+
+
+func soak(seconds: float) -> void:
+	wet_time = maxf(wet_time, seconds)
+
+
+func dry() -> void:
+	wet_time = 0.0
+
+
+func is_wet() -> bool:
+	return wet_time > 0.0
+
+
+## How much hair is left, 1.0 = full. Hair is the health bar: each hit snips some off.
+## Hair is the health bar: every hit snips a little puff of hair off in the haircut's colour.
+func _snip_hair() -> void:
+	var snip := HairSnip.new(ability.get("HAIR_COLOR") if ability.get("HAIR_COLOR") != null else Color.WHITE)
+	snip.position = global_position + Vector2(0, -HALF_SIZE.y)
+	get_parent().add_child(snip)
 
 
 func make_invincible(seconds: float) -> void:
@@ -336,6 +402,7 @@ func respawn_at(pos: Vector2) -> void:
 	control_lock = 0.0
 	hp = max_hp
 	_invincible = 1.0
+	wet_time = 0.0
 	squash.scale = Vector2.ONE
 	ability.reset()
 	alive = true
@@ -349,7 +416,7 @@ func set_frozen(frozen: bool) -> void:
 		velocity = Vector2.ZERO
 
 
-## Freeze-frame for impact (parry, volley, boss hits).
+## Freeze-frame for impact (parry, hair-catch toss, boss hits).
 func hit_stop(duration: float) -> void:
 	freeze_frame(get_tree(), duration)
 
@@ -371,3 +438,51 @@ static func add_rect_shape(owner_node: Node, size: Vector2, offset: Vector2) -> 
 	col.position = offset
 	owner_node.add_child(col)
 	return col
+
+
+## A puff of snipped hair strands that fall and fade (spawned by a hit).
+class HairSnip extends Node2D:
+	var color: Color
+	var _t := 0.0
+	var _strands: Array[Vector2] = []
+
+	func _init(c: Color) -> void:
+		color = c
+		z_index = 2
+		for i in 7:
+			_strands.append(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, -0.3)).normalized() * randf_range(60.0, 130.0))
+
+	func _process(delta: float) -> void:
+		_t += delta
+		if _t > 0.7:
+			queue_free()
+		queue_redraw()
+
+	func _draw() -> void:
+		var a := 1.0 - _t / 0.7
+		for v in _strands:
+			var p := v * _t + Vector2(0, 260.0 * _t * _t)
+			var tail := p - v.normalized() * 7.0
+			draw_line(tail, p, Color(color, a), 3.0)
+			draw_line(tail, p, Color("2b2140", a * 0.6), 1.0)
+
+
+## Water drips around a soaked player (drawn under the Visual node, so it flips with it).
+class WetDrips extends Node2D:
+	var player: Player
+
+	func _init(p: Player) -> void:
+		player = p
+		z_index = 1
+
+	func _process(_delta: float) -> void:
+		queue_redraw()
+
+	func _draw() -> void:
+		if not player.is_wet():
+			return
+		var t := Time.get_ticks_msec() / 1000.0
+		for i in 4:
+			var x := -16.0 + i * 11.0
+			var y := fmod(t * 60.0 + i * 13.0, 40.0) - Player.HALF_SIZE.y
+			draw_circle(Vector2(x, y), 2.5, Color("4aa3df"))

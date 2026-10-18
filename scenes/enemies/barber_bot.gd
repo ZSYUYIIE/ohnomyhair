@@ -12,6 +12,9 @@ signal defeated
 enum State { WALK, SHOOT, WINDUP, CHARGE, DAZED, HURT, DEAD }
 
 const SIZE := Vector2(96, 128)
+## Charging, it ducks its head like a bull: only this much of it is solid, so a full
+## jump (about 114 px) clears it. Standing tall it can't be jumped (128 px).
+const CHARGE_HEIGHT := 72.0
 const KNOB_HEIGHT := 40.0  # stomp zone on top of the head
 
 @export var hp := 3
@@ -162,7 +165,7 @@ func daze(seconds: float) -> void:
 ## Only a parried scissor (stun 3 s) is strong enough to daze it.
 func take_hit(_damage: int, stun_time: float = 0.0, _knockback := Vector2.ZERO) -> void:
 	if stun_time >= 2.0:
-		daze(maxf(parry_daze_time, stun_time))  # a golden (volleyed) scissor dazes longer
+		daze(maxf(parry_daze_time, stun_time))  # a golden (hair-caught) scissor dazes longer
 
 
 func _stomped_by(player: Player) -> void:
@@ -201,30 +204,31 @@ func _nearest_player() -> Player:
 
 
 func _hurt_touching_players() -> void:
-	var me := Rect2(global_position + Vector2(-SIZE.x / 2, -SIZE.y), SIZE)
+	var h := CHARGE_HEIGHT if state == State.CHARGE else SIZE.y
+	var me := Rect2(global_position + Vector2(-SIZE.x / 2, -h), Vector2(SIZE.x, h))
 	for p: Player in get_tree().get_nodes_in_group("players"):
 		var them := Rect2(p.global_position - Player.HALF_SIZE, Player.HALF_SIZE * 2.0)
 		if p.alive and me.intersects(them):
 			p.take_hit(1, 0.0, Vector2(signf(p.global_position.x - global_position.x) * 360.0, -300.0))
 
 
+const ART := preload("res://assets/art/enemies/enemy_barber_bot.png")
+
+
 func _draw() -> void:
-	var body := Color("c0392b")
+	# Head down, squashed low while charging: reads as "jump over me".
+	var squash := Vector2(1.15, CHARGE_HEIGHT / SIZE.y) if state == State.CHARGE else Vector2.ONE
+	var frame := 0  # normal | dazed (glowing knob) | hurt flash
 	match state:
-		State.DAZED: body = Color("7f8c8d")
-		State.HURT, State.WINDUP: body = Color.WHITE if int(_flash * 40.0) % 2 == 0 else Color("e74c3c")
+		State.DAZED: frame = 1
+		State.HURT, State.WINDUP: frame = 2 if int(_flash * 40.0) % 2 == 0 else 0
+	draw_set_transform(Vector2.ZERO, 0.0, squash * Vector2(facing, 1.0))
+	draw_texture_rect_region(ART, Rect2(-72, -140, 144, 144), Rect2(frame * 144, 0, 144, 144))
+	draw_set_transform(Vector2.ZERO, 0.0, squash)
 	var top := -SIZE.y
-	draw_rect(Rect2(-SIZE.x / 2, top + 24, SIZE.x, SIZE.y - 24), body)
-	draw_rect(Rect2(-SIZE.x / 2 + 8, top + 8, SIZE.x - 16, 20), Color("2c3e50"))    # head
-	draw_rect(Rect2(facing * 20 - 8, top + 12, 16, 10), Color("f1c40f"))            # eye
-	# Scissor arms
-	var arm := Vector2(facing * (SIZE.x / 2 + 18), top + 70)
-	draw_line(Vector2(facing * SIZE.x / 2, top + 64), arm + Vector2(0, -10), Color("bdc3c7"), 6.0)
-	draw_line(Vector2(facing * SIZE.x / 2, top + 76), arm + Vector2(0, 10), Color("bdc3c7"), 6.0)
-	# Head knob: the weak point, glowing while dazed
-	var knob := Color("f1c40f") if state == State.DAZED else Color("7f8c8d")
-	draw_rect(Rect2(-18, top - 4, 36, 12), knob)
 	if state == State.DAZED:
 		draw_string(ThemeDB.fallback_font, Vector2(-44, top - 14), "STOMP!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("f1c40f"))
 	for i in hp:
-		draw_rect(Rect2(-SIZE.x / 2 + i * 34, top - 34 if state != State.DAZED else top - 44, 28, 6), Color("e74c3c"))
+		var bar := Rect2(-SIZE.x / 2 + i * 34, top - 34 if state != State.DAZED else top - 44, 28, 7)
+		draw_rect(bar.grow(1.5), Color("2b2140"))
+		draw_rect(bar, Color("e74c3c"))

@@ -6,6 +6,7 @@ extends HairAbility
 ## Attack: parry (0.15 s window) that sends scissors back the way they came.
 ## Combo "Sling Dash": press skill while dangling from twin-tails' hair to be flung
 ## forward: a long, gravity-free air dash that smashes gel; the carrier bobs up.
+## Wet (shampoo shower): the pompadour flops, and a dash just bounces off gel until dried.
 
 const HAIR_COLOR := Color("3a8fd6")
 
@@ -117,12 +118,12 @@ func after_move() -> void:
 		return
 	for i in player.get_slide_collision_count():
 		var collider := player.get_slide_collision(i).get_collider()
-		if collider and collider.has_method("smash"):
+		if collider and collider.has_method("smash") and not player.is_wet():
 			collider.smash()
 			# A sling dash punches straight through gel; a ground dash stops at the wall.
 			if not _slinging:
 				_dash_left = 0.0
-	if player.is_on_wall() and not (_slinging and _touching_gel()):
+	if player.is_on_wall() and not (_slinging and _touching_gel() and not player.is_wet()):
 		_dash_left = 0.0
 		_slinging = false
 

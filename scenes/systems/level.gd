@@ -59,6 +59,7 @@ func _ready() -> void:
 				start_room = arg.get_slice("=", 1).to_int() - 1
 	_carry_over = {}
 	room_index = clampi(start_room, 0, rooms.size() - 1)
+	_activate_room(room_index)
 	camera.position = rooms[room_index].position
 	if rooms[room_index].starts_with_swapped_hair:
 		for player in players:
@@ -119,14 +120,24 @@ func _load_fresh(room: int, time: float, death_count: int) -> void:
 	Engine.time_scale = 1.0
 	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count}
 	var fresh: Level = load(scene_file_path).instantiate()
+	# Grab the tree first: once this level is removed from it, get_tree() returns null.
+	var tree := get_tree()
 	var parent := get_parent()
-	var was_current := get_tree().current_scene == self
+	var was_current := tree.current_scene == self
 	parent.remove_child(self)
 	parent.add_child(fresh)
 	if was_current:
-		get_tree().current_scene = fresh
+		tree.current_scene = fresh
 	replaced.emit(fresh)
 	queue_free()
+
+
+## Only the current room runs: enemies, turrets and timed hazards in rooms you haven't
+## reached stay frozen, so every room starts the same way when you get there (the boss
+## doesn't charge around - or shoot - while you're still two rooms back).
+func _activate_room(index: int) -> void:
+	for i in rooms.size():
+		rooms[i].process_mode = Node.PROCESS_MODE_INHERIT if i == index else Node.PROCESS_MODE_DISABLED
 
 
 func _place_players() -> void:
@@ -161,6 +172,7 @@ func _on_room_cleared(room: Room) -> void:
 	var pan := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	pan.tween_property(camera, "position", rooms[room_index].position, 0.7)
 	await pan.finished
+	_activate_room(room_index)
 	_place_players()
 	for player in players:
 		player.set_frozen(false)

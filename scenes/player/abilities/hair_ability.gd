@@ -27,6 +27,11 @@ func tick_carried(delta: float) -> void:
 	tick_attack(delta)
 
 
+## True while gliding (hair dryers only lift gliders).
+func is_gliding() -> bool:
+	return false
+
+
 ## Animation the haircut wants right now (skill or attack pose), or &"" to let the player
 ## pick one from movement.
 func anim() -> StringName:

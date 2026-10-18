@@ -212,16 +212,17 @@ func wait_for_clear_window(parrier: Player, turret: ScissorTurret, max_ticks: in
 
 ## Walk up to a clipper bot and dash into it until it's gone.
 func smash_bot(p: Player, bot: ClipperBot) -> bool:
-	for attempt in 8:
+	for attempt in 12:
 		if not is_instance_valid(bot):
 			return true
+		# Dash from range (a dash covers ~5 tiles) instead of walking into its blades.
 		var side := signf(p.global_position.x - bot.global_position.x)
-		await walk_to(p, bot.global_position.x + side * 90.0, 120)
+		await walk_to(p, bot.global_position.x + side * 120.0, 120)
 		if not is_instance_valid(bot):
 			return true
 		_face(p, bot.global_position.x)
 		await tap(p, "skill")
-		await _ticks(25)
+		await _ticks(30)
 	return not is_instance_valid(bot)
 
 
@@ -241,16 +242,19 @@ func _face(p: Player, x: float) -> void:
 	p.hit_box.position.x = absf(p.hit_box.position.x) * p.facing
 
 
-## Twin-tails whips the next parried (blue) scissor that comes into volley reach.
-## True if it turned golden.
-func volley_next(p: Player, max_ticks: int) -> bool:
-	for i in max_ticks:
-		for s: Scissor in get_nodes_in_group("scissors"):
-			if s.deflected and not s.golden and p.ability._in_volley_reach(s.global_position + s.direction * 6.0):
-				await tap(p, "attack")
-				return is_instance_valid(s) and s.golden
-		await physics_frame
-	return false
+## Hair Catch: twin-tails holds skill (pigtails open) until a parried (blue) scissor is
+## caught, then lets go to toss it straight up. True if it went up golden.
+func catch_and_toss(p: Player, max_ticks: int) -> bool:
+	hold(p, "skill", true)
+	var caught := await wait_until(func(): return p.ability.is_holding_scissor(), max_ticks)
+	await _ticks(4)
+	var s: Scissor = null
+	for x: Scissor in get_nodes_in_group("scissors"):
+		if x.holder == p:
+			s = x
+	hold(p, "skill", false)
+	await _ticks(2)
+	return caught and s != null and is_instance_valid(s) and s.golden and s.direction == Vector2.UP
 
 
 ## `guard` parries anything coming at them until `done` returns true (run another
