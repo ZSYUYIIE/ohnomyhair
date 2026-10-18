@@ -17,6 +17,23 @@ const SAVE_VERSION := 2
 static var save_path := "user://progress.cfg"
 
 
+static func has_seen_opening() -> bool:
+	var cfg := _load()
+	if cfg.get_value("story", "opening_seen", false):
+		return true
+	# Existing players can continue without a new mandatory opening.
+	for entry in LEVELS:
+		if cfg.has_section_key(entry.id, "best_time"):
+			return true
+	return false
+
+
+static func mark_opening_seen() -> void:
+	var cfg := _load()
+	cfg.set_value("story", "opening_seen", true)
+	cfg.save(save_path)
+
+
 static func index_of(scene_path: String) -> int:
 	for i in LEVELS.size():
 		if LEVELS[i].path == scene_path:

@@ -1,56 +1,68 @@
-# Asset Library v1: title and Salon Map UI
+# Asset Library v1: title, Salon Map and opening
 
-The user's newest AI-generated overview is the visual reference. It is not an existing
-production asset bundle. The current game assets were inspected and retained for gameplay;
-this pass creates a title illustration and implements real Godot controls around it.
+The teammate bundle supplied by the user on 2026-10-18 replaces the generated title
+draft. The source folder is `C:/Users/drdot/Downloads/ohnomyhair_asset_library_v1`.
+The project contains every runtime asset it needs; it does not depend on that Downloads path.
 
-## Current visual target
+## Runtime integration
 
-- Gold bubble logo, airborne pink Twin-Tails and blue Pompadour, floating hair clippings.
-- Warm peach salon, coral chairs, blue mirrors, lilac panels and checker floor.
-- Dark purple outlines, cream panels, rounded Fredoka headings and Nunito body text.
-- Start Game / About cover; a shared four-stop Salon Map with a lavender winding road.
-- Stage locks enforce every earlier clear. The last stage stays `?` / `???` until cleared.
-- HUD, pause, death, results, help, chair selection and boss bar share the same palette.
+- `assets/art/ui/poster/title_main_menu.png`: exact 1280×720 supplied title preview.
+  Its logo and Start Game / About lettering are baked in. Transparent native Buttons
+  align with those painted buttons, adding focus/hover feedback without duplicate text.
+  Quit remains a native button. A future localization pass needs separated title layers.
+- Start Game opens a native four-stop Salon Map. The teammate map is a static mockup
+  with locked progress baked in, so native controls/drawing implement its road, labels,
+  stage selection, padlocks and Play footer. Every earlier chapter must be cleared.
+  The final stop remains `?` / `???` until cleared; no boss illustration is shown.
+- `map_friends.png` is the exact supplied earlier transparent pair layer. An AtlasTexture
+  selects its occupied region (412,280,456,255); both friends move to the selected stop.
+  This reuses the standing pair intentionally, rather than treating it as a new-menu layer.
+- Map Play starts the opening on a fresh save, then loads Fresh Cut. Existing clears
+  count as having seen the opening. Natural completion and skipping persist
+  `story/opening_seen` in the existing save without changing chapter records.
+- `assets/art/opening/`: all 11 clean supplied panels, each 1280×720. The 39-second
+  timeline and English subtitles match the teammate JSON. Transitions are included
+  in each shot's duration. Wide shots push in at most 2.5%; close-ups keep their framing.
+  Subtitles use the bottom 140 px. Any key/click/controller button skips after a short
+  input guard so the opening Play click cannot skip it accidentally.
+- About opens the credits tab (GameJamPlus 26/27 / NPC Union / Singapore), with the
+  existing controls, combos and story help available alongside it.
+- HUD, pause, death, results, help, chair selection and boss bar share cream panels,
+  purple outlines, gold highlights and rounded fonts. Gameplay art is unchanged.
 
-Start Game opens the map at the latest unlocked chapter. Clicking a stage selects it;
-the footer Play button starts it. Back / Esc returns to the cover. Keyboard focus stays
-inside each visible overlay. About opens the controls, combos and story guide.
+## Provenance and imports
 
-## Sources and files
+`poster_ui_manifest.json` records runtime paths, source paths, dimensions and SHA-256.
+The supplied image hashes were checked against the teammate manifest, and the 13
+runtime copies are byte-for-byte identical. The original design metadata, timeline,
+SRT, generation prompts and README are retained under `docs/art/teammate_library_v1`.
+Those files describe the teammate delivery, not the current implementation status.
+The source specification calls the final chapter The Barber; the game's story name
+remains The Assistant, with the stable save ID `the_barber` retained.
 
-| File | Source / role |
-|---|---|
-| `art_src/ui/asset_library_reference_v1.jpg` | User-supplied AI overview, 1800×2580; current reference |
-| `assets/art/ui/poster/title_scene_gold.png` | Built-in image generation from that reference; 1672×941 opaque PNG |
-| `art_src/ui/storyboard_reference.png` | Earlier user-supplied art board; historical reference |
-| `art_src/ui/title_scene_pink_draft.png` | Earlier generated draft, superseded by the gold-logo reference |
-| `scenes/ui/salon_map_backdrop.gd` | Code-native map road, margin decorations and locks |
-| `assets/fonts/Fredoka.ttf` | Unmodified [Google Fonts Fredoka](https://github.com/google/fonts/tree/main/ofl/fredoka); accompanying SIL OFL license |
-| `assets/fonts/Nunito.ttf` | Unmodified [Google Fonts Nunito](https://github.com/google/fonts/tree/main/ofl/nunito); accompanying SIL OFL license |
+The map reference is archived under `art_src/ui/teammate_library_v1`. Generated pink
+and gold draft titles are retained under `art_src/ui`, excluded from Godot imports;
+`generated_drafts.md` records their earlier prompt and provenance. Unused native-size
+previews, optional SNIP variants and other reusable slices remain in the supplied
+bundle and are not shipped as runtime textures.
 
-Title SHA-256: `13a6aba9cdf041e7ca0e1dae3bffa623bc694e480cded74e3d73a7e27b24897d`.
-Texture import: lossless, no mipmaps, linear UI filtering. Original character portraits
-are used for the map marker. The source-art directory is excluded from Godot by `.gdignore`.
-Only the game logo is baked into title art; buttons, labels, stage numbers, locks, progress
-and input are native controls/drawing. Font variation axes use integer OpenType tags.
+Texture import: lossless, no mipmaps, linear filtering. Godot uses a 1280×720 reference
+viewport and letterboxes other aspect ratios. The opening has no supplied audio;
+this implementation is illustrated panels with subtle motion, subtitles and transitions.
 
-The 11 opening panels in the overview remain storyboard references. This UI pass does
-not present thumbnail crops as finished cutscene assets or claim an animated opening.
-
-## Generation prompt
-
-Tool: built-in `image_gen.imagegen`, opaque output, latest overview as reference image.
-
-> Create ONE finished 16:9 1920x1080 game title-screen background illustration derived faithfully from the TOP LEFT title-main-menu panel of this user's AI-generated asset-library reference. The overview is a reference, not an edit target to reproduce: exclude the library sheet, captions, map, opening thumbnails and all review text. Preserve the newer GOLD logo composition and airborne characters, not the older pink-logo standing-handshake composition. Warm polished cute 2D cartoon salon, thick dark-purple outlines, soft cel shading, cream peach walls, lavender panels, gleaming blue mirrors, coral-red barber chairs, warm brown drawers, teal/purple hair-product bottles, little plants, pink-and-cream checker floor. A clear two-line logo in the UPPER LEFT says exactly 'Oh No My Hair!' in large playful rounded GOLD/YELLOW bubble letters with cream highlights and thick dark-purple outlines, matching the reference. The logo occupies x=6%-46%, y=7%-42%. At the RIGHT half, x=50%-90%, y=12%-83%, the two ORIGINAL friends joyfully leap while holding hands: pink Twin-Tails above/right, blue spiky Pompadour below/left. Cream oval faces, two dark oval eyes, NO MOUTHS, glossy voluminous hair, dark purple thin stick arms and legs, oval hands and feet. Match the reference identities, action direction and silhouette; no clothes or extra characters. Include a few floating pink and blue hair clippings across the lower floor as in the reference. Leave a clean quiet area on the LEFT UNDER THE LOGO at x=10%-43%, y=48%-78% with subdued salon wall/chair behind it so native Start Game and About buttons can be placed there. Do NOT draw those buttons, any menu lettering, icons or UI controls. The only text in the image is the gold game logo. No watermark. This is production artwork, not a menu mockup, and interactive controls will be drawn by Godot.
-
-The tool returned 1672×941 rather than the requested 1920×1080. Its near-16:9 composition
-was inspected and kept at its original resolution; Godot scales it to the 1280×720 viewport.
+Fonts are unmodified [Fredoka](https://github.com/google/fonts/tree/main/ofl/fredoka)
+and [Nunito](https://github.com/google/fonts/tree/main/ofl/nunito) from Google Fonts.
+Their accompanying SIL OFL licenses are under `assets/fonts`. Numeric OpenType tags
+select the intended variable-font weights. License wording is preserved.
 
 ## Verification
 
-Headless tests cover title-to-map-to-game flow, latest-stage selection, locked-stage
-rejection, mystery naming, Back/Esc and focus containment, plus the campaign regression
-suites. GPU renders cover cover/map, help, HUD, pause, death, results and chairs, with
-title/map checks at 1280×720, 960×540 and a 1280×960 window (letterboxed game viewport).
-Review captures are in `.godot/poster-shots/` and logs in `.godot/poster-*.log`.
+`tests/test_opening.gd` checks source timeline parity, all 11 frames, exact boundaries,
+natural completion, initial-click protection, keyboard/mouse/controller skipping,
+persisted seen state, existing-save continuation and locked-destination rejection.
+`tests/test_menu.gd` covers cover → map → Play, map selection, locks, mystery naming,
+Back/Esc and keyboard focus, plus campaign and HUD regressions.
+
+GPU captures include every opening panel, cover/map at 1280×720 and 960×540, the
+letterboxed 1280×960 window, credits/help, HUD, pause, death, results and chairs.
+Review captures are in `.godot/poster-shots/`; logs are `.godot/teammate-*.log`.

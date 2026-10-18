@@ -113,5 +113,5 @@ static func focus_loop(buttons: Array[Button]) -> void:
 
 
 static func focus_if_visible(button: Button) -> void:
-	if is_instance_valid(button) and button.is_inside_tree() and button.is_visible_in_tree() and not button.disabled:
+	if is_instance_valid(button) and button.is_inside_tree() and button.is_visible_in_tree() and not button.disabled and button.focus_mode != Control.FOCUS_NONE:
 		button.grab_focus()

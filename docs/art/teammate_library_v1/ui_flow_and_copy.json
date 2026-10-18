@@ -1,0 +1,60 @@
+{
+  "reference_resolution": [
+    1280,
+    720
+  ],
+  "title": {
+    "preview": "ui/previews/title_main_menu_preview.png",
+    "options": [
+      "Start Game",
+      "About"
+    ],
+    "logo_color": "warm golden yellow #ffd34e",
+    "press_any_key": false
+  },
+  "about": {
+    "event": "GameJamPlus 26/27",
+    "team": "NPC Union",
+    "region": "Singapore",
+    "text": "Created for GameJamPlus 26/27\nNPC Union\nSingapore",
+    "presentation": "planned modal; no separate rendered screen included"
+  },
+  "map": {
+    "preview": "ui/previews/salon_map_preview.png",
+    "shared_party": true,
+    "selected_stage_initial": 1,
+    "unlocked_stage_initial": 1,
+    "stages": [
+      {
+        "id": 1,
+        "name": "Fresh Cut"
+      },
+      {
+        "id": 2,
+        "name": "Return to Sender"
+      },
+      {
+        "id": 3,
+        "name": "Wash & Blow-Dry"
+      },
+      {
+        "id": 4,
+        "name": "The Barber",
+        "locked_display_name": "???",
+        "hide_boss_art": true
+      }
+    ],
+    "progression": "On stage completion, move BOTH players together to the next stop and update the shared save.",
+    "buttons": [
+      "Back",
+      "Play"
+    ]
+  },
+  "flow": [
+    "title Start Game -> map",
+    "title About -> credits modal -> title",
+    "map Play -> opening cutscene only on first start, then selected level",
+    "cutscene any-key skip -> selected level"
+  ],
+  "implemented": false
+}

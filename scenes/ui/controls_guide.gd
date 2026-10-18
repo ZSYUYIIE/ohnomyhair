@@ -57,6 +57,10 @@ func _ready() -> void:
 		["SOMETHING'S OFF...", "The surprise chair and the assistant's damaging scissors can swap your two haircuts. Your movement keys stay yours; skills follow the haircut. Check your portrait and skill hints, then help each other adapt."],
 	]:
 		styles.add_child(_text(entry[0], entry[1], 18))
+	var about := _page("About")
+	about.add_child(UiTheme.heading("Oh No My Hair!", 38))
+	about.add_child(_text("CREATED FOR", "GameJamPlus 26/27\nNPC Union\nSingapore", 26))
+	about.add_child(_text("BAD HAIR. GOOD FRIENDS.", "One bad haircut. Two good friends. Escape the salon together.\nUse the other tabs for controls, hair combos and checkpoints.", 23))
 	_close = Button.new()
 	_close.text = "Got it  /  Esc"
 	_close.custom_minimum_size.y = 48
@@ -80,8 +84,8 @@ func _ready() -> void:
 	_close.focus_neighbor_right = _close.get_path()
 
 
-func open() -> void:
-	_tabs.current_tab = 0
+func open(tab: int = 0) -> void:
+	_tabs.current_tab = tab
 	show()
 	UiTheme.focus_if_visible.call_deferred(_close)
 

@@ -1,31 +1,174 @@
 {
-  "version": 1,
-  "direction": "User Asset Library v1 — gold title and shared Salon Map",
-  "viewport": [1280, 720],
+  "version": 2,
+  "direction": "Teammate Asset Library v1",
+  "viewport": [
+    1280,
+    720
+  ],
+  "provenance": "User-supplied AI artwork; original teammate metadata retained under docs/art/teammate_library_v1",
   "assets": [
     {
-      "id": "title_scene_gold",
-      "path": "assets/art/ui/poster/title_scene_gold.png",
-      "dimensions": [1672, 941],
-      "frames": 1,
-      "transparency": false,
+      "path": "assets/art/opening/cutscene_01_closing_time.png",
+      "source": "cutscene/panels/cutscene_01_closing_time.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "935c57a8e494713e85c4203c8cc0e187db69d426a24d1a7c352f954f8be4d2c5",
       "filter": "linear",
       "mipmaps": false,
-      "collision": "none",
-      "source": "built-in image_gen from user-provided AI overview",
-      "provenance": "docs/art/poster_ui.md",
-      "status": "agent-selected and inspected in Godot; user review pending"
+      "source_modified": false
     },
     {
-      "id": "salon_map",
+      "path": "assets/art/opening/cutscene_02_robot_assistant.png",
+      "source": "cutscene/panels/cutscene_02_robot_assistant.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "34ce95763da036e2c40ed35f3e1bf605c1c62f63c131046eeca8b1781e59f4a8",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_03_good_hair_day.png",
+      "source": "cutscene/panels/cutscene_03_good_hair_day.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "88b089447859dce22da59faa34cbed9a51287c662f25f57d078c8a8a82a2dba2",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_04_robot_malfunction.png",
+      "source": "cutscene/panels/cutscene_04_robot_malfunction.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "aab84cc4f30d1795a5ec573f2d6a91a58c8a2501c1a010a62f4ed23a4aa9a25f",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_05_hair_burst.png",
+      "source": "cutscene/panels/cutscene_05_hair_burst.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "0a726ba602de261789a3ddfba10268ce236321df4ab7de2bc4e4af041bf65834",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_06_power_hair_reveal.png",
+      "source": "cutscene/panels/cutscene_06_power_hair_reveal.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "bf17e96da85c8bd32d1350f93a0f700b5bc363870122940c080a8892ecb4d54c",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_07_door_lock.png",
+      "source": "cutscene/panels/cutscene_07_door_lock.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "36a63a69c0565d1c0cc233afc8a01284db725c5ab4cf5f41e7575dad9d48a6c1",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_08_protect_friend.png",
+      "source": "cutscene/panels/cutscene_08_protect_friend.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "6c96fb09e369d3a1c28868a28294994dd56f1d677d4cd6e49ca4c273032d0230",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_09_another_way.png",
+      "source": "cutscene/panels/cutscene_09_another_way.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "de24b36687cbb832a923210ba20ad7f740d1d4f03a6bb987ee622ae70fc9e245",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_10_trust_me.png",
+      "source": "cutscene/panels/cutscene_10_trust_me.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "ab1405ef7c44ab102c40aebe64aa96214df5cc875deefe25ec4b5ec2ae1a58e6",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/opening/cutscene_11_escape_together.png",
+      "source": "cutscene/panels/cutscene_11_escape_together.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "27e6d4b205971e4a2ab6b835a754d61125d042f058815ea6e94cd30f3f78d1ab",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/ui/poster/map_friends.png",
+      "source": "reusable_earlier_title_parts/landing_characters.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "aa1b500fc6b84c1f878c3531162e664a0e828621d8bad372cb328e0f5690af8b",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
+      "path": "assets/art/ui/poster/title_main_menu.png",
+      "source": "ui/previews/title_main_menu_preview.png",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "6c10862e78cb57ae339611c19c9dbf9b7cf5cc6c1ef3e96c6d061ea5b54b1db0",
+      "filter": "linear",
+      "mipmaps": false,
+      "source_modified": false
+    },
+    {
       "path": "scenes/ui/salon_map_backdrop.gd",
-      "format": "native vector drawing beneath interactive Godot Buttons",
-      "source": "project code following user overview",
-      "collision": "none; native GUI hit areas",
-      "status": "implemented and verified"
+      "source": "Native Godot implementation of teammate salon_map_preview.png",
+      "status": "interactive shared progression; map mockup retained under art_src/ui/teammate_library_v1"
     },
     {
-      "id": "fredoka",
       "path": "assets/fonts/Fredoka.ttf",
       "source": "https://github.com/google/fonts/tree/main/ofl/fredoka",
       "license": "SIL OFL 1.1",
@@ -33,7 +176,6 @@
       "modified": false
     },
     {
-      "id": "nunito",
       "path": "assets/fonts/Nunito.ttf",
       "source": "https://github.com/google/fonts/tree/main/ofl/nunito",
       "license": "SIL OFL 1.1",

@@ -10,8 +10,10 @@
    are saved in `user://progress.cfg`). To play one level directly: open `scenes/levels/level_0N.tscn` and press F6.
 
 The illustrated title uses **Start Game → Salon Map → Play**. Select an unlocked stop;
-the final stop stays a mystery until cleared. **About** opens controls and story help.
-UI art sources, licenses and generation prompt: [poster_ui.md](docs/art/poster_ui.md).
+the final stop stays a mystery until cleared. A new save plays the supplied 39-second
+opening before the first level; any key, mouse click or controller button skips it.
+**About** opens team credits, controls and story help.
+UI art sources, licenses and integration details: [poster_ui.md](docs/art/poster_ui.md).
 
 From a terminal (`--room=N` starts in room N of that level):
 ```
@@ -83,6 +85,7 @@ Each test plays through a level with simulated input; exit code 0 = pass.
 `test_combos.gd` checks each hair combo (and that the solo shortcut fails) in a bare arena.
 ```
 godot --headless --path . --script res://tests/test_menu.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_opening.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd

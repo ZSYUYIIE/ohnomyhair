@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "reference_resolution": [
+    1280,
+    720
+  ],
+  "cutscene_duration_seconds": 39,
+  "validation": {
+    "decoded_all_images": true,
+    "idle_recomposition_exact": true,
+    "timeline_references_exist": true,
+    "engine_tested": false
+  },
+  "images": [
+    {
+      "file": "cutscene/panels/cutscene_01_closing_time.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "935c57a8e494713e85c4203c8cc0e187db69d426a24d1a7c352f954f8be4d2c5"
+    },
+    {
+      "file": "cutscene/panels/cutscene_02_robot_assistant.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "34ce95763da036e2c40ed35f3e1bf605c1c62f63c131046eeca8b1781e59f4a8"
+    },
+    {
+      "file": "cutscene/panels/cutscene_03_good_hair_day.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "88b089447859dce22da59faa34cbed9a51287c662f25f57d078c8a8a82a2dba2"
+    },
+    {
+      "file": "cutscene/panels/cutscene_04_robot_malfunction.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "aab84cc4f30d1795a5ec573f2d6a91a58c8a2501c1a010a62f4ed23a4aa9a25f"
+    },
+    {
+      "file": "cutscene/optional_sfx/cutscene_04_robot_malfunction_snip.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "optional baked SNIP lettering",
+      "status": "ready_for_engine_import",
+      "sha256": "13d7da93d680c2e4e9c581a6e5e334f2a257f9d31dcfdea078ed9459b599211e"
+    },
+    {
+      "file": "cutscene/panels/cutscene_05_hair_burst.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "0a726ba602de261789a3ddfba10268ce236321df4ab7de2bc4e4af041bf65834"
+    },
+    {
+      "file": "cutscene/optional_sfx/cutscene_05_hair_burst_snip.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "optional baked SNIP lettering",
+      "status": "ready_for_engine_import",
+      "sha256": "4bd3d0f6bb680495955ea974f7ab9c2d2d4ddbcb76a896f17d3feb55ba3b3290"
+    },
+    {
+      "file": "cutscene/panels/cutscene_06_power_hair_reveal.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "bf17e96da85c8bd32d1350f93a0f700b5bc363870122940c080a8892ecb4d54c"
+    },
+    {
+      "file": "cutscene/panels/cutscene_07_door_lock.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "36a63a69c0565d1c0cc233afc8a01284db725c5ab4cf5f41e7575dad9d48a6c1"
+    },
+    {
+      "file": "cutscene/panels/cutscene_08_protect_friend.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "6c96fb09e369d3a1c28868a28294994dd56f1d677d4cd6e49ca4c273032d0230"
+    },
+    {
+      "file": "cutscene/panels/cutscene_09_another_way.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "de24b36687cbb832a923210ba20ad7f740d1d4f03a6bb987ee622ae70fc9e245"
+    },
+    {
+      "file": "cutscene/panels/cutscene_10_trust_me.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "ab1405ef7c44ab102c40aebe64aa96214df5cc875deefe25ec4b5ec2ae1a58e6"
+    },
+    {
+      "file": "cutscene/panels/cutscene_11_escape_together.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "clean opening illustration",
+      "status": "ready_for_engine_import",
+      "sha256": "27e6d4b205971e4a2ab6b835a754d61125d042f058815ea6e94cd30f3f78d1ab"
+    },
+    {
+      "file": "reusable_earlier_title_parts/landing_background.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "earlier static-title layer or registered idle slice",
+      "status": "legacy_reusable_not_layers_of_new_menu",
+      "sha256": "57f5d8c618cfccdf1ab141b78512ae435b6162a9fda12ff828489c029467543a"
+    },
+    {
+      "file": "reusable_earlier_title_parts/landing_characters.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": true,
+      "role": "earlier static-title layer or registered idle slice",
+      "status": "legacy_reusable_not_layers_of_new_menu",
+      "sha256": "aa1b500fc6b84c1f878c3531162e664a0e828621d8bad372cb328e0f5690af8b"
+    },
+    {
+      "file": "reusable_earlier_title_parts/landing_foreground.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": true,
+      "role": "earlier static-title layer or registered idle slice",
+      "status": "legacy_reusable_not_layers_of_new_menu",
+      "sha256": "c5fbbdb26538d588d7049daef9ae9342d8baa396c16672a111c5fbcf72527352"
+    },
+    {
+      "file": "reusable_earlier_title_parts/landing_p1_body.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": true,
+      "role": "earlier static-title layer or registered idle slice",
+      "status": "legacy_reusable_not_layers_of_new_menu",
+      "sha256": "d1e2c1a484fe2a9f794f69167da2a5f7b5213b24fcde5ba91f8550225496553d"
+    },
+    {
+      "file": "reusable_earlier_title_parts/landing_p1_tail_left.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": true,
+      "role": "earlier static-title layer or registered idle slice",
+      "status": "legacy_reusable_not_layers_of_new_menu",
+      "sha256": "696fad557df4340b4fb4de95109a8ed71e0bd5b2cfa92213c7f5999d88452f29"
+    },
+    {
+      "file": "reusable_earlier_title_parts/landing_p1_tail_right.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": true,
+      "role": "earlier static-title layer or registered idle slice",
+      "status": "legacy_reusable_not_layers_of_new_menu",
+      "sha256": "9d37c0fb9ea4bc6e12a3d60283425bbee21fb315e8d5bcae4ea6d137edb3bf32"
+    },
+    {
+      "file": "reusable_earlier_title_parts/landing_p2_character.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": true,
+      "role": "earlier static-title layer or registered idle slice",
+      "status": "legacy_reusable_not_layers_of_new_menu",
+      "sha256": "1b6edb7d248cd210cdb0445f262a3e339f36e5153c13f37ab974d23470263eaa"
+    },
+    {
+      "file": "ui/previews/title_main_menu_preview.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "latest approved full-screen UI mockup; baked text",
+      "status": "visual_reference_not_separated_ui",
+      "sha256": "6c10862e78cb57ae339611c19c9dbf9b7cf5cc6c1ef3e96c6d061ea5b54b1db0"
+    },
+    {
+      "file": "ui/source/title_main_menu_native.png",
+      "width": 1672,
+      "height": 941,
+      "transparent": false,
+      "role": "native-resolution generated UI mockup",
+      "status": "visual_reference_not_separated_ui",
+      "sha256": "af36b520e4b4c268e397806b779f8feaba19206e4d3b49efacb0325482d72139"
+    },
+    {
+      "file": "ui/previews/salon_map_preview.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "role": "latest approved full-screen UI mockup; baked text",
+      "status": "visual_reference_not_separated_ui",
+      "sha256": "e7b57250debc272188d05d94c2d270707ae8719cc4bbce41a7e8e6b68ff41046"
+    },
+    {
+      "file": "ui/source/salon_map_native.png",
+      "width": 1672,
+      "height": 941,
+      "transparent": false,
+      "role": "native-resolution generated UI mockup",
+      "status": "visual_reference_not_separated_ui",
+      "sha256": "0aba0b42beff46304994b155e19f0c85d6d7c6d6be63cd5fc138628e9f8f90b5"
+    },
+    {
+      "file": "references/p1_character_reference.png",
+      "width": 1086,
+      "height": 1448,
+      "transparent": true,
+      "role": "provided character or approved style reference",
+      "status": "reference_only",
+      "sha256": "461b769b7d8a165f684eeda0cb7d2f3e352b56eb08be79f7e90bf65c969f8026"
+    },
+    {
+      "file": "references/p2_character_reference.png",
+      "width": 1086,
+      "height": 1448,
+      "transparent": true,
+      "role": "provided character or approved style reference",
+      "status": "reference_only",
+      "sha256": "756cec6a77fa8f8e44849341889fe039932ac08961bc7569e549aad6f0636045"
+    },
+    {
+      "file": "references/approved_style_frame.png",
+      "width": 1672,
+      "height": 940,
+      "transparent": false,
+      "role": "provided character or approved style reference",
+      "status": "reference_only",
+      "sha256": "a0a411851422b0dffae6e7ee023a36cc82fb6d89bd70daebf72076ab1260043d"
+    },
+    {
+      "file": "previews/asset_library_overview.jpg",
+      "width": 1800,
+      "height": 2580,
+      "transparent": false,
+      "role": "current asset contact sheet",
+      "status": "review_only",
+      "sha256": "ef06a363145e3c1eaee4e9db96bddb3449ce42b85b4e0f37b22bca417375ae26"
+    },
+    {
+      "file": "previews/storyboard_11_shots.png",
+      "width": 2480,
+      "height": 1283,
+      "transparent": false,
+      "role": "storyboard contact sheet",
+      "status": "review_only_contains_captions",
+      "sha256": "a569520c16b0c6f8e0c8e053dc3aada82a407eb95fa8a9650810eac6e85a7af0"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 extends Control
 ## Vector road and lock decorations under real stage Buttons. No baked UI hit areas.
-const STOPS := [Vector2(210, 390), Vector2(490, 275), Vector2(795, 360), Vector2(1080, 265)]
+const STOPS := [Vector2(220, 440), Vector2(530, 265), Vector2(835, 365), Vector2(1140, 265)]
 var selected := 0
 var unlocked: Array[bool] = []
 var _road := PackedVector2Array()
@@ -20,8 +20,8 @@ func _draw() -> void:
 	# Broad lavender forms make the map feel like a page in the reference library.
 	draw_polyline(_road, Color("eedfeb"), 155, true)
 	for at in [STOPS[0], STOPS[3]]: draw_circle(at, 77.5, Color("eedfeb"))
-	draw_polyline(_road, UiTheme.INK, 57, true)
-	draw_polyline(_road, Color("cbb9df"), 50, true)
+	draw_polyline(_road, UiTheme.INK, 74, true)
+	draw_polyline(_road, Color("cbb9df"), 66, true)
 	for i in range(0, _road.size() - 2, 8):
 		draw_line(_road[i], _road[mini(i + 3, _road.size() - 1)], Color("8c75a8"), 3, true)
 	# A little pair of scissors and a comb echo the poster's margin drawings.

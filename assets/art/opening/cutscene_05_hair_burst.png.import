@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5s3k86dws6li"
-path="res://.godot/imported/title_scene_gold.png-1036eb260ac0541a875fcd5bde38cbdf.ctex"
+uid="uid://51vq5rgs3hit"
+path="res://.godot/imported/cutscene_05_hair_burst.png-0aa930fbc99ebb87549a23f36a4a7d19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/ui/poster/title_scene_gold.png"
-dest_files=["res://.godot/imported/title_scene_gold.png-1036eb260ac0541a875fcd5bde38cbdf.ctex"]
+source_file="res://assets/art/opening/cutscene_05_hair_burst.png"
+dest_files=["res://.godot/imported/cutscene_05_hair_burst.png-0aa930fbc99ebb87549a23f36a4a7d19.ctex"]
 
 [params]
 
