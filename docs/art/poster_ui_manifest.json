@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "direction": "User Asset Library v1 — gold title and shared Salon Map",
+  "viewport": [1280, 720],
+  "assets": [
+    {
+      "id": "title_scene_gold",
+      "path": "assets/art/ui/poster/title_scene_gold.png",
+      "dimensions": [1672, 941],
+      "frames": 1,
+      "transparency": false,
+      "filter": "linear",
+      "mipmaps": false,
+      "collision": "none",
+      "source": "built-in image_gen from user-provided AI overview",
+      "provenance": "docs/art/poster_ui.md",
+      "status": "agent-selected and inspected in Godot; user review pending"
+    },
+    {
+      "id": "salon_map",
+      "path": "scenes/ui/salon_map_backdrop.gd",
+      "format": "native vector drawing beneath interactive Godot Buttons",
+      "source": "project code following user overview",
+      "collision": "none; native GUI hit areas",
+      "status": "implemented and verified"
+    },
+    {
+      "id": "fredoka",
+      "path": "assets/fonts/Fredoka.ttf",
+      "source": "https://github.com/google/fonts/tree/main/ofl/fredoka",
+      "license": "SIL OFL 1.1",
+      "license_file": "assets/fonts/Fredoka-OFL.txt",
+      "modified": false
+    },
+    {
+      "id": "nunito",
+      "path": "assets/fonts/Nunito.ttf",
+      "source": "https://github.com/google/fonts/tree/main/ofl/nunito",
+      "license": "SIL OFL 1.1",
+      "license_file": "assets/fonts/Nunito-OFL.txt",
+      "modified": false
+    }
+  ]
+}

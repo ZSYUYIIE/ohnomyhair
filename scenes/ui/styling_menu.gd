@@ -27,11 +27,12 @@ func _ready() -> void:
 	root.add_child(center)
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(1120, 570)
+	panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 4, 26, 18))
 	center.add_child(panel)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 14)
 	panel.add_child(box)
-	box.add_child(UiTheme.label("Two friends. Pick your roles.", 36))
+	box.add_child(UiTheme.heading("Two friends. Pick your roles.", 38))
 	box.add_child(UiTheme.label("Your keys stay the same. Your haircut changes the skill. Save to heal both friends.", 20, UiTheme.MUTED))
 	var row := HBoxContainer.new()
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL

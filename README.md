@@ -9,6 +9,10 @@
 3. F5 opens the main menu (level cards unlock as you clear levels; best time and fewest deaths
    are saved in `user://progress.cfg`). To play one level directly: open `scenes/levels/level_0N.tscn` and press F6.
 
+The illustrated title uses **Start Game → Salon Map → Play**. Select an unlocked stop;
+the final stop stays a mystery until cleared. **About** opens controls and story help.
+UI art sources, licenses and generation prompt: [poster_ui.md](docs/art/poster_ui.md).
+
 From a terminal (`--room=N` starts in room N of that level):
 ```
 godot --path . res://scenes/levels/level_01.tscn -- --room=3

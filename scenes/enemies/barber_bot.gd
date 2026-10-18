@@ -272,12 +272,18 @@ func _draw() -> void:
 class BossBar extends CanvasLayer:
 	var boss: BarberBot
 	var _panel: Control
+	var _paper: StyleBoxFlat
+	var _filled: StyleBoxFlat
+	var _empty: StyleBoxFlat
 
 	func _init(b: BarberBot) -> void:
 		boss = b
 		layer = 8
 
 	func _ready() -> void:
+		_paper = UiTheme.card(UiTheme.CREAM, UiTheme.INK, 3, 16, 8)
+		_filled = UiTheme.card(UiTheme.PINK, UiTheme.INK, 2, 5, 0)
+		_empty = UiTheme.card(UiTheme.LILAC, UiTheme.INK, 2, 5, 0)
 		_panel = Control.new()
 		_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_panel.set_anchors_preset(Control.PRESET_CENTER_TOP)
@@ -295,13 +301,11 @@ class BossBar extends CanvasLayer:
 	func _draw_bar() -> void:
 		var ink := Color("2b2140")
 		var r := Rect2(Vector2.ZERO, _panel.size)
-		_panel.draw_rect(r, Color("fff6ea"))
-		_panel.draw_rect(r, ink, false, 3.0)
-		var font := ThemeDB.fallback_font
+		_panel.draw_style_box(_paper, r)
+		var font := UiTheme.heading_font()
 		_panel.draw_string(font, Vector2(14, 22), "THE ASSISTANT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
 		_panel.draw_string(font, Vector2(14, 22), "PHASE %d" % boss.phase(), HORIZONTAL_ALIGNMENT_RIGHT, _panel.size.x - 28, 16, Color("b0306a"))
 		var w := (_panel.size.x - 28 - 2 * 8) / boss._max_hp
 		for i in boss._max_hp:
 			var seg := Rect2(14 + i * (w + 8), 30, w, 12)
-			_panel.draw_rect(seg, Color("e74c3c") if i < boss.hp else Color(ink, 0.15))
-			_panel.draw_rect(seg, ink, false, 2.0)
+			_panel.draw_style_box(_filled if i < boss.hp else _empty, seg)

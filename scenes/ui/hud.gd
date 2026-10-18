@@ -27,7 +27,7 @@ func _ready() -> void:
 		var matte := ColorRect.new()
 		matte.position = rect.position
 		matte.size = rect.size
-		matte.color = UiTheme.INK
+		matte.color = UiTheme.WOOD if rect.position.y >= 648 else Color("49344e")
 		matte.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		root.add_child(matte)
 	for id in [1, 2]:
@@ -59,6 +59,7 @@ func _process(_delta: float) -> void:
 func _player_card(id: int) -> Control:
 	var panel := _plate()
 	var left := id == 1
+	panel.add_theme_stylebox_override("panel", UiTheme.card(Color("ffe6ef") if left else Color("e1f2fc"), UiTheme.INK, 3, 18, 6))
 	panel.anchor_left = 0.0 if left else 1.0
 	panel.anchor_right = panel.anchor_left
 	panel.anchor_top = 1.0
@@ -79,7 +80,7 @@ func _player_card(id: int) -> Control:
 	row.add_child(col)
 	var top := HBoxContainer.new()
 	col.add_child(top)
-	_names[id] = UiTheme.label("P%d" % id, 18)
+	_names[id] = UiTheme.heading("P%d" % id, 19)
 	_names[id].size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(_names[id])
 	_hearts[id] = HeartBar.new()
@@ -103,7 +104,7 @@ func _stage_card() -> Control:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 0)
 	panel.add_child(col)
-	_stage = UiTheme.label("", 20)
+	_stage = UiTheme.heading("", 21)
 	_stage.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_stage.clip_text = true
 	col.add_child(_stage)
@@ -115,7 +116,7 @@ func _stage_card() -> Control:
 
 func _plate() -> PanelContainer:
 	var panel := PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", UiTheme.card(Color(UiTheme.CREAM, 0.93), UiTheme.WALNUT, 2, 10, 6))
+	panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 3, 18, 6))
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return panel
 
