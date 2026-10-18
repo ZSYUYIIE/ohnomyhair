@@ -13,7 +13,8 @@ The illustrated title uses **Start Game → Salon Map → Play**. Select an unlo
 the final stop stays a mystery until cleared. A new save plays the supplied 39-second
 opening before the first level; any key, mouse click or controller button skips it.
 **About** opens team credits, controls and story help.
-**Watch opening / I** replays the introduction without changing your save.
+**▶ Opening** in chapter selection (or **I** on the title) replays the introduction without changing your save.
+On desktop, the round button in the corner or **Esc** on the title asks before quitting; web builds have no Quit.
 Menus support arrows / Tab, Shift+Tab and Enter / Space. In chapter selection,
 **1–4** selects an unlocked chapter and **P** plays it; **Esc** goes back.
 **F1 / H** opens the shortcut guide from the title, chapters, gameplay or pause.

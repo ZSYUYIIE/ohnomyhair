@@ -85,9 +85,12 @@ func _run() -> void:
 	current_scene.queue_free()
 	await frames()
 	menu = await _menu()
+	check(not menu._opening_button.is_visible_in_tree(), "the title keeps only its two painted actions")
+	menu._chapters_button.pressed.emit()
+	await frames()
 	menu._opening_button.pressed.emit()
 	await frames()
-	check(current_scene.get_script() == Opening and current_scene.return_to_menu, "Watch opening replays the CG even with existing progress")
+	check(current_scene.get_script() == Opening and current_scene.return_to_menu, "the chapter menu's Opening button replays the CG even with existing progress")
 	opening = current_scene
 	opening.set_process(false)
 	opening._elapsed = 0.4

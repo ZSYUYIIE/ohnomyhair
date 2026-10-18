@@ -87,17 +87,17 @@ static func primary(button: Button) -> void:
 	button.add_theme_stylebox_override("pressed", button_skin(Color("eab332"), false, true))
 
 
-static func wire_button(button: BaseButton) -> void:
+static func wire_button(button: BaseButton, hover := 1.025) -> void:
 	if button.has_meta("animated_button"): return
 	button.set_meta("animated_button", true)
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	button.resized.connect(func(): button.pivot_offset = button.size / 2.0)
-	button.mouse_entered.connect(func(): _button_pop(button, 1.025))
+	button.mouse_entered.connect(func(): _button_pop(button, hover))
 	button.mouse_exited.connect(func(): _button_pop(button, 1.0))
-	button.focus_entered.connect(func(): _button_pop(button, 1.025))
+	button.focus_entered.connect(func(): _button_pop(button, hover))
 	button.focus_exited.connect(func(): _button_pop(button, 1.0))
 	button.button_down.connect(func(): _button_pop(button, 0.965))
-	button.button_up.connect(func(): _button_pop(button, 1.025 if button.is_hovered() or button.has_focus() else 1.0))
+	button.button_up.connect(func(): _button_pop(button, hover if button.is_hovered() or button.has_focus() else 1.0))
 
 
 static func _button_pop(button: BaseButton, amount: float) -> void:
