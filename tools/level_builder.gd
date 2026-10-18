@@ -199,9 +199,11 @@ class RoomBuilder:
 		r.position = at
 		return add(r, name)
 
-	func hit_switch(name: String, col: int, row: int) -> Node2D:
+	## Service bell centred in tile (col, row); `x_shift` px moves it sideways, e.g. 16 to
+	## hang it over the middle of a 2-wide trench, so a toss from anywhere in it rings.
+	func hit_switch(name: String, col: int, row: int, x_shift := 0.0) -> Node2D:
 		var s := HitSwitch.new()
-		s.position = _center(col, row)
+		s.position = _center(col, row) + Vector2(x_shift, 0)
 		return add(s, name)
 
 	## locks: how many switches must call open() before it opens.

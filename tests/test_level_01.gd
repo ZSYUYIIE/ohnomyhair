@@ -15,6 +15,7 @@ func _run() -> void:
 		await _room_2()
 	if failed == 0:
 		await _room_3()
+	stop_logging()  # the rest are counter-checks that die on purpose
 	if failed == 0:
 		await _carry_alone_fails()
 	if failed == 0:

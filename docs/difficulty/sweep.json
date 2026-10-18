@@ -86,100 +86,100 @@
  {
   "test": "test_level_02",
   "seed": 1,
-  "passed": 8,
-  "failed": 1,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 2,
-  "passed": 17,
-  "failed": 2,
-  "first_fail": "R2: P2 on the walkway, P1 in the first trench"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 3,
-  "passed": 8,
-  "failed": 1,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 16,
+  "failed": 3,
+  "first_fail": "R2: hair catch from the far trench rings the second bell"
  },
  {
   "test": "test_level_02",
   "seed": 4,
-  "passed": 8,
-  "failed": 1,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 16,
+  "failed": 3,
+  "first_fail": "R2: hair catch from the far trench rings the second bell"
  },
  {
   "test": "test_level_02",
   "seed": 5,
-  "passed": 3,
-  "failed": 6,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 6,
-  "passed": 8,
-  "failed": 1,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_02",
   "seed": 7,
-  "passed": 15,
-  "failed": 4,
-  "first_fail": "R2: P1 moves to the far trench while it's jammed"
+  "passed": 18,
+  "failed": 1,
+  "first_fail": "R2: both in the exit clears L2"
  },
  {
   "test": "test_level_02",
   "seed": 8,
-  "passed": 17,
+  "passed": 7,
   "failed": 2,
-  "first_fail": "R2: P1 moves to the far trench while it's jammed"
+  "first_fail": "R1: both climb the shelves to the door"
  },
  {
   "test": "test_level_02",
   "seed": 9,
-  "passed": 8,
-  "failed": 1,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 7,
+  "failed": 2,
+  "first_fail": "R1: both climb the shelves to the door"
  },
  {
   "test": "test_level_02",
   "seed": 10,
-  "passed": 13,
-  "failed": 6,
-  "first_fail": "R2: P2 on the walkway, P1 in the first trench"
+  "passed": 16,
+  "failed": 3,
+  "first_fail": "R2: hair catch from the far trench rings the second bell"
  },
  {
   "test": "test_level_02",
   "seed": 11,
-  "passed": 3,
-  "failed": 6,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 18,
+  "failed": 1,
+  "first_fail": "R2: both in the exit clears L2"
  },
  {
   "test": "test_level_02",
   "seed": 12,
-  "passed": 3,
-  "failed": 6,
-  "first_fail": "R1: twin-tails drops into the trench"
+  "passed": 29,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_03",
   "seed": 1,
-  "passed": 20,
-  "failed": 2,
-  "first_fail": "R2: dry pompadour smashes the gel"
+  "passed": 27,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_03",
   "seed": 2,
-  "passed": 20,
-  "failed": 2,
-  "first_fail": "R2: dry pompadour smashes the gel"
+  "passed": 27,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_03",
@@ -191,16 +191,16 @@
  {
   "test": "test_level_03",
   "seed": 4,
-  "passed": 20,
-  "failed": 2,
-  "first_fail": "R2: dry pompadour smashes the gel"
+  "passed": 27,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_03",
   "seed": 5,
-  "passed": 20,
-  "failed": 2,
-  "first_fail": "R2: dry pompadour smashes the gel"
+  "passed": 27,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_03",
@@ -212,30 +212,30 @@
  {
   "test": "test_level_03",
   "seed": 7,
-  "passed": 27,
-  "failed": 0,
-  "first_fail": ""
+  "passed": 26,
+  "failed": 1,
+  "first_fail": "flying into the running shower soaks P1 and drops the carry into the dye"
  },
  {
   "test": "test_level_03",
   "seed": 8,
-  "passed": 27,
-  "failed": 0,
-  "first_fail": ""
- },
- {
-  "test": "test_level_03",
-  "seed": 9,
   "passed": 20,
   "failed": 2,
   "first_fail": "R2: dry pompadour smashes the gel"
  },
  {
   "test": "test_level_03",
-  "seed": 10,
+  "seed": 9,
   "passed": 27,
   "failed": 0,
   "first_fail": ""
+ },
+ {
+  "test": "test_level_03",
+  "seed": 10,
+  "passed": 20,
+  "failed": 2,
+  "first_fail": "R2: dry pompadour smashes the gel"
  },
  {
   "test": "test_level_03",
@@ -282,30 +282,30 @@
  {
   "test": "test_level_04",
   "seed": 5,
-  "passed": 19,
-  "failed": 1,
-  "first_fail": "R3: the afro waits in the trench"
- },
- {
-  "test": "test_level_04",
-  "seed": 6,
-  "passed": 19,
-  "failed": 1,
-  "first_fail": "R3: the afro waits in the trench"
- },
- {
-  "test": "test_level_04",
-  "seed": 7,
   "passed": 20,
   "failed": 0,
   "first_fail": ""
  },
  {
   "test": "test_level_04",
-  "seed": 8,
+  "seed": 6,
+  "passed": 20,
+  "failed": 0,
+  "first_fail": ""
+ },
+ {
+  "test": "test_level_04",
+  "seed": 7,
   "passed": 19,
   "failed": 1,
-  "first_fail": "R3: the afro waits in the trench"
+  "first_fail": "Perm Day clear: the results open"
+ },
+ {
+  "test": "test_level_04",
+  "seed": 8,
+  "passed": 20,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_04",
@@ -324,9 +324,9 @@
  {
   "test": "test_level_04",
   "seed": 11,
-  "passed": 19,
-  "failed": 1,
-  "first_fail": "R3: the afro waits in the trench"
+  "passed": 20,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_04",
@@ -345,9 +345,9 @@
  {
   "test": "test_level_05",
   "seed": 2,
-  "passed": 15,
-  "failed": 0,
-  "first_fail": ""
+  "passed": 14,
+  "failed": 1,
+  "first_fail": "Extensions clear: the results open"
  },
  {
   "test": "test_level_05",
@@ -373,8 +373,8 @@
  {
   "test": "test_level_05",
   "seed": 6,
-  "passed": 11,
-  "failed": 4,
+  "passed": 10,
+  "failed": 5,
   "first_fail": "R3: Long Straight hooks the ring onto the ledge"
  },
  {
@@ -422,9 +422,9 @@
  {
   "test": "test_level_06",
   "seed": 1,
-  "passed": 17,
-  "failed": 4,
-  "first_fail": "R2: P2 (now twin-tails) drops into the trench"
+  "passed": 63,
+  "failed": 0,
+  "first_fail": ""
  },
  {
   "test": "test_level_06",

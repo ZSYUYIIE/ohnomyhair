@@ -84,8 +84,8 @@ func _room_2() -> RoomBuilder:
 func _room_3() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room3", "3 - Double Return", Color("dfe7f2"), "res://assets/art/l2/bg_l2_02_corridor.png"))
 	rb.solid(0, 19, 11, 22)
-	rb.solid(13, 19, 38, 22)
-	rb.solid(12, 21, 12, 22)    # catch trench at x=12, 2 deep: scissors fly over the afro in it
+	rb.solid(14, 19, 38, 22)
+	rb.solid(12, 21, 13, 22)    # catch trench at x=12-13, 2 deep: scissors fly over the afro in it
 	rb.solid(34, 1, 34, 14)     # wall over the staff door
 	rb.spawn(1, 20, 19)
 	rb.spawn(2, 22, 19)
@@ -95,8 +95,8 @@ func _room_3() -> RoomBuilder:
 	var door := rb.door("StaffDoor", 34, 15, 1, 4, 2)
 	rb.link(left_bell, "activated", door, "open")
 	rb.link(right_bell, "activated", door, "open")
-	rb.stripes("ParryStripes", 15, 17, 19)
-	rb.stripes("CatchMark", 12, 12, 21, ORANGE)
+	rb.stripes("ParryStripes", 16, 18, 19)
+	rb.stripes("CatchMark", 12, 13, 21, ORANGE)
 	rb.exit(36, 16)
 	rb.gate("Dispenser on the body line", ["parry", "shield"])
 	rb.gate("Bell behind the dispenser line", ["parry"])

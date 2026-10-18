@@ -16,6 +16,7 @@ func _run() -> void:
 		await _room_3()
 	if failed == 0:
 		await _room_4()
+	stop_logging()  # unit checks put players in harm's way on purpose
 	if failed == 0:
 		await _boss_unit_checks()
 	finish()
@@ -71,7 +72,7 @@ func _room_2() -> void:
 	await walk_to(p1, o + 26 * TILE)
 	# P2 has to step out in front of P1 to reach the trench: jam the dispenser first.
 	await guard_until(p1, func(): return dispenser._jam > 2.0, 900)
-	await walk_to(p2, o + 27.5 * TILE)
+	await walk_to(p2, o + 28 * TILE)
 	await wait_until(func(): return p2.is_on_floor(), 60)
 	check(p2.global_position.y > 19 * TILE, "R2: P2 (now twin-tails) drops into the trench")
 	for attempt in 8:

@@ -86,9 +86,9 @@ func _room_3() -> void:
 	var left_bell: HitSwitch = room.get_node("LeftBell")
 	var right_bell: HitSwitch = room.get_node("RightBell")
 	var door: Door = room.get_node("StaffDoor")
-	await walk_to(p1, o + 12.5 * TILE)
+	await walk_to(p1, o + 13 * TILE)
 	check(p1.global_position.y > 19 * TILE, "R3: the afro waits in the trench")
-	await walk_to(p2, o + 16 * TILE)
+	await walk_to(p2, o + 17 * TILE)
 	# A plain parry sends the scissor back over the trench into the left bell.
 	for i in 4:
 		if left_bell.pressed:

@@ -15,6 +15,7 @@ func _run() -> void:
 		await _room_2()
 	if failed == 0:
 		await _room_3()
+	stop_logging()  # the rest are counter-checks that fall in the dye on purpose
 	await _soaked_hair_dries_by_itself()
 	await _pompadour_cant_cross_alone(1, 10, 13, 30)
 	await _pompadour_cant_cross_alone(2, 7, 16, 34)

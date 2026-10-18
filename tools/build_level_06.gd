@@ -59,8 +59,8 @@ func _room_1() -> RoomBuilder:
 func _room_2() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room2", "2 - The Chair", Color("f6dde4"), "res://assets/art/l4/bg_l4_02_chair.png"))
 	rb.solid(0, 19, 26, 22)     # floor...
-	rb.solid(28, 19, 38, 22)
-	rb.solid(27, 21, 27, 22)    # ...with a catch trench at x=27
+	rb.solid(29, 19, 38, 22)
+	rb.solid(27, 21, 28, 22)    # ...with a catch trench at x=27-28
 	rb.solid(15, 1, 22, 14)     # low ceiling: the chair tunnel is rows 15-18
 	rb.solid(33, 13, 38, 22)    # cliff (6 up)
 	rb.solid(34, 1, 34, 9)      # wall above the staff door
@@ -73,11 +73,11 @@ func _room_2() -> RoomBuilder:
 	# Shields the room from the dispenser until P1 (pompadour after the swap) dashes it.
 	rb.gel_wall("GelWall", 23, 13, 2, 6)
 	rb.turret("Dispenser", 30, 18, Vector2.LEFT, 2.5, 1.0)  # fires left only: the launch spot behind it is safe
-	var bell := rb.hit_switch("Bell", 27, 2)
+	var bell := rb.hit_switch("Bell", 27, 2, 16.0)
 	var door := rb.door("StaffDoor", 34, 10, 1, 3)
 	rb.link(bell, "activated", door, "open")
 	rb.stripes("ParryStripes", 25, 26, 19)
-	rb.stripes("CatchMark", 27, 27, 21, Color("ff5fa2"))
+	rb.stripes("CatchMark", 27, 28, 21, Color("ff5fa2"))
 	var lever := rb.lever("ChairLever", 33, 12)
 	rb.block("RisingStep", 31, 19, 2, 3, Vector2i(0, -3), lever, true)
 	rb.exit(36, 10)

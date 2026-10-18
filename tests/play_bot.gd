@@ -141,6 +141,12 @@ func wait_until(cond: Callable, max_ticks: int) -> bool:
 	return cond.call()
 
 
+## Call before counter-checks that die or fail on purpose (a solo jump into the dye, a
+## forced death to test the popup): those must not count as deaths in the play log.
+func stop_logging() -> void:
+	Telemetry.enabled = false
+
+
 ## A person notices a cue a moment after it happens.
 func _react() -> void:
 	if sloppy:

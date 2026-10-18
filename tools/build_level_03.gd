@@ -69,9 +69,9 @@ func _room_2() -> RoomBuilder:
 	rb.solid(30, 19, 38, 22)      # landing
 	rb.spawn(1, 1, 19)
 	rb.spawn(2, 3, 19)
-	rb.shower("TakeOffShower", 9, 1, 4, 9, 1.8, 1.6)
+	rb.shower("TakeOffShower", 9, 1, 4, 9, 2.6, 1.2)
 	rb.dryer("DryingDryer", 30, 15, 2, 18)
-	rb.shower("RinseCurtain", 32, 1, 3, 18, 1.8, 1.6, 0.9)
+	rb.shower("RinseCurtain", 32, 1, 3, 18, 2.6, 1.2, 0.9)
 	rb.gel_wall("GelWall", 35, 13, 2, 6)
 	rb.exit(37, 16)
 	rb.gate("17-wide dye pool from 9 up, both friends", ["carry"], {"gap": 17, "drop": 9})
@@ -98,11 +98,11 @@ func _room_3() -> RoomBuilder:
 	rb.spawn(1, 2, 19)
 	rb.spawn(2, 3, 19)
 	rb.dryer("LiftDryer", 5, 3, 2, 18)
-	rb.shower("ColumnShower", 4, 1, 4, 12, 3.0, 1.4)
+	rb.shower("ColumnShower", 4, 1, 4, 12, 3.6, 1.2)
 	rb.solid(9, 7, 15, 22)        # upper ledge, 12 up
 	rb.dye_pool("DyePool", 16, 20, 18, 2)
 	rb.solid(16, 22, 33, 22)
-	rb.shower("PoolShower", 23, 1, 3, 19, 2.6, 1.2, 1.0)
+	rb.shower("PoolShower", 23, 1, 3, 19, 3.4, 1.0, 1.0)
 	rb.solid(34, 19, 38, 22)      # landing
 	rb.exit(36, 16)
 	rb.gate("Dryer column under a timed shower, both friends", ["hair_copter", "spring"])

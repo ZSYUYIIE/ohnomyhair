@@ -11,6 +11,7 @@ func _run() -> void:
 	await _room_1()
 	if failed == 0:
 		await _room_2()
+	stop_logging()  # the rest kills P1 on purpose to test the popup
 	if failed == 0:
 		await _restart_and_pause()
 	finish()
@@ -29,7 +30,7 @@ func _room_1() -> void:
 	check(await wait_until(func(): return dispenser._jam > 0.0, 240), "R1: a lone parry just jams the dispenser")
 	check(not bell.pressed, "R1: the bell needs more than a parry")
 
-	await walk_to(p1, o + 20.5 * TILE)
+	await walk_to(p1, o + 21 * TILE)
 	check(p1.global_position.y > 19 * TILE, "R1: twin-tails drops into the trench")
 	var hp_before := p1.hp
 	var rung := false
@@ -65,7 +66,7 @@ func _room_2() -> void:
 	await guard_until(p2, func(): return p1.global_position.x > o + 17.5 * TILE and p1.global_position.y < 15 * TILE and p1.is_on_floor(), 900)
 	# P1 must step past P2 into the scissor line to reach the trench: jam the dispenser first.
 	await _jam(dispenser)
-	await walk_to(p1, o + 22.5 * TILE)
+	await walk_to(p1, o + 23 * TILE)
 	await wait_until(func(): return p1.is_on_floor(), 60)
 	check(p2.global_position.y < 15 * TILE and p1.global_position.y > 15 * TILE, "R2: P2 on the walkway, P1 in the first trench")
 
@@ -82,7 +83,7 @@ func _room_2() -> void:
 
 	# With the bot gone a lone parry jams the dispenser: that's P1's window to move.
 	await _jam(dispenser)
-	await walk_to(p1, o + 30.5 * TILE)
+	await walk_to(p1, o + 31 * TILE)
 	check(p1.global_position.y > 15 * TILE and p1.alive, "R2: P1 moves to the far trench while it's jammed")
 	check(await _volley_until(bells[1]), "R2: hair catch from the far trench rings the second bell")
 	check(door.is_open, "R2: both bells open the staff door")
