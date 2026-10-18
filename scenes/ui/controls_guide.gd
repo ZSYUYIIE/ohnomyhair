@@ -35,7 +35,7 @@ func _ready() -> void:
 	row.add_child(_player_keys(1))
 	row.add_child(_player_keys(2))
 	basics.add_child(_text("THE GOAL", "Both friends must stand in the green exit to leave a room.\nHearts are your hair: lose them all and you both restart the room.", 20))
-	basics.add_child(_text("ROOM SHORTCUTS", "Esc  Pause / resume     R  Restart room\nHold S / ↓ to drop through shelves. Press down to let go when carried.", 20))
+	basics.add_child(_text("ROOM SHORTCUTS", "Esc  Pause / resume     R  Restart room\nHold S / Down to drop through shelves. Press down to let go when carried.", 20))
 	var combos := _page("Hair combos")
 	for entry in [
 		["01  CARRY & GLIDE", "Twin-Tails: hold skill beside your friend to pick them up. Jump and keep holding to glide together."],
@@ -105,7 +105,7 @@ func _player_keys(id: int) -> PanelContainer:
 	col.add_theme_constant_override("separation", 6)
 	panel.add_child(col)
 	col.add_child(UiTheme.label("P1  /  TWIN-TAILS" if id == 1 else "P2  /  POMPADOUR", 24))
-	col.add_child(UiTheme.label("A / D   Move     W   Jump\nG   Hold: glide / carry   Tap: lever\nF   Hair whip to stun" if id == 1 else "← / →   Move     ↑   Jump\nK   Dash / launch a friend\nL   Parry flying scissors", 20))
+	col.add_child(UiTheme.label("A / D   Move     W   Jump\nG   Hold: glide / carry   Tap: lever\nF   Hair whip to stun" if id == 1 else "Left / Right   Move     Up   Jump\nK   Dash / launch a friend\nL   Parry flying scissors", 20))
 	return panel
 
 

@@ -81,8 +81,9 @@ func _room_2() -> RoomBuilder:
 	var after := Node2D.new()
 	after.visible = false
 	rb.add(after, "AfterSwapHints")
-	for line in [["P1 is the POMPADOUR now:  G dash / launch,  F parry", Vector2(760, 60)],
-			["P2 is the TWIN-TAILS now:  K glide / grab / lever,  L whip", Vector2(760, 92)]]:
+	# Below the banner area, so the "Wait. What?!" banner doesn't cover them.
+	for line in [["P1 is the POMPADOUR now:  G dash / launch,  F parry", Vector2(740, 215)],
+			["P2 is the TWIN-TAILS now:  K glide / grab / lever,  L whip", Vector2(740, 247)]]:
 		var label := Label.new()
 		label.text = line[0]
 		label.position = line[1]

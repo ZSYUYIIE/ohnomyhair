@@ -157,7 +157,7 @@ func _friends_panel() -> PanelContainer:
 		var name_label := UiTheme.label("P1  Twin-Tails" if id == 1 else "P2  Pompadour", 19)
 		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		player_col.add_child(name_label)
-		var keys := UiTheme.label("A D move / W jump\nG skill / F whip" if id == 1 else "← → move / ↑ jump\nK skill / L parry", 16, UiTheme.MUTED)
+		var keys := UiTheme.label("A D move / W jump\nG skill / F whip" if id == 1 else "Left Right move / Up jump\nK skill / L parry", 16, UiTheme.MUTED)
 		keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		player_col.add_child(keys)
 	var note := UiTheme.label("Bring a friend. You will need each other.\nHair is health. Both players must reach the exit.", 17)
