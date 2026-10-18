@@ -28,10 +28,11 @@ cards; the Play button or P launches the selected chapter.
   image generation with transparent output. Its red chest, yellow eye, scissor arms,
   chrome joints and red boots follow that reference. Charge squash, hurt flashes,
   dazed target glow and all boss collision/timing rules remain in code.
-- `chair_salon.png` is a new transparent coral-and-chrome styling chair derived from
-  the supplied salon reference. `chair_salon.tres` selects its occupied area without
-  modifying the source PNG. Both styling checkpoints and the surprise swap chair
-  use it; the used swap chair darkens. Trigger areas and gameplay behavior remain.
+- `chair_flat.svg` is the current in-game chair: an editable 112×120 vector with
+  flat coral fills, one shadow tone and consistent 2.5px purple outlines, matching
+  the original game props. It replaces the overly glossy generated chair. Both
+  styling checkpoints and the surprise swap chair use it; the used chair darkens.
+  Trigger areas and gameplay behavior remain. The generated PNG is superseded.
 - Gel, moving platforms and exit doors have glossy native drawing. The two original
   player animation sets and all room background PNGs are unchanged.
 
@@ -86,3 +87,5 @@ gates 108, checkpoints 36, boss pairs 4, story roster 8, and campaign levels 30/
 Tests use isolated saves. Logs are `.godot/final-art-*.log`. GPU renders cover all
 opening panels, title/chapter cards at 1280×720 and 960×540, a letterboxed 1280×960
 window, help/shortcuts, HUD and overlays; captures are `.godot/poster-shots`.
+
+The flat chair revision was imported and GPU-rendered; all 36 checkpoint checks pass.

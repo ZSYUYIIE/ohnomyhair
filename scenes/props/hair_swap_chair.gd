@@ -50,7 +50,7 @@ func _swap() -> void:
 	queue_redraw()
 
 
-const ART := preload("res://assets/art/props/chair_salon.tres")
+const ART := preload("res://assets/art/props/chair_flat.svg")
 
 
 func _draw() -> void:

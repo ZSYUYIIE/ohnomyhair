@@ -242,7 +242,8 @@
       "sha256": "c302e8af791f9bcde4210a3f538c32797991f427a3b4573b3d957b9b5a89c5d3",
       "filter": "linear",
       "mipmaps": false,
-      "source": "built-in image_gen; see generation prompt JSON files"
+      "source": "built-in image_gen; see generation prompt JSON files",
+      "status": "superseded by chair_flat.svg; retained as an unused earlier draft"
     },
     {
       "path": "assets/art/enemies/assistant_poster.png",
@@ -339,6 +340,18 @@
         32
       ],
       "collision": "existing TileSet polygons unchanged"
+    },
+    {
+      "path": "assets/art/props/chair_flat.svg",
+      "format": "editable SVG",
+      "dimensions": [
+        112,
+        120
+      ],
+      "source": "hand-authored vector matching the original game prop palette and outline weight",
+      "sha256": "0a1412c87334f23f7982ed994e16e6cdee75e6c6f9efd84d431c0fcf06833b86",
+      "collision": "existing chair trigger areas unchanged",
+      "filter": "linear"
     }
   ]
 }

@@ -1,6 +1,6 @@
 extends Area2D
 ## A safe co-op styling station. Down opens selection only when both friends are nearby.
-const ART := preload("res://assets/art/props/chair_salon.tres")
+const ART := preload("res://assets/art/props/chair_flat.svg")
 var level: Level
 var _near := false
 
