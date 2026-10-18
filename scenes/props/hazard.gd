@@ -30,8 +30,13 @@ func _physics_process(_delta: float) -> void:
 		# respawned elsewhere would die twice. Trust only a real rect overlap.
 		if body is Player and not me.intersects(Rect2(body.global_position - Player.HALF_SIZE, Player.HALF_SIZE * 2.0)):
 			continue
-		if body.has_method("die"):
-			body.die()
+		_touch(body)
+
+
+## What touching it does: hair dye is deadly. Hazards that only hurt override this.
+func _touch(body: Node) -> void:
+	if body.has_method("die"):
+		body.die()
 
 
 func is_active() -> bool:

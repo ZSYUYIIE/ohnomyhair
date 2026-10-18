@@ -1,7 +1,11 @@
 extends LevelBuilder
-## Generates L4 "The Barber": res://scenes/levels/level_04.tscn.
-## Room 1 puts L1's carry and L2's parry under pressure together, room 2 swaps the
-## friends' haircuts (Something's Off), room 3 is the barber-bot boss.
+## Generates L4 "The Barber": res://scenes/levels/level_04.tscn. A rising curve:
+##   1 Closing Time - warm-up recap: carry + parry under fire, a hot iron, a clipper bot;
+##   2 The Chair    - the twist: the haircuts swap (Something's Off);
+##   3 Rush Hour    - the robots arrive in three waves, each adding a threat; then a
+##                    breather (hazards off, growth tonics);
+##   4 The Barber Bot - the boss, in three announced phases (backup robots, then furious).
+## Design notes: docs/levels/level_04.md.
 ## Rerunning OVERWRITES the scene (see LevelBuilder).
 ## Run: godot --headless --path . --script res://tools/build_level_04.gd
 
@@ -18,7 +22,7 @@ func _configure() -> void:
 
 
 func _rooms() -> Array:
-	return [_room_1(), _room_2(), _room_3()]
+	return [_room_1(), _room_2(), _room_3(), _room_4()]
 
 
 ## Room 1: a turret fires along the take-off ledge and the carry's flight line.
@@ -89,10 +93,53 @@ func _room_2() -> RoomBuilder:
 	return rb
 
 
-## Room 3: the barber bot. Parry its scissors (or make it crash a charge) to daze it,
-## then land on its head knob: launch from a friend's head, or glide from a ledge.
+## Room 3: Rush Hour. The door to the workshop stays shut while the barber's robots
+## arrive in waves through the ceiling vents, each wave adding a threat:
+##   1 - two clipper bots (P1, now pompadour, dashes them apart; P2's whip stuns them);
+##   2 - three bots and the scissor dispenser wakes up: parry its scissors into the bots,
+##       or hide behind the counter / up on a shelf;
+##   3 - a hot floor: the flat irons in the middle lanes heat up, and a bot drops on
+##       each flank - cross the irons between heats to reach them.
+## Wave robots break in one dash; a growth tonic appears on the counter after waves 1 and 2
+## (a breather to recover hair). Then everything switches off, two more tonics appear
+## and the door opens.
 func _room_3() -> RoomBuilder:
-	var rb := RoomBuilder.new(self, room_node("Room3", "3 - The Barber Bot", Color("e2d6d6"), "res://assets/art/l4/bg_l4_03_workshop.png"))
+	var rb := RoomBuilder.new(self, room_node("Room3", "3 - Rush Hour", Color("ead8d2"), "res://assets/art/l4/bg_l4_rush.png"))
+	rb.node.starts_with_swapped_hair = true
+	rb.solid(0, 19, 38, 22)     # floor
+	rb.solid(18, 17, 20, 18)    # counter: cover from the dispenser's scissors
+	rb.one_way(6, 9, 16)        # shelves above the scissor line (3 up: a plain jump)
+	rb.one_way(28, 31, 16)
+	rb.solid(36, 1, 36, 12)     # wall above the door
+	rb.spawn(1, 2, 19)          # clear of the shelves
+	rb.spawn(2, 4, 19)
+	rb.turret("Dispenser", 35, 18, Vector2.LEFT, 2.6, 1.2)
+	rb.hot_iron("IronLeft", 11, 19, 2, 0.0)
+	rb.hot_iron("IronRight", 25, 19, 2, 1.3)
+	var door := rb.door("ArenaDoor", 36, 13, 1, 6)
+	var arena := WaveArena.new()
+	var waves: Array[Dictionary] = [
+		{"drops": [14, 24], "tonic": 19},
+		{"drops": [8, 24, 30], "wake": ["Dispenser"], "tonic": 19},
+		{"drops": [6, 32], "wake": ["IronLeft", "IronRight"]},  # patrols stay clear of the irons
+	]
+	arena.waves = waves
+	arena.vent_row = 0
+	arena.tonic_cols = PackedInt32Array([18, 20])
+	arena.tonic_row = 16        # on top of the counter: the supply table
+	rb.add(arena, "Waves")
+	rb.link(arena, "cleared", door, "open")
+	rb.exit(37, 16)
+	rb.hint("Robots incoming!  P1 dash (G) breaks them,  P2 whip (L) stuns them", Vector2(130, 250))
+	rb.hint("Parry (F) the scissors back into the robots", Vector2(700, 330))
+	return rb
+
+
+## Room 4: the barber bot. Parry its scissors (or make it crash a charge) to daze it,
+## then land on its head knob: launch from a friend's head, or glide from a ledge.
+## Phase 2 calls backup robots through the corner vents; they power down when it falls.
+func _room_4() -> RoomBuilder:
+	var rb := RoomBuilder.new(self, room_node("Room4", "4 - The Barber Bot", Color("e2d6d6"), "res://assets/art/l4/bg_l4_03_workshop.png"))
 	rb.node.starts_with_swapped_hair = true
 	rb.solid(0, 19, 38, 22)     # arena floor
 	# Corner ledges only: a charge crashes the bot right under them, so you can drop
@@ -108,6 +155,15 @@ func _room_3() -> RoomBuilder:
 	rb.add(boss, "BarberBot")
 	var door := rb.door("BossDoor", 36, 1, 1, 18)
 	rb.link(boss, "defeated", door, "open")
+	var backup := WaveArena.new()
+	var waves: Array[Dictionary] = [{"drops": [3, 34]}]
+	backup.waves = waves
+	backup.auto_start = false
+	backup.vent_row = 0
+	backup.patrol_tiles = 2.0
+	rb.add(backup, "Backup")
+	rb.link(boss, "backup_called", backup, "start_next")
+	rb.link(boss, "defeated", backup, "scrap_all")
 	rb.exit(37, 16)
-	rb.hint("Parry its scissors to daze it, then land on its glowing head.\nA tossed (golden) scissor dazes it longer.", Vector2(330, 60))
+	rb.hint("Parry its scissors to daze it, then land on its glowing head.\nA tossed (golden) scissor dazes it longer.", Vector2(330, 230))
 	return rb

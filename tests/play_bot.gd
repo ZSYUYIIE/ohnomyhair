@@ -114,8 +114,12 @@ func wait_until(cond: Callable, max_ticks: int) -> bool:
 
 
 ## Walk toward x, hopping up any step in the way. Local x is in level space.
+## Stops when the level gets busy (room cleared / pan): the target belongs to the old
+## room, and walking on would steer the player around the next one.
 func walk_to(p: Player, x: float, max_ticks := 600) -> void:
 	for i in max_ticks:
+		if level and level._busy:
+			break
 		var dx := x - p.global_position.x
 		if absf(dx) < 6.0:
 			break

@@ -93,7 +93,7 @@ func _room_2() -> void:
 	for p in [p2, p1]:
 		await walk_to(p, o + 37 * TILE)
 		await walk_to(p, o + (20.5 if p == p2 else 21.5) * TILE)
-	check(await wait_until(func(): return level.banner.text.ends_with("CLEAR!"), 300), "R2: both in the exit clears L2")
+	check(await wait_until(func(): return level.banner.text.contains("CLEAR!"), 300), "R2: both in the exit clears L2")
 
 
 ## Restart (R, or the death popup) rebuilds the room: the bot and the bells come back.

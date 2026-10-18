@@ -99,6 +99,18 @@ func _run() -> void:
 	await _frames(5)
 	await _key(KEY_ESCAPE)
 	check(paused and level.menu.is_open(), "Esc cannot dismiss a death screen")
+	# Playtest 5: R restarts straight from the death popup (no mouse needed) ...
+	await _key(KEY_R)
+	await _frames(5)
+	check(not paused and current_scene is Level and current_scene != level and is_instance_valid(current_scene), "R on the death popup restarts the room")
+	level = current_scene
+	# ... and from the pause menu.
+	await _key(KEY_ESCAPE)
+	check(paused and level.menu.is_open(), "(pause menu open)")
+	await _key(KEY_R)
+	await _frames(5)
+	check(not paused and current_scene is Level and current_scene != level, "R on the pause menu restarts the room")
+	level = current_scene
 	level.menu.show_pause(level.level_title, "x")
 	level.menu.press("Main menu")
 	await _frames(10)
@@ -123,9 +135,58 @@ func _run() -> void:
 		probe.queue_free()
 		await _frames(3)
 
+	await _clear_goes_straight_on()
+	_exit_door_keeps_its_shape()
+
 	Progress.reset()
 	print("Results: %d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
+
+
+## Playtest 5: the results popup between levels broke the flow. Clearing a level now
+## shows a CLEAR banner (time, deaths) and loads the next level by itself; only the last
+## level stops on its results and ending.
+func _clear_goes_straight_on() -> void:
+	Progress.reset()
+	var level: Level = load(Progress.LEVELS[0].path).instantiate()
+	root.add_child(level)
+	current_scene = level
+	await _frames(5)
+	level.room_index = level.rooms.size() - 1
+	level._on_room_cleared(level.rooms[level.room_index])
+	await _frames(3)
+	check(level.banner.text.contains("CLEAR!") and level.banner.text.contains("death") and not level.menu.is_open(), "a level clear shows the CLEAR banner with time and deaths, no popup")
+	await create_timer(Level.CLEAR_PAUSE + 0.5).timeout
+	await _frames(5)
+	check(current_scene is Level and current_scene.scene_file_path == Progress.LEVELS[1].path and not paused, "then the next level starts by itself")
+	check(root.get_children().filter(func(n): return n is Level).size() == 1, "and the cleared level is gone")
+	current_scene.queue_free()
+	await _frames(3)
+
+	for i in Progress.LEVELS.size() - 1:
+		Progress.record_clear(i, 60.0, 0)
+	level = load(Progress.LEVELS[-1].path).instantiate()
+	root.add_child(level)
+	current_scene = level
+	await _frames(5)
+	level.room_index = level.rooms.size() - 1
+	level._on_room_cleared(level.rooms[level.room_index])
+	await create_timer(Level.CLEAR_PAUSE + 0.5).timeout
+	await _frames(5)
+	check(current_scene == level and paused and level.menu.is_open() and "Play again" in level.menu.button_labels(), "the final level still ends on its results and ending")
+	paused = false
+	level.queue_free()
+	await _frames(3)
+
+
+## Playtest 5: L2's 4x2 exit squashed the door picture. The door keeps its 2:3 shape.
+func _exit_door_keeps_its_shape() -> void:
+	var exit: RoomExit = load("res://scenes/props/room_exit.tscn").instantiate()
+	for size in [Vector2(128, 64), Vector2(64, 96), Vector2(64, 160)]:
+		exit.size = size
+		var door := exit.door_rect()
+		check(absf(door.size.x / door.size.y - 2.0 / 3.0) < 0.01 and Rect2(Vector2.ZERO, size).encloses(door) and is_equal_approx(door.end.y, size.y), "exit %s: door stays 2:3, inside the exit, on the floor" % size)
+	exit.free()
 
 
 func _open_menu() -> MainMenu:

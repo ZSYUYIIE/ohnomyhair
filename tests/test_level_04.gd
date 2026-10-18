@@ -1,6 +1,7 @@
 extends PlayBot
-## Bot playthrough of L4: parry + carry under fire, the hair-swap chair, and the
-## barber-bot boss fought with swapped haircuts. Exits non-zero if any step fails.
+## Bot playthrough of L4: parry + carry under fire, the hair-swap chair, three waves of
+## robots, and the barber-bot boss (with its phases) fought with swapped haircuts.
+## Exits non-zero if any step fails.
 ## Run: godot --headless --fixed-fps 60 --path . --script res://tests/test_level_04.gd
 
 const LevelScene := preload("res://scenes/levels/level_04.tscn")
@@ -13,6 +14,8 @@ func _run() -> void:
 		await _room_2()
 	if failed == 0:
 		await _room_3()
+	if failed == 0:
+		await _room_4()
 	if failed == 0:
 		await _boss_unit_checks()
 	finish()
@@ -100,17 +103,113 @@ func _cross_when_cold(p: Player, iron: HotIron, x: float) -> void:
 	await walk_to(p, x)
 
 
+## Rush Hour: three waves. P2 (twin-tails) waits up on the left shelf; P1 (pompadour)
+## fights for real: parries scissors coming at her, hops hot irons, and dashes robots apart.
+func _room_3() -> void:
+	var room := level.get_node("Rooms/Room3")
+	var o: float = room.global_position.x
+	var arena: WaveArena = room.get_node("Waves")
+	var door: Door = room.get_node("ArenaDoor")
+	var dispenser: ScissorTurret = room.get_node("Dispenser")
+	var iron: HotIron = room.get_node("IronLeft")
+	check(dispenser.process_mode == Node.PROCESS_MODE_DISABLED and not iron.active and not door.is_open,
+			"R3: the dispenser and irons sleep and the door is shut before the waves")
+	await walk_to(p2, o + 7.5 * TILE)
+	await jump_up(p2)
+	check(p2.global_position.y < 16 * TILE, "R3: P2 waits up on the shelf")
+	await walk_to(p1, o + 16 * TILE)
+	for wave in 3:
+		check(await wait_until(func(): return arena.wave == wave and arena.robots_left() > 0, 600),
+				"R3: wave %d drops its robots through the vents" % (wave + 1))
+		if wave == 0:
+			check(level.banner.text == "WAVE 1 / 3", "R3: a banner announces the wave")
+		if wave == 1:
+			check(dispenser.process_mode == Node.PROCESS_MODE_INHERIT, "R3: wave 2 wakes the scissor dispenser")
+		if wave == 2:
+			check(iron.active, "R3: wave 3 heats the flat irons")
+		check(await _fight_wave(arena, 3600), "R3: P1 scraps wave %d" % (wave + 1))
+	check(await wait_until(func(): return door.is_open, 120), "R3: clearing the last wave opens the door")
+	check(not iron.active and dispenser.process_mode == Node.PROCESS_MODE_DISABLED, "R3: then the hazards switch off")
+	check(room.get_children().filter(func(n): return n is GrowthTonic).size() >= 2, "R3: growth tonics appear for the boss")
+	check(p1.alive and p2.alive, "R3: both survive the rush (P1 hair left: %d)" % p1.hp)
+	await enter_exit(room, 3)
+
+
+## P1 parries anything flying at her, waits for a hot (or heating) iron in her way to
+## cool, grabs a tonic when down to her last hair, and dashes the nearest robot from
+## about 3.5 tiles out. True once the wave is scrapped.
+func _fight_wave(arena: WaveArena, max_ticks: int) -> bool:
+	var irons: Array = arena.get_parent().get_children().filter(func(n): return n is HotIron)
+	for i in max_ticks:
+		if arena.robots_left() == 0 and arena._warning.is_empty():
+			break
+		if not p1.alive:
+			break
+		var s := _incoming(p1)
+		if s:
+			_face(p1, s.global_position.x)
+			await tap(p1, "attack")
+			continue
+		# Down to the last hair: head for a tonic on the counter first (same careful walk).
+		var tonics: Array = arena.get_parent().get_children().filter(func(n): return n is GrowthTonic)
+		var tonic: Node2D = tonics[0] if p1.hp <= 1 and not tonics.is_empty() else null
+		var target: Node2D = null
+		for r in arena.robots:
+			if is_instance_valid(r) and (target == null or absf(r.global_position.x - p1.global_position.x) < absf(target.global_position.x - p1.global_position.x)):
+				target = r
+		if target == null and tonic == null:
+			await physics_frame
+			continue
+		var stand: float
+		if tonic:
+			stand = tonic.global_position.x
+			if absf(stand - p1.global_position.x) <= 10.0:
+				await jump_up(p1)
+				continue
+		else:
+			var side := signf(p1.global_position.x - target.global_position.x)
+			stand = target.global_position.x + (side if side != 0.0 else -1.0) * 110.0
+		var dx: float = stand - p1.global_position.x
+		if absf(dx) > 10.0:
+			hold(p1, "right", dx > 0.0)
+			hold(p1, "left", dx < 0.0)
+			if p1.is_on_floor() and p1.is_on_wall():  # the counter: hop over it
+				hold(p1, "jump", true)
+				await _ticks(18)
+				hold(p1, "jump", false)
+			# Never step onto an iron that is hot or about to be: wait for it to cool
+			# (still parrying). Already standing on one: keep going, get off it.
+			var ahead: float = p1.global_position.x + signf(dx) * 30.0
+			for iron: HotIron in irons:
+				var span := Rect2(iron.global_position.x - Player.HALF_SIZE.x, 0, iron.size.x + 2 * Player.HALF_SIZE.x, 1)
+				var on_it := span.has_point(Vector2(p1.global_position.x, 0.5))
+				if (iron.is_active() or iron._is_warning()) and not on_it and span.has_point(Vector2(ahead, 0.5)):
+					hold(p1, "right", false)
+					hold(p1, "left", false)
+			await physics_frame
+			continue
+		hold(p1, "right", false)
+		hold(p1, "left", false)
+		_face(p1, target.global_position.x)
+		await tap(p1, "skill")
+		await _ticks(20)
+	for a in ["right", "left", "jump"]:
+		hold(p1, a, false)
+	return p1.alive and arena.robots_left() == 0
+
+
 ## The boss fight as three rounds of its real chain: a parried scissor dazes the bot,
 ## P1 (pompadour) launches P2 (twin-tails) off their head, P2 steers and glides onto
 ## the knob. Each round starts from a fixed setup next to the bot - a dodging,
 ## parrying bot strong enough to survive the whole fight on its own would test the
 ## bot more than the game. The rules themselves are unit-checked below.
-func _room_3() -> void:
-	var room := level.get_node("Rooms/Room3")
+func _room_4() -> void:
+	var room := level.get_node("Rooms/Room4")
 	var boss: BarberBot = room.get_node("BarberBot")
 	var door: Door = room.get_node("BossDoor")
+	var backup: WaveArena = room.get_node("Backup")
 	var floor_y: float = 19 * TILE - Player.HALF_SIZE.y
-	check(p1.ability is Pompadour, "R3: hair stays swapped in the boss room")
+	check(p1.ability is Pompadour, "R4: hair stays swapped in the boss room")
 
 	for round in 3:
 		if not is_instance_valid(boss) or boss.hp <= 0:
@@ -129,29 +228,39 @@ func _room_3() -> void:
 		s.deflect()
 		s.direction = Vector2(-side, 0)
 		s.rotation = s.direction.angle()
-		check(await wait_until(func(): return boss.state == BarberBot.State.DAZED, 90), "R3 round %d: a parried scissor dazes the bot" % (round + 1))
+		check(await wait_until(func(): return boss.state == BarberBot.State.DAZED, 90), "R4 round %d: a parried scissor dazes the bot" % (round + 1))
 		await wait_until(func(): return p1.has_rider(p2), 30)
 		var hp_before := boss.hp
 		await launch_and_stomp(p2, p1, boss)
-		check(not is_instance_valid(boss) or boss.hp < hp_before, "R3 round %d: launch + glide stomps its head" % (round + 1))
+		check(not is_instance_valid(boss) or boss.hp < hp_before, "R4 round %d: launch + glide stomps its head" % (round + 1))
+		if round == 0:
+			check(boss.phase() == 2 and level.banner.text.begins_with("PHASE 2"), "R4: the first stomp starts phase 2 (banner)")
+			check(await wait_until(func(): return backup.robots_left() == 2, 120), "R4: phase 2 calls two backup robots through the corner vents")
+		elif round == 1:
+			check(boss.phase() == 3 and boss.shots == 5 and level.banner.text.begins_with("PHASE 3"), "R4: the second stomp makes it furious: phase 3, 5-scissor bursts")
 		await _ticks(30)
-	check(not is_instance_valid(boss) or boss.hp <= 0, "R3: three stomps defeat the barber bot")
-	check(await wait_until(func(): return door.is_open, 60), "R3: defeating the bot opens the door")
+	check(not is_instance_valid(boss) or boss.hp <= 0, "R4: three stomps defeat the barber bot")
+	check(await wait_until(func(): return door.is_open, 60), "R4: defeating the bot opens the door")
+	await _ticks(2)
+	check(backup.robots_left() == 0, "R4: its backup robots power down with it")
 
 	var exit_x: float = room.get_node("Exit").global_position.x
 	await walk_to(p2, exit_x + 48)
 	await walk_to(p1, exit_x + 16)
-	check(await wait_until(func(): return level.banner.text.begins_with("THE END"), 300), "R3: both at the exit shows the ending")
+	check(await wait_until(func(): return level.banner.text.begins_with("THE END"), 300), "R4: both at the exit shows the ending")
 
 
 ## Direct checks of the boss rules, on a fresh copy started in the boss room.
 func _boss_unit_checks() -> void:
-	await load_level(LevelScene, 2)
-	var boss: BarberBot = level.get_node("Rooms/Room3/BarberBot")
+	await load_level(LevelScene, 3)
+	var boss: BarberBot = level.get_node("Rooms/Room4/BarberBot")
 	check(p1.ability is Pompadour and p2.ability is TwinTails, "boss room start: hair starts swapped")
+	await _ticks(2)
+	var bars := boss.get_children().filter(func(n): return n is BarberBot.BossBar)
+	check(bars.size() == 1 and bars[0].visible, "a boss bar shows its name, phase and hair left")
 
 	# Corner ledge (one-way, row 16): down drops through it.
-	var room_x: float = level.get_node("Rooms/Room3").global_position.x
+	var room_x: float = level.get_node("Rooms/Room4").global_position.x
 	p1.global_position = Vector2(room_x + 2.5 * TILE, 16 * TILE - Player.HALF_SIZE.y - 4)
 	check(await wait_until(func(): return p1.is_on_floor() and p1.alive, 60), "players can stand on a corner ledge")
 	hold(p1, "down", true)

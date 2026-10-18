@@ -1,13 +1,17 @@
 class_name BarberBot
 extends CharacterBody2D
-## L3 boss: the runaway barber robot. Origin is at the feet.
+## L4 boss: the runaway barber robot. Origin is at the feet.
 ## Loop: WALK toward a player -> SHOOT 3 scissors / WINDUP + CHARGE (alternating).
+## Three phases, one per hair of HP, each announced with a banner and shown on the boss bar:
+##   1 - as above;   2 - it calls for backup (`backup_called`: wire it to a WaveArena);
+##   3 - furious: faster, longer scissor bursts, shorter wind-up.
 ## It only takes damage from being stomped on its head knob while DAZED. It gets dazed by
 ## a parried scissor (3 s) or by crashing into a wall at the end of a charge (shorter).
 ## Whips, dashes and parry swings just bounce off ("too big").
 ## Each state is a function that returns the next state, or `stay` to remain.
 
 signal defeated
+signal backup_called
 
 enum State { WALK, SHOOT, WINDUP, CHARGE, DAZED, HURT, DEAD }
 
@@ -40,6 +44,8 @@ var _shots_left := 0
 var _charge_next := false
 var _knob: Area2D
 var _flash := 0.0
+var _max_hp := 3
+var _bar: BossBar
 
 
 func _ready() -> void:
@@ -53,10 +59,15 @@ func _ready() -> void:
 	_knob.monitorable = false
 	Player.add_rect_shape(_knob, Vector2(SIZE.x - 8, KNOB_HEIGHT), Vector2(0, -SIZE.y))
 	add_child(_knob)
+	_max_hp = hp
 	_enter(State.WALK)
 
 
 func _physics_process(delta: float) -> void:
+	if _bar == null:
+		# Made on the first tick, which only comes once its room is the current one.
+		_bar = BossBar.new(self)
+		add_child(_bar)
 	velocity.y += 1800.0 * delta
 	_flash = maxf(_flash - delta, 0.0)
 	_t -= delta
@@ -175,10 +186,30 @@ func _stomped_by(player: Player) -> void:
 	player.hit_stop(0.08)
 	if hp <= 0:
 		collision_layer = 0
+		Level.banner_for(self, "The barber bot is down!", 2.0)
 		defeated.emit()
 		var tween := create_tween()
 		tween.tween_property(self, "modulate:a", 0.0, 0.8)
 		tween.tween_callback(queue_free)
+	elif hp == _max_hp - 1:
+		Level.banner_for(self, "PHASE 2: it calls for backup!", 1.8)
+		backup_called.emit()
+	elif hp == 1:
+		_enrage()
+
+
+## Phase 3: one hair left and it's furious.
+func _enrage() -> void:
+	Level.banner_for(self, "PHASE 3: it's furious!", 1.8)
+	walk_speed *= 1.35
+	charge_speed *= 1.2
+	windup_time = 0.5
+	shots = 5
+	shot_gap = 0.36
+
+
+func phase() -> int:
+	return clampi(_max_hp - hp + 1, 1, 3)
 
 
 func _fire() -> void:
@@ -223,7 +254,9 @@ func _draw() -> void:
 		State.DAZED: frame = 1
 		State.HURT, State.WINDUP: frame = 2 if int(_flash * 40.0) % 2 == 0 else 0
 	draw_set_transform(Vector2.ZERO, 0.0, squash * Vector2(facing, 1.0))
-	draw_texture_rect_region(ART, Rect2(-72, -140, 144, 144), Rect2(frame * 144, 0, 144, 144))
+	# Furious (phase 3): it throbs red.
+	var tint := Color(1, 0.62, 0.6) if phase() == 3 and state != State.DAZED and int(Time.get_ticks_msec() / 150) % 2 == 0 else Color.WHITE
+	draw_texture_rect_region(ART, Rect2(-72, -140, 144, 144), Rect2(frame * 144, 0, 144, 144), tint)
 	draw_set_transform(Vector2.ZERO, 0.0, squash)
 	var top := -SIZE.y
 	if state == State.DAZED:
@@ -232,3 +265,42 @@ func _draw() -> void:
 		var bar := Rect2(-SIZE.x / 2 + i * 34, top - 34 if state != State.DAZED else top - 44, 28, 7)
 		draw_rect(bar.grow(1.5), Color("2b2140"))
 		draw_rect(bar, Color("e74c3c"))
+
+
+## Boss health bar at the top of the screen: name, phase and one red block per hair left.
+class BossBar extends CanvasLayer:
+	var boss: BarberBot
+	var _panel: Control
+
+	func _init(b: BarberBot) -> void:
+		boss = b
+		layer = 8
+
+	func _ready() -> void:
+		_panel = Control.new()
+		_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_panel.set_anchors_preset(Control.PRESET_CENTER_TOP)
+		_panel.offset_left = -190
+		_panel.offset_right = 190
+		_panel.offset_top = 10
+		_panel.offset_bottom = 62
+		_panel.draw.connect(_draw_bar)
+		add_child(_panel)
+
+	func _process(_delta: float) -> void:
+		visible = is_instance_valid(boss) and boss.hp > 0
+		_panel.queue_redraw()
+
+	func _draw_bar() -> void:
+		var ink := Color("2b2140")
+		var r := Rect2(Vector2.ZERO, _panel.size)
+		_panel.draw_rect(r, Color("fff6ea"))
+		_panel.draw_rect(r, ink, false, 3.0)
+		var font := ThemeDB.fallback_font
+		_panel.draw_string(font, Vector2(14, 22), "THE BARBER BOT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
+		_panel.draw_string(font, Vector2(14, 22), "PHASE %d" % boss.phase(), HORIZONTAL_ALIGNMENT_RIGHT, _panel.size.x - 28, 16, Color("b0306a"))
+		var w := (_panel.size.x - 28 - 2 * 8) / boss._max_hp
+		for i in boss._max_hp:
+			var seg := Rect2(14 + i * (w + 8), 30, w, 12)
+			_panel.draw_rect(seg, Color("e74c3c") if i < boss.hp else Color(ink, 0.15))
+			_panel.draw_rect(seg, ink, false, 2.0)

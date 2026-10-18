@@ -72,17 +72,26 @@ def growth_tonic() -> None:
 
 
 def flat_iron() -> None:
-    """Hot flat iron, 64x24 per frame: cold | red-hot. Bottom = the floor line."""
-    strip = Image.new("RGBA", (128, 24), (0, 0, 0, 0))
-    for i, plate in enumerate((PLATE_COLD, PLATE_HOT)):
+    """Hot flat iron, 64x32 per frame: cold | warming | red-hot. Bottom = the floor line.
+    Built to be seen at a glance on any floor: cream housing with a thick ink outline, a
+    hazard-striped base, and plates that go steel -> orange -> red with a yellow core."""
+    strip = Image.new("RGBA", (192, 32), (0, 0, 0, 0))
+    plates = ((150, 160, 172), (245, 150, 50), (235, 60, 40))
+    for i, plate in enumerate(plates):
         rng = random.Random(24)
-        img, d = canvas(64, 24)
-        shape(d, rect_pts(3, 14, 58, 8, 3), (60, 52, 78), INK, 2.6, rng, 0.4)                 # base
-        shape(d, rect_pts(6, 8, 52, 7, 3), plate, INK, 2.4, rng, 0.4)                         # plate
-        stroke(d, [(8, 9.5), (56, 9.5)], CHROME, 1.6)
-        shape(d, ellipse_pts(7, 15, 5, 5, 14), (60, 52, 78), INK, 2.2)                         # hinge
-        shape(d, ellipse_pts(52, 18, 2.2, 2.2, 10), PLATE_HOT if i else art.EXIT)              # light
-        strip.alpha_composite(finish(img, 64, 24), (i * 64, 0))
+        img, d = canvas(64, 32)
+        shape(d, rect_pts(2, 20, 60, 10, 4), (250, 238, 214), INK, 3, rng, 0.4)              # housing
+        for x in range(8, 58, 10):                                                             # stripes
+            stroke(d, [(x, 28), (x + 5, 22)], (235, 60, 40), 2.6)
+        shape(d, rect_pts(5, 9, 54, 12, 4), plate, INK, 3, rng, 0.4)                          # plate
+        if i == 2:
+            shape(d, rect_pts(12, 12.5, 40, 4, 2), (255, 214, 90))                             # white-hot core
+        stroke(d, [(9, 11.5), (54, 11.5)], (255, 255, 255) if i == 0 else (255, 230, 160), 1.6)
+        shape(d, ellipse_pts(6, 20, 6, 6, 16), (250, 238, 214), INK, 2.6)                      # hinge
+        shape(d, ellipse_pts(6, 20, 2, 2, 10), INK)
+        light = (art.EXIT, INTERACT, PLATE_HOT)[i]
+        shape(d, ellipse_pts(54, 25, 3, 3, 12), light, INK, 1.6)                               # power light
+        strip.alpha_composite(finish(img, 64, 32), (i * 64, 0))
     strip.save(PROPS / "prop_iron.png")
 
 

@@ -9,7 +9,7 @@ extends Area2D
 @export var warn_time := 0.6
 @export var on_time := 1.6
 @export var phase := 0.0
-@export var wet_seconds := 8.0
+@export var wet_seconds := 4.0
 
 const ART := preload("res://assets/art/props/prop_shower.png")
 

@@ -71,7 +71,10 @@ var _invincible := 0.0
 var _drop_through := 0.0
 var _separating: Player = null  # pads are re-enabled once we no longer overlap this friend
 ## Seconds left soaked by a shampoo shower (twin-tails can't glide, pompadour can't smash gel).
+## Hair dries by itself when it runs out; a hair dryer dries it at once.
 var wet_time := 0.0
+var _wet_total := 1.0         # length of the latest soak, for the drying meter
+var _sprayed_at := -10        # physics frame a running shower last hit us
 ## Hair dryers whose warm-air column we're standing in (they add / remove themselves).
 var updrafts: Array[Node] = []
 var _was_on_floor := true
@@ -207,9 +210,9 @@ func _physics_process(delta: float) -> void:
 		_can_cut_jump = false
 
 	if not updrafts.is_empty() and ability.is_gliding():
-		# Hair dryer: warm air lifts a glider. With a friend hanging on, it's only enough to hover.
+		# Hair dryer: warm air lifts a glider - slower with a friend hanging on.
 		var dryer: HairDryer = updrafts[0]
-		var target: float = 0.0 if carrying else -dryer.lift_speed
+		var target: float = -(dryer.carry_lift_speed if carrying else dryer.lift_speed)
 		velocity.y = move_toward(velocity.y, target, dryer.lift_accel * delta)
 	else:
 		var g := gravity * (fall_multiplier if velocity.y > 0.0 else 1.0)
@@ -291,11 +294,21 @@ func heal(amount: int) -> bool:
 
 
 func soak(seconds: float) -> void:
-	wet_time = maxf(wet_time, seconds)
+	_sprayed_at = Engine.get_physics_frames()
+	if seconds >= wet_time:
+		wet_time = seconds
+		_wet_total = seconds
 
 
+## A dryer's warm air can't beat a shower that is pouring on you right now.
 func dry() -> void:
-	wet_time = 0.0
+	if Engine.get_physics_frames() - _sprayed_at > 1:
+		wet_time = 0.0
+
+
+## 1.0 = just soaked, 0.0 = dry: drives the drying meter over the head.
+func wetness() -> float:
+	return clampf(wet_time / _wet_total, 0.0, 1.0)
 
 
 func is_wet() -> bool:
@@ -481,8 +494,16 @@ class WetDrips extends Node2D:
 	func _draw() -> void:
 		if not player.is_wet():
 			return
+		var water := Color("4aa3df")
 		var t := Time.get_ticks_msec() / 1000.0
 		for i in 4:
 			var x := -16.0 + i * 11.0
 			var y := fmod(t * 60.0 + i * 13.0, 40.0) - Player.HALF_SIZE.y
-			draw_circle(Vector2(x, y), 2.5, Color("4aa3df"))
+			draw_circle(Vector2(x, y), 2.5, water)
+		# Drying meter beside the name tag: a drop inside a ring that empties as the hair dries,
+		# so a soaked player can see the wait is short (or go stand in a dryer).
+		var c := Vector2(26.0 * player.visual.scale.x, -66.0)  # cancels the facing flip: always right of the tag
+		draw_arc(c, 9.0, 0.0, TAU, 24, Color("2b2140", 0.35), 3.0)
+		draw_arc(c, 9.0, -PI / 2.0, -PI / 2.0 + TAU * player.wetness(), 24, water, 3.0)
+		draw_circle(c + Vector2(0, 1.5), 3.5, water)
+		draw_colored_polygon(PackedVector2Array([c + Vector2(-3.2, 0.5), c + Vector2(3.2, 0.5), c + Vector2(0, -5.5)]), water)

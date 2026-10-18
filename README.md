@@ -27,17 +27,24 @@ godot --path . res://scenes/levels/level_01.tscn -- --room=3
 | Launch | stand on P2's head | skill | rider rises ~9 tiles |
 | **Sling Dash** | carry P2 through the air | skill while hanging | flung 7 tiles flat, through gel walls |
 | **Hair Catch** | hold skill: open pigtails catch a blue scissor; let go to toss it | parry first (scissor turns blue) | scissor shoots straight up, golden, rings bells |
-| **Hair-copter** | glide in a hair dryer's warm air | stand on her head | both rise; carrying instead only hovers |
+| **Hair-copter** | glide in a hair dryer's warm air | stand on her head | both rise at full speed (a carry rises too, at about half) |
 
-Salon hazards: **hair dryers** lift a gliding twin-tails and dry you; **shampoo showers** soak you
-(wet twin-tails can't glide, wet pompadour can't smash gel); a **growth tonic** grows 1 HP of hair back.
+Salon hazards: **hair dryers** lift a gliding twin-tails (and a friend she carries, slower) and dry
+you; **shampoo showers** soak you for 4 s (wet twin-tails can't glide, wet pompadour can't smash
+gel; a drop-and-ring meter shows the hair drying); a **growth tonic** grows 1 HP of hair back.
+Pompadour gets one dash per jump in the air; landing recharges it.
+Hot flat irons cycle cold -> warning ("!") -> red-hot; touching a hot one costs a heart and throws
+you clear. The last level ends with **Rush Hour** (three waves of robots dropping from ceiling
+vents, each adding a threat) and a three-phase barber-bot boss with a boss bar.
 Hair is the health bar: every hit snips a puff of hair off (hearts in the HUD); a soaked friend
 turns a washed-out blue and drips.
 
 Design notes: `docs/design/refinement.md`.
 
 While carried, press down to let go. Hold down to drop through a one-way platform.
-**Esc** pauses (Resume / Restart room / Main menu). **R** restarts the current room.
+**Esc** pauses (Resume / Restart room / Main menu). **R** restarts the current room - also from the
+death popup and the pause menu. Clearing a level shows its time and deaths in a banner and goes
+straight on to the next level; the last level ends on a results screen.
 If either friend dies, a popup offers **Restart room** or **Main menu**. Restarting rebuilds the
 whole room - enemies, bells, doors, gel and levers reset - while the level's time and death count
 carry on. The bottom bar shows each friend's haircut, hearts and keys, plus level, room, time and deaths.
@@ -66,7 +73,7 @@ On a fresh checkout run `godot --headless --path . --import` once first.
 - `scenes/systems/salon_decor.gd` — background mirrors, lamps and barber poles for each room
 - `scenes/systems/progress.gd` — level list, unlocks and best times
 - `scenes/ui/` — main menu, bottom-bar HUD, death / pause / results menu, shared UI theme
-- `scenes/systems/` — `Level` (rooms, respawn, room-to-room camera) and `Room`
+- `scenes/systems/` — `Level` (rooms, respawn, room-to-room camera) and `Room`; `WaveArena` (robot waves through ceiling vents)
 - `scenes/levels/` — generated level scenes
 - `tools/` — `build_level_0N.gd` generate the level scenes (rerunning overwrites them),
   `make_greybox_tiles.gd` paints the salon tile atlas,

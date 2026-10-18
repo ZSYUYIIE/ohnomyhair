@@ -3,13 +3,16 @@ extends Area2D
 ## Floor-standing salon blow dryer: a column of warm air above it. Position is the
 ## column's top-left corner; the dryer sits at its bottom center.
 ## - A gliding twin-tails rises (to the top of the column, then bobs there).
-##   Carrying a friend she can only hover: too heavy to climb.
+##   Carrying a friend she still rises, just slower (the friend's weight).
 ## - Anyone else falls slower in the warm air.
-## - Everyone inside is dried instantly (shampoo showers make you wet).
-## Combo "Hair-copter": pompadour stands on the gliding twin-tails' head and rides up.
+## - Everyone inside is dried instantly (shampoo showers make you wet) - unless a running
+##   shower is pouring on them at the same time.
+## Combo "Hair-copter": pompadour stands on the gliding twin-tails' head and rides up at
+## full speed - faster than being carried.
 
 @export var size := Vector2(64, 320)
 @export var lift_speed := 300.0
+@export var carry_lift_speed := 160.0
 @export var lift_accel := 1800.0
 @export var warm_fall_speed := 260.0
 
