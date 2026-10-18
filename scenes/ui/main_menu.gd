@@ -156,11 +156,9 @@ func _friends_panel() -> PanelContainer:
 		player_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		portraits.add_child(player_col)
 		var art := TextureRect.new()
-		var frames: SpriteFrames = load("res://assets/art/characters/%s/frames.tres" % ("twin_tails" if id == 1 else "pompadour"))
-		var portrait := AtlasTexture.new()
-		portrait.atlas = frames.get_frame_texture("idle", 0)
-		portrait.region = Rect2(24, 32, 88, 78)
-		art.texture = portrait
+		# Full-resolution portrait (tools/art/make_portraits.py): the in-game strips are
+		# drawn at game size and blur when the title screen enlarges them.
+		art.texture = load("res://assets/art/characters/portraits/%s.png" % ("twin_tails" if id == 1 else "pompadour"))
 		art.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

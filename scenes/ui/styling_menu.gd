@@ -104,11 +104,8 @@ func _update() -> void:
 		var style := selections[id]
 		var info: Dictionary = Player.HAIR_INFO[style]
 		_descriptions[id].text = info.about
-		var frames: SpriteFrames = load("res://assets/art/characters/%s/frames.tres" % FRAME_DIRS[style])
-		var portrait := AtlasTexture.new()
-		portrait.atlas = frames.get_frame_texture("idle", 0)
-		portrait.region = Rect2(20, 24, 96, 88)
-		_portraits[id].texture = portrait
+		# Full-resolution portrait (tools/art/make_portraits.py), sharp at menu size.
+		_portraits[id].texture = load("res://assets/art/characters/portraits/%s.png" % FRAME_DIRS[style])
 		for h in Player.HAIR_INFO.size():
 			var option := _options[id * 4 + h]
 			option.text = ("✓ " if h == style else "") + Player.HAIR_INFO[h].name
