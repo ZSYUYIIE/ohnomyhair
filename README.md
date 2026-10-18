@@ -93,6 +93,7 @@ Each test plays through a level with simulated input; exit code 0 = pass.
 godot --headless --path . --script res://tests/test_menu.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_opening.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_navigation.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_levers.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd

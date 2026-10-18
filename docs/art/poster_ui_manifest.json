@@ -352,6 +352,16 @@
       "sha256": "0a1412c87334f23f7982ed994e16e6cdee75e6c6f9efd84d431c0fcf06833b86",
       "collision": "existing chair trigger areas unchanged",
       "filter": "linear"
+    },
+    {
+      "path": "assets/art/characters/twin_tails/pull_source.png",
+      "source": "byte-identical copy of art_src/characters/twin_tails_sheet.png",
+      "sha256": "96b27bec6a9fe304b154c193f7c6b8e5457869f3ba10706f2ea829792735ad25",
+      "purpose": "full-width pull pose regions; source artwork unchanged",
+      "framing": "scenes/player/pull_frames.gd",
+      "cleanup": "assets/art/characters/twin_tails/pull_cleanup.gdshader",
+      "scale": 0.45,
+      "collision": "unchanged 28x44 player body"
     }
   ]
 }

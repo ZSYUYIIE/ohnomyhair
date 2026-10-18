@@ -39,7 +39,11 @@
 
   `Player._process` picks one from movement, unless the haircut's `anim()` asks for a skill pose.
 - **Known gaps:**
-  - Some source frames were cut at their cell edge. You'll see a hard edge on the tail at the end of `pull`, and on the hair tip in `dash` 2–3.
+  - Pull frames now use `scenes/player/pull_frames.gd`: wider measured regions from an
+    unmodified copy of the original sheet, with the same face/feet anchors and 0.45 scale.
+    A shader applies the existing alpha/fringe cleanup only during this pose. This
+    recovers tails cut off by the old 181px grid without changing the collision box.
+  - Pompadour's `dash` 2–3 still has a source-cell hair-tip crop.
   - There are no hurt, death or chair-sitting poses. Hurt uses the existing blink.
 
 ## World (`tools/art/make_l1_art.py`)

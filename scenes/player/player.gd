@@ -49,6 +49,7 @@ const CARRY_HANG := Vector2(0, 30)
 ## Pivot at the feet, so squash & stretch keeps them on the ground.
 @onready var squash: Node2D = $Visual/Squash
 @onready var sprite: AnimatedSprite2D = $Visual/Squash/Sprite
+@onready var _sprite_offset := sprite.offset
 @onready var interact_area: Area2D = $InteractArea
 @onready var head_pad: AnimatableBody2D = $HeadPad
 @onready var hit_box: Area2D = $HitBox
@@ -186,6 +187,10 @@ func _process(_delta: float) -> void:
 			anim = &"jump" if velocity.y < 0.0 else &"fall"
 	if sprite.animation != anim:
 		sprite.play(anim)
+	var frame_scale := ability.frame_scale(anim)
+	sprite.scale = Vector2.ONE * frame_scale
+	sprite.offset = _sprite_offset / frame_scale
+	sprite.material = ability.frame_material(anim)
 	# Soaked by a shampoo shower: a cool, washed-out tint (the drips are WetDrips).
 	sprite.modulate = WET_TINT if is_wet() else Color.WHITE
 

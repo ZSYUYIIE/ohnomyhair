@@ -14,6 +14,7 @@ extends HairAbility
 ## Wet (shampoo shower): the tails are too heavy to spin, so no gliding until dried.
 
 const HAIR_COLOR := Color("ff5fa2")
+const PullFrames := preload("res://scenes/player/pull_frames.gd")
 
 @export var glide_fall_speed := 120.0
 @export var carry_fall_speed := 220.0
@@ -35,7 +36,7 @@ var _pose_left := 0.0
 func _init() -> void:
 	body_color = Color("ffb3d1")
 	display_name = "Twin-Tails"
-	frames = preload("res://assets/art/characters/twin_tails/frames.tres")
+	frames = PullFrames.get_frames()
 
 
 func tick(delta: float) -> void:
@@ -121,6 +122,17 @@ func anim() -> StringName:
 func _show(pose: StringName, seconds: float) -> void:
 	_pose = pose
 	_pose_left = seconds
+	# A second accepted pull restarts the motion, even during the previous pull.
+	player.sprite.play(pose)
+	player.sprite.set_frame_and_progress(0, 0.0)
+
+
+func frame_scale(animation: StringName) -> float:
+	return PullFrames.SCALE if animation == &"pull" else 1.0
+
+
+func frame_material(animation: StringName) -> Material:
+	return PullFrames.MATERIAL if animation == &"pull" else null
 
 
 func reset() -> void:
@@ -134,11 +146,20 @@ func reset() -> void:
 
 
 func _pull_lever() -> bool:
+	var nearest: Lever = null
+	var distance := INF
 	for area in player.interact_area.get_overlapping_areas():
-		if area.has_method("interact"):
-			area.interact(player)
-			return true
-	return false
+		if area is Lever and area.can_interact():
+			var next_distance: float = player.global_position.distance_squared_to(area.global_position)
+			if next_distance < distance:
+				nearest = area
+				distance = next_distance
+	if nearest == null or not nearest.interact(player): return false
+	var direction := signf(nearest.global_position.x - player.global_position.x)
+	if direction != 0.0:
+		player.facing = direction
+		player.visual.scale.x = direction
+	return true
 
 
 func _grab_friend() -> void:

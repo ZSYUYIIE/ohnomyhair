@@ -10,7 +10,7 @@ signal toggled(on: bool)
 
 const ART := preload("res://assets/art/props/prop_lever.png")
 
-@export var one_shot := true
+@export var one_shot := false
 @export var spring_time := 0.0
 
 var is_on := false
@@ -22,19 +22,23 @@ func _ready() -> void:
 	if not Engine.is_editor_hint(): add_to_group("levers")
 
 
-func interact(_by: Node) -> void:
-	Sound.play("lever")
+func can_interact() -> bool:
+	return spring_time > 0.0 or not one_shot or not is_on
+
+
+func interact(_by: Node) -> bool:
+	if not can_interact(): return false
 	if spring_time > 0.0:
 		_remaining = spring_time
 		if not is_on:
 			is_on = true
 			toggled.emit(true)
-	elif one_shot and is_on:
-		return
 	else:
 		is_on = not is_on
 		toggled.emit(is_on)
+	Sound.play("lever")
 	queue_redraw()
+	return true
 
 
 func _physics_process(delta: float) -> void:

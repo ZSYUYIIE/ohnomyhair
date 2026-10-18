@@ -37,6 +37,7 @@ func _ready() -> void:
 	row.add_child(_player_keys(2))
 	basics.add_child(_text("THE GOAL", "Both friends must stand in the green exit to leave a room.\nHearts are your hair: lose them all and you both restart the room.", 20))
 	basics.add_child(_text("ROOM SHORTCUTS", "Esc  Pause / resume     R  Restart room\nHold S / ↓ to drop through shelves. Press down to let go when carried.", 20))
+	basics.add_child(_text("LEVERS", "Twin-Tails: tap skill near a lever to move its platform. Tap again to bring it back. Holding the key does not repeatedly switch it.", 20))
 	var combos := _page("Hair combos")
 	for entry in [
 		["01  CARRY & GLIDE", "Twin-Tails: hold skill beside your friend to pick them up. Jump and keep holding to glide together."],
