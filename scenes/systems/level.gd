@@ -165,10 +165,11 @@ func _on_room_cleared(room: Room) -> void:
 		if ending_text != "":
 			show_banner(ending_text, 0.0)
 		get_tree().paused = true
+		var next_index := Progress.index_of(next_level)
 		menu.show_results(level_title, {
 			"time": level_time, "deaths": deaths, "new_best": new_best,
 			"best_time": Progress.best_time(index) if index >= 0 else level_time,
-			"has_next": next_level != "" and ResourceLoader.exists(next_level),
+			"has_next": next_level != "" and ResourceLoader.exists(next_level) and Progress.is_unlocked(next_index),
 			"ending": ending_text,
 		})
 		return

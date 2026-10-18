@@ -109,9 +109,9 @@ func _level_card(i: int) -> PanelContainer:
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 5)
 	card.add_child(box)
-	box.add_child(UiTheme.label("CHAPTER 0%d  /  %s" % [i + 1, "CLEARED" if Progress.is_cleared(i) else ("READY" if unlocked else "LOCKED")], 14, UiTheme.MUTED))
+	box.add_child(UiTheme.label("CHAPTER 0%d  /  %s" % [i + 1, ("CLEARED" if Progress.is_cleared(i) else "READY") if unlocked else "LOCKED"], 14, UiTheme.MUTED))
 	box.add_child(UiTheme.label(Progress.LEVELS[i].title, 27, UiTheme.INK if unlocked else UiTheme.MUTED))
-	var info := "Finish chapter %d to unlock" % i
+	var info := "Finish chapter 1 to unlock" if i == 1 else "Finish chapters 1–%d to unlock" % i
 	if unlocked:
 		info = "Best %s  /  %d deaths" % [Progress.format_time(Progress.best_time(i)), Progress.best_deaths(i)] if Progress.is_cleared(i) else DESCRIPTIONS[i]
 	var detail := UiTheme.label(info, 16, UiTheme.MUTED)

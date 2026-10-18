@@ -1,7 +1,7 @@
 class_name Progress
 extends RefCounted
 ## Level list and saved progress (unlocks, best time, fewest deaths) in a ConfigFile.
-## Level 1 is always unlocked; clearing level N unlocks N+1.
+## Level 1 is always unlocked; later levels require every preceding level cleared.
 
 const LEVELS: Array[Dictionary] = [
 	{"path": "res://scenes/levels/level_01.tscn", "title": "Fresh Cut"},
@@ -23,7 +23,13 @@ static func index_of(scene_path: String) -> int:
 
 
 static func is_unlocked(index: int) -> bool:
-	return index == 0 or is_cleared(index - 1)
+	if index < 0 or index >= LEVELS.size():
+		return false
+	var cfg := _load()
+	for previous in index:
+		if not cfg.has_section_key(_key(previous), "best_time"):
+			return false
+	return true
 
 
 static func is_cleared(index: int) -> bool:
