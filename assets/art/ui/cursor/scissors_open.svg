@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g stroke="#2b2140" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M4 6 L24 20 Q28 23 26 27 Q24 29 21 26 Z" fill="#ffda47"/>
+    <path d="M25 26 L34 29 L35 34 L29 32 Z" fill="#efb831"/>
+    <path d="M45 32 A6.7 6.7 0 1 1 31.6 32 A6.7 6.7 0 1 1 45 32 Z M40.8 32 A2.5 2.5 0 1 0 35.8 32 A2.5 2.5 0 1 0 40.8 32 Z" fill="#ffda47" fill-rule="evenodd"/>
+    <path d="M8 9 L22 22" stroke="#fff1a8" stroke-width="1.5"/>
+  </g>
+  <g transform="rotate(42 23 26)" stroke="#2b2140" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M8 11 L24 22 Q28 24 25 28 Q23 30 20 26 Z" fill="#ffe56c"/>
+    <path d="M24 27 L29 34 L26 37 L21 29 Z" fill="#efb831"/>
+    <path d="M37.7 39.4 A6.7 6.7 0 1 1 24.3 39.4 A6.7 6.7 0 1 1 37.7 39.4 Z M33.5 39.4 A2.5 2.5 0 1 0 28.5 39.4 A2.5 2.5 0 1 0 33.5 39.4 Z" fill="#ffda47" fill-rule="evenodd"/>
+    <path d="M11 14 L22 24" stroke="#fff1a8" stroke-width="1.5"/>
+  </g>
+  <circle cx="23.5" cy="25.5" r="3" fill="#fff1a8" stroke="#2b2140" stroke-width="1.8"/>
+  <circle cx="23.5" cy="25.5" r="0.8" fill="#ae755b"/>
+</svg>
