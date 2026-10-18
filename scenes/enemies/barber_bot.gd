@@ -1,6 +1,6 @@
 class_name BarberBot
 extends CharacterBody2D
-## L4 boss: the runaway barber robot. Origin is at the feet.
+## L6 (finale) boss: the runaway barber robot. Origin is at the feet.
 ## Loop: WALK toward a player -> SHOOT 3 scissors / WINDUP + CHARGE (alternating).
 ## Three phases, one per hair of HP, each announced with a banner and shown on the boss bar:
 ##   1 - as above;   2 - it calls for backup (`backup_called`: wire it to a WaveArena);
@@ -186,7 +186,7 @@ func _stomped_by(player: Player) -> void:
 	player.hit_stop(0.08)
 	if hp <= 0:
 		collision_layer = 0
-		Level.banner_for(self, "The barber bot is down!", 2.0)
+		Level.banner_for(self, "The assistant is down!", 2.0)
 		defeated.emit()
 		var tween := create_tween()
 		tween.tween_property(self, "modulate:a", 0.0, 0.8)
@@ -214,6 +214,7 @@ func phase() -> int:
 
 func _fire() -> void:
 	var scissor := Scissor.new()
+	scissor.restyles = true
 	scissor.direction = Vector2(facing, 0)
 	# Body height of a player standing on the same floor, so it's parriable and dodgeable by jumping.
 	scissor.position = position + Vector2(facing * (SIZE.x / 2 + 16), -30)
@@ -297,7 +298,7 @@ class BossBar extends CanvasLayer:
 		_panel.draw_rect(r, Color("fff6ea"))
 		_panel.draw_rect(r, ink, false, 3.0)
 		var font := ThemeDB.fallback_font
-		_panel.draw_string(font, Vector2(14, 22), "THE BARBER BOT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
+		_panel.draw_string(font, Vector2(14, 22), "THE ASSISTANT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, ink)
 		_panel.draw_string(font, Vector2(14, 22), "PHASE %d" % boss.phase(), HORIZONTAL_ALIGNMENT_RIGHT, _panel.size.x - 28, 16, Color("b0306a"))
 		var w := (_panel.size.x - 28 - 2 * 8) / boss._max_hp
 		for i in boss._max_hp:

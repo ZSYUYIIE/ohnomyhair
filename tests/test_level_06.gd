@@ -1,10 +1,10 @@
 extends PlayBot
-## Bot playthrough of L4: parry + carry under fire, the hair-swap chair, three waves of
+## Bot playthrough of L6 (the finale; it was L4): parry + carry under fire, the hair-swap chair, three waves of
 ## robots, and the barber-bot boss (with its phases) fought with swapped haircuts.
 ## Exits non-zero if any step fails.
-## Run: godot --headless --fixed-fps 60 --path . --script res://tests/test_level_04.gd
+## Run: godot --headless --fixed-fps 60 --path . --script res://tests/test_level_06.gd
 
-const LevelScene := preload("res://scenes/levels/level_04.tscn")
+const LevelScene := preload("res://scenes/levels/level_06.tscn")
 
 
 func _run() -> void:
@@ -16,6 +16,7 @@ func _run() -> void:
 		await _room_3()
 	if failed == 0:
 		await _room_4()
+	begin_counter_checks()  # unit checks put players in harm's way on purpose
 	if failed == 0:
 		await _boss_unit_checks()
 	finish()
@@ -38,9 +39,7 @@ func _room_1() -> void:
 	# Grab works from beside, never from on top of each other: step next to P2 first
 	# (the hop onto the ledge can land P1 on P2's head).
 	await walk_to(p1, p2.global_position.x - 30.0)
-	hold(p1, "skill", true)
-	await _ticks(2)
-	check(p1.carrying == p2, "R1: twin-tails grabs pompadour on the ledge")
+	check(await grab(p1, p2), "R1: twin-tails grabs pompadour on the ledge")
 	check(await glide_jump(p1, o + 12 * TILE - 4, o + 22 * TILE, false), "R1: carry over the 9-tile pool while the turret is jammed")
 	hold(p1, "skill", false)
 	await _ticks(10)
@@ -71,7 +70,7 @@ func _room_2() -> void:
 	await walk_to(p1, o + 26 * TILE)
 	# P2 has to step out in front of P1 to reach the trench: jam the dispenser first.
 	await guard_until(p1, func(): return dispenser._jam > 2.0, 900)
-	await walk_to(p2, o + 27.5 * TILE)
+	await walk_to(p2, o + 28 * TILE)
 	await wait_until(func(): return p2.is_on_floor(), 60)
 	check(p2.global_position.y > 19 * TILE, "R2: P2 (now twin-tails) drops into the trench")
 	for attempt in 8:

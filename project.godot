@@ -20,7 +20,10 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/puzzle_dependencies/plugin.cfg")
 
 [input]
 
@@ -106,13 +109,39 @@ pause={
 2d_physics/layer_7="head_pads"
 2d_physics/layer_8="platforms"
 
+[puzzle_dependencies]
+
+types={
+0: {
+&"color": Color(0, 0, 0, 1),
+&"id": 0,
+&"label": "Type 1"
+},
+1: {
+&"color": Color(1, 0.47058824, 0.41960785, 1),
+&"id": 1,
+&"label": "Type 2"
+},
+2: {
+&"color": Color(0.7411765, 0.5764706, 0.9764706, 1),
+&"id": 2,
+&"label": "Type 3"
+},
+3: {
+&"color": Color(0.4509804, 0.9490196, 0.5019608, 1),
+&"id": 3,
+&"label": "Type 4"
+},
+4: {
+&"color": Color(1, 0.87058824, 0.4, 1),
+&"id": 4,
+&"label": "Type 5"
+}
+}
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-textures/canvas_textures/default_texture_filter=0
 environment/defaults/default_clear_color=Color(0.105, 0.09, 0.15, 1)
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/puzzle_dependencies/plugin.cfg")

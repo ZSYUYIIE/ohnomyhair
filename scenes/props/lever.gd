@@ -19,6 +19,7 @@ var _remaining := 0.0
 
 func _ready() -> void:
 	queue_redraw()
+	if not Engine.is_editor_hint(): add_to_group("levers")
 
 
 func interact(_by: Node) -> void:

@@ -53,6 +53,28 @@ Skill/attack follow the **haircut**, not the player: if hair gets swapped, so do
 Edit in Project Settings → Input Map. In code: `player.pressed("skill")` / `Input.is_action_pressed("p1_left")`.
 
 ## Run the tests
+
+### The escape story
+
+Two friends arrive at closing time for a haircut. The barber leaves them with his robot
+assistant. One snip too many reveals their hair powers; the robot locks the front door.
+Pompadour protects Twin-Tails, she spots the service route, and they choose to escape together.
+
+The campaign follows the same two friends through **Fresh Cut → Return to Sender →
+Wash & Blow-Dry → The Assistant**. The finale keeps its internal `level_06.tscn` path and
+stable save ID, but is chapter 4 in the game. Chairs and damaging boss scissors can swap
+their two familiar haircuts; both players must reach each exit.
+
+**Perm Day, Extensions and Style Lab are retired.** Their source art, abilities, scenes and
+tests are preserved under [`archive/four_haircut_prototype`](archive/four_haircut_prototype/README.md),
+excluded from Godot by `.gdignore`. The playable roster and portraits use only the original
+Twin-Tails and Pompadour artwork. Story and visual direction:
+[`docs/design/story_escape.md`](docs/design/story_escape.md).
+
+At a gold-marked chair, bring both friends nearby and press **S / Down** to swap or keep
+roles, heal, dry off and save the current room's checkpoint.
+
+### Automated checks
 Each test plays through a level with simulated input; exit code 0 = pass.
 `test_combos.gd` checks each hair combo (and that the solo shortcut fails) in a bare arena.
 ```
@@ -61,12 +83,16 @@ godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_01.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_02.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_level_03.gd
-godot --headless --fixed-fps 60 --path . --script res://tests/test_level_04.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_level_06.gd
+godot --headless --path . --script res://tests/test_gates.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_checkpoints.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_boss_pairs.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_story_roster.gd
 ```
 On a fresh checkout run `godot --headless --path . --import` once first.
 
 ## Repo layout
-- `scenes/player/` — the shared Player and the two haircuts (`abilities/`)
+- `scenes/player/` — the shared Player and the two story haircuts (`abilities/`)
 - `scenes/props/`, `scenes/enemies/` — barber-shop props and enemies: chair-pump levers, salon
   counters, regrowing hair-gel, dye basins, hot flat irons, service bells, staff doors, scissor
   dispensers, clipper bots, the barber bot

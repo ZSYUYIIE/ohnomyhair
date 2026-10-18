@@ -37,8 +37,10 @@ func _swap() -> void:
 	var players := get_tree().get_nodes_in_group("players")
 	for p: Player in players:
 		p.drop()
-	for p: Player in players:
-		p.set_hair(Player.Hair.POMPADOUR if p.hair == Player.Hair.TWIN_TAILS else Player.Hair.TWIN_TAILS)
+	if players.size() >= 2:
+		var first_hair: Player.Hair = players[0].hair
+		players[0].set_hair(players[1].hair)
+		players[1].set_hair(first_hair)
 	var level := owner as Level
 	if level:
 		level.flash_screen(1.0, Color("ff5fa2"))

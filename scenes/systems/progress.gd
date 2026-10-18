@@ -4,12 +4,14 @@ extends RefCounted
 ## Level 1 is always unlocked; later levels require every preceding level cleared.
 
 const LEVELS: Array[Dictionary] = [
-	{"path": "res://scenes/levels/level_01.tscn", "title": "Fresh Cut"},
-	{"path": "res://scenes/levels/level_02.tscn", "title": "Return to Sender"},
-	{"path": "res://scenes/levels/level_03.tscn", "title": "Wash & Blow-Dry"},
-	{"path": "res://scenes/levels/level_04.tscn", "title": "The Barber"},
+	{"id": "fresh_cut", "path": "res://scenes/levels/level_01.tscn", "title": "Fresh Cut"},
+	{"id": "return_to_sender", "path": "res://scenes/levels/level_02.tscn", "title": "Return to Sender"},
+	{"id": "wash_and_blow_dry", "path": "res://scenes/levels/level_03.tscn", "title": "Wash & Blow-Dry"},
+	# Keep the stable save ID and scene path: earlier finale records still belong here.
+	{"id": "the_barber", "path": "res://scenes/levels/level_06.tscn", "title": "The Assistant"},
 ]
 const MAIN_MENU := "res://scenes/ui/main_menu.tscn"
+const SAVE_VERSION := 2
 
 ## Tests point this somewhere else so they don't touch the player's save.
 static var save_path := "user://progress.cfg"
@@ -47,7 +49,7 @@ static func best_deaths(index: int) -> int:
 
 ## Records a clear; returns true if it set a new best time.
 static func record_clear(index: int, seconds: float, deaths: int) -> bool:
-	if index < 0:
+	if index < 0 or index >= LEVELS.size():
 		return false
 	var cfg := _load()
 	var key := _key(index)
@@ -63,7 +65,9 @@ static func record_clear(index: int, seconds: float, deaths: int) -> bool:
 
 
 static func reset() -> void:
-	ConfigFile.new().save(save_path)
+	var cfg := ConfigFile.new()
+	cfg.set_value("save", "version", SAVE_VERSION)
+	cfg.save(save_path)
 
 
 ## "1:05.3"
@@ -74,10 +78,29 @@ static func format_time(seconds: float) -> String:
 
 
 static func _key(index: int) -> String:
-	return "level_%d" % (index + 1)
+	return LEVELS[index].id if index >= 0 and index < LEVELS.size() else ""
 
 
 static func _load() -> ConfigFile:
 	var cfg := ConfigFile.new()
 	cfg.load(save_path)
+	if cfg.get_value("save", "version", 1) < SAVE_VERSION:
+		# In the four-chapter release level_4 was The Barber, before the two new
+		# chapters were inserted. Stable chapter IDs prevent future reorderings
+		# from granting a clear to an entirely different level.
+		var legacy_ids := ["fresh_cut", "return_to_sender", "wash_and_blow_dry",
+			"the_barber", "extensions", "the_barber"]
+		for i in legacy_ids.size():
+			var old_key := "level_%d" % (i + 1)
+			for field in ["best_time", "best_deaths"]:
+				if not cfg.has_section_key(old_key, field):
+					continue
+				var value = cfg.get_value(old_key, field)
+				var existing = cfg.get_value(legacy_ids[i], field, -1)
+				if existing < 0 or value < existing:
+					cfg.set_value(legacy_ids[i], field, value)
+			if cfg.has_section(old_key):
+				cfg.erase_section(old_key)
+		cfg.set_value("save", "version", SAVE_VERSION)
+		cfg.save(save_path)
 	return cfg

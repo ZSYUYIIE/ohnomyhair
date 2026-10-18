@@ -3,7 +3,10 @@ extends Control
 ## Salon title screen with the two friends beside a chapter grid.
 
 const Guide := preload("res://scenes/ui/controls_guide.gd")
-const DESCRIPTIONS := ["Glide, carry & sling your friend", "Parry scissors & ring the bells", "Ride warm air. Watch the shampoo!", "Swap haircuts & face the barber"]
+const DESCRIPTIONS := ["Find the service route together", "Turn the robot's scissors against it",
+	"Escape through the wash room", "Face the runaway assistant. Reach the back door."]
+## The escape has four chapters, in two rows of two.
+const CARD_COLUMNS := 2
 
 var _cards: Array[PanelContainer] = []
 var _play_buttons: Array[Button] = []
@@ -30,7 +33,7 @@ func _ready() -> void:
 	margin.add_child(col)
 	col.add_child(UiTheme.label("A TWO-PLAYER SALON ESCAPE  /  SHARED KEYBOARD", 16, UiTheme.MUTED))
 	col.add_child(UiTheme.label("OH NO MY HAIR!", 64))
-	col.add_child(UiTheme.label("Two terrible haircuts. One great escape. Better together.", 22, UiTheme.MUTED))
+	col.add_child(UiTheme.label("One bad haircut. Two good friends.", 22, UiTheme.MUTED))
 	var content := HBoxContainer.new()
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation", 24)
@@ -42,7 +45,7 @@ func _ready() -> void:
 	content.add_child(levels)
 	levels.add_child(UiTheme.label("CHOOSE YOUR CHAPTER", 17, UiTheme.MUTED))
 	var grid := GridContainer.new()
-	grid.columns = 2
+	grid.columns = CARD_COLUMNS
 	grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	grid.add_theme_constant_override("h_separation", 16)
 	grid.add_theme_constant_override("v_separation", 16)
@@ -81,7 +84,8 @@ func _wire_focus() -> void:
 		var b := _play_buttons[i]
 		if b.disabled:
 			continue
-		for entry in [["left", i - 1 if i % 2 == 1 else -1], ["right", i + 1 if i % 2 == 0 else -1], ["top", i - 2], ["bottom", i + 2]]:
+		for entry in [["left", i - 1 if i % CARD_COLUMNS > 0 else -1], ["right", i + 1 if i % CARD_COLUMNS < CARD_COLUMNS - 1 else -1],
+				["top", i - CARD_COLUMNS], ["bottom", i + CARD_COLUMNS]]:
 			var target: int = entry[1]
 			if target >= 0 and target < _play_buttons.size() and not _play_buttons[target].disabled:
 				b.set("focus_neighbor_" + entry[0], _play_buttons[target].get_path())
@@ -102,7 +106,7 @@ func play(index: int) -> void:
 func _level_card(i: int) -> PanelContainer:
 	var unlocked := Progress.is_unlocked(i)
 	var card := PanelContainer.new()
-	card.custom_minimum_size = Vector2(350, 0)
+	card.custom_minimum_size = Vector2(220, 0)
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	card.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM if unlocked else Color("eee6e1"), UiTheme.WALNUT if unlocked else Color("c5b9c5"), 2, 14, 16))
@@ -110,11 +114,12 @@ func _level_card(i: int) -> PanelContainer:
 	box.add_theme_constant_override("separation", 5)
 	card.add_child(box)
 	box.add_child(UiTheme.label("CHAPTER 0%d  /  %s" % [i + 1, ("CLEARED" if Progress.is_cleared(i) else "READY") if unlocked else "LOCKED"], 14, UiTheme.MUTED))
-	box.add_child(UiTheme.label(Progress.LEVELS[i].title, 27, UiTheme.INK if unlocked else UiTheme.MUTED))
+	box.add_child(UiTheme.label(Progress.LEVELS[i].title, 22, UiTheme.INK if unlocked else UiTheme.MUTED))
 	var info := "Finish chapter 1 to unlock" if i == 1 else "Finish chapters 1–%d to unlock" % i
 	if unlocked:
 		info = "Best %s  /  %d deaths" % [Progress.format_time(Progress.best_time(i)), Progress.best_deaths(i)] if Progress.is_cleared(i) else DESCRIPTIONS[i]
-	var detail := UiTheme.label(info, 16, UiTheme.MUTED)
+	var detail := UiTheme.label(info, 14, UiTheme.MUTED)
+	detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	detail.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	box.add_child(detail)
 	var button := _button(("Play again" if Progress.is_cleared(i) else "Play together") if unlocked else "Locked", play.bind(i))
@@ -143,11 +148,9 @@ func _friends_panel() -> PanelContainer:
 		player_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		portraits.add_child(player_col)
 		var art := TextureRect.new()
-		var frames: SpriteFrames = load("res://assets/art/characters/%s/frames.tres" % ("twin_tails" if id == 1 else "pompadour"))
-		var portrait := AtlasTexture.new()
-		portrait.atlas = frames.get_frame_texture("idle", 0)
-		portrait.region = Rect2(24, 32, 88, 78)
-		art.texture = portrait
+		# Full-resolution portrait (tools/art/make_portraits.py): the in-game strips are
+		# drawn at game size and blur when the title screen enlarges them.
+		art.texture = load("res://assets/art/characters/portraits/%s.png" % ("twin_tails" if id == 1 else "pompadour"))
 		art.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -160,7 +163,7 @@ func _friends_panel() -> PanelContainer:
 		var keys := UiTheme.label("A D move / W jump\nG skill / F whip" if id == 1 else "← → move / ↑ jump\nK skill / L parry", 16, UiTheme.MUTED)
 		keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		player_col.add_child(keys)
-	var note := UiTheme.label("Bring a friend. You will need each other.\nHair is health. Both players must reach the exit.", 17)
+	var note := UiTheme.label("The front door is locked. Find another way.\nProtect your friend. Escape together.", 17)
 	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(note)
 	return panel

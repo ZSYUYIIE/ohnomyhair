@@ -13,6 +13,10 @@ const HAIR_SCRIPTS := {
 	Hair.TWIN_TAILS: preload("res://scenes/player/abilities/twin_tails.gd"),
 	Hair.POMPADOUR: preload("res://scenes/player/abilities/pompadour.gd"),
 }
+const HAIR_INFO := [
+	{"name": "Twin-Tails", "skill": "glide/carry", "attack": "whip", "color": Color("ff5fa2"), "about": "Hold skill to glide or carry. Pull levers and catch parried scissors."},
+	{"name": "Pompadour", "skill": "dash/launch", "attack": "parry", "color": Color("3a8fd6"), "about": "Dash through gel. Launch a friend off your head. Parry scissors."},
+]
 const HALF_SIZE := Vector2(14, 22)  # keep in sync with CollisionShape2D (28x44)
 ## Sprite tint while soaked by a shampoo shower.
 const WET_TINT := Color(0.72, 0.86, 1.0)
@@ -62,6 +66,8 @@ var fall_cap := 0.0
 var control_lock := 0.0
 var carrying: Player = null
 var carried_by: Player = null
+## A teammate holding a long-hair rope. Movement always uses collision-aware sliding.
+var rope_provider: Player = null
 
 var _actions := {}
 var _coyote := 0.0
@@ -117,6 +123,12 @@ func teammate() -> Player:
 
 
 func set_hair(new_hair: Hair) -> void:
+	if not HAIR_SCRIPTS.has(new_hair):
+		return
+	drop()
+	if carried_by:
+		carried_by.drop()
+	rope_provider = null
 	hair = new_hair
 	if ability:
 		ability.reset()
@@ -127,6 +139,28 @@ func set_hair(new_hair: Hair) -> void:
 	# Body and hair are drawn together, so a new haircut is a whole new set of frames.
 	sprite.sprite_frames = ability.frames
 	sprite.play(&"idle")
+
+
+## Boss scissors change abilities without healing or replacing the player body.
+## The new haircut stays inside the room's style set and never copies the friend's
+## (StyleRules.next_style); when the set is just the pair, the two friends swap.
+func restyle_next() -> void:
+	if not alive:
+		return
+	var level := get_parent().get_parent() as Level
+	var styles := PackedInt32Array([0, 1])
+	if level and level.rooms.size() > 0:
+		styles = level.rooms[level.room_index].styles
+	var mate := teammate()
+	var next: int = StyleRules.next_style(hair, mate.hair if mate else -1, styles)
+	if next >= 0:
+		set_hair(next)
+	elif mate and mate.alive:
+		var mine := hair
+		set_hair(mate.hair)
+		mate.set_hair(mine)
+	if level:
+		level.show_banner("SNIP!  P%d → %s\n%s %s / %s %s" % [player_id, ability.display_name, "G" if player_id == 1 else "K", HAIR_INFO[hair].skill, "F" if player_id == 1 else "L", HAIR_INFO[hair].attack], 2.0)
 
 
 ## Picks the animation from what the haircut is doing, else from movement.
@@ -172,6 +206,8 @@ func _physics_process(delta: float) -> void:
 	wet_time = maxf(wet_time - delta, 0.0)
 	visual.modulate.a = 0.35 if _invincible > 0.0 and int(_invincible * 20.0) % 2 == 0 else 1.0
 	if not alive:
+		return
+	if _tick_rope(delta):
 		return
 	if carried_by:
 		_follow_carrier()
@@ -225,7 +261,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0.0, 1200.0 * delta)
 	else:
 		var accel := ground_accel if is_on_floor() else air_accel
-		velocity.x = move_toward(velocity.x, dir * run_speed, accel * delta)
+		velocity.x = move_toward(velocity.x, dir * run_speed * ability.move_multiplier(), accel * delta)
 
 	var rider := _rider_on_head()
 	var y_before := global_position.y
@@ -274,6 +310,9 @@ func has_rider(other: Player) -> bool:
 
 func take_hit(damage: int, _stun_time: float = 0.0, knockback := Vector2.ZERO) -> void:
 	if damage <= 0 or _invincible > 0.0 or not alive:
+		return
+	if ability.block_hit():
+		make_invincible(0.15)
 		return
 	hp -= damage
 	_invincible = invincible_time
@@ -390,6 +429,7 @@ func die() -> void:
 	if not alive:
 		return
 	alive = false
+	rope_provider = null
 	drop()
 	if carried_by:
 		carried_by.drop()
@@ -399,6 +439,7 @@ func die() -> void:
 
 
 func respawn_at(pos: Vector2) -> void:
+	rope_provider = null
 	drop()
 	if carried_by:
 		carried_by.drop()
@@ -421,6 +462,32 @@ func respawn_at(pos: Vector2) -> void:
 	alive = true
 	show()
 	shape.set_deferred("disabled", false)
+
+
+func _tick_rope(_delta: float) -> bool:
+	if not is_instance_valid(rope_provider):
+		rope_provider = null
+		return false
+	var provider := rope_provider
+	if not provider.alive or not provider.ability.has_method("rope_active") or not provider.ability.rope_active():
+		rope_provider = null
+		return false
+	var dir := Input.get_axis(_actions.left, _actions.right)
+	if dir != 0.0 or pressed("skill"):
+		rope_provider = null
+		velocity = Vector2((dir if dir != 0.0 else facing) * 420.0, -460.0)
+		control_lock = 0.12
+		_can_cut_jump = false
+		return false
+	var rope_x: float = provider.ability.rope_x()
+	velocity = Vector2(clampf((rope_x - global_position.x) * 12.0, -160, 160), -180.0 if held("jump") else (180.0 if held("down") else 0.0))
+	move_and_slide()
+	if global_position.y <= provider.global_position.y - HALF_SIZE.y * 2.0:
+		rope_provider = null
+		launch(80.0)
+	elif global_position.y > provider.global_position.y + provider.ability.rope_length:
+		rope_provider = null
+	return true
 
 
 func set_frozen(frozen: bool) -> void:

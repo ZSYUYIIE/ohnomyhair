@@ -1,0 +1,36 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/art/characters/long_straight/poses.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="Frame0"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 136, 128)
+
+[sub_resource type="AtlasTexture" id="Frame1"]
+atlas = ExtResource("1")
+region = Rect2(136, 0, 136, 128)
+
+[sub_resource type="AtlasTexture" id="Frame2"]
+atlas = ExtResource("1")
+region = Rect2(272, 0, 136, 128)
+
+[sub_resource type="AtlasTexture" id="Frame3"]
+atlas = ExtResource("1")
+region = Rect2(408, 0, 136, 128)
+
+[sub_resource type="AtlasTexture" id="Frame4"]
+atlas = ExtResource("1")
+region = Rect2(544, 0, 136, 128)
+
+[sub_resource type="AtlasTexture" id="Frame5"]
+atlas = ExtResource("1")
+region = Rect2(680, 0, 136, 128)
+
+[resource]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("Frame0")}], "loop": true, "name": &"idle", "speed": 6.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("Frame1")}, {"duration": 1.0, "texture": SubResource("Frame2")}], "loop": true, "name": &"run", "speed": 12.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("Frame3")}], "loop": true, "name": &"jump", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("Frame3")}], "loop": true, "name": &"fall", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("Frame3")}], "loop": true, "name": &"hang", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("Frame4")}], "loop": true, "name": &"rope", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("Frame5")}], "loop": true, "name": &"lasso", "speed": 1.0}]

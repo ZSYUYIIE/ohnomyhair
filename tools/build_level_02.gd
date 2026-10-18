@@ -12,7 +12,7 @@ extends LevelBuilder
 const PINK := Color("ff5fa2")
 
 ## Room 2 terrain ('#' solid, '=' one-way); entities are placed by tile coords below.
-## Rows 15-16 at x=22 and x=30 are the catch trenches cut into the walkway.
+## Rows 15-16 at x=22-23 and x=30-31 are the catch trenches cut into the walkway.
 const CORRIDOR := [
 	"########################################",
 	"#......................................#",
@@ -29,9 +29,9 @@ const CORRIDOR := [
 	"#......................................#",
 	"#......................................#",
 	"#......................................#",
-	"#................#####.#######.####....#",
+	"#................#####..######..###....#",
 	"#................#.....................#",
-	"#..............###....#.......#........#",
+	"#..............###....##......##.......#",
 	"#..............###.................====#",
 	"#............#####.....................#",
 	"#............#####.....................#",
@@ -57,24 +57,30 @@ func _rooms() -> Array:
 func _room_1() -> RoomBuilder:
 	var rb := RoomBuilder.new(self, room_node("Room1", "1 - Return to Sender", Color("e3dcef"), "res://assets/art/l2/bg_l2_01_reception.png"))
 	rb.solid(0, 19, 19, 22)
-	rb.solid(21, 19, 38, 22)
-	rb.solid(20, 21, 20, 22)    # trench at x=20, 2 deep: scissors fly over a player in it
-	rb.one_way(23, 27, 16)      # shelves up to the exit (3 tiles apart)
-	rb.one_way(26, 29, 13)
-	rb.one_way(28, 31, 10)
+	rb.solid(22, 19, 38, 22)
+	# Trench at x=20-21, 2 deep: scissors fly over a player in it. Two tiles wide: a
+	# one-tile hole left a 28 px body 4 px to fall in (docs/difficulty/report.md).
+	rb.solid(20, 21, 21, 22)
+	# Shelves up to the exit, 2 tiles apart: a jump clears 3.56, so 3-tile steps left half a
+	# tile to spare and a slightly short hop missed (docs/difficulty/report.md).
+	rb.one_way(23, 26, 16)
+	rb.one_way(25, 28, 14)
+	rb.one_way(27, 30, 12)
 	rb.solid(32, 10, 38, 12)    # exit counter, above the dispenser
 	rb.solid(32, 1, 32, 6)      # wall above the staff door: no jumping over it
 	rb.spawn(1, 3, 19)
 	rb.spawn(2, 5, 19)
 	rb.turret("Dispenser", 38, 18, Vector2.LEFT, 2.5, 2.0)
-	var bell := rb.hit_switch("Bell", 20, 2)
+	var bell := rb.hit_switch("Bell", 20, 2, 16.0)
 	var door := rb.door("StaffDoor", 32, 7, 1, 3)
 	rb.link(bell, "activated", door, "open")
 	rb.stripes("ParryStripes", 8, 18, 19)
-	rb.stripes("CatchMark", 20, 20, 21, PINK)
+	rb.stripes("CatchMark", 20, 21, 21, PINK)
+	rb.gate("Dispenser on the body line", ["parry"])
+	rb.gate("Ceiling bell", ["catch_toss"])
 	rb.exit(35, 7)
-	rb.hint("P2: parry scissors back with  L", Vector2(48, 400))
-	rb.hint("P1: wait in the trench and HOLD G\nto catch the BLUE scissor - let go to toss it up", Vector2(420, 300))
+	rb.hint("{pomp}: parry scissors back with  {pomp.attack}", Vector2(48, 400))
+	rb.hint("{tt}: wait in the trench and HOLD {tt.skill}\nto catch the BLUE scissor - let go to toss it up", Vector2(420, 300))
 	return rb
 
 
@@ -90,10 +96,12 @@ func _room_2() -> RoomBuilder:
 	rb.turret("Dispenser", 38, 14, Vector2.LEFT)
 	var door := rb.door("StaffDoor", 24, 16, 1, 5, 2)
 	for col in [22, 30]:
-		var bell := rb.hit_switch("Bell%d" % col, col, 1)
+		var bell := rb.hit_switch("Bell%d" % col, col, 1, 16.0)
 		rb.link(bell, "activated", door, "open")
-		rb.stripes("CatchMark%d" % col, col, col, 17, PINK)
+		rb.stripes("CatchMark%d" % col, col, col + 1, 17, PINK)
 	rb.stripes("ParryStripes", 17, 21, 15)
 	rb.exit(19, 18)
 	rb.hint("Two bells. The door needs both.", Vector2(440, 300))
+	rb.gate("Two ceiling bells", ["catch_toss"])
+	rb.gate("Clipper bots", ["whip", "parry", "jump"])
 	return rb

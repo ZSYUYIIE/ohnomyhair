@@ -39,6 +39,9 @@ var scene_path := ""
 ## Empty = the greybox tiles. `tileset_path` is where its TileSet is saved.
 var tile_atlas := ""
 var tileset_path := TILESET_PATH
+## The chapter's pair (P1, P2): every room starts with it and its chair offers it
+## (docs/design/roster_and_chapters.md). Rooms can override with RoomBuilder.styles().
+var pair: Array[int] = [Player.Hair.TWIN_TAILS, Player.Hair.POMPADOUR]
 
 
 ## Override: set level_name, level_title, next_level (or ending_text), scene_path.
@@ -59,6 +62,8 @@ class RoomBuilder:
 	func _init(builder: LevelBuilder, room: Node2D) -> void:
 		b = builder
 		node = room
+		node.starting_hair = PackedInt32Array(b.pair)
+		node.styles = PackedInt32Array(b.pair)
 		for y in ROWS:
 			var row := PackedByteArray()
 			row.resize(COLS)
@@ -188,9 +193,17 @@ class RoomBuilder:
 		t.position = _center(col, row)
 		return add(t, name)
 
-	func hit_switch(name: String, col: int, row: int) -> Node2D:
+	## Gold hook ring for Long Straight at room-local pixel `at`. Rings are targets, not floors.
+	func ring(name: String, at: Vector2) -> Node2D:
+		var r: Node2D = load("res://scenes/props/hair_anchor.gd").new()
+		r.position = at
+		return add(r, name)
+
+	## Service bell centred in tile (col, row); `x_shift` px moves it sideways, e.g. 16 to
+	## hang it over the middle of a 2-wide trench, so a toss from anywhere in it rings.
+	func hit_switch(name: String, col: int, row: int, x_shift := 0.0) -> Node2D:
 		var s := HitSwitch.new()
-		s.position = _center(col, row)
+		s.position = _center(col, row) + Vector2(x_shift, 0)
 		return add(s, name)
 
 	## locks: how many switches must call open() before it opens.
@@ -220,9 +233,32 @@ class RoomBuilder:
 			holder.add_child(r)
 			x += 20
 
+	## Haircuts the room's chair offers (and Tony restyles into). Every distinct pair
+	## must pass every gate; `start` is the pair the room starts with.
+	func styles(hairs: Array, start: Array = []) -> void:
+		node.styles = PackedInt32Array(hairs)
+		if start.size() == 2:
+			node.starting_hair = PackedInt32Array(start)
+
+	## An obstacle for the gate check, passable with any one of `verbs` (StyleRules).
+	## `spec` sizes it for the margin table (tools/difficulty/margins.gd), in tiles:
+	## {"gap": width, "drop": take-off height above the landing} or {"rise": height}.
+	func gate(name: String, verbs: Array, spec := {}) -> void:
+		var entry := {"name": name, "any": PackedStringArray(verbs)}
+		if not spec.is_empty():
+			entry["spec"] = spec
+		node.gates.append(entry)
+
+	## Hints may use haircut tokens ({tt}, {tt.skill}... see HairHint); they resolve
+	## at runtime to whoever wears that haircut.
 	func hint(text: String, pos: Vector2) -> void:
 		var label := Label.new()
 		label.text = text
+		if "{" in text:
+			label.set_script(load("res://scenes/ui/hair_hint.gd"))
+			label.template = text
+			var worn := {node.starting_hair[0]: 1, node.starting_hair[1]: 2} if node.starting_hair.size() == 2 else {}
+			label.text = HairHint.resolve(text, worn)
 		label.position = pos
 		label.add_theme_color_override("font_color", HINT_COLOR)
 		label.add_theme_font_size_override("font_size", 18)
@@ -272,7 +308,7 @@ func _initialize() -> void:
 		var p: Node2D = PlayerScene.instantiate()
 		p.name = "P%d" % id
 		p.player_id = id
-		p.hair = Player.Hair.TWIN_TAILS if id == 1 else Player.Hair.POMPADOUR
+		p.hair = pair[id - 1]
 		own(players, p)
 
 	var camera := Camera2D.new()

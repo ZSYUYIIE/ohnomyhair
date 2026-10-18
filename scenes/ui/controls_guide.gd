@@ -24,7 +24,7 @@ func _ready() -> void:
 	box.add_theme_constant_override("separation", 12)
 	panel.add_child(box)
 	box.add_child(UiTheme.label("A little teamwork goes a long way.", 32))
-	box.add_child(UiTheme.label("One keyboard. Two friends. Skills follow the haircut when hair gets swapped.", 20, UiTheme.MUTED))
+	box.add_child(UiTheme.label("Skills follow the haircut. Mouse wheel / Page Down to scroll for more.", 20, UiTheme.MUTED))
 	_tabs = TabContainer.new()
 	_tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	box.add_child(_tabs)
@@ -45,6 +45,17 @@ func _ready() -> void:
 		["05  WARM AIR", "Glide into a hair dryer to rise - carrying your friend too, just slower. Riding on her head goes up fastest."],
 	]:
 		combos.add_child(_text(entry[0], entry[1], 18))
+	var styles := _page("Story & checkpoints")
+	for entry in [
+		["01  ONE SNIP TOO MANY", "Two friends arrive at closing time, hoping for a fresh look. The barber leaves them with his robot assistant. Something's off: the assistant cuts too much, and their hair reveals unexpected powers."],
+		["02  THE DOOR LOCKS", "The robot locks the front door and turns its scissors towards them. Pompadour steps in to protect Twin-Tails. She notices another way through the salon."],
+		["03  TRUST ME", "They choose to run together. Glide, carry, launch and parry through the service rooms. Both friends must reach each green exit; nobody gets left behind."],
+		["04  THE SERVICE ROUTE", "Fresh Cut leads to Return to Sender, then Wash & Blow-Dry. These are rooms along the escape, where the same two friends learn to use their new powers together."],
+		["05  THE ASSISTANT", "The runaway robot and its backup block the back door. Daze it with a parried scissor or a wall crash, then land on its glowing head. Escape together when it powers down."],
+		["CHAIRS & CHECKPOINTS", "Bring both friends near a chair and press S / ↓. Swap the two familiar haircuts or keep your roles. Saving heals, dries off, and keeps your chosen pair on a room restart."],
+		["SOMETHING'S OFF...", "The surprise chair and the assistant's damaging scissors can swap your two haircuts. Your movement keys stay yours; skills follow the haircut. Check your portrait and skill hints, then help each other adapt."],
+	]:
+		styles.add_child(_text(entry[0], entry[1], 18))
 	_close = Button.new()
 	_close.text = "Got it  /  Esc"
 	_close.custom_minimum_size.y = 48
@@ -80,8 +91,13 @@ func dismiss() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if is_visible_in_tree() and event.is_action_pressed("ui_cancel"):
+	if not is_visible_in_tree(): return
+	if event.is_action_pressed("ui_cancel"):
 		dismiss()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_page_down") or event.is_action_pressed("ui_page_up"):
+		var scroll := _tabs.get_current_tab_control().get_child(0) as ScrollContainer
+		scroll.scroll_vertical += 220 if event.is_action_pressed("ui_page_down") else -220
 		get_viewport().set_input_as_handled()
 
 
@@ -91,9 +107,13 @@ func _page(title: String) -> VBoxContainer:
 	for edge in ["left", "right", "top", "bottom"]:
 		margin.add_theme_constant_override("margin_" + edge, 14)
 	_tabs.add_child(margin)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	margin.add_child(scroll)
 	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 12)
-	margin.add_child(box)
+	scroll.add_child(box)
 	return box
 
 

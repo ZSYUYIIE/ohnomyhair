@@ -1,0 +1,495 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://scenes/systems/level.gd" id="1_vmerw"]
+[ext_resource type="TileSet" path="res://assets/art/l2/perm_tileset.tres" id="2_x1re1"]
+[ext_resource type="Script" path="res://scenes/systems/room.gd" id="3_sibhc"]
+[ext_resource type="Texture2D" path="res://assets/art/l1/bg_l1_01_mirror.png" id="4_vdcoq"]
+[ext_resource type="Script" path="res://scenes/enemies/scissor_turret.gd" id="5_fy4m5"]
+[ext_resource type="Script" path="res://scenes/props/hit_switch.gd" id="6_axo1c"]
+[ext_resource type="Script" path="res://scenes/props/door.gd" id="7_mf6hd"]
+[ext_resource type="PackedScene" path="res://scenes/props/room_exit.tscn" id="8_5q4vb"]
+[ext_resource type="Script" path="res://scenes/props/room_exit.gd" id="9_eqf4o"]
+[ext_resource type="Script" path="res://scenes/ui/hair_hint.gd" id="10_47boq"]
+[ext_resource type="Texture2D" path="res://assets/art/l3/bg_l3_01_blow_dry.png" id="11_8m3pt"]
+[ext_resource type="Script" path="res://scenes/props/hair_dryer.gd" id="12_vwuh2"]
+[ext_resource type="Script" path="res://scenes/props/shower_head.gd" id="13_ec0pt"]
+[ext_resource type="PackedScene" path="res://scenes/props/breakable_wall.tscn" id="14_uu5oa"]
+[ext_resource type="Script" path="res://scenes/props/breakable_wall.gd" id="15_i7p7m"]
+[ext_resource type="Texture2D" path="res://assets/art/l2/bg_l2_02_corridor.png" id="16_afct4"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="17_lqu3g"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="18_1a7k5"]
+
+[node name="Level04" type="Node2D" unique_id=1896396334]
+script = ExtResource("1_vmerw")
+next_level = "res://scenes/levels/level_05.tscn"
+level_title = "LEVEL 4 - Perm Day"
+
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=1115626831]
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAMAAAABAAAAAAADAAIAAAACAAAAAAADAAIAAAADAAAAAAADAAIAAAAEAAAAAAADAAIAAAAFAAAAAAADAAIAAAAGAAAAAAADAAIAAAAHAAAAAAADAAIAAAAIAAAAAAADAAIAAAAJAAAAAAADAAIAAAAKAAAAAAADAAIAAAALAAAAAAADAAIAAAAMAAAAAAADAAIAAAANAAAAAAADAAIAAAAOAAAAAAADAAIAAAAPAAAAAAADAAIAAAAQAAAAAAADAAIAAAARAAAAAAADAAIAAAASAAAAAAADAAIAAAATAAAAAAADAAIAAAAUAAAAAAADAAIAAAAVAAAAAAADAAIAAAAWAAAAAAADAAIAAAAXAAAAAAADAAIAAAAYAAAAAAADAAIAAAAZAAAAAAADAAIAAAAaAAAAAAADAAIAAAAbAAAAAAADAAIAAAAcAAAAAAADAAIAAAAdAAAAAAADAAIAAAAeAAAAAAABAAQAAAAfAAAAAAADAAIAAAAgAAAAAAADAAIAAAAhAAAAAAADAAIAAAAiAAAAAAADAAIAAAAjAAAAAAADAAIAAAAkAAAAAAADAAIAAAAlAAAAAAADAAIAAAAmAAAAAAADAAIAAAAnAAAAAAAAAAQAAAAAAAEAAAABAAMAAAAeAAEAAAABAAEAAAAnAAEAAAADAAEAAAAAAAIAAAABAAMAAAAeAAIAAAABAAEAAAAnAAIAAAADAAEAAAAAAAMAAAABAAMAAAAeAAMAAAABAAEAAAAnAAMAAAADAAEAAAAAAAQAAAABAAMAAAAeAAQAAAABAAEAAAAnAAQAAAADAAEAAAAAAAUAAAABAAMAAAAeAAUAAAABAAEAAAAnAAUAAAADAAEAAAAAAAYAAAABAAMAAAASAAYAAAAAAAEAAAAeAAYAAAABAAEAAAAnAAYAAAADAAEAAAAAAAcAAAABAAMAAAASAAcAAAABAAAAAAAeAAcAAAABAAEAAAAnAAcAAAADAAEAAAAAAAgAAAABAAMAAAANAAgAAAADAAQAAAAOAAgAAAADAAQAAAAPAAgAAAADAAQAAAAQAAgAAAADAAQAAAARAAgAAAADAAQAAAASAAgAAAADAAQAAAATAAgAAAADAAQAAAAUAAgAAAADAAQAAAAVAAgAAAADAAQAAAAWAAgAAAADAAQAAAAXAAgAAAADAAQAAAAYAAgAAAADAAQAAAAZAAgAAAADAAQAAAAaAAgAAAADAAQAAAAbAAgAAAADAAQAAAAcAAgAAAADAAQAAAAdAAgAAAADAAQAAAAeAAgAAAABAAEAAAAnAAgAAAADAAEAAAAAAAkAAAABAAMAAAAeAAkAAAABAAEAAAAnAAkAAAADAAEAAAAAAAoAAAABAAMAAAAeAAoAAAABAAEAAAAnAAoAAAADAAEAAAAAAAsAAAABAAMAAAAeAAsAAAABAAEAAAAnAAsAAAADAAEAAAAAAAwAAAABAAMAAAAeAAwAAAABAAEAAAAnAAwAAAADAAEAAAAAAA0AAAABAAMAAAAeAA0AAAABAAEAAAAnAA0AAAADAAEAAAAAAA4AAAABAAMAAAAeAA4AAAABAAAAAAAnAA4AAAADAAEAAAAAAA8AAAABAAMAAAAnAA8AAAADAAEAAAAAABAAAAABAAMAAAAnABAAAAADAAEAAAAAABEAAAABAAMAAAAnABEAAAADAAEAAAAAABIAAAABAAMAAAAnABIAAAADAAEAAAAAABMAAAACAAQAAAABABMAAAACAAMAAAACABMAAAACAAMAAAADABMAAAACAAMAAAAEABMAAAACAAMAAAAFABMAAAACAAMAAAAGABMAAAACAAMAAAAHABMAAAACAAMAAAAIABMAAAACAAMAAAAJABMAAAACAAMAAAAKABMAAAACAAMAAAALABMAAAACAAMAAAAMABMAAAACAAMAAAANABMAAAACAAMAAAAOABMAAAACAAMAAAAPABMAAAACAAMAAAAQABMAAAACAAMAAAARABMAAAACAAMAAAASABMAAAACAAMAAAATABMAAAACAAMAAAAUABMAAAACAAMAAAAVABMAAAACAAMAAAAWABMAAAACAAMAAAAXABMAAAACAAMAAAAYABMAAAACAAMAAAAZABMAAAACAAMAAAAaABMAAAACAAMAAAAbABMAAAACAAMAAAAcABMAAAACAAMAAAAdABMAAAACAAMAAAAeABMAAAACAAMAAAAfABMAAAACAAMAAAAgABMAAAACAAMAAAAhABMAAAACAAMAAAAiABMAAAACAAMAAAAjABMAAAACAAMAAAAkABMAAAACAAMAAAAlABMAAAACAAMAAAAmABMAAAACAAMAAAAnABMAAAADAAMAAAAAABQAAAADAAMAAAABABQAAAACAAQAAAACABQAAAABAAQAAAADABQAAAAAAAQAAAAEABQAAAADAAMAAAAFABQAAAACAAQAAAAGABQAAAABAAQAAAAHABQAAAAAAAQAAAAIABQAAAADAAMAAAAJABQAAAACAAQAAAAKABQAAAABAAQAAAALABQAAAAAAAQAAAAMABQAAAADAAMAAAANABQAAAACAAQAAAAOABQAAAABAAQAAAAPABQAAAAAAAQAAAAQABQAAAADAAMAAAARABQAAAACAAQAAAASABQAAAABAAQAAAATABQAAAAAAAQAAAAUABQAAAADAAMAAAAVABQAAAACAAQAAAAWABQAAAABAAQAAAAXABQAAAAAAAQAAAAYABQAAAADAAMAAAAZABQAAAACAAQAAAAaABQAAAABAAQAAAAbABQAAAAAAAQAAAAcABQAAAADAAMAAAAdABQAAAACAAQAAAAeABQAAAABAAQAAAAfABQAAAAAAAQAAAAgABQAAAADAAMAAAAhABQAAAACAAQAAAAiABQAAAABAAQAAAAjABQAAAAAAAQAAAAkABQAAAADAAMAAAAlABQAAAACAAQAAAAmABQAAAABAAQAAAAnABQAAAAAAAQAAAAAABUAAAAAAAQAAAABABUAAAADAAMAAAACABUAAAACAAQAAAADABUAAAABAAQAAAAEABUAAAAAAAQAAAAFABUAAAADAAMAAAAGABUAAAACAAQAAAAHABUAAAABAAQAAAAIABUAAAAAAAQAAAAJABUAAAADAAMAAAAKABUAAAACAAQAAAALABUAAAABAAQAAAAMABUAAAAAAAQAAAANABUAAAADAAMAAAAOABUAAAACAAQAAAAPABUAAAABAAQAAAAQABUAAAAAAAQAAAARABUAAAADAAMAAAASABUAAAACAAQAAAATABUAAAABAAQAAAAUABUAAAAAAAQAAAAVABUAAAADAAMAAAAWABUAAAACAAQAAAAXABUAAAABAAQAAAAYABUAAAAAAAQAAAAZABUAAAADAAMAAAAaABUAAAACAAQAAAAbABUAAAABAAQAAAAcABUAAAAAAAQAAAAdABUAAAADAAMAAAAeABUAAAACAAQAAAAfABUAAAABAAQAAAAgABUAAAAAAAQAAAAhABUAAAADAAMAAAAiABUAAAACAAQAAAAjABUAAAABAAQAAAAkABUAAAAAAAQAAAAlABUAAAADAAMAAAAmABUAAAACAAQAAAAnABUAAAABAAQAAAAAABYAAAABAAQAAAABABYAAAAAAAQAAAACABYAAAADAAMAAAADABYAAAACAAQAAAAEABYAAAABAAQAAAAFABYAAAAAAAQAAAAGABYAAAADAAMAAAAHABYAAAACAAQAAAAIABYAAAABAAQAAAAJABYAAAAAAAQAAAAKABYAAAADAAMAAAALABYAAAACAAQAAAAMABYAAAABAAQAAAANABYAAAAAAAQAAAAOABYAAAADAAMAAAAPABYAAAACAAQAAAAQABYAAAABAAQAAAARABYAAAAAAAQAAAASABYAAAADAAMAAAATABYAAAACAAQAAAAUABYAAAABAAQAAAAVABYAAAAAAAQAAAAWABYAAAADAAMAAAAXABYAAAACAAQAAAAYABYAAAABAAQAAAAZABYAAAAAAAQAAAAaABYAAAADAAMAAAAbABYAAAACAAQAAAAcABYAAAABAAQAAAAdABYAAAAAAAQAAAAeABYAAAADAAMAAAAfABYAAAACAAQAAAAgABYAAAABAAQAAAAhABYAAAAAAAQAAAAiABYAAAADAAMAAAAjABYAAAACAAQAAAAkABYAAAABAAQAAAAlABYAAAAAAAQAAAAmABYAAAADAAMAAAAnABYAAAACAAQAAAAoAAAAAAADAAMAAAApAAAAAAADAAIAAAAqAAAAAAADAAIAAAArAAAAAAADAAIAAAAsAAAAAAADAAIAAAAtAAAAAAADAAIAAAAuAAAAAAADAAIAAAAvAAAAAAADAAIAAAAwAAAAAAADAAIAAAAxAAAAAAADAAIAAAAyAAAAAAADAAIAAAAzAAAAAAADAAIAAAA0AAAAAAADAAIAAAA1AAAAAAADAAIAAAA2AAAAAAADAAIAAAA3AAAAAAADAAIAAAA4AAAAAAADAAIAAAA5AAAAAAADAAIAAAA6AAAAAAADAAIAAAA7AAAAAAADAAIAAAA8AAAAAAADAAIAAAA9AAAAAAADAAIAAAA+AAAAAAADAAIAAAA/AAAAAAADAAIAAABAAAAAAAADAAIAAABBAAAAAAADAAIAAABCAAAAAAADAAIAAABDAAAAAAADAAIAAABEAAAAAAADAAIAAABFAAAAAAADAAIAAABGAAAAAAADAAIAAABHAAAAAAADAAIAAABIAAAAAAADAAIAAABJAAAAAAADAAIAAABKAAAAAAADAAIAAABLAAAAAAADAAIAAABMAAAAAAADAAIAAABNAAAAAAADAAIAAABOAAAAAAADAAIAAABPAAAAAAAAAAQAAAAoAAEAAAABAAMAAABPAAEAAAADAAEAAAAoAAIAAAABAAMAAABPAAIAAAADAAEAAAAoAAMAAAABAAMAAABPAAMAAAADAAEAAAAoAAQAAAABAAMAAABPAAQAAAADAAEAAAAoAAUAAAABAAMAAABPAAUAAAADAAEAAAAoAAYAAAABAAMAAABPAAYAAAADAAEAAAAoAAcAAAABAAMAAABPAAcAAAADAAEAAAAoAAgAAAABAAMAAABPAAgAAAADAAEAAAAoAAkAAAABAAMAAABPAAkAAAADAAEAAAAoAAoAAAABAAMAAABPAAoAAAADAAEAAAAoAAsAAAABAAMAAABPAAsAAAADAAEAAAAoAAwAAAABAAMAAABPAAwAAAADAAEAAAAoAA0AAAABAAMAAABPAA0AAAADAAEAAAAoAA4AAAABAAMAAABPAA4AAAADAAEAAAAoAA8AAAABAAMAAABPAA8AAAADAAEAAAAoABAAAAABAAMAAABPABAAAAADAAEAAAAoABEAAAABAAMAAABPABEAAAADAAEAAAAoABIAAAABAAMAAABPABIAAAADAAEAAAAoABMAAAACAAQAAAApABMAAAACAAMAAAAqABMAAAACAAMAAAArABMAAAACAAMAAAAsABMAAAACAAMAAAAtABMAAAACAAMAAAAuABMAAAACAAMAAAAvABMAAAACAAMAAAAwABMAAAACAAMAAAAxABMAAAACAAMAAAAyABMAAAACAAMAAAAzABMAAAACAAMAAAA0ABMAAAACAAMAAAA1ABMAAAACAAMAAAA2ABMAAAACAAMAAAA3ABMAAAACAAMAAAA4ABMAAAACAAMAAAA5ABMAAAACAAMAAAA6ABMAAAACAAMAAAA7ABMAAAACAAMAAAA8ABMAAAACAAMAAAA9ABMAAAACAAMAAAA+ABMAAAACAAMAAAA/ABMAAAACAAMAAABAABMAAAACAAMAAABBABMAAAACAAMAAABCABMAAAACAAMAAABDABMAAAACAAMAAABEABMAAAACAAMAAABFABMAAAACAAMAAABGABMAAAACAAMAAABHABMAAAACAAMAAABIABMAAAACAAMAAABJABMAAAACAAMAAABKABMAAAACAAMAAABLABMAAAACAAMAAABMABMAAAACAAMAAABNABMAAAACAAMAAABOABMAAAACAAMAAABPABMAAAADAAMAAAAoABQAAAADAAMAAAApABQAAAACAAQAAAAqABQAAAABAAQAAAArABQAAAAAAAQAAAAsABQAAAADAAMAAAAtABQAAAACAAQAAAAuABQAAAABAAQAAAAvABQAAAAAAAQAAAAwABQAAAADAAMAAAAxABQAAAACAAQAAAAyABQAAAABAAQAAAAzABQAAAAAAAQAAAA0ABQAAAADAAMAAAA1ABQAAAACAAQAAAA2ABQAAAABAAQAAAA3ABQAAAAAAAQAAAA4ABQAAAADAAMAAAA5ABQAAAACAAQAAAA6ABQAAAABAAQAAAA7ABQAAAAAAAQAAAA8ABQAAAADAAMAAAA9ABQAAAACAAQAAAA+ABQAAAABAAQAAAA/ABQAAAAAAAQAAABAABQAAAADAAMAAABBABQAAAACAAQAAABCABQAAAABAAQAAABDABQAAAAAAAQAAABEABQAAAADAAMAAABFABQAAAACAAQAAABGABQAAAABAAQAAABHABQAAAAAAAQAAABIABQAAAADAAMAAABJABQAAAACAAQAAABKABQAAAABAAQAAABLABQAAAAAAAQAAABMABQAAAADAAMAAABNABQAAAACAAQAAABOABQAAAABAAQAAABPABQAAAAAAAQAAAAoABUAAAAAAAQAAAApABUAAAADAAMAAAAqABUAAAACAAQAAAArABUAAAABAAQAAAAsABUAAAAAAAQAAAAtABUAAAADAAMAAAAuABUAAAACAAQAAAAvABUAAAABAAQAAAAwABUAAAAAAAQAAAAxABUAAAADAAMAAAAyABUAAAACAAQAAAAzABUAAAABAAQAAAA0ABUAAAAAAAQAAAA1ABUAAAADAAMAAAA2ABUAAAACAAQAAAA3ABUAAAABAAQAAAA4ABUAAAAAAAQAAAA5ABUAAAADAAMAAAA6ABUAAAACAAQAAAA7ABUAAAABAAQAAAA8ABUAAAAAAAQAAAA9ABUAAAADAAMAAAA+ABUAAAACAAQAAAA/ABUAAAABAAQAAABAABUAAAAAAAQAAABBABUAAAADAAMAAABCABUAAAACAAQAAABDABUAAAABAAQAAABEABUAAAAAAAQAAABFABUAAAADAAMAAABGABUAAAACAAQAAABHABUAAAABAAQAAABIABUAAAAAAAQAAABJABUAAAADAAMAAABKABUAAAACAAQAAABLABUAAAABAAQAAABMABUAAAAAAAQAAABNABUAAAADAAMAAABOABUAAAACAAQAAABPABUAAAABAAQAAAAoABYAAAABAAQAAAApABYAAAAAAAQAAAAqABYAAAADAAMAAAArABYAAAACAAQAAAAsABYAAAABAAQAAAAtABYAAAAAAAQAAAAuABYAAAADAAMAAAAvABYAAAACAAQAAAAwABYAAAABAAQAAAAxABYAAAAAAAQAAAAyABYAAAADAAMAAAAzABYAAAACAAQAAAA0ABYAAAABAAQAAAA1ABYAAAAAAAQAAAA2ABYAAAADAAMAAAA3ABYAAAACAAQAAAA4ABYAAAABAAQAAAA5ABYAAAAAAAQAAAA6ABYAAAADAAMAAAA7ABYAAAACAAQAAAA8ABYAAAABAAQAAAA9ABYAAAAAAAQAAAA+ABYAAAADAAMAAAA/ABYAAAACAAQAAABAABYAAAABAAQAAABBABYAAAAAAAQAAABCABYAAAADAAMAAABDABYAAAACAAQAAABEABYAAAABAAQAAABFABYAAAAAAAQAAABGABYAAAADAAMAAABHABYAAAACAAQAAABIABYAAAABAAQAAABJABYAAAAAAAQAAABKABYAAAADAAMAAABLABYAAAACAAQAAABMABYAAAABAAQAAABNABYAAAAAAAQAAABOABYAAAADAAMAAABPABYAAAACAAQAAABQAAAAAAADAAMAAABRAAAAAAADAAIAAABSAAAAAAADAAIAAABTAAAAAAADAAIAAABUAAAAAAADAAIAAABVAAAAAAADAAIAAABWAAAAAAADAAIAAABXAAAAAAADAAIAAABYAAAAAAADAAIAAABZAAAAAAADAAIAAABaAAAAAAADAAIAAABbAAAAAAADAAIAAABcAAAAAAADAAIAAABdAAAAAAADAAIAAABeAAAAAAADAAIAAABfAAAAAAADAAIAAABgAAAAAAADAAIAAABhAAAAAAADAAIAAABiAAAAAAADAAIAAABjAAAAAAADAAIAAABkAAAAAAADAAIAAABlAAAAAAADAAIAAABmAAAAAAADAAIAAABnAAAAAAADAAIAAABoAAAAAAADAAIAAABpAAAAAAADAAIAAABqAAAAAAADAAIAAABrAAAAAAADAAIAAABsAAAAAAADAAIAAABtAAAAAAADAAIAAABuAAAAAAADAAIAAABvAAAAAAADAAIAAABwAAAAAAADAAIAAABxAAAAAAADAAIAAAByAAAAAAABAAQAAABzAAAAAAADAAIAAAB0AAAAAAADAAIAAAB1AAAAAAADAAIAAAB2AAAAAAADAAIAAAB3AAAAAAAAAAQAAABQAAEAAAABAAMAAAByAAEAAAABAAEAAAB3AAEAAAADAAEAAABQAAIAAAABAAMAAAByAAIAAAABAAEAAAB3AAIAAAADAAEAAABQAAMAAAABAAMAAAByAAMAAAABAAEAAAB3AAMAAAADAAEAAABQAAQAAAABAAMAAAByAAQAAAABAAEAAAB3AAQAAAADAAEAAABQAAUAAAABAAMAAAByAAUAAAABAAEAAAB3AAUAAAADAAEAAABQAAYAAAABAAMAAAByAAYAAAABAAEAAAB3AAYAAAADAAEAAABQAAcAAAABAAMAAAByAAcAAAABAAEAAAB3AAcAAAADAAEAAABQAAgAAAABAAMAAAByAAgAAAABAAEAAAB3AAgAAAADAAEAAABQAAkAAAABAAMAAAByAAkAAAABAAEAAAB3AAkAAAADAAEAAABQAAoAAAABAAMAAAByAAoAAAABAAEAAAB3AAoAAAADAAEAAABQAAsAAAABAAMAAAByAAsAAAABAAEAAAB3AAsAAAADAAEAAABQAAwAAAABAAMAAAByAAwAAAABAAEAAAB3AAwAAAADAAEAAABQAA0AAAABAAMAAAByAA0AAAABAAEAAAB3AA0AAAADAAEAAABQAA4AAAABAAMAAAByAA4AAAABAAAAAAB3AA4AAAADAAEAAABQAA8AAAABAAMAAAB3AA8AAAADAAEAAABQABAAAAABAAMAAAB3ABAAAAADAAEAAABQABEAAAABAAMAAAB3ABEAAAADAAEAAABQABIAAAABAAMAAAB3ABIAAAADAAEAAABQABMAAAACAAQAAABRABMAAAACAAMAAABSABMAAAACAAMAAABTABMAAAACAAMAAABUABMAAAACAAMAAABVABMAAAACAAMAAABWABMAAAACAAMAAABXABMAAAACAAMAAABYABMAAAACAAMAAABZABMAAAACAAMAAABaABMAAAACAAMAAABbABMAAAAAAAMAAABeABMAAAACAAEAAABfABMAAAACAAMAAABgABMAAAACAAMAAABhABMAAAACAAMAAABiABMAAAACAAMAAABjABMAAAACAAMAAABkABMAAAACAAMAAABlABMAAAACAAMAAABmABMAAAACAAMAAABnABMAAAACAAMAAABoABMAAAACAAMAAABpABMAAAACAAMAAABqABMAAAACAAMAAABrABMAAAACAAMAAABsABMAAAACAAMAAABtABMAAAACAAMAAABuABMAAAACAAMAAABvABMAAAACAAMAAABwABMAAAACAAMAAABxABMAAAACAAMAAAByABMAAAACAAMAAABzABMAAAACAAMAAAB0ABMAAAACAAMAAAB1ABMAAAACAAMAAAB2ABMAAAACAAMAAAB3ABMAAAADAAMAAABQABQAAAADAAMAAABRABQAAAACAAQAAABSABQAAAABAAQAAABTABQAAAAAAAQAAABUABQAAAADAAMAAABVABQAAAACAAQAAABWABQAAAABAAQAAABXABQAAAAAAAQAAABYABQAAAADAAMAAABZABQAAAACAAQAAABaABQAAAABAAQAAABbABQAAAABAAMAAABeABQAAAADAAEAAABfABQAAAAAAAQAAABgABQAAAADAAMAAABhABQAAAACAAQAAABiABQAAAABAAQAAABjABQAAAAAAAQAAABkABQAAAADAAMAAABlABQAAAACAAQAAABmABQAAAABAAQAAABnABQAAAAAAAQAAABoABQAAAADAAMAAABpABQAAAACAAQAAABqABQAAAABAAQAAABrABQAAAAAAAQAAABsABQAAAADAAMAAABtABQAAAACAAQAAABuABQAAAABAAQAAABvABQAAAAAAAQAAABwABQAAAADAAMAAABxABQAAAACAAQAAAByABQAAAABAAQAAABzABQAAAAAAAQAAAB0ABQAAAADAAMAAAB1ABQAAAACAAQAAAB2ABQAAAABAAQAAAB3ABQAAAAAAAQAAABQABUAAAAAAAQAAABRABUAAAADAAMAAABSABUAAAACAAQAAABTABUAAAABAAQAAABUABUAAAAAAAQAAABVABUAAAADAAMAAABWABUAAAACAAQAAABXABUAAAABAAQAAABYABUAAAAAAAQAAABZABUAAAADAAMAAABaABUAAAACAAQAAABbABUAAAABAAQAAABcABUAAAACAAMAAABdABUAAAACAAMAAABeABUAAAACAAQAAABfABUAAAABAAQAAABgABUAAAAAAAQAAABhABUAAAADAAMAAABiABUAAAACAAQAAABjABUAAAABAAQAAABkABUAAAAAAAQAAABlABUAAAADAAMAAABmABUAAAACAAQAAABnABUAAAABAAQAAABoABUAAAAAAAQAAABpABUAAAADAAMAAABqABUAAAACAAQAAABrABUAAAABAAQAAABsABUAAAAAAAQAAABtABUAAAADAAMAAABuABUAAAACAAQAAABvABUAAAABAAQAAABwABUAAAAAAAQAAABxABUAAAADAAMAAAByABUAAAACAAQAAABzABUAAAABAAQAAAB0ABUAAAAAAAQAAAB1ABUAAAADAAMAAAB2ABUAAAACAAQAAAB3ABUAAAABAAQAAABQABYAAAABAAQAAABRABYAAAAAAAQAAABSABYAAAADAAMAAABTABYAAAACAAQAAABUABYAAAABAAQAAABVABYAAAAAAAQAAABWABYAAAADAAMAAABXABYAAAACAAQAAABYABYAAAABAAQAAABZABYAAAAAAAQAAABaABYAAAADAAMAAABbABYAAAACAAQAAABcABYAAAABAAQAAABdABYAAAAAAAQAAABeABYAAAADAAMAAABfABYAAAACAAQAAABgABYAAAABAAQAAABhABYAAAAAAAQAAABiABYAAAADAAMAAABjABYAAAACAAQAAABkABYAAAABAAQAAABlABYAAAAAAAQAAABmABYAAAADAAMAAABnABYAAAACAAQAAABoABYAAAABAAQAAABpABYAAAAAAAQAAABqABYAAAADAAMAAABrABYAAAACAAQAAABsABYAAAABAAQAAABtABYAAAAAAAQAAABuABYAAAADAAMAAABvABYAAAACAAQAAABwABYAAAABAAQAAABxABYAAAAAAAQAAAByABYAAAADAAMAAABzABYAAAACAAQAAAB0ABYAAAABAAQAAAB1ABYAAAAAAAQAAAB2ABYAAAADAAMAAAB3ABYAAAACAAQAAAA=")
+tile_set = ExtResource("2_x1re1")
+
+[node name="Rooms" type="Node2D" parent="." unique_id=108017052]
+
+[node name="Room1" type="Node2D" parent="Rooms" unique_id=486474278]
+script = ExtResource("3_sibhc")
+title = "1 - The Perm Rollers"
+starting_hair = PackedInt32Array(2, 1)
+styles = PackedInt32Array(2, 1)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("spring", "hook", "hair_copter"),
+"name": "Roller shelf 11 up",
+"spec": {
+"rise": 11
+}
+}, {
+"any": PackedStringArray("parry", "catch_return"),
+"name": "Bell on the shelf"
+}])
+
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room1" unique_id=1982301907]
+z_index = -10
+mouse_filter = 2
+texture = ExtResource("4_vdcoq")
+
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room1" unique_id=367280879]
+position = Vector2(112, 586)
+
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room1" unique_id=686064695]
+position = Vector2(176, 586)
+
+[node name="Dispenser" type="StaticBody2D" parent="Rooms/Room1" unique_id=1347477804]
+position = Vector2(944, 240)
+script = ExtResource("5_fy4m5")
+
+[node name="Bell" type="Area2D" parent="Rooms/Room1" unique_id=582169143]
+position = Vector2(784, 240)
+script = ExtResource("6_axo1c")
+
+[node name="StaffDoor" type="StaticBody2D" parent="Rooms/Room1" unique_id=909286106]
+position = Vector2(960, 480)
+script = ExtResource("7_mf6hd")
+size = Vector2(32, 128)
+
+[node name="ParryStripes" type="Node2D" parent="Rooms/Room1" unique_id=1916575970]
+
+[node name="@ColorRect@2" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1273934652]
+offset_left = 608.0
+offset_top = 256.0
+offset_right = 618.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@3" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1328804651]
+offset_left = 628.0
+offset_top = 256.0
+offset_right = 638.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@4" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=406703985]
+offset_left = 648.0
+offset_top = 256.0
+offset_right = 658.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@5" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=635765132]
+offset_left = 668.0
+offset_top = 256.0
+offset_right = 678.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@6" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=924683579]
+offset_left = 688.0
+offset_top = 256.0
+offset_right = 698.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@7" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=1246465698]
+offset_left = 708.0
+offset_top = 256.0
+offset_right = 718.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@8" type="ColorRect" parent="Rooms/Room1/ParryStripes" unique_id=263590043]
+offset_left = 728.0
+offset_top = 256.0
+offset_right = 738.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="Exit" type="Area2D" parent="Rooms/Room1" unique_id=870992550 instance=ExtResource("8_5q4vb")]
+texture_filter = 2
+position = Vector2(1120, 512)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("9_eqf4o")
+
+[node name="Hint8" type="Label" parent="Rooms/Room1" unique_id=1194913]
+offset_left = 48.0
+offset_top = 300.0
+offset_right = 48.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "P1: HOLD G to wind your perm up like a spring.
+Let go, and whoever stands on your head goes sky-high."
+script = ExtResource("10_47boq")
+template = "{afro}: HOLD {afro.skill} to wind your perm up like a spring.
+Let go, and whoever stands on your head goes sky-high."
+
+[node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=345248910]
+offset_left = 470.0
+offset_top = 420.0
+offset_right = 470.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "A Pompadour launch won't reach.
+A wound-up Afro will."
+
+[node name="Hint10" type="Label" parent="Rooms/Room1" unique_id=388884389]
+offset_left = 470.0
+offset_top = 150.0
+offset_right = 470.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "P2: parry (L) a scissor into the bell"
+script = ExtResource("10_47boq")
+template = "{pomp}: parry ({pomp.attack}) a scissor into the bell"
+
+[node name="Room2" type="Node2D" parent="Rooms" unique_id=1481405410]
+position = Vector2(1280, 0)
+script = ExtResource("3_sibhc")
+title = "2 - Setting Lotion"
+starting_hair = PackedInt32Array(2, 1)
+styles = PackedInt32Array(2, 1)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("cannonball"),
+"name": "Perm-set gel that sets again"
+}, {
+"any": PackedStringArray("walk"),
+"name": "Shower over the approach"
+}])
+
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room2" unique_id=1278290978]
+z_index = -10
+mouse_filter = 2
+texture = ExtResource("11_8m3pt")
+
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room2" unique_id=2110998640]
+position = Vector2(112, 586)
+
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room2" unique_id=1839150964]
+position = Vector2(176, 586)
+
+[node name="Dryer" type="Area2D" parent="Rooms/Room2" unique_id=239859335]
+position = Vector2(32, 384)
+script = ExtResource("12_vwuh2")
+size = Vector2(64, 224)
+
+[node name="Rinse" type="Area2D" parent="Rooms/Room2" unique_id=283927464]
+position = Vector2(192, 32)
+script = ExtResource("13_ec0pt")
+size = Vector2(384, 576)
+off_time = 2.4
+on_time = 1.4
+
+[node name="PermGel" type="StaticBody2D" parent="Rooms/Room2" unique_id=703795880 groups=["breakable"] instance=ExtResource("14_uu5oa")]
+texture_filter = 2
+position = Vector2(576, 32)
+collision_mask = 0
+script = ExtResource("15_i7p7m")
+size = Vector2(64, 576)
+regrow_time = 2.5
+requires_cannonball = true
+
+[node name="Exit" type="Area2D" parent="Rooms/Room2" unique_id=1574457034 instance=ExtResource("8_5q4vb")]
+texture_filter = 2
+position = Vector2(1120, 512)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("9_eqf4o")
+
+[node name="Hint7" type="Label" parent="Rooms/Room2" unique_id=2080779541]
+offset_left = 700.0
+offset_top = 150.0
+offset_right = 700.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "Orange gel is perm-set:
+a plain dash just bounces off."
+
+[node name="Hint8" type="Label" parent="Rooms/Room2" unique_id=1839464399]
+offset_left = 220.0
+offset_top = 60.0
+offset_right = 220.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "P2: stand on P1's head and HOLD K
+while P1 lets go of G: CANNONBALL!"
+script = ExtResource("10_47boq")
+template = "{pomp}: stand on {afro}'s head and HOLD {pomp.skill}
+while {afro} lets go of {afro.skill}: CANNONBALL!"
+
+[node name="Hint9" type="Label" parent="Rooms/Room2" unique_id=1225211042]
+offset_left = 40.0
+offset_top = 260.0
+offset_right = 40.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "Wet perms won't spring.
+Dry off in the warm air."
+
+[node name="Hint10" type="Label" parent="Rooms/Room2" unique_id=843785077]
+offset_left = 700.0
+offset_top = 420.0
+offset_right = 700.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "Run through
+before it sets!"
+
+[node name="Room3" type="Node2D" parent="Rooms" unique_id=288670555]
+position = Vector2(2560, 0)
+script = ExtResource("3_sibhc")
+title = "3 - Double Return"
+starting_hair = PackedInt32Array(2, 1)
+styles = PackedInt32Array(2, 1)
+gates = Array[Dictionary]([{
+"any": PackedStringArray("parry", "shield"),
+"name": "Dispenser on the body line"
+}, {
+"any": PackedStringArray("parry"),
+"name": "Bell behind the dispenser line"
+}, {
+"any": PackedStringArray("catch_return"),
+"name": "Bell past the friends"
+}])
+
+[node name="Backdrop" type="TextureRect" parent="Rooms/Room3" unique_id=333280625]
+z_index = -10
+mouse_filter = 2
+texture = ExtResource("16_afct4")
+
+[node name="SpawnP1" type="Marker2D" parent="Rooms/Room3" unique_id=1376804869]
+position = Vector2(656, 586)
+
+[node name="SpawnP2" type="Marker2D" parent="Rooms/Room3" unique_id=1523221874]
+position = Vector2(720, 586)
+
+[node name="Dispenser" type="StaticBody2D" parent="Rooms/Room3" unique_id=667411690]
+position = Vector2(48, 592)
+script = ExtResource("5_fy4m5")
+direction = Vector2(1, 0)
+first_shot_delay = 2.5
+
+[node name="LeftBell" type="Area2D" parent="Rooms/Room3" unique_id=1600653854]
+position = Vector2(144, 592)
+script = ExtResource("6_axo1c")
+
+[node name="RightBell" type="Area2D" parent="Rooms/Room3" unique_id=1811815742]
+position = Vector2(1008, 592)
+script = ExtResource("6_axo1c")
+
+[node name="StaffDoor" type="StaticBody2D" parent="Rooms/Room3" unique_id=1220400466]
+position = Vector2(1088, 480)
+script = ExtResource("7_mf6hd")
+size = Vector2(32, 128)
+locks = 2
+
+[node name="ParryStripes" type="Node2D" parent="Rooms/Room3" unique_id=932895618]
+
+[node name="@ColorRect@9" type="ColorRect" parent="Rooms/Room3/ParryStripes" unique_id=1647405749]
+offset_left = 512.0
+offset_top = 608.0
+offset_right = 522.0
+offset_bottom = 614.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@10" type="ColorRect" parent="Rooms/Room3/ParryStripes" unique_id=1635682068]
+offset_left = 532.0
+offset_top = 608.0
+offset_right = 542.0
+offset_bottom = 614.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@11" type="ColorRect" parent="Rooms/Room3/ParryStripes" unique_id=1983311383]
+offset_left = 552.0
+offset_top = 608.0
+offset_right = 562.0
+offset_bottom = 614.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@12" type="ColorRect" parent="Rooms/Room3/ParryStripes" unique_id=1286706402]
+offset_left = 572.0
+offset_top = 608.0
+offset_right = 582.0
+offset_bottom = 614.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="@ColorRect@13" type="ColorRect" parent="Rooms/Room3/ParryStripes" unique_id=1307387468]
+offset_left = 592.0
+offset_top = 608.0
+offset_right = 602.0
+offset_bottom = 614.0
+mouse_filter = 2
+color = Color(0.94509804, 0.76862746, 0.05882353, 1)
+
+[node name="CatchMark" type="Node2D" parent="Rooms/Room3" unique_id=921719376]
+
+[node name="@ColorRect@14" type="ColorRect" parent="Rooms/Room3/CatchMark" unique_id=1028970996]
+offset_left = 384.0
+offset_top = 672.0
+offset_right = 394.0
+offset_bottom = 678.0
+mouse_filter = 2
+color = Color(0.93333334, 0.6039216, 0.25882354, 1)
+
+[node name="@ColorRect@15" type="ColorRect" parent="Rooms/Room3/CatchMark" unique_id=463769525]
+offset_left = 404.0
+offset_top = 672.0
+offset_right = 414.0
+offset_bottom = 678.0
+mouse_filter = 2
+color = Color(0.93333334, 0.6039216, 0.25882354, 1)
+
+[node name="@ColorRect@16" type="ColorRect" parent="Rooms/Room3/CatchMark" unique_id=550909394]
+offset_left = 424.0
+offset_top = 672.0
+offset_right = 434.0
+offset_bottom = 678.0
+mouse_filter = 2
+color = Color(0.93333334, 0.6039216, 0.25882354, 1)
+
+[node name="@ColorRect@17" type="ColorRect" parent="Rooms/Room3/CatchMark" unique_id=1866383286]
+offset_left = 444.0
+offset_top = 672.0
+offset_right = 454.0
+offset_bottom = 678.0
+mouse_filter = 2
+color = Color(0.93333334, 0.6039216, 0.25882354, 1)
+
+[node name="Exit" type="Area2D" parent="Rooms/Room3" unique_id=694633907 instance=ExtResource("8_5q4vb")]
+texture_filter = 2
+position = Vector2(1152, 512)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("9_eqf4o")
+
+[node name="Hint10" type="Label" parent="Rooms/Room3" unique_id=1207992532]
+offset_left = 560.0
+offset_top = 200.0
+offset_right = 560.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "Two bells. The door needs both."
+
+[node name="Hint11" type="Label" parent="Rooms/Room3" unique_id=1119058564]
+offset_left = 380.0
+offset_top = 420.0
+offset_right = 380.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "P2: parry (L) on the yellow stripes"
+script = ExtResource("10_47boq")
+template = "{pomp}: parry ({pomp.attack}) on the yellow stripes"
+
+[node name="Hint12" type="Label" parent="Rooms/Room3" unique_id=1347940365]
+offset_left = 40.0
+offset_top = 330.0
+offset_right = 40.0
+offset_bottom = 330.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
+theme_override_constants/outline_size = 6
+text = "P1: wait in the trench, HOLD F to catch a BLUE scissor,
+turn around, and let go: it flies back the other way!"
+script = ExtResource("10_47boq")
+template = "{afro}: wait in the trench, HOLD {afro.attack} to catch a BLUE scissor,
+turn around, and let go: it flies back the other way!"
+
+[node name="Players" type="Node2D" parent="." unique_id=591006311]
+
+[node name="P1" type="CharacterBody2D" parent="Players" unique_id=697502178 instance=ExtResource("17_lqu3g")]
+collision_layer = 2
+collision_mask = 193
+script = ExtResource("18_1a7k5")
+hair = 2
+
+[node name="P2" type="CharacterBody2D" parent="Players" unique_id=420142655 instance=ExtResource("17_lqu3g")]
+collision_layer = 2
+collision_mask = 193
+script = ExtResource("18_1a7k5")
+player_id = 2
+hair = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1784834833]
+anchor_mode = 0
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2096507572]
+
+[node name="Flash" type="ColorRect" parent="UI" unique_id=876547074]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Banner" type="Label" parent="UI" unique_id=1939989922]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 40.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 34
+theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+horizontal_alignment = 1
+
+[connection signal="activated" from="Rooms/Room1/Bell" to="Rooms/Room1/StaffDoor" method="open"]
+[connection signal="activated" from="Rooms/Room3/LeftBell" to="Rooms/Room3/StaffDoor" method="open"]
+[connection signal="activated" from="Rooms/Room3/RightBell" to="Rooms/Room3/StaffDoor" method="open"]

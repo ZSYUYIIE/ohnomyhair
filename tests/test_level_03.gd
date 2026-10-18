@@ -15,6 +15,7 @@ func _run() -> void:
 		await _room_2()
 	if failed == 0:
 		await _room_3()
+	begin_counter_checks()  # the rest are counter-checks that fall in the dye on purpose
 	await _soaked_hair_dries_by_itself()
 	await _pompadour_cant_cross_alone(1, 10, 13, 30)
 	await _pompadour_cant_cross_alone(2, 7, 16, 34)
@@ -65,9 +66,7 @@ func _room_2() -> void:
 	await wait_until(func(): return not shower.is_active() and shower._cycle_time() < 0.15, 400)
 	await walk_to(p1, o + 10.8 * TILE)
 	check(not p1.is_wet(), "R2: P1 steps onto the counter between sprays, dry")
-	hold(p1, "skill", true)
-	await _ticks(2)
-	check(p1.carrying == p2, "R2: P1 grabs P2 on the counter")
+	check(await grab(p1, p2), "R2: P1 grabs P2 on the counter")
 	check(await glide_jump(p1, o + 13 * TILE - 4, o + 30 * TILE, false), "R2: carry over the 17-wide dye between sprays")
 	hold(p1, "skill", false)
 	await _ticks(10)
@@ -79,6 +78,7 @@ func _room_2() -> void:
 	await wait_until(func(): return rinse.is_active(), 300)
 	await walk_to(p2, o + 35 * TILE - 20)
 	check(p2.is_wet(), "R2: the rinse shower soaked P2")
+	_face(p2, o + 40 * TILE)  # dash at the gel, not back toward the dye
 	await tap(p2, "skill")
 	await _ticks(30)
 	check(is_instance_valid(gel) and gel.is_solid(), "R2: soggy pompadour bounces off the gel")
@@ -89,6 +89,7 @@ func _room_2() -> void:
 	await wait_until(func(): return not rinse.is_active() and rinse._cycle_time() < 0.15, 400)
 	await walk_to(p2, o + 35 * TILE - 20)
 	check(not p2.is_wet(), "R2: crossing between sprays keeps P2 dry")
+	_face(p2, o + 40 * TILE)
 	await tap(p2, "skill")
 	await _ticks(30)
 	check(not is_instance_valid(room.get_node_or_null("GelWall")), "R2: dry pompadour smashes the gel")
@@ -108,9 +109,7 @@ func _room_3() -> void:
 	var pool_shower: ShowerHead = room.get_node("PoolShower")
 	await walk_to(p2, o + 14.4 * TILE)
 	await walk_to(p1, o + 13.6 * TILE)
-	hold(p1, "skill", true)
-	await _ticks(2)
-	check(p1.carrying == p2, "R3: P1 grabs P2 at the ledge's edge")
+	check(await grab(p1, p2), "R3: P1 grabs P2 at the ledge's edge")
 	await wait_until(func(): return not pool_shower.is_active() and pool_shower._cycle_time() < 0.15, 400)
 	var landed := await glide_jump(p1, o + 16 * TILE - 4, o + 34 * TILE, false)
 	# Gliding on into the exit door clears the room mid-air, which is a win too.

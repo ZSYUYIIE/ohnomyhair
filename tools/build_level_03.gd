@@ -15,7 +15,7 @@ extends LevelBuilder
 func _configure() -> void:
 	level_name = "Level03"
 	level_title = "LEVEL 3 - Wash & Blow-Dry"
-	next_level = "res://scenes/levels/level_04.tscn"
+	next_level = "res://scenes/levels/level_06.tscn"
 	scene_path = "res://scenes/levels/level_03.tscn"
 	tile_atlas = "res://assets/art/l3/tiles_l3.png"
 	tileset_path = "res://assets/art/l3/salon_tileset.tres"
@@ -41,11 +41,14 @@ func _room_1() -> RoomBuilder:
 	rb.dryer("BigDryer", 22, 5, 2, 18)
 	rb.solid(26, 8, 38, 18)       # exit ledge, 11 up
 	rb.exit(35, 5)
+	rb.gate("Lever shelf 10 up", ["glide"])
+	rb.gate("Gate lever", ["lever"])
+	rb.gate("Exit ledge 11 up, both friends", ["hair_copter"], {"rise": 11})
 	rb.hint("Warm air lifts a glider:
-P1 jump + HOLD G in the dryer", Vector2(40, 330))
+{tt}: jump + HOLD {tt.skill} in the dryer", Vector2(40, 330))
 	rb.hint("It lifts you both too!
-P1: grab P2, then glide into the dryer
-(P2 riding on P1's head goes up faster)", Vector2(520, 330))
+{tt}: grab {pomp}, then glide into the dryer
+({pomp} riding on {tt}'s head goes up faster)", Vector2(520, 330))
 	return rb
 
 
@@ -66,11 +69,14 @@ func _room_2() -> RoomBuilder:
 	rb.solid(30, 19, 38, 22)      # landing
 	rb.spawn(1, 1, 19)
 	rb.spawn(2, 3, 19)
-	rb.shower("TakeOffShower", 9, 1, 4, 9, 1.8, 1.6)
+	rb.shower("TakeOffShower", 9, 1, 4, 9, 2.6, 1.2)
 	rb.dryer("DryingDryer", 30, 15, 2, 18)
-	rb.shower("RinseCurtain", 32, 1, 3, 18, 1.8, 1.6, 0.9)
+	rb.shower("RinseCurtain", 32, 1, 3, 18, 2.6, 1.2, 0.9)
 	rb.gel_wall("GelWall", 35, 13, 2, 6)
 	rb.exit(37, 16)
+	rb.gate("17-wide dye pool from 9 up, both friends", ["carry"], {"gap": 17, "drop": 9})
+	rb.gate("Shower over the take-off counter", ["walk"])
+	rb.gate("Gel wall behind a shower", ["dash_gel"])
 	rb.hint("Wet tails can't glide - or carry!
 Go between sprays.
 Soaked? Step down, hair dries.", Vector2(450, 170))
@@ -92,14 +98,16 @@ func _room_3() -> RoomBuilder:
 	rb.spawn(1, 2, 19)
 	rb.spawn(2, 3, 19)
 	rb.dryer("LiftDryer", 5, 3, 2, 18)
-	rb.shower("ColumnShower", 4, 1, 4, 12, 3.0, 1.4)
+	rb.shower("ColumnShower", 4, 1, 4, 12, 3.6, 1.2)
 	rb.solid(9, 7, 15, 22)        # upper ledge, 12 up
 	rb.dye_pool("DyePool", 16, 20, 18, 2)
 	rb.solid(16, 22, 33, 22)
-	rb.shower("PoolShower", 23, 1, 3, 19, 2.6, 1.2, 1.0)
+	rb.shower("PoolShower", 23, 1, 3, 19, 3.4, 1.0, 1.0)
 	rb.solid(34, 19, 38, 22)      # landing
 	rb.exit(36, 16)
-	rb.hint("Carry P2 up the warm air.
+	rb.gate("Dryer column under a timed shower, both friends", ["hair_copter"])
+	rb.gate("18-wide dye pool from 12 up under a shower, both friends", ["carry"], {"gap": 18, "drop": 12})
+	rb.hint("Carry {pomp} up the warm air.
 Soaked? You drop back in -
 wait for the spray to stop", Vector2(296, 262))
 	rb.hint("Fly the moment

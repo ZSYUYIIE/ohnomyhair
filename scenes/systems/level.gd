@@ -35,6 +35,13 @@ var _banner_tween: Tween
 
 ## Handed from a level to its fresh copy across restart_room().
 static var _carry_over := {}
+const StyleMenu := preload("res://scenes/ui/styling_menu.gd")
+const StyleChair := preload("res://scenes/props/styling_chair.gd")
+var styling_menu: CanvasLayer
+var _active_chair: Area2D
+var _checkpoint := {}
+## level_time when the current room (re)started, for the play log's room times.
+var _room_t0 := 0.0
 
 
 func _ready() -> void:
@@ -46,6 +53,10 @@ func _ready() -> void:
 	menu = LevelMenu.new()
 	add_child(menu)
 	menu.chosen.connect(_on_menu_chosen)
+	styling_menu = StyleMenu.new()
+	add_child(styling_menu)
+	styling_menu.styles_chosen.connect(_save_styles)
+	styling_menu.closed.connect(func(): get_tree().paused = false)
 	# The banner sits below the top edge, clear of the ceiling bells.
 	banner.offset_top = 70.0
 	banner.offset_bottom = 190.0
@@ -55,10 +66,12 @@ func _ready() -> void:
 	for player in $Players.get_children():
 		players.append(player)
 		player.died.connect(_on_player_died)
-	if _carry_over.get("path", "") == scene_file_path:
+	var restarted: bool = _carry_over.get("path", "") == scene_file_path
+	if restarted:
 		start_room = _carry_over.room
 		level_time = _carry_over.time
 		deaths = _carry_over.deaths
+		_checkpoint = _carry_over.get("checkpoint", {})
 	else:
 		# `godot ... -- --room=3` starts in room 3 (1-based) without editing the scene.
 		for arg in OS.get_cmdline_user_args():
@@ -68,11 +81,10 @@ func _ready() -> void:
 	room_index = clampi(start_room, 0, rooms.size() - 1)
 	_activate_room(room_index)
 	camera.position = rooms[room_index].position
-	if rooms[room_index].starts_with_swapped_hair:
-		for player in players:
-			player.set_hair(Player.Hair.POMPADOUR if player.player_id == 1 else Player.Hair.TWIN_TAILS)
 	_place_players()
+	_install_stations()
 	show_banner(level_title + "\n" + rooms[room_index].title)
+	_log_room_start(restarted)
 
 
 func _process(delta: float) -> void:
@@ -96,6 +108,10 @@ func _on_player_died(player: Player) -> void:
 		return
 	_busy = true
 	deaths += 1
+	var at := player.global_position - rooms[room_index].global_position
+	Telemetry.log_event("death", self, {"player": player.player_id, "hair": player.ability.display_name,
+		"x": snappedf(at.x, 0.1), "y": snappedf(at.y, 0.1), "wet": player.is_wet(),
+		"cause": Telemetry.death_cause(player, rooms[room_index]), "room_time": snappedf(level_time - _room_t0, 0.01)})
 	flash_screen(0.8, Color("ff5a5a"))
 	await get_tree().create_timer(0.5).timeout
 	get_tree().paused = true
@@ -110,6 +126,7 @@ func _on_menu_chosen(action: String) -> void:
 		"restart":
 			restart_room()
 		"replay":
+			_checkpoint = {}
 			_load_fresh(0, 0.0, 0)
 		"next":
 			get_tree().change_scene_to_file(next_level)
@@ -126,7 +143,7 @@ func restart_room() -> void:
 func _load_fresh(room: int, time: float, death_count: int) -> void:
 	get_tree().paused = false
 	Engine.time_scale = 1.0
-	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count}
+	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count, "checkpoint": _checkpoint.duplicate(true)}
 	var fresh: Level = load(scene_file_path).instantiate()
 	# Grab the tree first: once this level is removed from it, get_tree() returns null.
 	var tree := get_tree()
@@ -150,13 +167,20 @@ func _activate_room(index: int) -> void:
 
 func _place_players() -> void:
 	for player in players:
-		player.respawn_at(rooms[room_index].spawn_point(player.player_id))
+		var at := rooms[room_index].spawn_point(player.player_id)
+		if _checkpoint.get("room", -1) == room_index:
+			player.set_hair(_checkpoint.hair[player.player_id - 1])
+			at = _checkpoint.positions[player.player_id - 1]
+		elif rooms[room_index].starting_hair.size() == 2:
+			player.set_hair(rooms[room_index].starting_hair[player.player_id - 1])
+		player.respawn_at(at)
 
 
 func _on_room_cleared(room: Room) -> void:
 	if _busy or room != rooms[room_index]:
 		return
 	_busy = true
+	Telemetry.log_event("room_clear", self, {"room_time": snappedf(level_time - _room_t0, 0.01)})
 	for player in players:
 		player.set_frozen(true)
 
@@ -165,6 +189,7 @@ func _on_room_cleared(room: Room) -> void:
 		return
 
 	room_index += 1
+	_checkpoint = {}
 	var pan := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	pan.tween_property(camera, "position", rooms[room_index].position, 0.7)
 	await pan.finished
@@ -173,7 +198,53 @@ func _on_room_cleared(room: Room) -> void:
 	for player in players:
 		player.set_frozen(false)
 	show_banner(rooms[room_index].title)
+	_log_room_start(false)
 	_busy = false
+
+
+func _log_room_start(restarted: bool) -> void:
+	_room_t0 = level_time
+	Telemetry.log_event("room_start", self, {"restart": restarted,
+		"pair": [Player.HAIR_INFO[players[0].hair].name, Player.HAIR_INFO[players[1].hair].name]})
+
+
+func _install_stations() -> void:
+	for room in rooms:
+		if room.styles.size() < 2:
+			continue
+		var station := StyleChair.new()
+		station.level = self
+		station.name = "StylingStation"
+		station.position = (room.get_node("SpawnP1").position + room.get_node("SpawnP2").position) / 2 + Vector2(0, 22)
+		room.add_child(station)
+
+
+func open_styling(chair: Area2D) -> void:
+	if _busy or get_tree().paused or chair.get_parent() != rooms[room_index]: return
+	for player in players:
+		if not player.alive or player.global_position.distance_to(chair.global_position) > 160:
+			show_banner("Bring both friends to the styling chair", 1.5)
+			return
+	_active_chair = chair
+	get_tree().paused = true
+	styling_menu.open(players, rooms[room_index].styles)
+
+
+func _save_styles(styles: Array[int]) -> void:
+	get_tree().paused = false
+	if not is_instance_valid(_active_chair) or styles.size() != players.size(): return
+	# Two friends never share a haircut, and only the room's own styles are on offer.
+	if styles[0] == styles[1] or styles.any(func(s): return s not in rooms[room_index].styles): return
+	var positions: Array[Vector2] = []
+	for i in players.size():
+		players[i].set_hair(styles[i])
+		players[i].heal(players[i].max_hp)
+		players[i].dry()
+		# A restart resets the room's obstacles too. Use its authored safe starts:
+		# fixed offsets from the chair can land inside a tower or on a hot iron.
+		positions.append(rooms[room_index].spawn_point(players[i].player_id))
+	_checkpoint = {"room": room_index, "hair": styles.duplicate(), "positions": positions}
+	show_banner("Fresh styles. Room checkpoint saved!", 1.8)
 
 
 ## Last room cleared: record the time, show it in the banner, then keep the flow going

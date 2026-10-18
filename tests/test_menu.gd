@@ -15,9 +15,11 @@ func _initialize() -> void:
 
 func _run() -> void:
 	Progress.save_path = "user://test_menu_progress.cfg"
+	_legacy_save()
 	Progress.reset()
 
 	var menu: MainMenu = await _open_menu()
+	check(menu._menu_buttons.size() == 2 and menu._menu_buttons.all(func(b): return b.text != "Style Lab"), "retired prototype is absent from the playable menu")
 	check(not menu._play_buttons[0].disabled, "level 1 is always unlocked")
 	check(menu._play_buttons[1].disabled and menu._play_buttons[2].disabled and menu._play_buttons[3].disabled, "chapters 2, 3 and 4 start locked")
 	check(root.get_visible_rect().encloses(menu._controls_button.get_global_rect()), "title screen actions fit inside the viewport")
@@ -25,6 +27,12 @@ func _run() -> void:
 	await _frames(5)
 	check(menu._controls.visible and menu._controls.is_ancestor_of(root.gui_get_focus_owner()), "help opens with keyboard focus inside the overlay")
 	check(menu._controls.size == menu.size, "help overlay fills the screen and centers its panel")
+	menu._controls._tabs.current_tab = 2
+	await _frames(5)
+	await _key(KEY_PAGEDOWN)
+	var guide_scroll: ScrollContainer = menu._controls._tabs.get_current_tab_control().get_child(0)
+	check(guide_scroll.scroll_vertical > 0, "story and checkpoint help scrolls with Page Down")
+	menu._controls._tabs.current_tab = 0
 	for i in 6:
 		await _key(KEY_TAB)
 		check(menu._controls.is_ancestor_of(root.gui_get_focus_owner()), "Tab stays inside help (%d)" % i)
@@ -141,6 +149,29 @@ func _run() -> void:
 	Progress.reset()
 	print("Results: %d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
+
+
+func _legacy_save() -> void:
+	var legacy := ConfigFile.new()
+	for i in 4:
+		legacy.set_value("level_%d" % (i + 1), "best_time", 60.0 + i)
+		legacy.set_value("level_%d" % (i + 1), "best_deaths", i)
+	legacy.save(Progress.save_path)
+	check(Progress.is_cleared(0) and Progress.best_time(2) == 62.0, "legacy save preserves the first three chapter records")
+	check(Progress.LEVELS.size() == 4 and Progress.LEVELS[3].id == "the_barber", "campaign follows the two friends through four chapters")
+	check(Progress.is_unlocked(3) and not Progress.is_unlocked(4), "original save unlocks the finale after the original three chapters")
+	check(Progress.best_time(3) == 63.0 and Progress.best_deaths(3) == 3, "old boss records remain attached to the finale")
+	var saved := ConfigFile.new()
+	saved.load(Progress.save_path)
+	check(saved.get_value("save", "version", 0) == Progress.SAVE_VERSION and not saved.has_section("level_4"), "migration persists its version and removes ambiguous positional records")
+	check(Progress.best_time(3) == 63.0, "reloading a migrated save preserves its records")
+	# Expansion saves already use IDs. Removed chapter records must not become
+	# a finale clear or a prerequisite for the restored four-chapter route.
+	saved.erase_section("the_barber")
+	saved.set_value("perm_day", "best_time", 12.0)
+	saved.set_value("extensions", "best_time", 13.0)
+	saved.save(Progress.save_path)
+	check(Progress.is_unlocked(3) and not Progress.is_cleared(3), "expansion chapter records neither gate nor clear the finale")
 
 
 ## Playtest 5: the results popup between levels broke the flow. Clearing a level now
