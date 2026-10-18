@@ -35,6 +35,10 @@ static var _carry_over := {}
 
 
 func _ready() -> void:
+	# Fit the entire 1280 x 720 room above a dedicated 72 px HUD footer.
+	# Keep a uniform scale and center it horizontally; physics stays in room units.
+	camera.zoom = Vector2(0.9, 0.9)
+	camera.offset = Vector2(-64.0 / 0.9, 0.0)
 	add_child(Hud.new())
 	menu = LevelMenu.new()
 	add_child(menu)
@@ -76,7 +80,8 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if menu.is_open():
 		return
-	if event.is_action_pressed("pause") and not _busy:
+	if (event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel")) and not _busy:
+		get_viewport().set_input_as_handled()
 		get_tree().paused = true
 		menu.show_pause(level_title, rooms[room_index].title)
 	elif event.is_action_pressed("restart") and not _busy:
@@ -160,10 +165,11 @@ func _on_room_cleared(room: Room) -> void:
 		if ending_text != "":
 			show_banner(ending_text, 0.0)
 		get_tree().paused = true
+		var next_index := Progress.index_of(next_level)
 		menu.show_results(level_title, {
 			"time": level_time, "deaths": deaths, "new_best": new_best,
 			"best_time": Progress.best_time(index) if index >= 0 else level_time,
-			"has_next": next_level != "" and ResourceLoader.exists(next_level),
+			"has_next": next_level != "" and ResourceLoader.exists(next_level) and Progress.is_unlocked(next_index),
 			"ending": ending_text,
 		})
 		return

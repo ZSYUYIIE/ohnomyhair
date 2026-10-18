@@ -1,9 +1,7 @@
 class_name Hud
 extends CanvasLayer
-## Bottom bar, Fireboy & Watergirl style: one card per friend (portrait in their current
-## hair colours, haircut name, hearts, keys) at the sides, and the stage card in the middle
-## (level, room n/N and its name, time, deaths). It sits over the floor tiles because the
-## ceilings hold gameplay (service bells, hints).
+## Dedicated footer below the complete room view. Side mattes mask neighbouring rooms
+## during camera pans. Each player card follows their current haircut and skill keys.
 
 const CARD_W := 330.0
 const CARD_H := 56.0
@@ -25,6 +23,13 @@ func _ready() -> void:
 	root.theme = UiTheme.get_theme()
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(root)
+	for rect in [Rect2(0, 0, 64, 648), Rect2(1216, 0, 64, 648), Rect2(0, 648, 1280, 72)]:
+		var matte := ColorRect.new()
+		matte.position = rect.position
+		matte.size = rect.size
+		matte.color = UiTheme.INK
+		matte.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		root.add_child(matte)
 	for id in [1, 2]:
 		root.add_child(_player_card(id))
 	root.add_child(_stage_card())
@@ -36,14 +41,18 @@ func _process(_delta: float) -> void:
 		if not _names.has(id):
 			continue
 		_names[id].text = "P%d  %s" % [id, p.ability.display_name]
-		_keys[id].text = ("G skill   F attack" if id == 1 else "K skill   L attack")
+		var skill := "G" if id == 1 else "K"
+		var attack := "F" if id == 1 else "L"
+		_keys[id].text = "%s %s  /  %s %s" % [skill, "glide/carry" if p.hair == Player.Hair.TWIN_TAILS else "dash/launch", attack, "whip" if p.hair == Player.Hair.TWIN_TAILS else "parry"]
+		if p.is_wet():
+			_keys[id].text = "SOAKED  /  Find warm air to dry off"
 		_hearts[id].set_values(maxi(p.hp, 0) if p.alive else 0, p.max_hp)
 		_portraits[id].set_colors(p.ability.body_color, p.ability.get("HAIR_COLOR"))
 	if level:
 		var room := level.rooms[level.room_index] if level.rooms.size() > 0 else null
 		var room_name: String = room.title.get_slice(" - ", 1) if room and " - " in room.title else (room.title if room else "")
-		_stage.text = "%s   |   Room %d/%d  %s" % [level.level_title, level.room_index + 1, level.rooms.size(), room_name]
-		_stats.text = "TIME %s      DEATHS %d      Esc pause   R restart" % [Progress.format_time(level.level_time), level.deaths]
+		_stage.text = "ROOM %d/%d  /  %s" % [level.room_index + 1, level.rooms.size(), room_name]
+		_stats.text = "%s   /   %d deaths   /   Esc help & pause" % [Progress.format_time(level.level_time), level.deaths]
 
 
 func _player_card(id: int) -> Control:
@@ -74,7 +83,8 @@ func _player_card(id: int) -> Control:
 	top.add_child(_names[id])
 	_hearts[id] = HeartBar.new()
 	top.add_child(_hearts[id])
-	_keys[id] = UiTheme.label("", 14, Color(UiTheme.INK, 0.7))
+	_keys[id] = UiTheme.label("", 16, UiTheme.MUTED)
+	_keys[id].clip_text = true
 	col.add_child(_keys[id])
 	return panel
 
@@ -92,11 +102,11 @@ func _stage_card() -> Control:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 0)
 	panel.add_child(col)
-	_stage = UiTheme.label("", 17)
+	_stage = UiTheme.label("", 20)
 	_stage.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_stage.clip_text = true
 	col.add_child(_stage)
-	_stats = UiTheme.label("", 14, Color(UiTheme.INK, 0.75))
+	_stats = UiTheme.label("", 17, UiTheme.MUTED)
 	_stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(_stats)
 	return panel
@@ -111,6 +121,8 @@ func _plate() -> PanelContainer:
 
 ## Little head-and-hair icon in the player's current colours.
 class Portrait extends Control:
+	const TWIN_FRAMES = preload("res://assets/art/characters/twin_tails/frames.tres")
+	const POMP_FRAMES = preload("res://assets/art/characters/pompadour/frames.tres")
 	var body := Color.WHITE
 	var hair := Color.WHITE
 
@@ -124,11 +136,8 @@ class Portrait extends Control:
 			queue_redraw()
 
 	func _draw() -> void:
-		draw_rect(Rect2(6, 12, 22, 28), body)
-		draw_rect(Rect2(6, 6, 22, 8), hair)
-		draw_rect(Rect2(2, 10, 5, 14), hair)
-		draw_rect(Rect2(27, 10, 5, 14), hair)
-		draw_rect(Rect2(19, 20, 3, 4), UiTheme.INK)
+		var frames: SpriteFrames = POMP_FRAMES if hair == UiTheme.BLUE else TWIN_FRAMES
+		draw_texture_rect(frames.get_frame_texture("idle", 0), Rect2(-27, -28, 88, 83), false)
 
 
 ## Row of hearts: filled = HP left.

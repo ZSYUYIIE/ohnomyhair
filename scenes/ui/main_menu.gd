@@ -1,12 +1,15 @@
 class_name MainMenu
 extends Control
-## Title screen: the two friends, a card per level (locked until the previous one is
-## cleared, with best time and fewest deaths), Controls and Quit. Keyboard: arrows + Enter.
+## Salon title screen with the two friends beside a chapter grid.
+
+const Guide := preload("res://scenes/ui/controls_guide.gd")
+const DESCRIPTIONS := ["Glide, carry & sling your friend", "Parry scissors & ring the bells", "Ride warm air. Watch the shampoo!", "Swap haircuts & face the barber"]
 
 var _cards: Array[PanelContainer] = []
-var _close_button: Button
 var _play_buttons: Array[Button] = []
+var _menu_buttons: Array[Button] = []
 var _controls: Control
+var _controls_button: Button
 
 
 func _ready() -> void:
@@ -15,123 +18,167 @@ func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	theme = UiTheme.get_theme()
 	_build_backdrop()
-
+	var margin := MarginContainer.new()
+	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
+	for edge in ["left", "right"]:
+		margin.add_theme_constant_override("margin_" + edge, 48)
+	for edge in ["top", "bottom"]:
+		margin.add_theme_constant_override("margin_" + edge, 28)
+	add_child(margin)
 	var col := VBoxContainer.new()
-	col.set_anchors_preset(Control.PRESET_FULL_RECT)
-	col.alignment = BoxContainer.ALIGNMENT_CENTER
-	col.add_theme_constant_override("separation", 18)
-	add_child(col)
-
-	var title := UiTheme.label("OH NO MY HAIR", 72, UiTheme.PINK)
-	title.add_theme_color_override("font_outline_color", UiTheme.WALNUT)
-	title.add_theme_constant_override("outline_size", 14)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	col.add_child(title)
-	var subtitle := UiTheme.label("Two friends. Two terrible haircuts. One barber shop to escape.", 22)
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	col.add_child(subtitle)
-
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 20)
-	col.add_child(row)
+	col.add_theme_constant_override("separation", 14)
+	margin.add_child(col)
+	col.add_child(UiTheme.label("A TWO-PLAYER SALON ESCAPE  /  SHARED KEYBOARD", 16, UiTheme.MUTED))
+	col.add_child(UiTheme.label("OH NO MY HAIR!", 64))
+	col.add_child(UiTheme.label("Two terrible haircuts. One great escape. Better together.", 22, UiTheme.MUTED))
+	var content := HBoxContainer.new()
+	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", 24)
+	col.add_child(content)
+	content.add_child(_friends_panel())
+	var levels := VBoxContainer.new()
+	levels.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	levels.add_theme_constant_override("separation", 10)
+	content.add_child(levels)
+	levels.add_child(UiTheme.label("CHOOSE YOUR CHAPTER", 17, UiTheme.MUTED))
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	grid.add_theme_constant_override("h_separation", 16)
+	grid.add_theme_constant_override("v_separation", 16)
+	levels.add_child(grid)
 	for i in Progress.LEVELS.size():
-		row.add_child(_level_card(i))
-
+		grid.add_child(_level_card(i))
 	var buttons := HBoxContainer.new()
-	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
-	buttons.add_theme_constant_override("separation", 16)
+	buttons.add_theme_constant_override("separation", 14)
 	col.add_child(buttons)
-	var controls := _button("Controls & combos", _toggle_controls)
-	buttons.add_child(controls)
-	buttons.add_child(_button("Quit", func(): get_tree().quit()))
-
-	_controls = _controls_panel()
+	_controls_button = _button("How to play & combos", _toggle_controls)
+	buttons.add_child(_controls_button)
+	_menu_buttons.append(_controls_button)
+	var quit_button := _button("Quit", func(): get_tree().quit())
+	buttons.add_child(quit_button)
+	_menu_buttons.append(quit_button)
+	var tip := UiTheme.label("Arrow keys / Tab to choose     Enter to play", 17, UiTheme.MUTED)
+	tip.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	buttons.add_child(tip)
+	_controls = Guide.new()
 	add_child(_controls)
+	_controls.closed.connect(_guide_closed)
 	_controls.hide()
+	_wire_focus()
 	_focus_latest()
 
 
-## The furthest unlocked level's Play button.
+func _wire_focus() -> void:
+	var enabled: Array[Button] = []
+	for button in _play_buttons:
+		if not button.disabled:
+			enabled.append(button)
+	enabled.append_array(_menu_buttons)
+	UiTheme.focus_loop(enabled)
+	for i in _play_buttons.size():
+		var b := _play_buttons[i]
+		if b.disabled:
+			continue
+		for entry in [["left", i - 1 if i % 2 == 1 else -1], ["right", i + 1 if i % 2 == 0 else -1], ["top", i - 2], ["bottom", i + 2]]:
+			var target: int = entry[1]
+			if target >= 0 and target < _play_buttons.size() and not _play_buttons[target].disabled:
+				b.set("focus_neighbor_" + entry[0], _play_buttons[target].get_path())
+
+
 func _focus_latest() -> void:
 	for i in range(_play_buttons.size() - 1, -1, -1):
 		if not _play_buttons[i].disabled:
-			_play_buttons[i].grab_focus.call_deferred()
+			UiTheme.focus_if_visible.call_deferred(_play_buttons[i])
 			return
 
 
 func play(index: int) -> void:
-	get_tree().change_scene_to_file(Progress.LEVELS[index].path)
+	if index >= 0 and index < Progress.LEVELS.size() and Progress.is_unlocked(index) and not _controls.visible:
+		get_tree().change_scene_to_file(Progress.LEVELS[index].path)
 
 
 func _level_card(i: int) -> PanelContainer:
 	var unlocked := Progress.is_unlocked(i)
 	var card := PanelContainer.new()
-	card.custom_minimum_size = Vector2(270, 190)
-	if not unlocked:
-		card.add_theme_stylebox_override("panel", UiTheme.card(Color("ece3d8"), Color("b9a998")))
+	card.custom_minimum_size = Vector2(350, 0)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	card.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM if unlocked else Color("eee6e1"), UiTheme.WALNUT if unlocked else Color("c5b9c5"), 2, 14, 16))
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 6)
+	box.add_theme_constant_override("separation", 5)
 	card.add_child(box)
-	box.add_child(UiTheme.label("LEVEL %d" % (i + 1), 16, Color(UiTheme.INK, 0.6)))
-	box.add_child(UiTheme.label(Progress.LEVELS[i].title, 28, UiTheme.INK if unlocked else Color("a3968a")))
-	var info := ""
-	if not unlocked:
-		info = "Clear Level %d to unlock" % i
-	elif Progress.is_cleared(i):
-		info = "Best  %s\nFewest deaths  %d" % [Progress.format_time(Progress.best_time(i)), Progress.best_deaths(i)]
-	else:
-		info = "Not cleared yet\n "
-	box.add_child(UiTheme.label(info, 16, Color(UiTheme.INK, 0.8)))
-	var play_button := _button("Play" if unlocked else "Locked", play.bind(i))
-	play_button.disabled = not unlocked
-	box.add_child(play_button)
+	box.add_child(UiTheme.label("CHAPTER 0%d  /  %s" % [i + 1, ("CLEARED" if Progress.is_cleared(i) else "READY") if unlocked else "LOCKED"], 14, UiTheme.MUTED))
+	box.add_child(UiTheme.label(Progress.LEVELS[i].title, 27, UiTheme.INK if unlocked else UiTheme.MUTED))
+	var info := "Finish chapter 1 to unlock" if i == 1 else "Finish chapters 1–%d to unlock" % i
+	if unlocked:
+		info = "Best %s  /  %d deaths" % [Progress.format_time(Progress.best_time(i)), Progress.best_deaths(i)] if Progress.is_cleared(i) else DESCRIPTIONS[i]
+	var detail := UiTheme.label(info, 16, UiTheme.MUTED)
+	detail.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	box.add_child(detail)
+	var button := _button(("Play again" if Progress.is_cleared(i) else "Play together") if unlocked else "Locked", play.bind(i))
+	button.disabled = not unlocked
+	if unlocked:
+		button.add_theme_stylebox_override("normal", UiTheme.card(Color("f9e39b"), UiTheme.WALNUT, 2, 9, 10))
+	box.add_child(button)
 	_cards.append(card)
-	_play_buttons.append(play_button)
+	_play_buttons.append(button)
 	return card
 
 
-## Full-screen dimmed overlay with the controls card centered on it.
-func _controls_panel() -> Control:
-	var overlay := ColorRect.new()
-	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
-	overlay.color = Color(0.1, 0.06, 0.08, 0.55)
-	var center := CenterContainer.new()
-	center.set_anchors_preset(Control.PRESET_FULL_RECT)
-	overlay.add_child(center)
+func _friends_panel() -> PanelContainer:
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(860, 0)
-	center.add_child(panel)
+	panel.custom_minimum_size.x = 390
+	panel.add_theme_stylebox_override("panel", UiTheme.card(Color("f4eaf1"), Color("c5b4c8"), 2, 16, 20))
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 10)
+	box.add_theme_constant_override("separation", 8)
 	panel.add_child(box)
-	box.add_child(UiTheme.label("Controls", 32, UiTheme.PINK.darkened(0.2)))
-	box.add_child(UiTheme.label(
-		"P1 (starts as Twin-Tails):   A / D move   W jump   G skill   F attack\n" +
-		"P2 (starts as Pompadour):   Arrows move   Up jump   K skill   L attack\n" +
-		"Esc pause   R restart room   Down: let go when carried / drop through a shelf", 18))
-	box.add_child(UiTheme.label("Skills follow the haircut, not the player.", 18, UiTheme.PINK.darkened(0.2)))
-	box.add_child(UiTheme.label(
-		"Twin-Tails   skill: hold to glide, grab your friend, pull a lever    attack: hair whip (stun)\n" +
-		"Pompadour   skill: dash through gel, launch a friend off your head    attack: parry scissors", 18))
-	box.add_child(UiTheme.label("Hair combos", 24, UiTheme.INK))
-	box.add_child(UiTheme.label(
-		"Carry - Twin-Tails holds skill next to Pompadour and glides with her.\n" +
-		"Launch - Twin-Tails stands on Pompadour's head; Pompadour presses skill.\n" +
-		"Sling Dash - while hanging, Pompadour presses skill: flung through the air and through gel.\n" +
-		"Hair Catch - Pompadour parries (scissor turns blue); Twin-Tails holds skill to catch it, lets go to toss it up.\n" +
-		"Hair-copter - Pompadour stands on Twin-Tails' head; she glides in a hair dryer and lifts them both.", 18))
-	_close_button = _button("Close", _toggle_controls)
-	box.add_child(_close_button)
-	return overlay
+	box.add_child(UiTheme.label("MEET YOUR OTHER HALF", 17, UiTheme.MUTED))
+	var portraits := HBoxContainer.new()
+	portraits.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	box.add_child(portraits)
+	for id in [1, 2]:
+		var player_col := VBoxContainer.new()
+		player_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		portraits.add_child(player_col)
+		var art := TextureRect.new()
+		var frames: SpriteFrames = load("res://assets/art/characters/%s/frames.tres" % ("twin_tails" if id == 1 else "pompadour"))
+		var portrait := AtlasTexture.new()
+		portrait.atlas = frames.get_frame_texture("idle", 0)
+		portrait.region = Rect2(24, 32, 88, 78)
+		art.texture = portrait
+		art.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		art.custom_minimum_size = Vector2(160, 130)
+		art.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		player_col.add_child(art)
+		var name_label := UiTheme.label("P1  Twin-Tails" if id == 1 else "P2  Pompadour", 19)
+		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		player_col.add_child(name_label)
+		var keys := UiTheme.label("A D move / W jump\nG skill / F whip" if id == 1 else "← → move / ↑ jump\nK skill / L parry", 16, UiTheme.MUTED)
+		keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		player_col.add_child(keys)
+	var note := UiTheme.label("Bring a friend. You will need each other.\nHair is health. Both players must reach the exit.", 17)
+	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(note)
+	return panel
 
 
 func _toggle_controls() -> void:
-	_controls.visible = not _controls.visible
 	if _controls.visible:
-		_close_button.grab_focus()
-	else:
-		_focus_latest()
+		_controls.dismiss()
+		return
+	for b in _play_buttons + _menu_buttons:
+		b.focus_mode = Control.FOCUS_NONE
+	_controls.open()
+
+
+func _guide_closed() -> void:
+	for b in _play_buttons + _menu_buttons:
+		b.focus_mode = Control.FOCUS_ALL
+	UiTheme.focus_if_visible.call_deferred(_controls_button)
 
 
 func _button(text: String, on_press: Callable) -> Button:
@@ -142,36 +189,14 @@ func _button(text: String, on_press: Callable) -> Button:
 	return b
 
 
-## Salon wall with mirrors and barber poles, a checkered floor, and the two friends.
 func _build_backdrop() -> void:
 	var wall := ColorRect.new()
 	wall.set_anchors_preset(Control.PRESET_FULL_RECT)
 	wall.color = Color("f6e7ec")
+	wall.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(wall)
 	var decor := SalonDecor.new()
 	decor.wall_color = wall.color
+	decor.modulate.a = 0.3
 	decor.layout_seed = 7
 	add_child(decor)
-	var floor_strip := Floor.new()
-	floor_strip.anchor_top = 1.0
-	floor_strip.anchor_bottom = 1.0
-	floor_strip.anchor_right = 1.0
-	floor_strip.offset_top = -90.0
-	add_child(floor_strip)
-	for side in [[Vector2(90, 470), TwinTails.new()], [Vector2(1100, 470), Pompadour.new()]]:
-		var hair: HairAbility = side[1]
-		var portrait := Hud.Portrait.new()
-		portrait.set_colors(hair.body_color, hair.HAIR_COLOR)
-		portrait.position = side[0]
-		portrait.scale = Vector2(3, 3)
-		add_child(portrait)
-		hair.free()
-
-
-class Floor extends Control:
-	func _draw() -> void:
-		draw_rect(Rect2(Vector2.ZERO, size), Color("7a4e33"))
-		for cx in int(size.x / 12.0) + 1:
-			for cy in 2:
-				var c := Color("26262b") if (cx + cy) % 2 == 0 else Color("efeae2")
-				draw_rect(Rect2(cx * 12, cy * 12, 12, 12), c)

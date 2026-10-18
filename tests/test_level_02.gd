@@ -118,7 +118,7 @@ func _restart_and_pause() -> void:
 
 	await press_action("pause")
 	check(paused and level.menu.is_open(), "Esc pauses and shows the pause menu")
-	check(level.menu.button_labels() == ["Resume", "Restart room", "Main menu"], "pause menu has Resume / Restart room / Main menu")
+	check(level.menu.button_labels() == ["Resume", "How to play & combos", "Restart room", "Main menu"], "pause menu has Resume / help / Restart room / Main menu")
 	var t: float = level.level_time
 	await _ticks(30)
 	check(is_equal_approx(level.level_time, t), "the level timer stops while paused")
