@@ -1,7 +1,8 @@
 class_name LevelMenu
 extends CanvasLayer
-## In-level overlay: the death popup, the pause menu and the level-clear results.
-## Runs while the tree is paused. Arrow keys / Enter (or the mouse) pick a button.
+## In-level overlay: the death popup, the pause menu and the final level's results.
+## Runs while the tree is paused. Arrow keys / Enter (or the mouse) pick a button;
+## R restarts the room straight from the death popup or the pause menu.
 
 signal chosen(action: String)  # "restart", "menu", "resume", "next", "replay"
 
@@ -9,6 +10,7 @@ var _dim: ColorRect
 var _panel: PanelContainer
 var _box: VBoxContainer
 var _can_resume := false
+var _can_restart := false
 var _guide: Control
 const Guide := preload("res://scenes/ui/controls_guide.gd")
 
@@ -53,12 +55,14 @@ func is_open() -> bool:
 ## Death popup: someone got snipped. Restart the room or leave.
 func show_death(who: String) -> void:
 	_can_resume = false
-	_open("Bad haircut!", "%s got snipped. The room resets when you restart." % who,
+	_can_restart = true
+	_open("Bad haircut!", "%s got snipped. Press R to try the room again." % who,
 			[["Restart room", "restart"], ["Main menu", "menu"]])
 
 
 func show_pause(level_title: String, room_title: String) -> void:
 	_can_resume = true
+	_can_restart = true
 	_open("Paused", "%s\n%s" % [level_title, room_title],
 			[["Resume", "resume"], ["How to play & combos", "help"], ["Restart room", "restart"], ["Main menu", "menu"]])
 
@@ -66,6 +70,7 @@ func show_pause(level_title: String, room_title: String) -> void:
 ## stats: {time, deaths, best_time, new_best, has_next, ending}
 func show_results(level_title: String, stats: Dictionary) -> void:
 	_can_resume = false
+	_can_restart = false
 	var lines := "Time   %s%s\nDeaths   %d\nBest   %s" % [
 		Progress.format_time(stats.time), "   NEW BEST!" if stats.new_best else "",
 		stats.deaths, Progress.format_time(stats.best_time)]
@@ -138,6 +143,11 @@ func _on_pressed(action: String) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if visible and _can_resume and not _guide.visible and (event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel")):
+	if not visible or _guide.visible:
+		return
+	if _can_restart and event.is_action_pressed("restart"):
+		get_viewport().set_input_as_handled()
+		_on_pressed("restart")
+	elif _can_resume and (event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel")):
 		get_viewport().set_input_as_handled()
 		_on_pressed("resume")

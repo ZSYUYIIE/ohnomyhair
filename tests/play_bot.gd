@@ -114,12 +114,14 @@ func wait_until(cond: Callable, max_ticks: int) -> bool:
 
 
 ## Walk toward x, hopping up any step in the way. Local x is in level space.
+## Stops when the level gets busy (room cleared / pan): the target belongs to the old
+## room, and walking on would steer the player around the next one.
 func walk_to(p: Player, x: float, max_ticks := 600) -> void:
 	var start_room := level.room_index if is_instance_valid(level) else -1
 	for i in max_ticks:
-		# An exit can pan before we reach the target point inside it. Do not steer back
-		# toward an old room's coordinates after the players spawn in the next room.
-		if is_instance_valid(level) and level.room_index != start_room:
+		# Stop once the level is busy (clear / pan) or has moved on: the target point
+		# belongs to the old room, and steering back would walk around the next one.
+		if is_instance_valid(level) and (level._busy or level.room_index != start_room):
 			break
 		var dx := x - p.global_position.x
 		if absf(dx) < 6.0:

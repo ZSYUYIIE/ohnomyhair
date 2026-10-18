@@ -42,7 +42,7 @@ func _ready() -> void:
 		["02  LAUNCH", "Twin-Tails stands on Pompadour's head. Pompadour presses skill to launch her up."],
 		["03  SLING DASH", "While hanging in midair, Pompadour presses skill to fling through gel. Twin-Tails follows the gap."],
 		["04  HAIR CATCH", "Pompadour parries. Twin-Tails holds skill on the ground to catch the blue scissor; release to toss up."],
-		["05  HAIR-COPTER", "Pompadour stands on Twin-Tails' head. Hold Twin-Tails' skill in warm air to lift both. Carrying hovers."],
+		["05  WARM AIR", "Glide into a hair dryer to rise - carrying your friend too, just slower. Riding on her head goes up fastest."],
 	]:
 		combos.add_child(_text(entry[0], entry[1], 18))
 	var styles := _page("New styles & chairs")

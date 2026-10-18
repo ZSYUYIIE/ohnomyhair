@@ -47,16 +47,16 @@ Also:
 |---|---|---|---|---|
 | 1 | Fresh Cut | Twin-Tails / Pompadour | glide, dash, carry, launch, sling | swap roles |
 | 2 | Return to Sender | Twin-Tails / Pompadour | parry, Hair Catch | swap roles |
-| 3 | Wash & Blow-Dry | Twin-Tails / Pompadour | dryers, showers, Hair-copter, tonic | swap roles |
+| 3 | Wash & Blow-Dry | Twin-Tails / Pompadour | dryers, showers, carry up the warm air (Hair-copter is faster) | swap roles |
 | 4 | **Perm Day** (new) | Afro / Pompadour | spring, cannonball, double return | swap roles |
 | 5 | **Extensions** (new) | Twin-Tails / Long Straight | hook, rope, lasso | swap roles |
-| 6 | The Barber (was 4) | TT / Pomp, swapped in room 2 | boss | **all four** in the arena |
+| 6 | The Barber (was 4) | TT / Pomp, swapped in room 2 | Rush Hour waves, then the boss | **all four** in the boss arena (room 4) |
 
 Each new haircut is introduced next to one the players already know, in a chapter whose rooms
 need it. The finale's arena is the only room that offers all four, and all six pairs pass its
 gates: Tony can be dazed by anyone (bait a charge into a wall; parry, return or cannonball are
 faster), and the corner ledges above his head knob can be reached by a launch, a spring or a
-hook (the arena has gold rings).
+hook (the arena has gold rings). Rush Hour (room 3) keeps the swapped Twin-Tails / Pompadour pair.
 
 ### Chapter 4: Perm Day (Afro + Pompadour), `docs/levels/level_04.md`
 
@@ -101,9 +101,9 @@ This pair has no lever puller, so every switch is a bell and every height is a s
 
 - **Finale room 1:** the friends spawned next to the hot flat iron (P2 at column 4, iron at
   5-6). Spawns moved two tiles clear.
-- **A tonic near the room 2 exit:** restores damage taken in that room. Room transitions
-  restore full HP, so it does not change starting health in the boss arena. Chapter 3's
-  tonic remains part of the tonic lesson.
+- **Tonics before the boss:** the teammate's Rush Hour room (finale room 3) hands out growth
+  tonics between waves, so the finale no longer needs the extra one on room 2's exit ledge.
+  Chapter 3 no longer has a tonic (it has no damage source).
 - **Hints that gave the answer away** ("P1 stands on P2's head, P2 presses K") now name the move
   being taught instead.
 - **The title screen** lays out six chapters, three per row.

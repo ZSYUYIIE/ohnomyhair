@@ -67,7 +67,7 @@ func _room_2() -> RoomBuilder:
 	rb.gate("Tower 13 up, both friends", ["hair_copter", "spring"])
 	rb.gate("21-wide dye pool from 13 up, both friends", ["carry"])
 	rb.gate("Clipper bot on the landing", ["whip", "lasso_stun", "parry", "jump"])
-	rb.hint("Too heavy to carry up?\nWarm air lifts a glider...\nand whatever stands on one.", Vector2(40, 270))
+	rb.hint("Warm air lifts a glider...\nand whoever rides on her head.", Vector2(40, 270))
 	rb.hint("{tt}: grab {long} at the edge and fly!\n{long} can lasso ({long.attack}) while hanging.", Vector2(420, 120))
 	return rb
 

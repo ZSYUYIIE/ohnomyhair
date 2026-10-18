@@ -1,7 +1,8 @@
 class_name Level
 extends Node2D
 ## Runs a level made of single-screen Rooms and pans to the next room once both
-## friends reach the room's exit.
+## friends reach the room's exit. Clearing the last room shows a short CLEAR banner and
+## goes straight on to the next level; only the final level stops on a results menu.
 ## A death pauses the game and asks: restart the room or go to the main menu.
 ## Restarting rebuilds the whole level scene at the current room, so every enemy,
 ## bell, door, gel wall and lever is reset too; the level's time and death count carry over.
@@ -15,6 +16,8 @@ signal replaced(fresh: Level)
 @export var level_title := ""
 ## Shown after the last room of the last level, above the results.
 @export_multiline var ending_text := ""
+## Seconds the CLEAR banner stays up before the next level loads.
+const CLEAR_PAUSE := 2.2
 
 @onready var camera: Camera2D = $Camera2D
 @onready var flash: ColorRect = $UI/Flash
@@ -174,20 +177,7 @@ func _on_room_cleared(room: Room) -> void:
 		player.set_frozen(true)
 
 	if room_index == rooms.size() - 1:
-		var index := Progress.index_of(scene_file_path)
-		var new_best := Progress.record_clear(index, level_time, deaths)
-		show_banner(level_title + " CLEAR!", 0.0)
-		await get_tree().create_timer(2.0).timeout
-		if ending_text != "":
-			show_banner(ending_text, 0.0)
-		get_tree().paused = true
-		var next_index := Progress.index_of(next_level)
-		menu.show_results(level_title, {
-			"time": level_time, "deaths": deaths, "new_best": new_best,
-			"best_time": Progress.best_time(index) if index >= 0 else level_time,
-			"has_next": next_level != "" and ResourceLoader.exists(next_level) and Progress.is_unlocked(next_index),
-			"ending": ending_text,
-		})
+		_on_level_cleared()
 		return
 
 	room_index += 1
@@ -246,6 +236,45 @@ func _save_styles(styles: Array[int]) -> void:
 		positions.append(rooms[room_index].spawn_point(players[i].player_id))
 	_checkpoint = {"room": room_index, "hair": styles.duplicate(), "positions": positions}
 	show_banner("Fresh styles. Room checkpoint saved!", 1.8)
+
+
+## Last room cleared: record the time, show it in the banner, then keep the flow going
+## into the next level. The final level (no next one) stops on the results and ending.
+func _on_level_cleared() -> void:
+	var index := Progress.index_of(scene_file_path)
+	var new_best := Progress.record_clear(index, level_time, deaths)
+	var has_next := next_level != "" and ResourceLoader.exists(next_level) and Progress.is_unlocked(Progress.index_of(next_level))
+	var stats := "%s   |   %d %s%s" % [Progress.format_time(level_time), deaths, "death" if deaths == 1 else "deaths",
+			"   |   NEW BEST!" if new_best else ""]
+	show_banner("%s CLEAR!\n%s" % [level_title, stats], 0.0)
+	# Bound to this level: if it's freed first (main menu, a test), the timer just does nothing.
+	get_tree().create_timer(CLEAR_PAUSE).timeout.connect(_after_clear.bind(has_next, new_best, index))
+
+
+func _after_clear(has_next: bool, new_best: bool, index: int) -> void:
+	if has_next and ending_text == "":
+		# Only the running game moves on; a level embedded elsewhere (tests) stays put.
+		if get_tree().current_scene == self:
+			get_tree().change_scene_to_file(next_level)
+		return
+	if ending_text != "":
+		show_banner(ending_text, 0.0)
+	get_tree().paused = true
+	menu.show_results(level_title, {
+		"time": level_time, "deaths": deaths, "new_best": new_best,
+		"best_time": Progress.best_time(index) if index >= 0 else level_time,
+		"has_next": has_next,
+		"ending": ending_text,
+	})
+
+
+## Show a banner on the level that `node` lives in (does nothing outside a level).
+static func banner_for(node: Node, text: String, seconds := 2.0) -> void:
+	var n := node
+	while n and not (n is Level):
+		n = n.get_parent()
+	if n:
+		(n as Level).show_banner(text, seconds)
 
 
 func flash_screen(alpha: float, color := Color.WHITE) -> void:

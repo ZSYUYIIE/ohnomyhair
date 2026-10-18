@@ -12,8 +12,8 @@ func _run() -> void:
 
 func _pair_route(pair: Array) -> void:
 	for action in InputMap.get_actions(): Input.action_release(action)
-	await load_level(Finale, 2)
-	var room := level.rooms[2]
+	await load_level(Finale, 3)
+	var room := level.rooms[3]
 	var origin := room.global_position.x
 	var label := "%s + %s" % [StyleRules.hair_name(pair[0]), StyleRules.hair_name(pair[1])]
 	level.open_styling(room.get_node("StylingStation"))

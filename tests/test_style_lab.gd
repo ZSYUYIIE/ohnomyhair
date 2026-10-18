@@ -67,11 +67,11 @@ func _boss_room() -> void:
 	var room := level.rooms[2]
 	var boss: BarberBot = room.get_node("BarberBot")
 	check(p1.hair == Player.Hair.AFRO and p2.hair == Player.Hair.POMPADOUR, "makeover arena starts with Afro and Pompadour")
-	# The combat route is shared with campaign L4; exercise the new projectile contract here.
+	# The combat route is shared with the campaign finale (L6); exercise the new projectile contract here.
 	boss._fire()
 	await _ticks(2)
 	check(get_nodes_in_group("scissors").any(func(s): return s.restyles), "makeover: Tony fires haircut-changing scissors")
-	# Test the authored victory wiring independently of timing already covered in L4.
+	# Test the authored victory wiring independently of timing already covered in L6.
 	for i in 3:
 		boss._stomped_by(p2)
 	check(room.get_node("BossDoor").is_open, "makeover: defeating Tony opens the lab exit")

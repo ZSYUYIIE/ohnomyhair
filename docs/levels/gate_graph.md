@@ -77,18 +77,18 @@ flowchart LR
   G0_2 -.- V0_2(["hair_copter / spring"])
   R1["2 - Shampoo Station"]
   R0 --> R1
-  R1 --- G1_0{{"10-wide dye pool under a shower"}}
+  R1 --- G1_0{{"17-wide dye pool from 9 up, both friends"}}
   G1_0 -.- V1_0(["carry"])
-  R1 --- G1_1{{"Gel wall under a shower"}}
-  G1_1 -.- V1_1(["dash_gel"])
+  R1 --- G1_1{{"Shower over the take-off counter"}}
+  G1_1 -.- V1_1(["walk"])
+  R1 --- G1_2{{"Gel wall behind a shower"}}
+  G1_2 -.- V1_2(["dash_gel"])
   R2["3 - Rinse & Repeat"]
   R1 --> R2
-  R2 --- G2_0{{"Upper ledge 10 up, both friends"}}
+  R2 --- G2_0{{"Dryer column under a timed shower, both friends"}}
   G2_0 -.- V2_0(["hair_copter / spring"])
-  R2 --- G2_1{{"Gel wall"}}
-  G2_1 -.- V2_1(["dash_gel"])
-  R2 --- G2_2{{"Dispenser behind the gel"}}
-  G2_2 -.- V2_2(["parry / shield"])
+  R2 --- G2_1{{"18-wide dye pool from 12 up under a shower, both friends"}}
+  G2_1 -.- V2_1(["carry"])
 ```
 
 ## Chapter 4: Perm Day
@@ -169,7 +169,8 @@ flowchart LR
 |---|---|---|---|
 | 1 - Closing Time | Twin-Tails / Pompadour | Twin-Tails, Pompadour | 1 |
 | 2 - The Chair | Twin-Tails / Pompadour | Twin-Tails, Pompadour | 1 |
-| 3 - The Barber Bot | Pompadour / Twin-Tails | Twin-Tails, Pompadour, Afro, Long Straight | 6 |
+| 3 - Rush Hour | Pompadour / Twin-Tails | Pompadour, Twin-Tails | 1 |
+| 4 - The Barber Bot | Pompadour / Twin-Tails | Twin-Tails, Pompadour, Afro, Long Straight | 6 |
 
 ```mermaid
 flowchart LR
@@ -194,12 +195,22 @@ flowchart LR
   G1_3 -.- V1_3(["launch / spring"])
   R1 --- G1_4{{"Step lever"}}
   G1_4 -.- V1_4(["lever / lasso_lever"])
-  R2["3 - The Barber Bot"]
+  R2["3 - Rush Hour"]
   R1 --> R2
-  R2 --- G2_0{{"Daze Tony"}}
-  G2_0 -.- V2_0(["crash / parry / catch_return / cannonball"])
-  R2 --- G2_1{{"Corner ledge 7 up, above the knob"}}
-  G2_1 -.- V2_1(["launch / spring / hook"])
+  R2 --- G2_0{{"Three waves of clipper bots"}}
+  G2_0 -.- V2_0(["dash_gel / parry / whip / lasso_stun"])
+  R2 --- G2_1{{"Dispenser (wave 2)"}}
+  G2_1 -.- V2_1(["parry / shield"])
+  R2 --- G2_2{{"Hot irons (wave 3)"}}
+  G2_2 -.- V2_2(["walk"])
+  R3["4 - The Barber Bot"]
+  R2 --> R3
+  R3 --- G3_0{{"Daze Tony"}}
+  G3_0 -.- V3_0(["crash / parry / catch_return / cannonball"])
+  R3 --- G3_1{{"Corner ledge 7 up, above the knob"}}
+  G3_1 -.- V3_1(["launch / spring / hook"])
+  R3 --- G3_2{{"Backup robots (phase 2)"}}
+  G3_2 -.- V3_2(["dash_gel / parry / whip / lasso_stun / shield / jump"])
 ```
 
 ## Style Lab
