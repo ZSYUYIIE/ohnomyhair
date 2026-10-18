@@ -2,7 +2,7 @@ class_name Level
 extends Node2D
 ## Runs a level made of single-screen Rooms and pans to the next room once both
 ## friends reach the room's exit. Clearing the last room shows a short CLEAR banner and
-## goes straight on to the next level; only the final level stops on a results menu.
+## goes straight on to the next level; the finale plays its CG before the results menu.
 ## A death pauses the game and asks: restart the room or go to the main menu.
 ## Restarting rebuilds the whole level scene at the current room, so every enemy,
 ## bell, door, gel wall and lever is reset too; the level's time and death count carry over.
@@ -37,6 +37,8 @@ var _banner_tween: Tween
 static var _carry_over := {}
 const StyleMenu := preload("res://scenes/ui/styling_menu.gd")
 const StyleChair := preload("res://scenes/props/styling_chair.gd")
+const Ending := preload("res://scenes/ui/ending_cutscene.gd")
+var ending_cutscene: Control
 var styling_menu: CanvasLayer
 var _active_chair: Area2D
 var _checkpoint := {}
@@ -257,7 +259,7 @@ func _save_styles(styles: Array[int]) -> void:
 
 
 ## Last room cleared: record the time, show it in the banner, then keep the flow going
-## into the next level. The final level (no next one) stops on the results and ending.
+## into the next level. The finale plays its ending before showing the results.
 func _on_level_cleared() -> void:
 	var index := Progress.index_of(scene_file_path)
 	var new_best := Progress.record_clear(index, level_time, deaths)
@@ -278,6 +280,24 @@ func _after_clear(has_next: bool, new_best: bool, index: int) -> void:
 	if ending_text != "":
 		show_banner(ending_text, 0.0)
 	get_tree().paused = true
+	if ending_text != "":
+		# Keep the finished level and its stats; only the CG runs while gameplay is paused.
+		var overlay := CanvasLayer.new()
+		overlay.name = "EndingCG"
+		overlay.layer = 30
+		overlay.process_mode = Node.PROCESS_MODE_ALWAYS
+		ending_cutscene = Ending.new()
+		ending_cutscene.finished.connect(func():
+			overlay.queue_free()
+			ending_cutscene = null
+			_show_results(has_next, new_best, index))
+		overlay.add_child(ending_cutscene)
+		add_child(overlay)
+		return
+	_show_results(has_next, new_best, index)
+
+
+func _show_results(has_next: bool, new_best: bool, index: int) -> void:
 	menu.show_results(level_title, {
 		"time": level_time, "deaths": deaths, "new_best": new_best,
 		"best_time": Progress.best_time(index) if index >= 0 else level_time,

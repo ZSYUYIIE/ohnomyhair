@@ -57,7 +57,9 @@ Design notes: `docs/design/refinement.md`.
 While carried, press down to let go. Hold down to drop through a one-way platform.
 **Esc** pauses (Resume / Restart room / Main menu). **R** restarts the current room - also from the
 death popup and the pause menu. Clearing a level shows its time and deaths in a banner and goes
-straight on to the next level; the last level ends on a results screen.
+straight on to the next level. Clearing the last level plays the supplied 25-second
+ending CG, then opens the results screen with **Play again** and **Main menu**.
+Any key, mouse click or controller button skips the ending to those same results.
 If either friend dies, a popup offers **Restart room** or **Main menu**. Restarting rebuilds the
 whole room - enemies, bells, doors, gel and levers reset - while the level's time and death count
 carry on. The bottom bar shows each friend's haircut, hearts and keys, plus level, room, time and deaths.
@@ -93,6 +95,7 @@ Each test plays through a level with simulated input; exit code 0 = pass.
 ```
 godot --headless --path . --script res://tests/test_menu.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_opening.gd
+godot --headless --fixed-fps 60 --path . --script res://tests/test_ending.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_navigation.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_levers.gd
 godot --headless --fixed-fps 60 --path . --script res://tests/test_combos.gd

@@ -1,0 +1,8 @@
+﻿shot,start_seconds,duration_seconds,image,subtitle,action,sound_suggestion
+01,0,3,assets/ending_01_we_did_it.png,We actually did it.,The friends catch their breath beside the defeated robot.,"A final motor wind-down, then a relieved breath."
+02,3,3,assets/ending_02_good_friends.png,,"A relieved, mouthless fist-bump.",One soft friendly tap.
+03,6,3,assets/ending_03_barber_returns.png,I was only gone a minute...,"The barber returns, startled by the aftermath.","Door hinge, tiny comic hat pop."
+04,9,4,assets/ending_04_fix_your_hair.png,The barber offers to fix your hair.,He offers the empty chair and comb.,Soft comb tap; calm room tone.
+05,13,4,assets/ending_05_look_at_each_other.png,You look at each other...,"They look at each other, considering the offer.",A short thoughtful pause.
+06,17,4,assets/ending_06_and_say_no.png,...and say no.,A shared head shake; they choose to keep their hair.,A light hair swish and a tiny sparkle chime.
+07,21,4,assets/ending_07_bad_hair_good_friends.png,Bad hair. Good friends.,They leave together while the barber waves goodbye.,Paired footsteps and a gentle musical resolve.
