@@ -218,7 +218,7 @@ func _legacy_save() -> void:
 
 ## Playtest 5: the results popup between levels broke the flow. Clearing a level now
 ## shows a CLEAR banner (time, deaths) and loads the next level by itself; only the last
-## level stops on its results and ending.
+## level plays its ending, then stops on its results.
 func _clear_goes_straight_on() -> void:
 	Progress.reset()
 	var level: Level = load(Progress.LEVELS[0].path).instantiate()
@@ -246,7 +246,11 @@ func _clear_goes_straight_on() -> void:
 	level._on_room_cleared(level.rooms[level.room_index])
 	await create_timer(Level.CLEAR_PAUSE + 0.5).timeout
 	await _frames(5)
-	check(current_scene == level and paused and level.menu.is_open() and "Play again" in level.menu.button_labels(), "the final level still ends on its results and ending")
+	check(current_scene == level and paused and is_instance_valid(level.ending_cutscene) and not level.menu.is_open(), "the final level plays its ending before opening results")
+	level.ending_cutscene._elapsed = 0.4
+	level.ending_cutscene._try_skip()
+	await _frames(3)
+	check(current_scene == level and paused and level.menu.is_open() and "Play again" in level.menu.button_labels(), "skipping the ending opens the final results")
 	paused = false
 	level.queue_free()
 	await _frames(3)

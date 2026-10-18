@@ -1,0 +1,137 @@
+{
+  "reference_resolution": [
+    1280,
+    720
+  ],
+  "total_seconds": 25,
+  "subtitle_region": [
+    0,
+    580,
+    1280,
+    140
+  ],
+  "shots": [
+    {
+      "id": "01",
+      "title": "We Did It",
+      "image": "assets/ending_01_we_did_it.png",
+      "start_seconds": 0,
+      "duration_seconds": 3,
+      "subtitle": "We actually did it.",
+      "framing": "medium_wide",
+      "action": "The friends catch their breath beside the defeated robot.",
+      "sound_suggestion": "A final motor wind-down, then a relieved breath.",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.03,
+        "transition": "straight_cut"
+      }
+    },
+    {
+      "id": "02",
+      "title": "Good Friends",
+      "image": "assets/ending_02_good_friends.png",
+      "start_seconds": 3,
+      "duration_seconds": 3,
+      "subtitle": "",
+      "framing": "two_person_closeup",
+      "action": "A relieved, mouthless fist-bump.",
+      "sound_suggestion": "One soft friendly tap.",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.0,
+        "transition": "straight_cut"
+      }
+    },
+    {
+      "id": "03",
+      "title": "The Barber Returns",
+      "image": "assets/ending_03_barber_returns.png",
+      "start_seconds": 6,
+      "duration_seconds": 3,
+      "subtitle": "I was only gone a minute...",
+      "framing": "barber_medium_closeup",
+      "action": "The barber returns, startled by the aftermath.",
+      "sound_suggestion": "Door hinge, tiny comic hat pop.",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.0,
+        "transition": "straight_cut"
+      }
+    },
+    {
+      "id": "04",
+      "title": "An Offer to Fix It",
+      "image": "assets/ending_04_fix_your_hair.png",
+      "start_seconds": 9,
+      "duration_seconds": 4,
+      "subtitle": "The barber offers to fix your hair.",
+      "framing": "medium_wide_three_shot",
+      "action": "He offers the empty chair and comb.",
+      "sound_suggestion": "Soft comb tap; calm room tone.",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.03,
+        "transition": "straight_cut"
+      }
+    },
+    {
+      "id": "05",
+      "title": "A Look Between Friends",
+      "image": "assets/ending_05_look_at_each_other.png",
+      "start_seconds": 13,
+      "duration_seconds": 4,
+      "subtitle": "You look at each other...",
+      "framing": "callback_two_person_closeup",
+      "action": "They look at each other, considering the offer.",
+      "sound_suggestion": "A short thoughtful pause.",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.0,
+        "transition": "straight_cut"
+      }
+    },
+    {
+      "id": "06",
+      "title": "No, Thanks",
+      "image": "assets/ending_06_and_say_no.png",
+      "start_seconds": 17,
+      "duration_seconds": 4,
+      "subtitle": "...and say no.",
+      "framing": "decision_two_person_closeup",
+      "action": "A shared head shake; they choose to keep their hair.",
+      "sound_suggestion": "A light hair swish and a tiny sparkle chime.",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.0,
+        "transition": "straight_cut"
+      }
+    },
+    {
+      "id": "07",
+      "title": "Bad Hair. Good Friends.",
+      "image": "assets/ending_07_bad_hair_good_friends.png",
+      "start_seconds": 21,
+      "duration_seconds": 4,
+      "subtitle": "Bad hair. Good friends.",
+      "framing": "wide_goodbye",
+      "action": "They leave together while the barber waves goodbye.",
+      "sound_suggestion": "Paired footsteps and a gentle musical resolve.",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.03,
+        "transition": "hold_then_fade_out"
+      }
+    }
+  ],
+  "notes": [
+    "Subtitles are separate; production PNGs contain no baked caption or dialogue text.",
+    "Emotion punctuation ! and ? and motion marks are intentionally drawn.",
+    "Shot02 has no subtitle from 3 to 6 seconds.",
+    "Shots02/05/06 are close-ups with intentionally cropped torsos, and shot03 has plain apron continuing through the bottom edge.",
+    "Use restrained camera motion; validate hair/hand cropping in Godot before increasing zoom.",
+    "Opening callback: ending05 echoes the opening03 two-person close-up.",
+    "All timing includes transitions; no video or audio files are included.",
+    "Approved for packaging by the user on 2026-10-18."
+  ]
+}

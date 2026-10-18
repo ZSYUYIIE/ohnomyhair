@@ -1,0 +1,74 @@
+{
+  "images": [
+    {
+      "file": "assets/ending_01_we_did_it.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "sha256": "390b6f8ce8a0f9a986242211f2c94f9a238e98a555d7d433a856dca4a5bd6c11"
+    },
+    {
+      "file": "assets/ending_02_good_friends.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "sha256": "0888c0977bb14e7f86b58154bdb3ddeace57c3974ceea03ed19b8f9a18baec48"
+    },
+    {
+      "file": "assets/ending_03_barber_returns.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "sha256": "4212b299e6ef49cedda7ca6d881c500ec324b1b662465e10f422c6c1c03a6e20"
+    },
+    {
+      "file": "assets/ending_04_fix_your_hair.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "sha256": "abd8ced4152cebf9bcf67588ca068712d34ca0cd93422e1bc2f30442ca6af284"
+    },
+    {
+      "file": "assets/ending_05_look_at_each_other.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "sha256": "a1f4124bcb20c0c71b39218d8fd26215f94662a464f14225191dac2903cf05b0"
+    },
+    {
+      "file": "assets/ending_06_and_say_no.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "sha256": "5dbe30233438f540daa3419427f882ab9dae30d1362e391b782c592ad14c536f"
+    },
+    {
+      "file": "assets/ending_07_bad_hair_good_friends.png",
+      "width": 1280,
+      "height": 720,
+      "transparent": false,
+      "sha256": "96d358b265cebd6a725034b3cbf6096705ace202d9c0318011df3702242b29de"
+    }
+  ],
+  "qa": {
+    "decoded_pngs": 7,
+    "reference_resolution": [
+      1280,
+      720
+    ],
+    "all_opaque": true,
+    "total_seconds": 25,
+    "subtitle_cues": 6,
+    "subtitle_free_shot": "02",
+    "zip_created": true,
+    "engine_tested": false,
+    "visual_review": [
+      "mouthless protagonists and barber",
+      "brown barber hair",
+      "same pink twin-tails and blue spiky hair",
+      "subtitles separate from source panels",
+      "extra breathing room added to wide shots; plain torso/apron may extend through close-up frame edges"
+    ]
+  },
+  "approval_status": "approved_for_packaging"
+}
