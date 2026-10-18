@@ -39,7 +39,9 @@ Illustrations and label pills select destinations. Locked illustrations show an
 unlock explanation; disabled labels remain outside the keyboard focus loop. The
 buttons use the supplied normal / hover / pressed artwork and pointer feedback.
 The friends, gold platform and label show the selected stage; the extra yellow arc
-and pink label focus frame are removed. Back and Play retain their focus outlines.
+and pink label focus frame are removed. All illustrated map buttons, including
+Story, Rooms, Back and Play, now use the supplied skins and focus pop without an
+extra surrounding frame. Other menus keep ink hover borders and gold keyboard focus.
 Back, help, number keys,
 arrows / Tab, Enter / Space activation and P to play retain their existing behavior.
 

@@ -90,8 +90,6 @@ func _ready() -> void:
 	opening_button.pressed.connect(func(): opening_requested.emit())
 	rooms_button = _button("Rooms", Rect2(1008, 17, 198, 86), 34)
 	_style_button(rooms_button, "cream")
-	# Keep the supplied button silhouette; focus still uses the button's pop animation.
-	rooms_button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	rooms_button.visible = Progress.campaign_completed()
 	rooms_button.pressed.connect(func(): rooms_requested.emit())
 	# Containers reserve separate space for records and shortcuts, even with large best times.
@@ -235,8 +233,6 @@ func _style_pill(button: Button, color: String) -> void:
 	button.add_theme_stylebox_override("pressed", _skin("pill_lavender"))
 	button.add_theme_stylebox_override("disabled", _skin("pill_lavender"))
 	_focus_style(button)
-	# Stage selection is shown by the friends and gold platform, without another frame.
-	button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 
 func _style_button(button: Button, color: String) -> void:
 	for state in ["normal", "hover", "pressed"]:
@@ -245,13 +241,9 @@ func _style_button(button: Button, color: String) -> void:
 	_focus_style(button)
 
 func _focus_style(button: Button) -> void:
-	var focus := StyleBoxFlat.new()
-	focus.draw_center = false
-	focus.border_color = UiTheme.PINK
-	focus.set_border_width_all(4)
-	focus.set_corner_radius_all(30)
-	focus.set_expand_margin_all(2)
-	button.add_theme_stylebox_override("focus", focus)
+	# Every illustrated map button keeps its original silhouette on keyboard focus.
+	# The shared pop animation and hover/pressed artwork provide interaction feedback.
+	button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	button.add_theme_color_override("font_color", Color("250d39"))
 
 func _skin(asset: String) -> StyleBoxTexture:
