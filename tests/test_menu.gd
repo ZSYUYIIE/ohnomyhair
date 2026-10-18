@@ -20,6 +20,22 @@ func _run() -> void:
 	var menu: MainMenu = await _open_menu()
 	check(not menu._play_buttons[0].disabled, "level 1 is always unlocked")
 	check(menu._play_buttons[1].disabled and menu._play_buttons[2].disabled, "levels 2 and 3 start locked")
+	check(root.get_visible_rect().encloses(menu._controls_button.get_global_rect()), "title screen actions fit inside the viewport")
+	menu._toggle_controls()
+	await _frames(5)
+	check(menu._controls.visible and menu._controls.is_ancestor_of(root.gui_get_focus_owner()), "help opens with keyboard focus inside the overlay")
+	check(menu._controls.size == menu.size, "help overlay fills the screen and centers its panel")
+	for i in 6:
+		await _key(KEY_TAB)
+		check(menu._controls.is_ancestor_of(root.gui_get_focus_owner()), "Tab stays inside help (%d)" % i)
+	await _key(KEY_ESCAPE)
+	check(not menu._controls.visible and root.gui_get_focus_owner() == menu._controls_button, "Esc closes help and returns focus to its opener")
+	menu.play(1)
+	await _frames(3)
+	check(current_scene == menu, "locked chapters cannot be launched")
+	await _key(KEY_ENTER)
+	check(menu._controls.visible, "Enter opens help using the restored keyboard focus")
+	await _key(KEY_ESCAPE)
 	menu.queue_free()
 
 	check(Progress.record_clear(0, 83.4, 2), "first clear is a new best")
@@ -48,10 +64,47 @@ func _run() -> void:
 	check(levels.size() == 1 and current_scene == levels[0] and current_scene.scene_file_path.ends_with("level_03.tscn"), "after a restart, Next level replaces the level instead of stacking a second one")
 
 	var level: Level = current_scene
+	await _key(KEY_ESCAPE)
+	check(paused and level.menu.is_open(), "Esc opens the pause menu")
+	level.menu.press("How to play & combos")
+	await _frames(5)
+	check(paused and level.menu._guide.visible and not level.menu._panel.visible, "pause help keeps gameplay paused")
+	await _key(KEY_ESCAPE)
+	check(paused and not level.menu._guide.visible and level.menu._panel.visible, "Esc from help returns to pause without resuming gameplay")
+	await _key(KEY_ESCAPE)
+	check(not paused and not level.menu.is_open(), "Esc again resumes gameplay")
+	await _key(KEY_ESCAPE, false)
+	check(paused and level.menu.is_open(), "logical Esc also pauses without a physical scan code")
+	await _key(KEY_ESCAPE, false)
+	check(not paused and not level.menu.is_open(), "logical Esc resumes without a physical scan code")
+	level.menu.show_death("P1")
+	paused = true
+	await _frames(5)
+	await _key(KEY_ESCAPE)
+	check(paused and level.menu.is_open(), "Esc cannot dismiss a death screen")
 	level.menu.show_pause(level.level_title, "x")
 	level.menu.press("Main menu")
 	await _frames(10)
 	check(current_scene is MainMenu, "the level's Main menu button returns to the title screen")
+	current_scene.queue_free()
+	await _frames(3)
+	for entry in Progress.LEVELS:
+		var probe: Level = load(entry.path).instantiate()
+		root.add_child(probe)
+		current_scene = probe
+		await _frames(5)
+		var hud: Hud = probe.get_children().filter(func(n): return n is Hud)[0]
+		var footer_top: float = hud._stage.get_parent().get_parent().get_global_rect().position.y
+		for room in probe.rooms:
+			probe.camera.position = room.position
+			probe.camera.force_update_scroll()
+			await _frames(3)
+			var screen := room.get_global_transform_with_canvas()
+			var top_left := screen * Vector2.ZERO
+			var bottom_right := screen * Vector2(1280, 720)
+			check(top_left.x >= 0 and top_left.y >= 0 and bottom_right.x <= root.get_visible_rect().size.x and bottom_right.y < footer_top, "%s / %s: entire room stays visible above HUD" % [entry.title, room.title])
+		probe.queue_free()
+		await _frames(3)
 
 	Progress.reset()
 	print("Results: %d passed, %d failed" % [passed, failed])
@@ -69,6 +122,19 @@ func _open_menu() -> MainMenu:
 func _frames(n: int) -> void:
 	for i in n:
 		await process_frame
+
+
+func _key(code: Key, physical := true) -> void:
+	var ev := InputEventKey.new()
+	ev.keycode = code
+	ev.physical_keycode = code if physical else KEY_NONE
+	ev.pressed = true
+	Input.parse_input_event(ev)
+	await _frames(2)
+	ev = ev.duplicate()
+	ev.pressed = false
+	Input.parse_input_event(ev)
+	await _frames(3)
 
 
 func check(ok: bool, label: String) -> void:
