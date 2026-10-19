@@ -1,0 +1,25 @@
+{
+  "recording": "hs_audio.m4a (6:54), ChenHongshan333, 2026-10-20",
+  "model": "medium.en",
+  "notes": "Seconds in the recording. Where a section was read more than once the last complete take is used; spoken notes such as 'I'll say that again' are left out. market and costs borrow their last sentence from the first take, which the re-read skipped. text is what is said (the captions).",
+  "scenes": {
+    "hook": {"keep": [[1.55, 10.98]], "text": "What if your worst haircut became your best escape plan? This is Oh No My Hair, a two-player cooperative puzzle platformer by NPC Union."},
+    "story": {"keep": [[12.68, 34.2]], "text": "Imagine two friends visit a salon at closing time. The barber just leaves his robot assistant in charge. Then the scissors suddenly go wrong, their hair gains unexpected powers, and the front door just locks. That means you have to escape from the house, and moreover, escaping means learning to trust each other."},
+    "twins": {"keep": [[37.3, 50.06]], "text": "Twin-Tails can glide, pull levers, and carry her partner through the air. She creates routes and keeps her friend above danger. Her movement ability becomes a shared resource, rather than just a personal advantage."},
+    "pomp": {"keep": [[87.2, 99.35]], "text": "Pompadour can dash through gel, parry flying scissors, and launch a teammate from his head. His tools complement hers. One player opens a route; the other makes that route usable for both."},
+    "sling": {"keep": [[102.9, 118.58]], "text": "Our signature moment is the sling dash. Twin-Tails carries Pompadour over the pit. He launches out of her grip, punches through a regrowing gel curtain, and she follows before it closes. The solution belongs to both players."},
+    "parry": {"keep": [[121.0, 135.45]], "text": "Cooperation also changes what a projectile can do. Pompadour parries a scissor. Twin-Tails catches it with her hair and tosses it upward to ring a service bell. An enemy attack becomes the key to the next door."},
+    "water": {"keep": [[137.75, 155.82]], "text": "The salon is part of the puzzle, also. Water makes hair heavy and temporarily disables key abilities. Hair dryers, however, just restore those powers and create rising air currents. That means familiar tools ask players to rethink their timing and their route."},
+    "boss": {"keep": [[164.4, 181.25]], "text": "The finale combines aimed scissors, overhead warnings, charging attacks, showers, and roaming robots. Players create a counterattack window and strike together. Hair swaps can also exchange their roles, turning a familiar partnership into an unexpected challenge."},
+    "theme": {"keep": [[204.68, 214.57]], "text": "Better Together is our rule for level design. Carry me. Wait for the water. Parry now. A bad haircut becomes a warm story about trust."},
+    "audience": {"keep": [[216.35, 226.85]], "text": "Our audience is friends, siblings, and couples who enjoy cooperative puzzles and playful platforming. One shared keyboard and a browser make the prototype easy to try together."},
+    "market": {"keep": [[252.72, 265.72], [243.98, 246.34]], "text": "PICO PARK 2 serves larger cooperative groups. Ibb and Obb explores two-player gravity puzzles. Our niche, on the other hand, is two asymmetric hair abilities, combination moves, and a compact salon escape. We still need to validate the demand."},
+    "prototype": {"keep": [[284.6, 300.99]], "text": "The prototype has 4 chapters, 12 rooms, a 3-phase boss, story sequences, saved progression and room replay. It is now publicly playable on itch.io. Future expansion will depend on testing with more pairs."},
+    "budget": {"keep": [[303.47, 318.76]], "text": "Our indicative budgets are 20,000 US dollars for a 12-week minimum version, 60,000 for 24 weeks, or 120,000 for an expanded 36-week scope. These are planning estimates, not funding raised."},
+    "costs": {"keep": [[338.95, 347.84], [331.1, 333.65]], "text": "The minimum allocates 12,000 to development, 3,000 to art and audio, 1,000 to testing and tools, and 4,000 to contingency. Online multiplayer is outside this scope."},
+    "roadmap": {"keep": [[350.05, 364.19]], "text": "Weeks 1 to 4: playtests and onboarding. Weeks 5 to 8: polish rooms, controls, and visual feedback. Weeks 9 to 12: accessibility checks, bug fixing, and release preparation. Expansion follows player evidence."},
+    "validation": {"keep": [[376.35, 389.03]], "text": "Next, we plan to test 20 player pairs, tracking unaided tutorial completion, repeated failure points, and willingness to play another room. These are future validation targets, not achieved audience metrics."},
+    "team": {"keep": [[391.08, 400.29]], "text": "We are NPC Union: ChenHongshan333 and ZSYUYIIE. We are seeking playtest feedback and incubation support to polish this cooperative experience."},
+    "end": {"keep": [[401.85, 410.43]], "text": "So, at the end, scan the code to play and tell us what you think. Oh No My Hair. Bad hair, good friends. Thank you for listening."}
+  }
+}
