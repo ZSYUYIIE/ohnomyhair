@@ -14,8 +14,11 @@ const pill:React.CSSProperties={padding:'18px 32px',borderRadius:60,border:`4px 
 // Local caption renderer: the published BasicCaptions source returned HTTP 403.
 // Caption timings use the skill's Caption JSON shape, synchronized to speech.
 export const BasicCaptions=({captions}:{captions:Caption[]})=>{
- const f=useCurrentFrame();const active=captions.find(c=>f/30*1000>=c.startMs&&f/30*1000<c.endMs);
- return active?<div style={{position:'absolute',left:110,right:110,bottom:30,minHeight:78,padding:'15px 30px',display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(39,24,53,.94)',borderRadius:22,color:'#fffaf0',fontFamily:'Nunito',fontWeight:750,fontSize:34,lineHeight:1.28,textAlign:'center'}}>{active.text}</div>:null;
+ const f=useCurrentFrame();const ms=f/30*1000;const active=captions.find(c=>ms>=c.startMs&&ms<c.endMs);
+ if(!active)return null;
+ const joinedIn=captions.some(c=>c.endMs===active.startMs),joinedOut=captions.some(c=>c.startMs===active.endMs);
+ const fade=Math.min(joinedIn?1:(ms-active.startMs)/130,joinedOut?1:(active.endMs-ms)/130,1);
+ return <div style={{opacity:fade,position:'absolute',left:110,right:110,bottom:30,minHeight:78,padding:'15px 30px',display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(39,24,53,.94)',borderRadius:22,color:'#fffaf0',fontFamily:'Nunito',fontWeight:750,fontSize:34,lineHeight:1.28,textAlign:'center'}}>{active.text}</div>;
 };
 const Card=({children,style={}}:{children:React.ReactNode;style?:React.CSSProperties})=><div style={{...box,padding:38,...style}}>{children}</div>;
 const Heading=({children}:{children:React.ReactNode})=><div style={{fontFamily:'Fredoka',fontSize:49,fontWeight:650,lineHeight:1.14}}>{children}</div>;
@@ -25,7 +28,7 @@ const Friends=({style={}}:{style?:React.CSSProperties})=>{
  const s=Math.min(w/456,h/255);
  return <div style={{position:'relative',overflow:'hidden',flexShrink:0,...style}}><CanvasImage src={staticFile('map_friends.png')} style={{position:'absolute',width:1280*s,height:720*s,left:(w-456*s)/2-412*s,top:(h-255*s)/2-280*s}}/></div>;
 };
-const Gameplay=({clip}:{clip:string})=><div style={{...box,position:'absolute',left:240,top:130,width:1440,height:810,borderRadius:24,background:INK}}><Video name="Puzzle demonstration" src={staticFile(clip+'.mp4')} trimBefore={clip==='parry_catch'?270:0} playbackRate={clip==='sling_gel'?.7:clip==='carry_launch'?.8:1} loop muted style={{width:'100%',height:'100%',objectFit:'contain'}}/>{clip==='boss'&&<Video name="Stomp counterattack" src={staticFile('stomp.mp4')} from={420} playbackRate={.6} loop muted style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain'}}/>}</div>;
+const Gameplay=({clip}:{clip:string})=><div style={{...box,position:'absolute',left:240,top:130,width:1440,height:810,borderRadius:24,background:INK}}><Video name="Puzzle demonstration" src={staticFile(clip+'.mp4')} trimBefore={clip==='parry_catch'?270:0} playbackRate={clip==='sling_gel'?.7:clip==='carry_launch'?.8:clip==='fresh_cut'?.75:clip==='boss'?.7:1} loop muted style={{width:'100%',height:'100%',objectFit:'contain'}}/>{clip==='boss'&&<Video name="Stomp counterattack" src={staticFile('stomp.mp4')} from={420} playbackRate={.6} loop muted style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain'}}/>}</div>;
 
 type Props={title:string;eyebrow:string;kind:string;id:string;clip?:string;endFrames:number;children?:React.ReactNode};
 const SceneInner=({title,eyebrow,kind,id,clip,endFrames,children}:Props)=>{
@@ -48,7 +51,7 @@ const SceneInner=({title,eyebrow,kind,id,clip,endFrames,children}:Props)=>{
     <div style={{position:'absolute',left:105,top:735,display:'flex',gap:20}}><span style={pill}>2-PLAYER CO-OP</span><span style={pill}>PUZZLE PLATFORMER</span></div>
    </>}
    {kind==='story'&&<>
-    <CanvasImage src={staticFile(f<endFrames*.48?'cutscene_02_robot_assistant.png':f<endFrames*.72?'cutscene_05_hair_burst.png':'cutscene_11_escape_together.png')} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',scale:interpolate(f,[0,endFrames],[1,1.04])}}/>
+    {[['cutscene_02_robot_assistant.png',-99,.48],['cutscene_05_hair_burst.png',.48,.72],['cutscene_11_escape_together.png',.72,99]].map(([img,a,b])=>{const x=Number(a)*endFrames,y=Number(b)*endFrames;const o=interpolate(f,[x-6,x+6,y-6,y+6],[0,1,1,0],{extrapolateLeft:'clamp',extrapolateRight:'clamp'});return o>0?<CanvasImage key={String(img)} src={staticFile(String(img))} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',opacity:o,scale:interpolate(f,[0,endFrames],[1,1.04])}}/>:null;})}
     <div style={{position:'absolute',left:85,top:60,...pill,fontSize:58,background:CREAM}}>{title}</div>
    </>}
    {kind==='duo'&&<div style={{...body,display:'flex',alignItems:'center',gap:90}}><Friends style={{width:800,height:650,translate:`0 ${Math.sin(f/20)*8}px`}}/><div><div style={{fontSize:92,lineHeight:1.1,fontWeight:650}}>“Carry me.”<br/>“Wait for the water.”<br/><span style={{color:'#d73784'}}>“Parry now!”</span></div><div style={{...pill,marginTop:45,display:'inline-block'}}>JAM THEME: BETTER TOGETHER</div></div></div>}

@@ -32,49 +32,49 @@
         {
           "text": "Hi, we're NPC Union.",
           "startMs": 284.95799999999997,
-          "endMs": 1889.791,
+          "endMs": 2141.75,
           "timestampMs": 284.95799999999997,
           "confidence": null
         },
         {
           "text": "I'm ZSYUYIIE.",
           "startMs": 2141.75,
-          "endMs": 3418.916,
+          "endMs": 4084.958,
           "timestampMs": 2141.75,
           "confidence": null
         },
         {
           "text": "And I'm ChenHongshan333. We made this game in a",
           "startMs": 4084.958,
-          "endMs": 7655.791,
+          "endMs": 7567.958,
           "timestampMs": 4084.958,
           "confidence": null
         },
         {
           "text": "forty-eight hour game jam, where the theme was Better",
           "startMs": 7567.958,
-          "endMs": 10544.166,
+          "endMs": 10456.291,
           "timestampMs": 7567.958,
           "confidence": null
         },
         {
           "text": "Together.",
           "startMs": 10456.291,
-          "endMs": 11114.541,
+          "endMs": 11737.625,
           "timestampMs": 10456.291,
           "confidence": null
         },
         {
           "text": "It's called Oh No My Hair.",
           "startMs": 11737.625,
-          "endMs": 13196.875,
+          "endMs": 13449.166,
           "timestampMs": 11737.625,
           "confidence": null
         },
         {
           "text": "It's a puzzle platformer for two people sharing one",
           "startMs": 13449.166,
-          "endMs": 15964.208,
+          "endMs": 15876.333,
           "timestampMs": 13449.166,
           "confidence": null
         },
@@ -112,35 +112,35 @@
         {
           "text": "Two friends get to a salon right before closing,",
           "startMs": 297.08299999999997,
-          "endMs": 2994.207,
+          "endMs": 3197.583,
           "timestampMs": 297.08299999999997,
           "confidence": null
         },
         {
           "text": "and the barber leaves his robot assistant in charge.",
           "startMs": 3197.583,
-          "endMs": 6016.0,
+          "endMs": 6664.833,
           "timestampMs": 3197.583,
           "confidence": null
         },
         {
           "text": "The robot cuts way too much.",
           "startMs": 6664.833,
-          "endMs": 8439.582,
+          "endMs": 8703.666,
           "timestampMs": 6664.833,
           "confidence": null
         },
         {
           "text": "Their hair gets powers, the robot locks the front",
           "startMs": 8703.666,
-          "endMs": 11157.999,
+          "endMs": 11070.166,
           "timestampMs": 8703.666,
           "confidence": null
         },
         {
           "text": "door, and the two of them have to find",
           "startMs": 11070.166,
-          "endMs": 13391.041,
+          "endMs": 13303.166,
           "timestampMs": 11070.166,
           "confidence": null
         },
@@ -174,14 +174,14 @@
         {
           "text": "Player one is Twin-Tails.",
           "startMs": 260.666,
-          "endMs": 1938.332,
+          "endMs": 2191.375,
           "timestampMs": 260.666,
           "confidence": null
         },
         {
           "text": "She can glide and pull levers, and she can",
           "startMs": 2191.375,
-          "endMs": 4779.25,
+          "endMs": 4691.375,
           "timestampMs": 2191.375,
           "confidence": null
         },
@@ -220,35 +220,35 @@
         {
           "text": "Player two is Pompadour.",
           "startMs": 272.83299999999997,
-          "endMs": 1744.166,
+          "endMs": 2141.75,
           "timestampMs": 272.83299999999997,
           "confidence": null
         },
         {
           "text": "He dashes through hair gel, knocks flying scissors back,",
           "startMs": 2141.75,
-          "endMs": 5554.833,
+          "endMs": 5734.0,
           "timestampMs": 2141.75,
           "confidence": null
         },
         {
           "text": "and can launch his friend off the top of",
           "startMs": 5734.0,
-          "endMs": 7545.166,
+          "endMs": 7457.291,
           "timestampMs": 5734.0,
           "confidence": null
         },
         {
           "text": "his head.",
           "startMs": 7457.291,
-          "endMs": 8103.374,
+          "endMs": 8764.958,
           "timestampMs": 7457.291,
           "confidence": null
         },
         {
           "text": "Every room is built around something one of them",
           "startMs": 8764.958,
-          "endMs": 11134.374,
+          "endMs": 11046.5,
           "timestampMs": 8764.958,
           "confidence": null
         },
@@ -282,35 +282,35 @@
         {
           "text": "This is our favourite move.",
           "startMs": 260.666,
-          "endMs": 1804.832,
+          "endMs": 2093.208,
           "timestampMs": 260.666,
           "confidence": null
         },
         {
           "text": "Twin-Tails carries Pompadour over a pit, and he throws",
           "startMs": 2093.208,
-          "endMs": 5785.416,
+          "endMs": 5697.583,
           "timestampMs": 2093.208,
           "confidence": null
         },
         {
           "text": "himself out of her grip.",
           "startMs": 5697.583,
-          "endMs": 7096.124,
+          "endMs": 7384.458,
           "timestampMs": 5697.583,
           "confidence": null
         },
         {
           "text": "He smashes through a wall of gel that grows",
           "startMs": 7384.458,
-          "endMs": 9729.624,
+          "endMs": 9641.75,
           "timestampMs": 7384.458,
           "confidence": null
         },
         {
           "text": "back, and she has to glide through the hole",
           "startMs": 9641.75,
-          "endMs": 12156.791,
+          "endMs": 12068.916,
           "timestampMs": 9641.75,
           "confidence": null
         },
@@ -344,28 +344,28 @@
         {
           "text": "The enemy's scissors end up helping you.",
           "startMs": 272.83299999999997,
-          "endMs": 2314.583,
+          "endMs": 2615.041,
           "timestampMs": 272.83299999999997,
           "confidence": null
         },
         {
           "text": "Pompadour knocks one back, and Twin-Tails catches it in",
           "startMs": 2615.041,
-          "endMs": 5809.708,
+          "endMs": 5721.833,
           "timestampMs": 2615.041,
           "confidence": null
         },
         {
           "text": "her pigtails and throws it straight up into a",
           "startMs": 5721.833,
-          "endMs": 7945.6239,
+          "endMs": 7857.75,
           "timestampMs": 5721.833,
           "confidence": null
         },
         {
           "text": "service bell. Ring the bell, and the next door",
           "startMs": 7857.75,
-          "endMs": 10688.375,
+          "endMs": 10600.5,
           "timestampMs": 7857.75,
           "confidence": null
         },
@@ -404,28 +404,28 @@
         {
           "text": "The salon gets in your way too.",
           "startMs": 272.83299999999997,
-          "endMs": 2083.958,
+          "endMs": 2360.208,
           "timestampMs": 272.83299999999997,
           "confidence": null
         },
         {
           "text": "Wet hair from the shampoo showers stops working, so",
           "startMs": 2360.208,
-          "endMs": 4972.332,
+          "endMs": 4884.458,
           "timestampMs": 2360.208,
           "confidence": null
         },
         {
           "text": "Twin-Tails can't glide, and Pompadour bounces off the gel.",
           "startMs": 4884.458,
-          "endMs": 8455.375,
+          "endMs": 9112.833,
           "timestampMs": 4884.458,
           "confidence": null
         },
         {
           "text": "A hair dryer fixes that, and its hot air",
           "startMs": 9112.833,
-          "endMs": 11372.999,
+          "endMs": 11285.125,
           "timestampMs": 9112.833,
           "confidence": null
         },
@@ -464,49 +464,49 @@
         {
           "text": "At the end, you fight the assistant itself.",
           "startMs": 248.9159,
-          "endMs": 2545.499,
+          "endMs": 2833.5,
           "timestampMs": 248.9159,
           "confidence": null
         },
         {
           "text": "It throws scissors, charges across the room, and calls",
           "startMs": 2833.5,
-          "endMs": 5749.041,
+          "endMs": 5661.166,
           "timestampMs": 2833.5,
           "confidence": null
         },
         {
           "text": "in backup robots.",
           "startMs": 5661.166,
-          "endMs": 6901.958,
+          "endMs": 7552.833,
           "timestampMs": 5661.166,
           "confidence": null
         },
         {
           "text": "You stun it with its own scissors, or by",
           "startMs": 7552.833,
-          "endMs": 9606.708,
+          "endMs": 9518.833,
           "timestampMs": 7552.833,
           "confidence": null
         },
         {
           "text": "tricking it into a wall, then one of you",
           "startMs": 9518.833,
-          "endMs": 12021.75,
+          "endMs": 11933.875,
           "timestampMs": 9518.833,
           "confidence": null
         },
         {
           "text": "lands on its head.",
           "startMs": 11933.875,
-          "endMs": 13016.874,
+          "endMs": 13305.25,
           "timestampMs": 11933.875,
           "confidence": null
         },
         {
           "text": "Get hit, and it can swap your haircuts, so",
           "startMs": 13305.25,
-          "endMs": 15832.416,
+          "endMs": 15744.583,
           "timestampMs": 13305.25,
           "confidence": null
         },
@@ -539,21 +539,21 @@
         {
           "text": "Both players have to matter in every room, so",
           "startMs": 297.08299999999997,
-          "endMs": 2508.75,
+          "endMs": 2420.875,
           "timestampMs": 297.08299999999997,
           "confidence": null
         },
         {
           "text": "you end up shouting carry me, and wait for",
           "startMs": 2420.875,
-          "endMs": 4632.499,
+          "endMs": 4544.666,
           "timestampMs": 2420.875,
           "confidence": null
         },
         {
           "text": "the water, at the person next to you.",
           "startMs": 4544.666,
-          "endMs": 6282.999,
+          "endMs": 6547.083,
           "timestampMs": 4544.666,
           "confidence": null
         },
@@ -586,7 +586,7 @@
         {
           "text": "It's for friends, siblings and couples who like puzzles.",
           "startMs": 284.95799999999997,
-          "endMs": 3091.25,
+          "endMs": 3379.625,
           "timestampMs": 284.95799999999997,
           "confidence": null
         },
@@ -624,35 +624,35 @@
         {
           "text": "There are already good co-op puzzle games Pico Park 2",
           "startMs": 260.666,
-          "endMs": 3649.541,
+          "endMs": 3561.666,
           "timestampMs": 260.666,
           "confidence": null
         },
         {
           "text": "is built for groups of two to eight and",
           "startMs": 3561.666,
-          "endMs": 5870.374,
+          "endMs": 5782.541,
           "timestampMs": 3561.666,
           "confidence": null
         },
         {
           "text": "ibb and obb is a two-player game about gravity",
           "startMs": 5782.541,
-          "endMs": 8151.958,
+          "endMs": 8812.958,
           "timestampMs": 5782.541,
           "confidence": null
         },
         {
           "text": "Ours is smaller and each of you has a",
           "startMs": 8812.958,
-          "endMs": 10794.041,
+          "endMs": 10706.166,
           "timestampMs": 8812.958,
           "confidence": null
         },
         {
           "text": "power the other one doesn't We still have to",
           "startMs": 10706.166,
-          "endMs": 13269.749,
+          "endMs": 13181.875,
           "timestampMs": 10706.166,
           "confidence": null
         },
@@ -685,14 +685,14 @@
         {
           "text": "The prototype is finished and playable on itch dot",
           "startMs": 272.83299999999997,
-          "endMs": 2775.708,
+          "endMs": 2687.875,
           "timestampMs": 272.83299999999997,
           "confidence": null
         },
         {
           "text": "io. Four chapters, twelve rooms, and a boss with",
           "startMs": 2687.875,
-          "endMs": 5651.916,
+          "endMs": 5564.083,
           "timestampMs": 2687.875,
           "confidence": null
         },
@@ -745,77 +745,77 @@
         {
           "text": "To polish it and launch on Steam in twelve",
           "startMs": 272.83299999999997,
-          "endMs": 2654.374,
+          "endMs": 2566.5,
           "timestampMs": 272.83299999999997,
           "confidence": null
         },
         {
           "text": "weeks, we need about seventeen thousand two hundred US",
           "startMs": 2566.5,
-          "endMs": 5639.833,
+          "endMs": 5551.958,
           "timestampMs": 2566.5,
           "confidence": null
         },
         {
           "text": "dollars.",
           "startMs": 5551.958,
-          "endMs": 6185.958,
+          "endMs": 6857.083,
           "timestampMs": 5551.958,
           "confidence": null
         },
         {
           "text": "Eight thousand eight hundred pays the two of us",
           "startMs": 6857.083,
-          "endMs": 9129.416,
+          "endMs": 9041.541,
           "timestampMs": 6857.083,
           "confidence": null
         },
         {
           "text": "sixteen hundred a month each.",
           "startMs": 9041.541,
-          "endMs": 10767.75,
+          "endMs": 11068.25,
           "timestampMs": 9041.541,
           "confidence": null
         },
         {
           "text": "That's the low end for small indie teams.",
           "startMs": 11068.25,
-          "endMs": 13340.583,
+          "endMs": 14004.958,
           "timestampMs": 11068.25,
           "confidence": null
         },
         {
           "text": "Four thousand two hundred buys freelance art, music and",
           "startMs": 14004.958,
-          "endMs": 17490.874,
+          "endMs": 17403.0,
           "timestampMs": 14004.958,
           "confidence": null
         },
         {
           "text": "sound.",
           "startMs": 17403.0,
-          "endMs": 18037.0,
+          "endMs": 18705.083,
           "timestampMs": 17403.0,
           "confidence": null
         },
         {
           "text": "Thirteen hundred covers the Steam fee, playtests, tools, store",
           "startMs": 18705.083,
-          "endMs": 22712.874,
+          "endMs": 22625.0,
           "timestampMs": 18705.083,
           "confidence": null
         },
         {
           "text": "art and a trailer.",
           "startMs": 22625.0,
-          "endMs": 23671.583,
+          "endMs": 24340.958,
           "timestampMs": 22625.0,
           "confidence": null
         },
         {
           "text": "And the last twenty-nine hundred is a twenty percent",
           "startMs": 24340.958,
-          "endMs": 27086.583,
+          "endMs": 26998.708,
           "timestampMs": 24340.958,
           "confidence": null
         },
@@ -853,35 +853,35 @@
         {
           "text": "If we raise nothing, we still ship a smaller",
           "startMs": 284.95799999999997,
-          "endMs": 2605.833,
+          "endMs": 2517.958,
           "timestampMs": 284.95799999999997,
           "confidence": null
         },
         {
           "text": "version on about nine hundred dollars of our own",
           "startMs": 2517.958,
-          "endMs": 4729.624,
+          "endMs": 4641.75,
           "timestampMs": 2517.958,
           "confidence": null
         },
         {
           "text": "savings.",
           "startMs": 4641.75,
-          "endMs": 5360.666,
+          "endMs": 6028.958,
           "timestampMs": 4641.75,
           "confidence": null
         },
         {
           "text": "For the full version, we'd cover the production costs",
           "startMs": 6028.958,
-          "endMs": 8483.332,
+          "endMs": 8395.458,
           "timestampMs": 6028.958,
           "confidence": null
         },
         {
           "text": "ourselves and run a small Kickstarter for our pay.",
           "startMs": 8395.458,
-          "endMs": 11201.791,
+          "endMs": 11490.125,
           "timestampMs": 8395.458,
           "confidence": null
         },
@@ -914,28 +914,28 @@
         {
           "text": "Weeks one to four are playtests and fixing the",
           "startMs": 284.95799999999997,
-          "endMs": 2533.041,
+          "endMs": 2445.125,
           "timestampMs": 284.95799999999997,
           "confidence": null
         },
         {
           "text": "tutorial. Weeks five to eight are polish, and the",
           "startMs": 2445.125,
-          "endMs": 5299.999,
+          "endMs": 5212.125,
           "timestampMs": 2445.125,
           "confidence": null
         },
         {
           "text": "Steam page goes up by week eight.",
           "startMs": 5212.125,
-          "endMs": 7132.541,
+          "endMs": 7420.875,
           "timestampMs": 5212.125,
           "confidence": null
         },
         {
           "text": "Weeks nine to twelve are accessibility, bug fixes, and",
           "startMs": 7420.875,
-          "endMs": 10494.207,
+          "endMs": 10406.291,
           "timestampMs": 7420.875,
           "confidence": null
         },
@@ -973,21 +973,21 @@
         {
           "text": "Next we plan to test twenty player pairs tracking",
           "startMs": 300.0,
-          "endMs": 3725.0,
+          "endMs": 3637.5,
           "timestampMs": 300.0,
           "confidence": null
         },
         {
           "text": "unaided tutorial completion repeated failure points and willingness to",
           "startMs": 3637.5,
-          "endMs": 7800.0,
+          "endMs": 7712.5,
           "timestampMs": 3637.5,
           "confidence": null
         },
         {
           "text": "play another room These are future validation targets not",
           "startMs": 7712.5,
-          "endMs": 12150.0,
+          "endMs": 12062.5,
           "timestampMs": 7712.5,
           "confidence": null
         },
@@ -1020,14 +1020,14 @@
         {
           "text": "That's us, NPC Union.",
           "startMs": 284.95799999999997,
-          "endMs": 1914.083,
+          "endMs": 2202.416,
           "timestampMs": 284.95799999999997,
           "confidence": null
         },
         {
           "text": "We're looking for playtesters, feedback, and mentoring to get",
           "startMs": 2202.416,
-          "endMs": 5809.707,
+          "endMs": 5721.833,
           "timestampMs": 2202.416,
           "confidence": null
         },
@@ -1065,14 +1065,14 @@
         {
           "text": "Scan the code, grab a friend, and give it",
           "startMs": 249.625,
-          "endMs": 2825.332,
+          "endMs": 2737.5,
           "timestampMs": 249.625,
           "confidence": null
         },
         {
           "text": "a go.",
           "startMs": 2737.5,
-          "endMs": 3250.124,
+          "endMs": 3929.083,
           "timestampMs": 2737.5,
           "confidence": null
         },

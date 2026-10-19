@@ -15,6 +15,7 @@ The pitch video for Oh No My Hair, and everything needed to change and re-render
 | `v3/README.txt` | v3 editing, AI voice replacement, rebuild commands, capture provenance and review notes |
 | `videos/Oh_No_My_Hair_Pitch_v3_Clean.mp4` | Silent v3 picture without burned-in subtitles, for replacing narration |
 | `videos/Oh_No_My_Hair_Pitch_v3_NoBGM.mp4` | v3 with voices and game SFX, without background music |
+| `videos/Oh_No_My_Hair_Pitch_v2.1.mp4` | v2 with the picture jumps fixed: story illustrations cross-fade, gameplay clips no longer loop back mid-scene, the caption box no longer blinks between lines (3:59) |
 | `videos/Oh_No_My_Hair_Pitch_v2.mp4` | Previous version: two voices, rewritten script, sourced USD budget (3:59) |
 | `videos/Oh_No_My_Hair_Pitch_Final.mp4` | First version (one AI voice), kept for comparison |
 | `docs/Oh_No_My_Hair_Pitch_Script_v2.txt` | The v2 script as a read-aloud script (A = ZSYUYIIE, B = ChenHongshan333) |
@@ -42,7 +43,7 @@ pip install -r requirements.txt
 
 ## Re-render without changes
 
-The voice files and timeline are committed, so this reproduces `videos/Oh_No_My_Hair_Pitch_v2.mp4`:
+The voice files and timeline are committed, so this reproduces `videos/Oh_No_My_Hair_Pitch_v2.1.mp4`:
 
 ```
 python render.py

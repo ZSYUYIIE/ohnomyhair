@@ -1,0 +1,379 @@
+1
+00:00:00,285 --> 00:00:02,142
+Hi, we're NPC Union.
+
+2
+00:00:02,142 --> 00:00:04,085
+I'm ZSYUYIIE.
+
+3
+00:00:04,085 --> 00:00:07,568
+And I'm ChenHongshan333. We made this game in a
+
+4
+00:00:07,568 --> 00:00:10,456
+forty-eight hour game jam, where the theme was Better
+
+5
+00:00:10,456 --> 00:00:11,738
+Together.
+
+6
+00:00:11,738 --> 00:00:13,449
+It's called Oh No My Hair.
+
+7
+00:00:13,449 --> 00:00:15,876
+It's a puzzle platformer for two people sharing one
+
+8
+00:00:15,876 --> 00:00:18,986
+keyboard, and neither of you can finish it alone.
+
+9
+00:00:20,264 --> 00:00:23,164
+Two friends get to a salon right before closing,
+
+10
+00:00:23,164 --> 00:00:26,631
+and the barber leaves his robot assistant in charge.
+
+11
+00:00:26,631 --> 00:00:28,670
+The robot cuts way too much.
+
+12
+00:00:28,670 --> 00:00:31,037
+Their hair gets powers, the robot locks the front
+
+13
+00:00:31,037 --> 00:00:33,270
+door, and the two of them have to find
+
+14
+00:00:33,270 --> 00:00:34,159
+another way out.
+
+15
+00:00:35,394 --> 00:00:37,325
+Player one is Twin-Tails.
+
+16
+00:00:37,325 --> 00:00:39,825
+She can glide and pull levers, and she can
+
+17
+00:00:39,825 --> 00:00:41,587
+pick her friend up and fly with him.
+
+18
+00:00:42,839 --> 00:00:44,708
+Player two is Pompadour.
+
+19
+00:00:44,708 --> 00:00:48,301
+He dashes through hair gel, knocks flying scissors back,
+
+20
+00:00:48,301 --> 00:00:50,024
+and can launch his friend off the top of
+
+21
+00:00:50,024 --> 00:00:51,332
+his head.
+
+22
+00:00:51,332 --> 00:00:53,613
+Every room is built around something one of them
+
+23
+00:00:53,613 --> 00:00:54,975
+can't do on their own.
+
+24
+00:00:56,227 --> 00:00:58,060
+This is our favourite move.
+
+25
+00:00:58,060 --> 00:01:01,664
+Twin-Tails carries Pompadour over a pit, and he throws
+
+26
+00:01:01,664 --> 00:01:03,351
+himself out of her grip.
+
+27
+00:01:03,351 --> 00:01:05,608
+He smashes through a wall of gel that grows
+
+28
+00:01:05,608 --> 00:01:08,036
+back, and she has to glide through the hole
+
+29
+00:01:08,036 --> 00:01:09,119
+before it closes.
+
+30
+00:01:10,339 --> 00:01:12,682
+The enemy's scissors end up helping you.
+
+31
+00:01:12,682 --> 00:01:15,788
+Pompadour knocks one back, and Twin-Tails catches it in
+
+32
+00:01:15,788 --> 00:01:17,924
+her pigtails and throws it straight up into a
+
+33
+00:01:17,924 --> 00:01:20,667
+service bell. Ring the bell, and the next door
+
+34
+00:01:20,667 --> 00:01:21,338
+opens.
+
+35
+00:01:22,573 --> 00:01:24,660
+The salon gets in your way too.
+
+36
+00:01:24,660 --> 00:01:27,184
+Wet hair from the shampoo showers stops working, so
+
+37
+00:01:27,184 --> 00:01:31,413
+Twin-Tails can't glide, and Pompadour bounces off the gel.
+
+38
+00:01:31,413 --> 00:01:33,585
+A hair dryer fixes that, and its hot air
+
+39
+00:01:33,585 --> 00:01:34,438
+lifts you up.
+
+40
+00:01:35,682 --> 00:01:38,267
+At the end, you fight the assistant itself.
+
+41
+00:01:38,267 --> 00:01:41,094
+It throws scissors, charges across the room, and calls
+
+42
+00:01:41,094 --> 00:01:42,986
+in backup robots.
+
+43
+00:01:42,986 --> 00:01:44,952
+You stun it with its own scissors, or by
+
+44
+00:01:44,952 --> 00:01:47,367
+tricking it into a wall, then one of you
+
+45
+00:01:47,367 --> 00:01:48,739
+lands on its head.
+
+46
+00:01:48,739 --> 00:01:51,178
+Get hit, and it can swap your haircuts, so
+
+47
+00:01:51,178 --> 00:01:53,050
+suddenly you have each other's powers.
+
+48
+00:01:54,330 --> 00:01:56,454
+Both players have to matter in every room, so
+
+49
+00:01:56,454 --> 00:01:58,578
+you end up shouting carry me, and wait for
+
+50
+00:01:58,578 --> 00:02:00,580
+the water, at the person next to you.
+
+51
+00:02:00,580 --> 00:02:01,979
+That's our favourite part.
+
+52
+00:02:03,252 --> 00:02:06,346
+It's for friends, siblings and couples who like puzzles.
+
+53
+00:02:06,346 --> 00:02:08,606
+You only need one keyboard and a browser.
+
+54
+00:02:09,827 --> 00:02:13,128
+There are already good co-op puzzle games Pico Park 2
+
+55
+00:02:13,128 --> 00:02:15,349
+is built for groups of two to eight and
+
+56
+00:02:15,349 --> 00:02:18,380
+ibb and obb is a two-player game about gravity
+
+57
+00:02:18,380 --> 00:02:20,273
+Ours is smaller and each of you has a
+
+58
+00:02:20,273 --> 00:02:22,749
+power the other one doesn't We still have to
+
+59
+00:02:22,749 --> 00:02:24,633
+find out whether people want that
+
+60
+00:02:25,906 --> 00:02:28,321
+The prototype is finished and playable on itch dot
+
+61
+00:02:28,321 --> 00:02:31,197
+io. Four chapters, twelve rooms, and a boss with
+
+62
+00:02:31,197 --> 00:02:33,215
+three phases, with saved progress.
+
+63
+00:02:34,439 --> 00:02:36,733
+To polish it and launch on Steam in twelve
+
+64
+00:02:36,733 --> 00:02:39,719
+weeks, we need about seventeen thousand two hundred US
+
+65
+00:02:39,719 --> 00:02:41,024
+dollars.
+
+66
+00:02:41,024 --> 00:02:43,208
+Eight thousand eight hundred pays the two of us
+
+67
+00:02:43,208 --> 00:02:45,235
+sixteen hundred a month each.
+
+68
+00:02:45,235 --> 00:02:48,172
+That's the low end for small indie teams.
+
+69
+00:02:48,172 --> 00:02:51,570
+Four thousand two hundred buys freelance art, music and
+
+70
+00:02:51,570 --> 00:02:52,872
+sound.
+
+71
+00:02:52,872 --> 00:02:56,792
+Thirteen hundred covers the Steam fee, playtests, tools, store
+
+72
+00:02:56,792 --> 00:02:58,508
+art and a trailer.
+
+73
+00:02:58,508 --> 00:03:01,165
+And the last twenty-nine hundred is a twenty percent
+
+74
+00:03:01,165 --> 00:03:01,739
+buffer.
+
+75
+00:03:03,018 --> 00:03:05,251
+If we raise nothing, we still ship a smaller
+
+76
+00:03:05,251 --> 00:03:07,375
+version on about nine hundred dollars of our own
+
+77
+00:03:07,375 --> 00:03:08,762
+savings.
+
+78
+00:03:08,762 --> 00:03:11,129
+For the full version, we'd cover the production costs
+
+79
+00:03:11,129 --> 00:03:14,223
+ourselves and run a small Kickstarter for our pay.
+
+80
+00:03:14,223 --> 00:03:16,338
+Any prize money would be a bonus.
+
+81
+00:03:17,618 --> 00:03:19,778
+Weeks one to four are playtests and fixing the
+
+82
+00:03:19,778 --> 00:03:22,545
+tutorial. Weeks five to eight are polish, and the
+
+83
+00:03:22,545 --> 00:03:24,754
+Steam page goes up by week eight.
+
+84
+00:03:24,754 --> 00:03:27,740
+Weeks nine to twelve are accessibility, bug fixes, and
+
+85
+00:03:27,740 --> 00:03:28,568
+the release.
+
+86
+00:03:29,833 --> 00:03:33,171
+Next we plan to test twenty player pairs tracking
+
+87
+00:03:33,171 --> 00:03:37,246
+unaided tutorial completion repeated failure points and willingness to
+
+88
+00:03:37,246 --> 00:03:41,596
+play another room These are future validation targets not
+
+89
+00:03:41,596 --> 00:03:43,283
+achieved audience metrics
+
+90
+00:03:45,018 --> 00:03:46,936
+That's us, NPC Union.
+
+91
+00:03:46,936 --> 00:03:50,455
+We're looking for playtesters, feedback, and mentoring to get
+
+92
+00:03:50,455 --> 00:03:51,308
+this finished.
+
+93
+00:03:52,550 --> 00:03:55,038
+Scan the code, grab a friend, and give it
+
+94
+00:03:55,038 --> 00:03:56,229
+a go.
+
+95
+00:03:56,229 --> 00:03:57,361
+Thanks for watching!
