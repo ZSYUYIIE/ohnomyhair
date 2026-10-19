@@ -1,3 +1,4 @@
 edge-tts
 imageio-ffmpeg
 numpy
+Pillow

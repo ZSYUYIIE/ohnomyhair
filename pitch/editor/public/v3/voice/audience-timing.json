@@ -1,0 +1,261 @@
+{
+  "seconds": 16.716,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 7.584,
+      "speaker": "B",
+      "text": "We're making this for two people who enjoy solving something together, sharing one keyboard. The prototype runs in a browser."
+    },
+    {
+      "line": 2,
+      "start": 7.8839999999999995,
+      "end": 16.716,
+      "speaker": "A",
+      "text": "PICO PARK and ibb and obb are useful reference points. Our focus is these hair-powered combinations, inside one mischievous salon."
+    }
+  ],
+  "words": [
+    {
+      "text": "We're",
+      "start": 0.084958,
+      "end": 0.194166,
+      "speaker": "B"
+    },
+    {
+      "text": "making",
+      "start": 0.206291,
+      "end": 0.546082,
+      "speaker": "B"
+    },
+    {
+      "text": "this",
+      "start": 0.55825,
+      "end": 0.740291,
+      "speaker": "B"
+    },
+    {
+      "text": "for",
+      "start": 0.752416,
+      "end": 0.885916,
+      "speaker": "B"
+    },
+    {
+      "text": "two",
+      "start": 0.898041,
+      "end": 1.104332,
+      "speaker": "B"
+    },
+    {
+      "text": "people",
+      "start": 1.1165,
+      "end": 1.480583,
+      "speaker": "B"
+    },
+    {
+      "text": "who",
+      "start": 1.492708,
+      "end": 1.626208,
+      "speaker": "B"
+    },
+    {
+      "text": "enjoy",
+      "start": 1.638333,
+      "end": 1.978124,
+      "speaker": "B"
+    },
+    {
+      "text": "solving",
+      "start": 1.990291,
+      "end": 2.402916,
+      "speaker": "B"
+    },
+    {
+      "text": "something",
+      "start": 2.415041,
+      "end": 2.766999,
+      "speaker": "B"
+    },
+    {
+      "text": "together",
+      "start": 2.779125,
+      "end": 3.300958,
+      "speaker": "B"
+    },
+    {
+      "text": "sharing",
+      "start": 3.834958,
+      "end": 4.199041,
+      "speaker": "B"
+    },
+    {
+      "text": "one",
+      "start": 4.211166,
+      "end": 4.429624,
+      "speaker": "B"
+    },
+    {
+      "text": "keyboard",
+      "start": 4.44175,
+      "end": 5.036416,
+      "speaker": "B"
+    },
+    {
+      "text": "The",
+      "start": 5.4005,
+      "end": 5.461166,
+      "speaker": "B"
+    },
+    {
+      "text": "prototype",
+      "start": 5.473291,
+      "end": 6.104374,
+      "speaker": "B"
+    },
+    {
+      "text": "runs",
+      "start": 6.1165,
+      "end": 6.395625,
+      "speaker": "B"
+    },
+    {
+      "text": "in",
+      "start": 6.40775,
+      "end": 6.492708,
+      "speaker": "B"
+    },
+    {
+      "text": "a",
+      "start": 6.504875,
+      "end": 6.577708,
+      "speaker": "B"
+    },
+    {
+      "text": "browser",
+      "start": 6.589791,
+      "end": 7.220874,
+      "speaker": "B"
+    },
+    {
+      "text": "PICO",
+      "start": 7.944666,
+      "end": 8.199541,
+      "speaker": "A"
+    },
+    {
+      "text": "PARK",
+      "start": 8.211666,
+      "end": 8.612166,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 8.636415999999999,
+      "end": 8.782041,
+      "speaker": "A"
+    },
+    {
+      "text": "ibb",
+      "start": 8.794208,
+      "end": 9.024791,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 9.036916,
+      "end": 9.146124,
+      "speaker": "A"
+    },
+    {
+      "text": "obb",
+      "start": 9.158291,
+      "end": 9.498082,
+      "speaker": "A"
+    },
+    {
+      "text": "are",
+      "start": 9.522333,
+      "end": 9.692249,
+      "speaker": "A"
+    },
+    {
+      "text": "useful",
+      "start": 9.704374999999999,
+      "end": 10.14125,
+      "speaker": "A"
+    },
+    {
+      "text": "reference",
+      "start": 10.153416,
+      "end": 10.529624,
+      "speaker": "A"
+    },
+    {
+      "text": "points",
+      "start": 10.54175,
+      "end": 11.027166,
+      "speaker": "A"
+    },
+    {
+      "text": "Our",
+      "start": 11.415541,
+      "end": 11.549040999999999,
+      "speaker": "A"
+    },
+    {
+      "text": "focus",
+      "start": 11.561166,
+      "end": 12.082999,
+      "speaker": "A"
+    },
+    {
+      "text": "is",
+      "start": 12.107291,
+      "end": 12.277207,
+      "speaker": "A"
+    },
+    {
+      "text": "these",
+      "start": 12.289333,
+      "end": 12.507791,
+      "speaker": "A"
+    },
+    {
+      "text": "hair-powered",
+      "start": 12.519915999999998,
+      "end": 13.150998999999999,
+      "speaker": "A"
+    },
+    {
+      "text": "combinations",
+      "start": 13.163124999999999,
+      "end": 14.000499999999999,
+      "speaker": "A"
+    },
+    {
+      "text": "inside",
+      "start": 14.473790999999999,
+      "end": 14.995624,
+      "speaker": "A"
+    },
+    {
+      "text": "one",
+      "start": 15.007791,
+      "end": 15.323332,
+      "speaker": "A"
+    },
+    {
+      "text": "mischievous",
+      "start": 15.335458,
+      "end": 15.845165999999999,
+      "speaker": "A"
+    },
+    {
+      "text": "salon",
+      "start": 15.857291,
+      "end": 16.379124,
+      "speaker": "A"
+    }
+  ]
+}

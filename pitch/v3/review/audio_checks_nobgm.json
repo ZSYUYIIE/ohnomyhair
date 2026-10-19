@@ -1,0 +1,100 @@
+{
+  "method": "Normalized waveform correlation in the final encoded mix, +/-200ms search; no subjective listening claim.",
+  "criteria": "Source-locked SFX: <=1 frame. Non-lip-synced spoken captions: <=80ms. Report actual offsets separately; these are not zero-offset claims.",
+  "checks": [
+    {
+      "expected_seconds": 16.3,
+      "found_seconds": 16.346,
+      "offset_ms": 46.0,
+      "correlation": 0.9847,
+      "name": "narration / story",
+      "tolerance_ms": 80,
+      "passed": true
+    },
+    {
+      "expected_seconds": 28.3,
+      "found_seconds": 28.346,
+      "offset_ms": 46.0,
+      "correlation": 0.9855,
+      "name": "narration / roles",
+      "tolerance_ms": 80,
+      "passed": true
+    },
+    {
+      "expected_seconds": 162.9667,
+      "found_seconds": 163.0128,
+      "offset_ms": 46.08,
+      "correlation": 0.9907,
+      "name": "narration / proof",
+      "tolerance_ms": 80,
+      "passed": true
+    },
+    {
+      "expected_seconds": 196.9,
+      "found_seconds": 196.946,
+      "offset_ms": 46.0,
+      "correlation": 0.9837,
+      "name": "narration / plan",
+      "tolerance_ms": 80,
+      "passed": true
+    },
+    {
+      "expected_seconds": 221.4333,
+      "found_seconds": 221.4794,
+      "offset_ms": 46.04,
+      "correlation": 0.9995,
+      "name": "narration / budget",
+      "tolerance_ms": 80,
+      "passed": true
+    },
+    {
+      "expected_seconds": 240.0333,
+      "found_seconds": 240.0794,
+      "offset_ms": 46.04,
+      "correlation": 0.9993,
+      "name": "narration / end",
+      "tolerance_ms": 80,
+      "passed": true
+    },
+    {
+      "expected_seconds": 3.2267,
+      "found_seconds": 3.2268,
+      "offset_ms": 0.05,
+      "correlation": 1.0,
+      "name": "opening gel smash",
+      "tolerance_ms": 33.333,
+      "passed": true
+    },
+    {
+      "expected_seconds": 2.4266,
+      "found_seconds": 2.4266,
+      "offset_ms": 0.02,
+      "correlation": 0.9999,
+      "name": "opening grab",
+      "tolerance_ms": 33.333,
+      "passed": true
+    },
+    {
+      "expected_seconds": 82.945,
+      "found_seconds": 82.945,
+      "offset_ms": 0.0,
+      "correlation": 0.8615,
+      "name": "relay bell",
+      "tolerance_ms": 33.333,
+      "passed": true
+    }
+  ],
+  "loudness": {
+    "input_i": "-15.92",
+    "input_tp": "-1.51",
+    "input_lra": "7.20",
+    "input_thresh": "-26.36",
+    "output_i": "-16.13",
+    "output_tp": "-1.50",
+    "output_lra": "6.70",
+    "output_thresh": "-26.55",
+    "normalization_type": "dynamic",
+    "target_offset": "0.13"
+  },
+  "loudness_passed": true
+}

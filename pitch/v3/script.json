@@ -1,0 +1,239 @@
+[
+  {
+    "id": "hook",
+    "title": "Throw me!",
+    "minimum": 15,
+    "lead": 0,
+    "kind": "hook",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "Ready?",
+        "at": 0.4
+      },
+      {
+        "speaker": "B",
+        "text": "Throw me!",
+        "at": 1.5
+      },
+      {
+        "speaker": "A",
+        "text": "Oh No My Hair. A two-player puzzle platformer where your haircut is your way out.",
+        "at": 7
+      }
+    ]
+  },
+  {
+    "id": "story",
+    "title": "One snip too many",
+    "minimum": 12,
+    "lead": 0.5,
+    "kind": "story",
+    "lines": [
+      {
+        "speaker": "B",
+        "text": "Two friends visit a salon. The robot assistant cuts too much, their hair gets powers, and the front door locks. Now they have to escape together."
+      }
+    ]
+  },
+  {
+    "id": "roles",
+    "title": "Two haircuts. Two jobs.",
+    "minimum": 17,
+    "lead": 0.5,
+    "kind": "roles",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "Twin-Tails can glide and carry her friend across gaps."
+      },
+      {
+        "speaker": "B",
+        "text": "Pompadour can dash through hair gel, parry scissors, and launch her from his head. Put those abilities together, and you can reach places neither friend could reach alone."
+      }
+    ]
+  },
+  {
+    "id": "sling",
+    "title": "The sling",
+    "minimum": 28,
+    "lead": 0.5,
+    "kind": "sling",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "Here's the problem: this gel curtain grows back. Carrying your friend gets you to the wall, but you still can't get through."
+      },
+      {
+        "speaker": "B",
+        "text": "So she carries him over the gap. He dashes out of her grip and breaks the gel. She follows before it closes. Watch their timing."
+      }
+    ]
+  },
+  {
+    "id": "parry",
+    "title": "Return to sender",
+    "minimum": 27,
+    "lead": 0.5,
+    "kind": "parry",
+    "lines": [
+      {
+        "speaker": "B",
+        "text": "This time, the door needs a bell that's out of reach. A parry sends a scissor back horizontally. That won't ring it."
+      },
+      {
+        "speaker": "A",
+        "text": "Twin-Tails catches the blue scissor, then tosses it straight up. The enemy's attack becomes the tool that opens your route. Both players have a job in that chain."
+      }
+    ]
+  },
+  {
+    "id": "salon",
+    "title": "Wash. Dry. Try again.",
+    "minimum": 20,
+    "lead": 0.5,
+    "kind": "salon",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "The salon changes how your hair works. Get soaked and Twin-Tails can't glide. Pompadour can't break gel."
+      },
+      {
+        "speaker": "B",
+        "text": "Warm air dries you off and lifts Twin-Tails. Carry your friend into it, and you rise together. Now you have to choose when to cross the showers."
+      }
+    ]
+  },
+  {
+    "id": "swap",
+    "title": "Your haircut. My controls.",
+    "minimum": 10,
+    "lead": 0.5,
+    "kind": "swap",
+    "lines": [
+      {
+        "speaker": "B",
+        "text": "Then a barber's chair swaps your haircuts. The powers go with the hair, so the person who was carrying now needs a lift. You have to switch jobs."
+      }
+    ]
+  },
+  {
+    "id": "boss",
+    "title": "The assistant is waiting",
+    "minimum": 14,
+    "lead": 0.5,
+    "kind": "boss",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "The escape ends at the robot assistant. It charges, throws scissors, and brings in backup."
+      },
+      {
+        "speaker": "B",
+        "text": "Stun it, launch your friend, and land on its head. The moves you've learned become your way through the final fight."
+      }
+    ]
+  },
+  {
+    "id": "audience",
+    "title": "A game for the person next to you",
+    "minimum": 16,
+    "lead": 0.5,
+    "kind": "audience",
+    "lines": [
+      {
+        "speaker": "B",
+        "text": "We're making this for two people who enjoy solving something together, sharing one keyboard. The prototype runs in a browser."
+      },
+      {
+        "speaker": "A",
+        "text": "PICO PARK and ibb and obb are useful reference points. Our focus is these hair-powered combinations, inside one mischievous salon."
+      }
+    ]
+  },
+  {
+    "id": "proof",
+    "title": "You can play it today",
+    "minimum": 16,
+    "lead": 0.5,
+    "kind": "proof",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "The playable prototype has four chapters, twelve rooms, saved progress, and a three-phase boss."
+      },
+      {
+        "speaker": "B",
+        "text": "It starts with learning each haircut, then asks you to combine them under new conditions. Every exit needs both friends. You can try the full prototype on itch dot io."
+      }
+    ]
+  },
+  {
+    "id": "team",
+    "title": "Made by NPC Union",
+    "minimum": 13,
+    "lead": 0.5,
+    "kind": "team",
+    "lines": [
+      {
+        "speaker": "B",
+        "text": "We're NPC Union: ChenHongshan333 and ZSYUYIIE. This started in a forty-eight-hour jam with the theme Better Together."
+      },
+      {
+        "speaker": "A",
+        "text": "We've kept iterating on the escape, the rooms, and how the two players help each other."
+      }
+    ]
+  },
+  {
+    "id": "plan",
+    "title": "Next: watch real pairs play",
+    "minimum": 24,
+    "lead": 0.5,
+    "kind": "plan",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "Next, we want twenty pairs to play without us explaining the puzzles. Can they learn the first combo? Where do they keep failing? Do they choose another room?"
+      },
+      {
+        "speaker": "B",
+        "text": "Our proposed twelve-week plan starts with those tests and clearer tutorials, then room and audio polish, followed by accessibility, bug fixes, and release preparation. Those player results are still ahead of us."
+      }
+    ]
+  },
+  {
+    "id": "budget",
+    "title": "A focused production plan",
+    "minimum": 18,
+    "lead": 0.5,
+    "kind": "budget",
+    "lines": [
+      {
+        "speaker": "A",
+        "text": "We estimate seventeen thousand two hundred US dollars for that twelve-week production plan. It covers our time, commissioned art and audio, launch costs, and a twenty-percent buffer."
+      },
+      {
+        "speaker": "B",
+        "text": "The immediate help we're looking for is playtesters and mentoring on onboarding and release planning."
+      }
+    ]
+  },
+  {
+    "id": "end",
+    "title": "Bring a friend.",
+    "minimum": 14,
+    "lead": 0.6,
+    "kind": "end",
+    "lines": [
+      {
+        "speaker": "B",
+        "text": "Grab the person next to you and try the prototype. We'd love to see how you solve it together."
+      },
+      {
+        "speaker": "A",
+        "text": "Scan the code to play Oh No My Hair. Thanks for watching."
+      }
+    ]
+  }
+]

@@ -1,0 +1,163 @@
+﻿OH NO MY HAIR PITCH V3 — INDEPENDENT REVIEW
+Status: MAIN VISUAL / MEASURED AUDIO CHECKS PASS; FULL DELIVERY PENDING
+Date: 2026-10-19. Read-only review; no source/film edits. Only this report written.
+
+Evidence and limits
+Inspected main encoded MP4 metadata, final-contact.jpg (42 scene entry/middle/hold
+samples), full-resolution final sling/parry/boss/end middle frames, final-qr.png,
+and 30 further encoded action/reference samples extracted in memory. Earlier
+preliminary PNGs were excluded. Read production brief/decisions/feature mapping,
+script/timeline/storyboard, implementation, capture provenance and Shotcraft
+final-review/aesthetic rules; compared exact marker card, Gallery style entry,
+demo TSX and marker-reference.mp4. This is sampled frame review, not a claim to
+have watched all 7,579 frames in real time. No subjective listening performed.
+
+Technical facts independently measured
+H264 High, 1920x1080, 30/1 fps, 7,579 video frames = 252.633s; AAC stereo 48kHz.
+Container duration252.700s: 67ms extra audio/container tail, not a timeline failure.
+Corrected final-file loudness analysis supplied in audio_checks.json:
+-16.31 LUFS integrated, -1.51 dBTP, LRA8.20. Output fields in loudnorm describe a
+hypothetical second normalization; they are not current-file loudness.
+
+P — PRODUCT
+P1 PASS: hook f225/f420 clearly identifies Oh No My Hair / two-player puzzle
+platformer. Scenes explain hair powers, shared keyboard and browser audience.
+P2 PASS: core sling/scissor combinations receive substantial teaching time;
+end f7369 asks for prototype play, supported by plan/budget request for mentoring.
+P3 PASS WITH SOURCE LIMIT: four chapters and saved progress match progress.gd;
+12 rooms match supplied current-build baseline; three phases match barber_bot.gd.
+No invented individual responsibilities or achieved testing/funding metrics.
+48-hour origin is a production claim without an independently dated source in
+this review; not treated as independently verified history.
+P4 PASS: requirement_decisions/feature_shots correspond to implemented segments,
+actual footage, voice/captions and replacement deliverables (extras still pending).
+
+F — FEATURES
+F1 PASS IN SAMPLED FRAMES: hook f72 carry, f96 gel crossing, f120 follow;
+relay f2433/f2457/f2478/f2488 shows parry/catch/toss/bell progression;
+salon f3240 solo glide, f3330/f3375 carrying ascent, f3420 both on ledge;
+swap f3600/f3630/f3705/f3780 exposes changed hair powers/player identities;
+boss f4125/f4155/f4174/f4200 shows launch, airborne approach, stomp, phase2.
+Current chapter UI and 4/12/3 summary visible f4868/f5124/f5369.
+F2 PASS WITH OPTIONAL PACING NOTE: sling repeats in hook, lesson and labelled
+0.8x replay. Repetition has distinct hook/teaching purposes. Held tails of about
+4.43s swap,5.1s parry,3.97s audience,2.13s boss remain. In sampled hold frames they
+retain completed-state information, not blank/error frames. A tighter cut is
+optional, not a release blocker. Real-time pacing not subjectively assessed.
+F3 PASS: labels explain the chains, game targets/characters remain visible.
+Caption overlays cover some lower HUD/character feet in relay, but the catch and
+upward path remain observable. Labels do not cover bell or boss head.
+
+V — VISUAL DIRECTION
+V1 PASS: final frames maintain game's cream/ink/pink/blue/gold palette,
+Fredoka/Nunito and salon art; no unrelated visual theme.
+V2 PASS IN SAMPLES: calm held compositions and brief title entrances fit brief;
+no observed unexplained camera jumps in inspected action sequences.
+V3/V4 PASS IN SAMPLES: no drift to technology/neon treatment or banned effects.
+
+S — SHOT CARD / GALLERY
+S1/S2 PASS: closing marker-underline-title is the sole claimed card; style key,
+reference media and exact demo identify the same variant. Other shots correctly
+labelled custom editorial gameplay.
+S3 PASS: code preserves seeded variable-width/dry-brush geometry and ease-out
+f32–42 reveal. Encoded comparison: reference f24/f33/f42 vs film f7183/f7192/f7201
+shows corresponding landing, drawing and settled stroke, followed by long hold.
+S4/S5 MINOR OPTIONAL POLISH: gold stroke visibly begins beneath the final 'g' of
+'Bring' and crosses its descender before continuing under 'a friend' (f7369).
+Moving/narrowing it to the intended keyword would make emphasis cleaner. Current
+meaning remains clear, and hand-drawn material suits the game. Upright text has
+same mild upward stroke as italic reference; accepted as stylistic adaptation,
+not claimed pixel-identical reproduction.
+S6 N/A: no unavailable/reference-only Gallery variant claimed.
+
+B — TIMELINE
+B1 PASS: 14 contiguous sections /7579f matches storyboard and 3–5 minute scope.
+B2 PASS IN SAMPLES: action sources, editorial labels, captions and narration
+claims correspond. Measured final SFX alignment supports action timing (see A9).
+B3 PASS: title settles around localf22 and closing underline localf42; visible
+hold extends well beyond one second. Plan/budget entries settle before cuts.
+B4 LIMIT: current brief/source is review baseline; no external signed approval
+history was supplied. No deviation detected from this baseline.
+
+D — FACTS / ASSETS
+D1 PASS: f5886 identifies 20 planned pairs, not achieved tests; f6236 explicitly
+proposed12-week plan; f6882 budget is estimate/funding not secured. 8800+4200+
+1300+2900=17200; buffer is approximately20% of14300 subtotal, rounding noted.
+D2 PASS IN REVIEWED FRAMES: public team handles and itch.io destination; no
+private contact or credentials found.
+D3 PASS: captures are real renderer footage; staged boss positions/projectile/
+immunity and synthesized hook exchange documented. Not presented as human testing.
+D4 PASS IN SAMPLES: fonts/images loaded; no placeholder, missing image or error
+surface visible. Chapter screenshot is genuine product UI, not recreated mock.
+D5 PASS FOR QR CONTENT: independently read QR module bitstream from encoded
+final-qr.png (29x29/version3; format BCH zero errors, mask5; byte mode42 chars).
+Payload exactly https://chenhongshan333.itch.io/ohnomyhair, matching visible URL.
+No network availability or device scan test performed.
+
+A — AUDIO
+A1 PASS MEASURED COVERAGE / SUBJECTIVE LIMIT: earlier master stopped calm bed
+after first33.1s. Corrected master uses explicit993f Loop+ClipAudio and remux.
+Independent corrected mono PCM RMS probes (0.2s windows) are all non-silent:
+14.5:-20.06;43.5:-22.12;71.5:-23.59;98.5:-25.50;118.5:-25.61;128.633:-30.85;
+142.633:-26.79;161.167:-27.39;179.467:-26.99;195.1:-27.14;219.633:-31.55;
+238.133:-29.15;251:-31.60 dBFS. Supplied14-window coverage check also passes.
+Original must-fix is CLOSED. Independently re-extracted corrected picture SHA256
+matches reviewed main/NoBGM hash below; visual findings remain valid. Music mood,
+loop seams and balance unlistened. Intentional game-audio/product-ad S1/Q8
+adaptation is properly documented.
+A2 PASS FOR MEASURED PROBES: supplied final encoded correlations place opening
+ grab/gel and relay bell at approximately0ms error, coefficients .9784/.9896/.8581
+in corrected main audio_checks.json.
+A3 N/A: no strong-beat synchronized-cut claim.
+A4 N/A: riser/impact/sparkle product-launch ending deliberately not adopted.
+A5 SOURCE PASS: long composed audio has explicit duration; footage bounded by
+shot lengths/freeze boundaries. No final subjective tail/audibility assessment.
+A6 UNVERIFIED: no listening; speech intelligibility, individual effect audibility
+and music masking cannot be certified by peak/correlation numbers alone.
+A7 DOCUMENTED ADAPTATION: actual game feedback sounds serve visible game actions.
+A8 PASS NOBGM / CLEAN PENDING: independently extracted main and NoBGM H264 AnnexB
+bitstreams match exactly (30,169,478 bytes; SHA256
+8e1caa9d937baaf4bb9e0fec09e10a1fb1eebd1cf0c15e48d67181841ccc42d5).
+NoBGM metadata matches main7579f/1920x1080/30fps with48kHz stereo AAC. Supplied
+audio_checks_nobgm.json records SFX grab/gel/bell offsets0.02/0.05/0ms,
+coefficients.9999/1/.8615; narration same+46ms. Measured NoBGM level-15.92LUFS /
+-1.51dBTP. Independent14.0–14.4s PCM probe: main-19.68dBFS, NoBGM digital silence,
+consistent with music removed. No subjective listening. SFX-only source evidence:
+PlayBot.load_level adds level under root without current_scene; capture routes
+inherit it and call no Sound.music. Sound._track_for_scene stays empty. UI capture
+alone sets current_scene but only its PNGs are used. Legacy clips audio:false.
+A9 PASS FOR MEASURED EVENTS / LIMITED SCOPE: six final narration waveform probes
+show consistent+46ms versus MP3 source (coefficients .975–.995 after remaster). This is about1.38f
+and below stated80ms non-lip-synced narration tolerance; not a caption-reading
+blocker. Keep explicit offset; do not call it zero. Frame-pinned SFX are assessed
+separately and align near0ms. Report is audio_checks.json. Only3 SFX and6 narration
+probes measured, not every sound; no universal sub-frame-sync claim justified.
+
+Q / AESTHETIC RULES
+Q1 PASS: actual gameplay and chapter screenshot, native artwork.
+Q2 N/A: no perspective UI rasterization. Q3 PASS IN SAMPLES: no added shake.
+Q4 PASS: no glint/sweep spill seen. Q5 PASS: opening one clear cooperative action.
+Q6 PASS: dense proof/plan/budget frontal and readable.
+Q7 N/A: no product-object orbit. Q8 documented game-specific quiet CTA adaptation.
+Q9 PASS: cards land in fixed slots. Q10 N/A: no mock documents.
+Q11 PASS IN SAMPLES / SIZE LIMIT: caption bottom80 verified in encoded frames;
+main phrases are large, high contrast and readable; auxiliary30/31px source
+findings fixed to32px. Source narrative fontSize56, unscaled; final effective
+pixel heights not separately measured. At contact-sheet size, main captions/CTA
+remain readable; native game instructions/HUD are secondary texture and are
+smaller than editorial text. Closing URL44px remains clear (f7369).
+R1/R2 PASS IN SAMPLES: title/settling rests and eased entries. R3 optional trim
+of long holds as above. R4 PASS: no whole-frame beat pumping in inspected sources.
+C1 PASS IN SAMPLES: narration/caption claims correspond to visible mechanics;
+not a word-by-word listening assessment. C2 PASS: concrete feature language.
+C3 N/A: no3D annotation. ProcessP1 fulfilled for sampled final frames; P2 marker
+reference compared; P3 N/A; P4 repetition has teaching purpose as noted.
+
+Release findings
+No must-fix visual issue found in inspected main encoded frames. Earlier main
+music coverage defect is corrected and independently verified CLOSED. Optional:
+reposition closing underline to avoid 'Bring' descender and consider shorter
+held footage. Earlier caption safe-area and auxiliary-size issues are resolved.
+Full delivery decision remains PENDING Clean and stems.
+NoBGM metadata/picture parity and measured cues passed. Subjective audio remains explicitly
+unverified; report this limit rather than asserting it was listened to.

@@ -1,0 +1,237 @@
+{
+  "seconds": 12.155999999999999,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 5.904,
+      "speaker": "A",
+      "text": "The escape ends at the robot assistant. It charges, throws scissors, and brings in backup."
+    },
+    {
+      "line": 2,
+      "start": 6.204,
+      "end": 12.155999999999999,
+      "speaker": "B",
+      "text": "Stun it, launch your friend, and land on its head. The moves you've learned become your way through the final fight."
+    }
+  ],
+  "words": [
+    {
+      "text": "The",
+      "start": 0.060666,
+      "end": 0.121332,
+      "speaker": "A"
+    },
+    {
+      "text": "escape",
+      "start": 0.1335,
+      "end": 0.606791,
+      "speaker": "A"
+    },
+    {
+      "text": "ends",
+      "start": 0.631083,
+      "end": 1.067958,
+      "speaker": "A"
+    },
+    {
+      "text": "at",
+      "start": 1.080083,
+      "end": 1.237833,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 1.25,
+      "end": 1.322833,
+      "speaker": "A"
+    },
+    {
+      "text": "robot",
+      "start": 1.334958,
+      "end": 1.771833,
+      "speaker": "A"
+    },
+    {
+      "text": "assistant",
+      "start": 1.784,
+      "end": 2.427208,
+      "speaker": "A"
+    },
+    {
+      "text": "It",
+      "start": 2.79125,
+      "end": 2.8276659,
+      "speaker": "A"
+    },
+    {
+      "text": "charges",
+      "start": 2.839791,
+      "end": 3.422332,
+      "speaker": "A"
+    },
+    {
+      "text": "throws",
+      "start": 3.434458,
+      "end": 3.798541,
+      "speaker": "A"
+    },
+    {
+      "text": "scissors",
+      "start": 3.810666,
+      "end": 4.308249,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 4.332541,
+      "end": 4.502457,
+      "speaker": "A"
+    },
+    {
+      "text": "brings",
+      "start": 4.514583,
+      "end": 4.842249,
+      "speaker": "A"
+    },
+    {
+      "text": "in",
+      "start": 4.854375,
+      "end": 4.97575,
+      "speaker": "A"
+    },
+    {
+      "text": "backup",
+      "start": 4.987875,
+      "end": 5.534,
+      "speaker": "A"
+    },
+    {
+      "text": "Stun",
+      "start": 6.276833,
+      "end": 6.5923739999999995,
+      "speaker": "B"
+    },
+    {
+      "text": "it",
+      "start": 6.6045,
+      "end": 6.76225,
+      "speaker": "B"
+    },
+    {
+      "text": "launch",
+      "start": 6.786541,
+      "end": 7.0777909999999995,
+      "speaker": "B"
+    },
+    {
+      "text": "your",
+      "start": 7.089916,
+      "end": 7.199123999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "friend",
+      "start": 7.211290999999999,
+      "end": 7.587498999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 7.61175,
+      "end": 7.757375,
+      "speaker": "B"
+    },
+    {
+      "text": "land",
+      "start": 7.769541,
+      "end": 8.036541,
+      "speaker": "B"
+    },
+    {
+      "text": "on",
+      "start": 8.048665999999999,
+      "end": 8.170041,
+      "speaker": "B"
+    },
+    {
+      "text": "its",
+      "start": 8.182166,
+      "end": 8.327791,
+      "speaker": "B"
+    },
+    {
+      "text": "head",
+      "start": 8.339915999999999,
+      "end": 8.740416,
+      "speaker": "B"
+    },
+    {
+      "text": "The",
+      "start": 9.12875,
+      "end": 9.189416,
+      "speaker": "B"
+    },
+    {
+      "text": "moves",
+      "start": 9.201583,
+      "end": 9.517123999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "you've",
+      "start": 9.52925,
+      "end": 9.711291,
+      "speaker": "B"
+    },
+    {
+      "text": "learned",
+      "start": 9.723416,
+      "end": 9.990416,
+      "speaker": "B"
+    },
+    {
+      "text": "become",
+      "start": 10.002541,
+      "end": 10.305957,
+      "speaker": "B"
+    },
+    {
+      "text": "your",
+      "start": 10.318083,
+      "end": 10.451583,
+      "speaker": "B"
+    },
+    {
+      "text": "way",
+      "start": 10.463708,
+      "end": 10.669999,
+      "speaker": "B"
+    },
+    {
+      "text": "through",
+      "start": 10.682165999999999,
+      "end": 10.852082,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 10.864208,
+      "end": 10.961291,
+      "speaker": "B"
+    },
+    {
+      "text": "final",
+      "start": 10.973416,
+      "end": 11.313206999999998,
+      "speaker": "B"
+    },
+    {
+      "text": "fight",
+      "start": 11.325375,
+      "end": 11.798666,
+      "speaker": "B"
+    }
+  ]
+}

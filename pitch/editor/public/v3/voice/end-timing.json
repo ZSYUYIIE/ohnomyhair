@@ -1,0 +1,207 @@
+{
+  "seconds": 9.684000000000001,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 5.496,
+      "speaker": "B",
+      "text": "Grab the person next to you and try the prototype. We'd love to see how you solve it together."
+    },
+    {
+      "line": 2,
+      "start": 5.796,
+      "end": 9.684000000000001,
+      "speaker": "A",
+      "text": "Scan the code to play Oh No My Hair. Thanks for watching."
+    }
+  ],
+  "words": [
+    {
+      "text": "Grab",
+      "start": 0.097083,
+      "end": 0.364083,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 0.376208,
+      "end": 0.473291,
+      "speaker": "B"
+    },
+    {
+      "text": "person",
+      "start": 0.485416,
+      "end": 0.837374,
+      "speaker": "B"
+    },
+    {
+      "text": "next",
+      "start": 0.8495,
+      "end": 1.165041,
+      "speaker": "B"
+    },
+    {
+      "text": "to",
+      "start": 1.177166,
+      "end": 1.249999,
+      "speaker": "B"
+    },
+    {
+      "text": "you",
+      "start": 1.262125,
+      "end": 1.419875,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 1.432041,
+      "end": 1.516999,
+      "speaker": "B"
+    },
+    {
+      "text": "try",
+      "start": 1.529125,
+      "end": 1.771833,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 1.784,
+      "end": 1.881083,
+      "speaker": "B"
+    },
+    {
+      "text": "prototype",
+      "start": 1.893208,
+      "end": 2.621374,
+      "speaker": "B"
+    },
+    {
+      "text": "We'd",
+      "start": 2.997583,
+      "end": 3.155333,
+      "speaker": "B"
+    },
+    {
+      "text": "love",
+      "start": 3.167458,
+      "end": 3.385916,
+      "speaker": "B"
+    },
+    {
+      "text": "to",
+      "start": 3.398041,
+      "end": 3.519416,
+      "speaker": "B"
+    },
+    {
+      "text": "see",
+      "start": 3.531541,
+      "end": 3.774249,
+      "speaker": "B"
+    },
+    {
+      "text": "how",
+      "start": 3.786416,
+      "end": 3.932041,
+      "speaker": "B"
+    },
+    {
+      "text": "you",
+      "start": 3.944166,
+      "end": 4.065541,
+      "speaker": "B"
+    },
+    {
+      "text": "solve",
+      "start": 4.077666,
+      "end": 4.417457,
+      "speaker": "B"
+    },
+    {
+      "text": "it",
+      "start": 4.429625,
+      "end": 4.514583,
+      "speaker": "B"
+    },
+    {
+      "text": "together",
+      "start": 4.526708,
+      "end": 5.133499,
+      "speaker": "B"
+    },
+    {
+      "text": "Scan",
+      "start": 5.845625,
+      "end": 6.161166000000001,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 6.173291,
+      "end": 6.258249,
+      "speaker": "A"
+    },
+    {
+      "text": "code",
+      "start": 6.2703750000000005,
+      "end": 6.634458,
+      "speaker": "A"
+    },
+    {
+      "text": "to",
+      "start": 6.646625,
+      "end": 6.743708,
+      "speaker": "A"
+    },
+    {
+      "text": "play",
+      "start": 6.755833,
+      "end": 7.022833,
+      "speaker": "A"
+    },
+    {
+      "text": "Oh",
+      "start": 7.0349580000000005,
+      "end": 7.132041,
+      "speaker": "A"
+    },
+    {
+      "text": "No",
+      "start": 7.144166,
+      "end": 7.301916,
+      "speaker": "A"
+    },
+    {
+      "text": "My",
+      "start": 7.314083,
+      "end": 7.471833,
+      "speaker": "A"
+    },
+    {
+      "text": "Hair",
+      "start": 7.484,
+      "end": 7.860208,
+      "speaker": "A"
+    },
+    {
+      "text": "Thanks",
+      "start": 8.247458,
+      "end": 8.550874,
+      "speaker": "A"
+    },
+    {
+      "text": "for",
+      "start": 8.563,
+      "end": 8.732916,
+      "speaker": "A"
+    },
+    {
+      "text": "watching",
+      "start": 8.745041,
+      "end": 9.315416,
+      "speaker": "A"
+    }
+  ]
+}

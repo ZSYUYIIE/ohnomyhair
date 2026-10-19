@@ -1,0 +1,65 @@
+{
+  "parry": {
+    "parry": [
+      {
+        "seconds": 5.5041,
+        "correlation": 0.7675
+      },
+      {
+        "seconds": 16.6519,
+        "correlation": 0.8442
+      }
+    ],
+    "catch": [],
+    "toss": [
+      {
+        "seconds": 19.9052,
+        "correlation": 0.7127
+      }
+    ],
+    "bell": [
+      {
+        "seconds": 18.445,
+        "correlation": 0.7857
+      },
+      {
+        "seconds": 18.7838,
+        "correlation": 0.7018
+      }
+    ]
+  },
+  "sling": {
+    "grab": [
+      {
+        "seconds": 4.7266,
+        "correlation": 0.9612
+      }
+    ],
+    "sling": [],
+    "gel_smash": [
+      {
+        "seconds": 5.5267,
+        "correlation": 0.989
+      }
+    ]
+  },
+  "boss": {
+    "parry": [],
+    "boss_daze": [],
+    "launch": [],
+    "boss_stomp": [
+      {
+        "seconds": 3.5107,
+        "correlation": 0.8519
+      }
+    ]
+  },
+  "swap": {
+    "swap": [
+      {
+        "seconds": 1.5374,
+        "correlation": 0.9974
+      }
+    ]
+  }
+}

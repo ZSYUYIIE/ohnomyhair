@@ -1,0 +1,285 @@
+{
+  "seconds": 15.948,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 7.008,
+      "speaker": "A",
+      "text": "The salon changes how your hair works. Get soaked and Twin-Tails can't glide. Pompadour can't break gel."
+    },
+    {
+      "line": 2,
+      "start": 7.308,
+      "end": 15.948,
+      "speaker": "B",
+      "text": "Warm air dries you off and lifts Twin-Tails. Carry your friend into it, and you rise together. Now you have to choose when to cross the showers."
+    }
+  ],
+  "words": [
+    {
+      "text": "The",
+      "start": 0.072833,
+      "end": 0.133499,
+      "speaker": "A"
+    },
+    {
+      "text": "salon",
+      "start": 0.145625,
+      "end": 0.546125,
+      "speaker": "A"
+    },
+    {
+      "text": "changes",
+      "start": 0.55825,
+      "end": 1.09225,
+      "speaker": "A"
+    },
+    {
+      "text": "how",
+      "start": 1.104375,
+      "end": 1.322833,
+      "speaker": "A"
+    },
+    {
+      "text": "your",
+      "start": 1.334958,
+      "end": 1.504874,
+      "speaker": "A"
+    },
+    {
+      "text": "hair",
+      "start": 1.517,
+      "end": 1.771875,
+      "speaker": "A"
+    },
+    {
+      "text": "works",
+      "start": 1.784,
+      "end": 2.257291,
+      "speaker": "A"
+    },
+    {
+      "text": "Get",
+      "start": 2.621375,
+      "end": 2.779125,
+      "speaker": "A"
+    },
+    {
+      "text": "soaked",
+      "start": 2.79125,
+      "end": 3.228125,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 3.240291,
+      "end": 3.349499,
+      "speaker": "A"
+    },
+    {
+      "text": "Twin-Tails",
+      "start": 3.361666,
+      "end": 3.992749,
+      "speaker": "A"
+    },
+    {
+      "text": "can't",
+      "start": 4.004875,
+      "end": 4.271875,
+      "speaker": "A"
+    },
+    {
+      "text": "glide",
+      "start": 4.284,
+      "end": 4.781583,
+      "speaker": "A"
+    },
+    {
+      "text": "Pompadour",
+      "start": 5.145625,
+      "end": 5.5825,
+      "speaker": "A"
+    },
+    {
+      "text": "can't",
+      "start": 5.594666,
+      "end": 5.946624,
+      "speaker": "A"
+    },
+    {
+      "text": "break",
+      "start": 5.95875,
+      "end": 6.213625,
+      "speaker": "A"
+    },
+    {
+      "text": "gel",
+      "start": 6.225708,
+      "end": 6.650458,
+      "speaker": "A"
+    },
+    {
+      "text": "Warm",
+      "start": 7.392958,
+      "end": 7.659958,
+      "speaker": "B"
+    },
+    {
+      "text": "air",
+      "start": 7.672083,
+      "end": 7.854124,
+      "speaker": "B"
+    },
+    {
+      "text": "dries",
+      "start": 7.86625,
+      "end": 8.230333,
+      "speaker": "B"
+    },
+    {
+      "text": "you",
+      "start": 8.242458,
+      "end": 8.363833,
+      "speaker": "B"
+    },
+    {
+      "text": "off",
+      "start": 8.375958,
+      "end": 8.606541,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 8.618666,
+      "end": 8.727874,
+      "speaker": "B"
+    },
+    {
+      "text": "lifts",
+      "start": 8.740041,
+      "end": 9.007041,
+      "speaker": "B"
+    },
+    {
+      "text": "Twin-Tails",
+      "start": 9.019166,
+      "end": 9.795874,
+      "speaker": "B"
+    },
+    {
+      "text": "Carry",
+      "start": 10.184208,
+      "end": 10.439083,
+      "speaker": "B"
+    },
+    {
+      "text": "your",
+      "start": 10.451208,
+      "end": 10.596833,
+      "speaker": "B"
+    },
+    {
+      "text": "friend",
+      "start": 10.608958,
+      "end": 10.936624,
+      "speaker": "B"
+    },
+    {
+      "text": "into",
+      "start": 10.948791,
+      "end": 11.252207,
+      "speaker": "B"
+    },
+    {
+      "text": "it",
+      "start": 11.264291,
+      "end": 11.434207,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 11.725458,
+      "end": 11.822541000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "you",
+      "start": 11.834708,
+      "end": 11.980333,
+      "speaker": "B"
+    },
+    {
+      "text": "rise",
+      "start": 11.992458,
+      "end": 12.295874,
+      "speaker": "B"
+    },
+    {
+      "text": "together",
+      "start": 12.308,
+      "end": 12.890540999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "Now",
+      "start": 13.26675,
+      "end": 13.436665999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "you",
+      "start": 13.448791,
+      "end": 13.570166,
+      "speaker": "B"
+    },
+    {
+      "text": "have",
+      "start": 13.582291,
+      "end": 13.752206999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "to",
+      "start": 13.764291,
+      "end": 13.873498999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "choose",
+      "start": 13.885666,
+      "end": 14.237624,
+      "speaker": "B"
+    },
+    {
+      "text": "when",
+      "start": 14.249749999999999,
+      "end": 14.395375,
+      "speaker": "B"
+    },
+    {
+      "text": "to",
+      "start": 14.407499999999999,
+      "end": 14.516708,
+      "speaker": "B"
+    },
+    {
+      "text": "cross",
+      "start": 14.528875,
+      "end": 14.844415999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 14.856541,
+      "end": 14.941499,
+      "speaker": "B"
+    },
+    {
+      "text": "showers",
+      "start": 14.953624999999999,
+      "end": 15.584708,
+      "speaker": "B"
+    }
+  ]
+}

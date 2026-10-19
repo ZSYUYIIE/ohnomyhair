@@ -1,0 +1,50 @@
+{
+  "scope": "main-only",
+  "expected_seconds": 252.63333333333333,
+  "checks": [
+    {
+      "pass": true,
+      "check": "main duration within 3\u20135 minutes"
+    },
+    {
+      "pass": true,
+      "check": "main follows the authored timeline"
+    },
+    {
+      "pass": true,
+      "check": "main is 1080p / 30fps"
+    },
+    {
+      "pass": true,
+      "check": "main has AAC / 48kHz audio"
+    },
+    {
+      "pass": true,
+      "check": "main fully decodes without errors"
+    },
+    {
+      "pass": true,
+      "check": "all captions have valid time bounds"
+    },
+    {
+      "pass": true,
+      "check": "caption phrases do not overlap"
+    },
+    {
+      "pass": true,
+      "check": "final frame QR decodes to the public prototype"
+    }
+  ],
+  "files": {
+    "main": {
+      "path": "F:\\gamejam\\pitch\\videos\\Oh_No_My_Hair_Pitch_v3.mp4",
+      "bytes": 35036289,
+      "seconds": 252.7,
+      "video_codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": "30/1"
+    }
+  },
+  "qr_destination": "https://chenhongshan333.itch.io/ohnomyhair"
+}

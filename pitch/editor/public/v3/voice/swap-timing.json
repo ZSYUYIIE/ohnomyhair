@@ -1,0 +1,182 @@
+{
+  "seconds": 8.328,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 8.328,
+      "speaker": "B",
+      "text": "Then a barber's chair swaps your haircuts. The powers go with the hair, so the person who was carrying now needs a lift. You have to switch jobs."
+    }
+  ],
+  "words": [
+    {
+      "text": "Then",
+      "start": 0.084958,
+      "end": 0.242708,
+      "speaker": "B"
+    },
+    {
+      "text": "a",
+      "start": 0.254875,
+      "end": 0.315541,
+      "speaker": "B"
+    },
+    {
+      "text": "barber's",
+      "start": 0.327666,
+      "end": 0.776707,
+      "speaker": "B"
+    },
+    {
+      "text": "chair",
+      "start": 0.788833,
+      "end": 1.055833,
+      "speaker": "B"
+    },
+    {
+      "text": "swaps",
+      "start": 1.067958,
+      "end": 1.419916,
+      "speaker": "B"
+    },
+    {
+      "text": "your",
+      "start": 1.432041,
+      "end": 1.553416,
+      "speaker": "B"
+    },
+    {
+      "text": "haircuts",
+      "start": 1.565541,
+      "end": 2.257291,
+      "speaker": "B"
+    },
+    {
+      "text": "The",
+      "start": 2.65775,
+      "end": 2.730583,
+      "speaker": "B"
+    },
+    {
+      "text": "powers",
+      "start": 2.742708,
+      "end": 3.143208,
+      "speaker": "B"
+    },
+    {
+      "text": "go",
+      "start": 3.155333,
+      "end": 3.313083,
+      "speaker": "B"
+    },
+    {
+      "text": "with",
+      "start": 3.32525,
+      "end": 3.45875,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 3.470875,
+      "end": 3.567958,
+      "speaker": "B"
+    },
+    {
+      "text": "hair",
+      "start": 3.580083,
+      "end": 3.944166,
+      "speaker": "B"
+    },
+    {
+      "text": "so",
+      "start": 3.968458,
+      "end": 4.126208,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 4.138333,
+      "end": 4.247541,
+      "speaker": "B"
+    },
+    {
+      "text": "person",
+      "start": 4.259708,
+      "end": 4.623791,
+      "speaker": "B"
+    },
+    {
+      "text": "who",
+      "start": 4.635916,
+      "end": 4.757291,
+      "speaker": "B"
+    },
+    {
+      "text": "was",
+      "start": 4.769416,
+      "end": 4.939332,
+      "speaker": "B"
+    },
+    {
+      "text": "carrying",
+      "start": 4.951458,
+      "end": 5.351958,
+      "speaker": "B"
+    },
+    {
+      "text": "now",
+      "start": 5.364083,
+      "end": 5.533999,
+      "speaker": "B"
+    },
+    {
+      "text": "needs",
+      "start": 5.546125,
+      "end": 5.813125,
+      "speaker": "B"
+    },
+    {
+      "text": "a",
+      "start": 5.82525,
+      "end": 5.898083,
+      "speaker": "B"
+    },
+    {
+      "text": "lift",
+      "start": 5.910208,
+      "end": 6.383499,
+      "speaker": "B"
+    },
+    {
+      "text": "You",
+      "start": 6.759708,
+      "end": 6.832541,
+      "speaker": "B"
+    },
+    {
+      "text": "have",
+      "start": 6.844666,
+      "end": 7.002416,
+      "speaker": "B"
+    },
+    {
+      "text": "to",
+      "start": 7.014583,
+      "end": 7.111666,
+      "speaker": "B"
+    },
+    {
+      "text": "switch",
+      "start": 7.123791,
+      "end": 7.451457,
+      "speaker": "B"
+    },
+    {
+      "text": "jobs",
+      "start": 7.463583,
+      "end": 7.985416,
+      "speaker": "B"
+    }
+  ]
+}

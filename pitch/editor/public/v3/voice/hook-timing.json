@@ -1,0 +1,136 @@
+{
+  "seconds": 11.968,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.4,
+      "end": 1.1680000000000001,
+      "speaker": "A",
+      "text": "Ready?"
+    },
+    {
+      "line": 2,
+      "start": 1.5,
+      "end": 2.436,
+      "speaker": "B",
+      "text": "Throw me!"
+    },
+    {
+      "line": 3,
+      "start": 7.0,
+      "end": 11.968,
+      "speaker": "A",
+      "text": "Oh No My Hair. A two-player puzzle platformer where your haircut is your way out."
+    }
+  ],
+  "words": [
+    {
+      "text": "Ready",
+      "start": 0.472833,
+      "end": 0.8004990000000001,
+      "speaker": "A"
+    },
+    {
+      "text": "Throw",
+      "start": 1.584958,
+      "end": 1.803416,
+      "speaker": "B"
+    },
+    {
+      "text": "me",
+      "start": 1.815541,
+      "end": 2.082541,
+      "speaker": "B"
+    },
+    {
+      "text": "Oh",
+      "start": 7.0485409,
+      "end": 7.1092069,
+      "speaker": "A"
+    },
+    {
+      "text": "No",
+      "start": 7.121375,
+      "end": 7.291291,
+      "speaker": "A"
+    },
+    {
+      "text": "My",
+      "start": 7.303416,
+      "end": 7.473332,
+      "speaker": "A"
+    },
+    {
+      "text": "Hair",
+      "start": 7.485416,
+      "end": 7.873749,
+      "speaker": "A"
+    },
+    {
+      "text": "A",
+      "start": 8.262125,
+      "end": 8.3106659,
+      "speaker": "A"
+    },
+    {
+      "text": "two-player",
+      "start": 8.322833,
+      "end": 8.820416,
+      "speaker": "A"
+    },
+    {
+      "text": "puzzle",
+      "start": 8.832540999999999,
+      "end": 9.148082,
+      "speaker": "A"
+    },
+    {
+      "text": "platformer",
+      "start": 9.160208,
+      "end": 9.779124,
+      "speaker": "A"
+    },
+    {
+      "text": "where",
+      "start": 9.79125,
+      "end": 9.985416,
+      "speaker": "A"
+    },
+    {
+      "text": "your",
+      "start": 9.997583,
+      "end": 10.143208,
+      "speaker": "A"
+    },
+    {
+      "text": "haircut",
+      "start": 10.155333,
+      "end": 10.640749,
+      "speaker": "A"
+    },
+    {
+      "text": "is",
+      "start": 10.665041,
+      "end": 10.834957,
+      "speaker": "A"
+    },
+    {
+      "text": "your",
+      "start": 10.847083,
+      "end": 11.004833,
+      "speaker": "A"
+    },
+    {
+      "text": "way",
+      "start": 11.017,
+      "end": 11.235458000000001,
+      "speaker": "A"
+    },
+    {
+      "text": "out",
+      "start": 11.247582999999999,
+      "end": 11.599541,
+      "speaker": "A"
+    }
+  ]
+}

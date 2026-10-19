@@ -31,7 +31,9 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "dev:v3": "remotion studio src/v3/Root.tsx --port=3014",
+    "lint:v3": "tsc -p tsconfig.v3.json"
   },
   "allowScripts": {
     "esbuild": false

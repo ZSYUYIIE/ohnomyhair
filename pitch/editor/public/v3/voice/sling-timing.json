@@ -1,0 +1,303 @@
+{
+  "seconds": 16.308,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 7.752,
+      "speaker": "A",
+      "text": "Here's the problem: this gel curtain grows back. Carrying your friend gets you to the wall, but you still can't get through."
+    },
+    {
+      "line": 2,
+      "start": 8.052,
+      "end": 16.308,
+      "speaker": "B",
+      "text": "So she carries him over the gap. He dashes out of her grip and breaks the gel. She follows before it closes. Watch their timing."
+    }
+  ],
+  "words": [
+    {
+      "text": "Here's",
+      "start": 0.0485409,
+      "end": 0.3155409,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 0.327666,
+      "end": 0.412624,
+      "speaker": "A"
+    },
+    {
+      "text": "problem",
+      "start": 0.42475,
+      "end": 1.007291,
+      "speaker": "A"
+    },
+    {
+      "text": "this",
+      "start": 1.529125,
+      "end": 1.735416,
+      "speaker": "A"
+    },
+    {
+      "text": "gel",
+      "start": 1.747583,
+      "end": 2.038833,
+      "speaker": "A"
+    },
+    {
+      "text": "curtain",
+      "start": 2.050958,
+      "end": 2.390749,
+      "speaker": "A"
+    },
+    {
+      "text": "grows",
+      "start": 2.402916,
+      "end": 2.718457,
+      "speaker": "A"
+    },
+    {
+      "text": "back",
+      "start": 2.730583,
+      "end": 3.167458,
+      "speaker": "A"
+    },
+    {
+      "text": "Carrying",
+      "start": 3.543708,
+      "end": 3.859249,
+      "speaker": "A"
+    },
+    {
+      "text": "your",
+      "start": 3.871375,
+      "end": 3.980583,
+      "speaker": "A"
+    },
+    {
+      "text": "friend",
+      "start": 3.992708,
+      "end": 4.381041,
+      "speaker": "A"
+    },
+    {
+      "text": "gets",
+      "start": 4.393208,
+      "end": 4.611666,
+      "speaker": "A"
+    },
+    {
+      "text": "you",
+      "start": 4.623791,
+      "end": 4.720874,
+      "speaker": "A"
+    },
+    {
+      "text": "to",
+      "start": 4.733,
+      "end": 4.830083,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 4.84225,
+      "end": 4.939333,
+      "speaker": "A"
+    },
+    {
+      "text": "wall",
+      "start": 4.951458,
+      "end": 5.400499,
+      "speaker": "A"
+    },
+    {
+      "text": "but",
+      "start": 5.8495,
+      "end": 6.067958,
+      "speaker": "A"
+    },
+    {
+      "text": "you",
+      "start": 6.080083,
+      "end": 6.165041,
+      "speaker": "A"
+    },
+    {
+      "text": "still",
+      "start": 6.177166,
+      "end": 6.456291,
+      "speaker": "A"
+    },
+    {
+      "text": "can't",
+      "start": 6.468458,
+      "end": 6.783999,
+      "speaker": "A"
+    },
+    {
+      "text": "get",
+      "start": 6.796125,
+      "end": 6.990291,
+      "speaker": "A"
+    },
+    {
+      "text": "through",
+      "start": 7.002416,
+      "end": 7.390749,
+      "speaker": "A"
+    },
+    {
+      "text": "So",
+      "start": 8.1009159,
+      "end": 8.2344159,
+      "speaker": "B"
+    },
+    {
+      "text": "she",
+      "start": 8.246540999999999,
+      "end": 8.416457,
+      "speaker": "B"
+    },
+    {
+      "text": "carries",
+      "start": 8.428583,
+      "end": 8.804791,
+      "speaker": "B"
+    },
+    {
+      "text": "him",
+      "start": 8.816915999999999,
+      "end": 8.974666,
+      "speaker": "B"
+    },
+    {
+      "text": "over",
+      "start": 8.986832999999999,
+      "end": 9.205290999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 9.217416,
+      "end": 9.326623999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "gap",
+      "start": 9.338791,
+      "end": 9.799957,
+      "speaker": "B"
+    },
+    {
+      "text": "He",
+      "start": 10.187916,
+      "end": 10.321416,
+      "speaker": "B"
+    },
+    {
+      "text": "dashes",
+      "start": 10.333541,
+      "end": 10.770415999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "out",
+      "start": 10.782582999999999,
+      "end": 10.891791,
+      "speaker": "B"
+    },
+    {
+      "text": "of",
+      "start": 10.903958,
+      "end": 11.001040999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "her",
+      "start": 11.013166,
+      "end": 11.146666,
+      "speaker": "B"
+    },
+    {
+      "text": "grip",
+      "start": 11.158790999999999,
+      "end": 11.474332,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 11.486457999999999,
+      "end": 11.595666,
+      "speaker": "B"
+    },
+    {
+      "text": "breaks",
+      "start": 11.607833,
+      "end": 11.947624,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 11.95975,
+      "end": 12.056833,
+      "speaker": "B"
+    },
+    {
+      "text": "gel",
+      "start": 12.068999999999999,
+      "end": 12.542290999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "She",
+      "start": 12.894583,
+      "end": 13.052333,
+      "speaker": "B"
+    },
+    {
+      "text": "follows",
+      "start": 13.064499999999999,
+      "end": 13.465,
+      "speaker": "B"
+    },
+    {
+      "text": "before",
+      "start": 13.477125000000001,
+      "end": 13.816915999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "it",
+      "start": 13.829083,
+      "end": 13.914041,
+      "speaker": "B"
+    },
+    {
+      "text": "closes",
+      "start": 13.926165999999998,
+      "end": 14.581499,
+      "speaker": "B"
+    },
+    {
+      "text": "Watch",
+      "start": 14.957332999999998,
+      "end": 15.212208,
+      "speaker": "B"
+    },
+    {
+      "text": "their",
+      "start": 15.224333,
+      "end": 15.394248999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "timing",
+      "start": 15.406375,
+      "end": 15.9525,
+      "speaker": "B"
+    }
+  ]
+}

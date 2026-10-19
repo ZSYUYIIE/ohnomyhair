@@ -1,0 +1,321 @@
+{
+  "seconds": 17.796,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 7.104,
+      "speaker": "B",
+      "text": "This time, the door needs a bell that's out of reach. A parry sends a scissor back horizontally. That won't ring it."
+    },
+    {
+      "line": 2,
+      "start": 7.404,
+      "end": 17.796,
+      "speaker": "A",
+      "text": "Twin-Tails catches the blue scissor, then tosses it straight up. The enemy's attack becomes the tool that opens your route. Both players have a job in that chain."
+    }
+  ],
+  "words": [
+    {
+      "text": "This",
+      "start": 0.084958,
+      "end": 0.291249,
+      "speaker": "B"
+    },
+    {
+      "text": "time",
+      "start": 0.303416,
+      "end": 0.643207,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 0.667458,
+      "end": 0.788833,
+      "speaker": "B"
+    },
+    {
+      "text": "door",
+      "start": 0.800958,
+      "end": 1.043666,
+      "speaker": "B"
+    },
+    {
+      "text": "needs",
+      "start": 1.055833,
+      "end": 1.322833,
+      "speaker": "B"
+    },
+    {
+      "text": "a",
+      "start": 1.334958,
+      "end": 1.407791,
+      "speaker": "B"
+    },
+    {
+      "text": "bell",
+      "start": 1.419916,
+      "end": 1.650499,
+      "speaker": "B"
+    },
+    {
+      "text": "that's",
+      "start": 1.662625,
+      "end": 1.905333,
+      "speaker": "B"
+    },
+    {
+      "text": "out",
+      "start": 1.917458,
+      "end": 2.038833,
+      "speaker": "B"
+    },
+    {
+      "text": "of",
+      "start": 2.050958,
+      "end": 2.184458,
+      "speaker": "B"
+    },
+    {
+      "text": "reach",
+      "start": 2.196583,
+      "end": 2.633458,
+      "speaker": "B"
+    },
+    {
+      "text": "A",
+      "start": 3.021833,
+      "end": 3.094666,
+      "speaker": "B"
+    },
+    {
+      "text": "parry",
+      "start": 3.106791,
+      "end": 3.434457,
+      "speaker": "B"
+    },
+    {
+      "text": "sends",
+      "start": 3.446583,
+      "end": 3.725708,
+      "speaker": "B"
+    },
+    {
+      "text": "a",
+      "start": 3.737875,
+      "end": 3.798541,
+      "speaker": "B"
+    },
+    {
+      "text": "scissor",
+      "start": 3.810666,
+      "end": 4.198999,
+      "speaker": "B"
+    },
+    {
+      "text": "back",
+      "start": 4.211166,
+      "end": 4.453874,
+      "speaker": "B"
+    },
+    {
+      "text": "horizontally",
+      "start": 4.466,
+      "end": 5.339791,
+      "speaker": "B"
+    },
+    {
+      "text": "That",
+      "start": 5.740291,
+      "end": 5.958749,
+      "speaker": "B"
+    },
+    {
+      "text": "won't",
+      "start": 5.970875,
+      "end": 6.237875,
+      "speaker": "B"
+    },
+    {
+      "text": "ring",
+      "start": 6.25,
+      "end": 6.432041,
+      "speaker": "B"
+    },
+    {
+      "text": "it",
+      "start": 6.444166,
+      "end": 6.759707,
+      "speaker": "B"
+    },
+    {
+      "text": "Twin-Tails",
+      "start": 7.476833,
+      "end": 8.156458,
+      "speaker": "A"
+    },
+    {
+      "text": "catches",
+      "start": 8.168583,
+      "end": 8.593333,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 8.605458,
+      "end": 8.702541,
+      "speaker": "A"
+    },
+    {
+      "text": "blue",
+      "start": 8.714666,
+      "end": 8.920957,
+      "speaker": "A"
+    },
+    {
+      "text": "scissor",
+      "start": 8.933125,
+      "end": 9.467125,
+      "speaker": "A"
+    },
+    {
+      "text": "then",
+      "start": 10.013208,
+      "end": 10.243791,
+      "speaker": "A"
+    },
+    {
+      "text": "tosses",
+      "start": 10.255958,
+      "end": 10.692833,
+      "speaker": "A"
+    },
+    {
+      "text": "it",
+      "start": 10.704958,
+      "end": 10.814166,
+      "speaker": "A"
+    },
+    {
+      "text": "straight",
+      "start": 10.826333,
+      "end": 11.153998999999999,
+      "speaker": "A"
+    },
+    {
+      "text": "up",
+      "start": 11.166125000000001,
+      "end": 11.457374999999999,
+      "speaker": "A"
+    },
+    {
+      "text": "The",
+      "start": 11.821458,
+      "end": 11.882124000000001,
+      "speaker": "A"
+    },
+    {
+      "text": "enemy's",
+      "start": 11.894290999999999,
+      "end": 12.294791,
+      "speaker": "A"
+    },
+    {
+      "text": "attack",
+      "start": 12.306916000000001,
+      "end": 12.768082,
+      "speaker": "A"
+    },
+    {
+      "text": "becomes",
+      "start": 12.780208,
+      "end": 13.204958,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 13.217125,
+      "end": 13.314208,
+      "speaker": "A"
+    },
+    {
+      "text": "tool",
+      "start": 13.326333,
+      "end": 13.702541,
+      "speaker": "A"
+    },
+    {
+      "text": "that",
+      "start": 13.714666000000001,
+      "end": 13.920957,
+      "speaker": "A"
+    },
+    {
+      "text": "opens",
+      "start": 13.933125,
+      "end": 14.297208,
+      "speaker": "A"
+    },
+    {
+      "text": "your",
+      "start": 14.309332999999999,
+      "end": 14.479249,
+      "speaker": "A"
+    },
+    {
+      "text": "route",
+      "start": 14.491375,
+      "end": 14.916125000000001,
+      "speaker": "A"
+    },
+    {
+      "text": "Both",
+      "start": 15.316625,
+      "end": 15.607875,
+      "speaker": "A"
+    },
+    {
+      "text": "players",
+      "start": 15.62,
+      "end": 16.008333,
+      "speaker": "A"
+    },
+    {
+      "text": "have",
+      "start": 16.0205,
+      "end": 16.202541,
+      "speaker": "A"
+    },
+    {
+      "text": "a",
+      "start": 16.214666,
+      "end": 16.275332,
+      "speaker": "A"
+    },
+    {
+      "text": "job",
+      "start": 16.2875,
+      "end": 16.651583000000002,
+      "speaker": "A"
+    },
+    {
+      "text": "in",
+      "start": 16.663708,
+      "end": 16.785083,
+      "speaker": "A"
+    },
+    {
+      "text": "that",
+      "start": 16.797207999999998,
+      "end": 16.991374,
+      "speaker": "A"
+    },
+    {
+      "text": "chain",
+      "start": 17.003500000000003,
+      "end": 17.440375,
+      "speaker": "A"
+    }
+  ]
+}
