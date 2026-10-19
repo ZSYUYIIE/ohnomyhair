@@ -82,4 +82,3 @@ Bring a friend.
 Voice: editor/public/v3/voice/end.mp3; start +0.60s
 B: Grab the person next to you and try the prototype. We'd love to see how you solve it together.
 A: Scan the code to play Oh No My Hair. Thanks for watching.
-

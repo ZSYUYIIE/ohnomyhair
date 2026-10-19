@@ -55,4 +55,3 @@ B: The immediate help we're looking for is playtesters and mentoring on onboardi
 END / Bring a friend.
 B: Grab the person next to you and try the prototype. We'd love to see how you solve it together.
 A: Scan the code to play Oh No My Hair. Thanks for watching.
-
