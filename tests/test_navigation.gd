@@ -23,11 +23,14 @@ func _run() -> void:
 	await key(KEY_ESCAPE)
 	await key(KEY_ESCAPE)
 	await key(KEY_I)
-	check(current_scene.get_script() == load("res://scenes/ui/opening_cutscene.gd"), "I replays the opening from the title")
-	var opening = current_scene
+	check(menu._collection_kind == "story", "I opens Story from the title")
+	menu._collection_buttons[0].pressed.emit()
+	await frames()
+	var opening = menu._collection.get_meta("cg")
 	opening._elapsed = 0.4
-	await key(KEY_SPACE)
-	check(current_scene is MainMenu and not Progress.has_seen_opening(), "replay returns to title without changing a fresh save")
+	await key(KEY_ESCAPE)
+	check(current_scene == menu and menu._collection.visible and not Progress.has_seen_opening(), "replay returns to Story without changing a fresh save")
+	await key(KEY_ESCAPE)
 	current_scene.queue_free()
 	await frames()
 	Progress.record_clear(0, 60.0, 0)

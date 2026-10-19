@@ -3,10 +3,12 @@ extends Control
 ## Illustrated salon cover; the escape route lives in a separate chapter sheet.
 const Guide := preload("res://scenes/ui/controls_guide.gd")
 const Opening := preload("res://scenes/ui/opening_cutscene.gd")
+const Ending := preload("res://scenes/ui/ending_cutscene.gd")
 const COVER := preload("res://assets/art/ui/poster/title_cover.png")
 ## Painted pills on the cover, in cover pixels; the cut-out sprites sit exactly on top.
 const START_RECT := Rect2(140, 469, 538, 153)
 const ABOUT_RECT := Rect2(176, 615, 464, 127)
+const SalonMap := preload("res://scenes/ui/salon_map.gd")
 var _play_buttons: Array[Button] = []
 var _menu_buttons: Array[Button] = []
 var _controls: Control
@@ -24,7 +26,13 @@ var _selected_chapter := 0
 var _map_play: Button
 var _map_title: Label
 var _map_detail: Label
-var _card_states: Array[Label] = []
+var _map_view: Control
+var _chapter_footer: VBoxContainer
+var _chapter_shortcuts: Label
+var _collection: Control
+var _collection_buttons: Array[Button] = []
+var _collection_return: Control
+var _collection_kind := ""
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -44,7 +52,7 @@ func _ready() -> void:
 	cover.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	cover.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(cover)
-	_start_button = _cover_button(preload("res://assets/art/ui/poster/title_button_start.png"), START_RECT, "Start Game", _open_chapters)
+	_start_button = _cover_button(preload("res://assets/art/ui/poster/title_button_start.png"), START_RECT, "Start Game", _enter_game)
 	cover.add_child(_start_button)
 	_menu_buttons.append(_start_button)
 	_chapters_button = _start_button
@@ -74,13 +82,8 @@ func _cover_button(texture: Texture2D, rect: Rect2, label: String, action: Calla
 	b.name = label.replace(" ", "")
 	b.flat = true
 	b.set_meta("cover_rect", rect)
-	var ring := StyleBoxFlat.new()
-	ring.draw_center = false
-	ring.border_color = UiTheme.PINK
-	ring.set_border_width_all(4)
-	ring.set_corner_radius_all(int(rect.size.y))
-	ring.set_expand_margin_all(3)
-	b.add_theme_stylebox_override("focus", ring)
+	for state in ["normal", "hover", "pressed", "focus", "disabled"]:
+		b.add_theme_stylebox_override(state, StyleBoxEmpty.new())
 	var art := TextureRect.new()
 	art.texture = texture
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -171,107 +174,24 @@ func _close_quit_confirm() -> void:
 	UiTheme.focus_if_visible.call_deferred(_quit_return if _quit_return in _menu_buttons else _start_button)
 
 func _build_chapters() -> void:
-	_chapters = Control.new()
-	_chapters.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_map_view = SalonMap.new()
+	_chapters = _map_view
 	add_child(_chapters)
-	var salon := TextureRect.new()
-	salon.texture = preload("res://assets/art/salon_v2/landing_background.png")
-	salon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	salon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	salon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	salon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_chapters.add_child(salon)
-	var shade := ColorRect.new()
-	shade.color = Color(0.12, 0.07, 0.21, 0.86)
-	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_chapters.add_child(shade)
-	var title := UiTheme.heading("Find your way out", 48, UiTheme.CREAM)
-	title.position = Vector2(54, 36)
-	_chapters.add_child(title)
-	var intro := UiTheme.label("ONE SALON. TWO FRIENDS.  Choose a chapter to escape together.", 20, Color("dbc9e7"))
-	intro.position = Vector2(57, 103)
-	_chapters.add_child(intro)
-	_opening_button = _button("▶  Opening", _watch_opening)
-	_opening_button.position = Vector2(918, 48)
-	_opening_button.size = Vector2(156, 56)
-	_chapters.add_child(_opening_button)
-	_chapter_back = _button("‹  Back", _close_chapters)
-	_chapter_back.position = Vector2(1090, 48)
-	_chapter_back.size = Vector2(132, 56)
-	_chapters.add_child(_chapter_back)
-	var previews := [preload("res://assets/art/ui/chapters/fresh_cut.png"),
-		preload("res://assets/art/ui/chapters/return_to_sender.png"),
-		preload("res://assets/art/ui/chapters/wash_blow_dry.png"),
-		preload("res://assets/art/ui/chapters/mystery.png")]
-	for i in Progress.LEVELS.size():
-		var button := _button("", _select_chapter.bind(i))
-		button.position = Vector2(54 + i * 298, 180)
-		button.size = Vector2(278, 351)
-		button.clip_contents = true
-		button.disabled = not Progress.is_unlocked(i)
-		button.tooltip_text = "Select " + _chapter_name(i) if not button.disabled else "Complete the previous chapter first"
-		button.add_theme_stylebox_override("disabled", UiTheme.button_skin(Color("b9a9bd")))
-		_chapters.add_child(button)
-		_play_buttons.append(button)
-		button.focus_entered.connect(_select_chapter.bind(i))
-		var frame := Control.new()
-		frame.name = "PreviewFrame"
-		frame.position = Vector2(12, 12)
-		frame.size = Vector2(254, 166)
-		frame.clip_contents = true
-		frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		button.add_child(frame)
-		var image := TextureRect.new()
-		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		image.stretch_mode = TextureRect.STRETCH_SCALE
-		image.texture = previews[i]
-		image.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		image.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		image.modulate = Color(0.53, 0.46, 0.58) if button.disabled else Color.WHITE
-		frame.add_child(image)
-		var step := UiTheme.label("CHAPTER  %02d" % [i + 1], 16, UiTheme.MUTED)
-		step.position = Vector2(18, 194)
-		step.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		button.add_child(step)
-		var name_label := UiTheme.heading(_chapter_name(i), 25)
-		name_label.position = Vector2(18, 221)
-		name_label.size = Vector2(245, 68)
-		name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		button.add_child(name_label)
-		var state := UiTheme.heading("", 20)
-		state.position = Vector2(18, 296)
-		state.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		button.add_child(state)
-		_card_states.append(state)
-		if button.disabled:
-			var locked := UiTheme.heading("LOCKED", 25, UiTheme.CREAM)
-			locked.position = Vector2(76, 80)
-			locked.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			button.add_child(locked)
-	var panel := PanelContainer.new()
-	panel.position = Vector2(54, 577)
-	panel.size = Vector2(1172, 104)
-	panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 3, 22, 15))
-	_chapters.add_child(panel)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 24)
-	panel.add_child(row)
-	var col := VBoxContainer.new()
-	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(col)
-	_map_title = UiTheme.heading("", 30)
-	col.add_child(_map_title)
-	_map_detail = UiTheme.label("", 18, UiTheme.MUTED)
-	col.add_child(_map_detail)
-	_map_play = _button("Play chapter  ▶", func(): play(_selected_chapter))
-	_map_play.custom_minimum_size = Vector2(250, 64)
-	UiTheme.primary(_map_play)
-	row.add_child(_map_play)
-	var keys := UiTheme.label("← → / Tab  Select   ·   1–4  Chapter   ·   P  Play   ·   I  Opening   ·   Esc  Back   ·   F1 / H  Help", 16, Color("e7d8ef"))
-	keys.position = Vector2(59, 692)
-	keys.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_chapters.add_child(keys)
+	_play_buttons = _map_view.buttons
+	_chapter_back = _map_view.back
+	_opening_button = _map_view.opening_button
+	_map_play = _map_view.play_button
+	_map_title = _map_view.stage_name
+	_map_detail = _map_view.stage_detail
+	_chapter_footer = _map_view.footer
+	_chapter_shortcuts = _map_view.shortcuts
+	_map_view.chapter_selected.connect(_select_chapter)
+	_map_view.play_requested.connect(func(): play(_selected_chapter))
+	_map_view.back_requested.connect(_close_chapters)
+	_map_view.opening_requested.connect(_open_story)
+	_map_view.rooms_requested.connect(_open_rooms)
+	for i in _play_buttons.size():
+		_play_buttons[i].focus_entered.connect(_select_chapter.bind(i))
 	_select_chapter(_latest_unlocked())
 	_chapters.hide()
 
@@ -284,14 +204,11 @@ func _select_chapter(index: int) -> void:
 	_map_title.text = _chapter_name(index)
 	_map_detail.text = "Stage %d / %d" % [index + 1, Progress.LEVELS.size()]
 	if Progress.is_cleared(index):
-		_map_detail.text += "  ·  Best %s  ·  %d deaths" % [Progress.format_time(Progress.best_time(index)), Progress.best_deaths(index)]
-	for i in _play_buttons.size():
-		var button := _play_buttons[i]
-		button.add_theme_stylebox_override("normal", UiTheme.button_skin(UiTheme.GOLD if i == index else UiTheme.CREAM))
-		button.add_theme_stylebox_override("hover", UiTheme.button_skin(Color("fff0af"), true))
-		button.add_theme_stylebox_override("pressed", UiTheme.button_skin(Color("edc95d"), false, true))
-		_card_states[i].text = "Complete chapter %d" % i if button.disabled else ("Selected  ✓" if i == index else "Choose chapter  →")
-		_card_states[i].add_theme_color_override("font_color", UiTheme.MUTED if button.disabled else UiTheme.INK)
+		var deaths := Progress.best_deaths(index)
+		_map_detail.text += "  |  Best %s  |  %d %s" % [Progress.format_time(Progress.best_time(index)), deaths, "death" if deaths == 1 else "deaths"]
+	var names: Array[String] = []
+	for i in Progress.LEVELS.size(): names.append(_chapter_name(i))
+	_map_view.refresh(index, names)
 
 func _latest_unlocked() -> int:
 	for i in range(Progress.LEVELS.size() - 1, -1, -1):
@@ -301,15 +218,17 @@ func _latest_unlocked() -> int:
 func _focus_latest() -> void:
 	UiTheme.focus_if_visible.call_deferred(_play_buttons[_latest_unlocked()] if _chapters.visible else _start_button)
 
-func _open_chapters() -> void:
+func _open_chapters(selected: int = -1) -> void:
 	if _controls.visible: return
 	for b in _menu_buttons: b.focus_mode = Control.FOCUS_NONE
 	_chapters.show()
-	_select_chapter(_latest_unlocked())
+	_select_chapter(selected if Progress.is_unlocked(selected) else _latest_unlocked())
 	var enabled: Array[Button] = []
 	for b in _play_buttons:
 		if not b.disabled: enabled.append(b)
 	enabled.append_array([_map_play, _opening_button, _chapter_back])
+	if _map_view.rooms_button.visible: enabled.append(_map_view.rooms_button)
+	for b in enabled: b.focus_mode = Control.FOCUS_ALL
 	UiTheme.focus_loop(enabled)
 	for i in _play_buttons.size():
 		var b := _play_buttons[i]
@@ -320,49 +239,150 @@ func _open_chapters() -> void:
 				b.set("focus_neighbor_" + side[0], _play_buttons[at].get_path())
 		b.focus_neighbor_bottom = _map_play.get_path()
 		b.focus_neighbor_top = _chapter_back.get_path()
-	_focus_latest()
+	UiTheme.focus_if_visible.call_deferred(_play_buttons[_selected_chapter])
 
 func _close_chapters() -> void:
 	_chapters.hide()
 	for b in _menu_buttons: b.focus_mode = Control.FOCUS_ALL
 	UiTheme.focus_if_visible.call_deferred(_chapters_button)
 
-func play(index: int) -> void:
-	if index >= 0 and index < Progress.LEVELS.size() and Progress.is_unlocked(index) and not _controls.visible:
-		if not Progress.has_seen_opening():
-			var opening := Opening.new()
-			opening.target_index = index
-			get_tree().root.add_child(opening)
-			get_tree().current_scene = opening
-			queue_free()
-		else:
-			get_tree().change_scene_to_file(Progress.LEVELS[index].path)
-
-func _watch_opening() -> void:
-	if _controls.visible: return
+func _enter_game() -> void:
+	if _controls.visible or _chapters.visible: return
+	if Progress.has_seen_opening():
+		_open_chapters()
+		return
+	Progress.mark_opening_seen()
 	var opening := Opening.new()
-	opening.return_to_menu = true
+	opening.return_to_chapters = true
 	get_tree().root.add_child(opening)
 	get_tree().current_scene = opening
 	queue_free()
+
+func play(index: int) -> void:
+	if index >= 0 and index < Progress.LEVELS.size() and Progress.is_unlocked(index) and not _controls.visible:
+		get_tree().change_scene_to_file(Progress.LEVELS[index].path)
+
+## Story and postgame room collections share a modal with a contained focus loop.
+func _open_collection(title: String, subtitle: String, kind: String) -> VBoxContainer:
+	_collection_return = get_viewport().gui_get_focus_owner()
+	_collection_kind = kind
+	for b in _menu_buttons + _play_buttons + [_map_play, _opening_button, _chapter_back, _map_view.rooms_button]:
+		b.focus_mode = Control.FOCUS_NONE
+	_collection_buttons.clear()
+	_collection = ColorRect.new()
+	_collection.color = Color(0.12, 0.07, 0.21, 0.72)
+	_collection.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(_collection)
+	var center := CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_collection.add_child(center)
+	var panel := PanelContainer.new()
+	panel.custom_minimum_size.x = 580
+	panel.add_theme_stylebox_override("panel", UiTheme.card(UiTheme.CREAM, UiTheme.INK, 4, 26, 24))
+	center.add_child(panel)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 14)
+	panel.add_child(box)
+	var heading := UiTheme.heading(title, 38)
+	box.add_child(heading)
+	var detail := UiTheme.label(subtitle, 19)
+	detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	detail.custom_minimum_size.x = 520
+	box.add_child(detail)
+	return box
+
+func _collection_button(box: VBoxContainer, text: String, action: Callable, locked := false) -> void:
+	var b := _button(text, action)
+	b.custom_minimum_size.y = 52
+	b.disabled = locked
+	box.add_child(b)
+	_collection_buttons.append(b)
+
+func _finish_collection(box: VBoxContainer) -> void:
+	_collection_button(box, "‹  Back", _close_collection)
+	var enabled: Array[Button] = []
+	for b in _collection_buttons:
+		if not b.disabled: enabled.append(b)
+	UiTheme.focus_loop(enabled)
+	UiTheme.focus_if_visible.call_deferred(enabled[0])
+
+func _open_story() -> void:
+	if _controls.visible or is_instance_valid(_collection): return
+	var box := _open_collection("Story", "Replay the story whenever you like.", "story")
+	_collection_button(box, "Opening  ·  39 sec", _replay_story.bind(false))
+	_collection_button(box, "Ending  ·  25 sec" if Progress.campaign_completed() else "Ending  ·  Complete all chapters to unlock", _replay_story.bind(true), not Progress.campaign_completed())
+	_finish_collection(box)
+
+func _replay_story(ending: bool) -> void:
+	if ending and not Progress.campaign_completed(): return
+	if ending: Progress.mark_ending_seen()
+	# Keep the map, destination and records in place beneath the replay.
+	var cg: Control = Ending.new() if ending else load("res://scenes/ui/storyboard_cutscene.gd").new()
+	if not ending: cg.shots = Opening.SHOTS
+	add_child(cg)
+	_collection.hide()
+	_collection.set_meta("cg", cg)
+	cg.finished.connect(func():
+		cg.queue_free()
+		_collection.show()
+		UiTheme.focus_if_visible.call_deferred(_collection_buttons[1 if ending else 0]))
+
+func _open_rooms() -> void:
+	if not Progress.campaign_completed() or _controls.visible or is_instance_valid(_collection): return
+	var chapter: Node = load(Progress.LEVELS[_selected_chapter].path).instantiate()
+	var box := _open_collection(Progress.LEVELS[_selected_chapter].title, "Choose a room. Replays keep chapter records unchanged.", "rooms")
+	var i := 0
+	for room in chapter.get_node("Rooms").get_children():
+		_collection_button(box, room.title, _play_room.bind(_selected_chapter, i))
+		i += 1
+	chapter.free()
+	_finish_collection(box)
+
+func _play_room(chapter_index: int, room_index: int) -> void:
+	if not Progress.campaign_completed() or chapter_index < 0 or chapter_index >= Progress.LEVELS.size(): return
+	var level: Level = load(Progress.LEVELS[chapter_index].path).instantiate()
+	if room_index < 0 or room_index >= level.get_node("Rooms").get_child_count():
+		level.free()
+		return
+	level.start_room = room_index
+	level.room_replay = true
+	var tree := get_tree()
+	tree.root.add_child(level)
+	tree.current_scene = level
+	queue_free()
+
+func _close_collection() -> void:
+	_collection.queue_free()
+	_collection = null
+	if _chapters.visible:
+		var selected := _selected_chapter
+		_open_chapters(selected)
+	else:
+		for b in _menu_buttons: b.focus_mode = Control.FOCUS_ALL
+	UiTheme.focus_if_visible.call_deferred(_collection_return if is_instance_valid(_collection_return) else _start_button)
 
 func _toggle_controls(tab: int = 3) -> void:
 	if _controls.visible:
 		_controls.dismiss()
 		return
 	_help_from_chapters = _chapters.visible
-	for b in _menu_buttons + _play_buttons + [_opening_button, _chapter_back, _map_play]: b.focus_mode = Control.FOCUS_NONE
+	for b in _menu_buttons + _play_buttons + [_opening_button, _chapter_back, _map_play, _map_view.rooms_button]: b.focus_mode = Control.FOCUS_NONE
 	_controls.open(tab)
 
 func _guide_closed() -> void:
 	for b in _menu_buttons + _play_buttons + [_opening_button, _chapter_back, _map_play]: b.focus_mode = Control.FOCUS_ALL
 	if _help_from_chapters:
-		_open_chapters()
+		_open_chapters(_selected_chapter)
 	else:
 		UiTheme.focus_if_visible.call_deferred(_controls_button)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _controls.visible: return
+	if is_instance_valid(_collection):
+		if event.is_action_pressed("ui_cancel"):
+			_close_collection()
+			get_viewport().set_input_as_handled()
+		return
 	if _quit_confirm and _quit_confirm.visible:
 		if event.is_action_pressed("ui_cancel"):
 			_close_quit_confirm()
@@ -374,7 +394,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("menu_opening"):
 		get_viewport().set_input_as_handled()
-		_watch_opening()
+		_open_story()
 		return
 	if _chapters.visible:
 		if event.is_action_pressed("menu_play"):

@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "direction": "Teammate Asset Library v1",
   "viewport": [
     1280,
@@ -255,7 +255,8 @@
       "sha256": "7350174388f4f75beb6fe4aa27d2aeeaeaf1c67d13d57136582dbb60ab94f5ea",
       "filter": "linear",
       "mipmaps": false,
-      "source": "built-in image_gen; see generation prompt JSON files"
+      "source": "built-in image_gen; see generation prompt JSON files",
+      "status": "superseded by scenes/enemies/assistant_doodle.gd"
     },
     {
       "path": "assets/art/ui/poster/title_interactive_backdrop.png",
@@ -267,7 +268,8 @@
       "sha256": "70f81241dd68310a54d0f35b7fc25e8b70745e2d7d248d6970cc299567cef9f8",
       "filter": "linear",
       "mipmaps": false,
-      "source": "built-in image_gen; see generation prompt JSON files"
+      "source": "built-in image_gen; see generation prompt JSON files",
+      "status": "Superseded and removed by the latest default-branch painted cover"
     },
     {
       "path": "assets/art/salon_v2/landing_background.png",
@@ -362,6 +364,93 @@
       "cleanup": "assets/art/characters/twin_tails/pull_cleanup.gdshader",
       "scale": 0.45,
       "collision": "unchanged 28x44 player body"
+    },
+    {
+      "path": "scenes/enemies/assistant_doodle.gd",
+      "format": "hand-authored native vector puppet",
+      "source": "project code",
+      "palette": "flat coral, lilac metal, purple ink, yellow eye",
+      "poses": [
+        "walk",
+        "shoot",
+        "windup",
+        "charge",
+        "rain",
+        "dazed",
+        "hurt",
+        "dead"
+      ],
+      "collision": "existing boss body and stomp target unchanged"
+    },
+    {
+      "path": "assets/fonts/SalonArrows.ttf",
+      "source": "tools/art/build_ui_symbols.py; original Noto sources in art_src/fonts",
+      "license": "SIL OFL 1.1, renamed subset",
+      "purpose": "Web symbols with UI-compatible line metrics"
+    },
+    {
+      "path": "assets/fonts/SalonIcons.ttf",
+      "source": "tools/art/build_ui_symbols.py; original Noto sources in art_src/fonts",
+      "license": "SIL OFL 1.1, renamed subset",
+      "purpose": "Web symbols with UI-compatible line metrics"
+    },
+    {
+      "path": "assets/art/ui/salon_map/map_clean.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "2a82985243cf1bc95b2eea7577bddb634a6ef109562f736c85566afc78337ce3",
+      "source": "Supplied SalonMap_Godot4_GameJam_Assets pack; original README and SVGs in art_src/ui/salon_map",
+      "integration": "scenes/ui/salon_map.gd; supplied transparent UI PNGs with separate live labels and existing campaign progress"
+    },
+    {
+      "path": "assets/art/ui/salon_map/map_neutral.png",
+      "source": "Built-in image edit of supplied map: remove baked friends and restore matching lavender platforms",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "13961ee5601483ce2a6fe13685e33b260d1d33be817b0473143a3542eadb2c50",
+      "integration": "scenes/ui/salon_map.gd; docs/art/salon_map.md"
+    },
+    {
+      "path": "assets/art/ui/salon_map/map_gold_platforms.png",
+      "source": "Aligned built-in image edit: four gold platform variants, revealed as selected-stage atlas regions",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "3b04e491197afe59e60cd0565fca947a451506f43400fee8fcf1b9c412cc022d",
+      "integration": "scenes/ui/salon_map.gd; docs/art/salon_map.md"
+    },
+    {
+      "path": "assets/art/ui/salon_map/friends_marker.png",
+      "source": "Built-in transparent extraction of the supplied map friends; runtime atlas and alpha cleanup",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "b1177941e20b43816be393e606f50d494701788982fcc6a67fdfb30010401d48",
+      "integration": "scenes/ui/salon_map.gd; docs/art/salon_map.md"
+    },
+    {
+      "path": "assets/art/ui/poster/title_cover.png",
+      "source": "Default branch de8a15b / title-reference commit 6d8ee23",
+      "sha256": "e593968fafc2f4be184512eec743336d6fbd52a89b4b93919d73399dd59308c6",
+      "integration": "scenes/ui/main_menu.gd; native painted controls without an extra focus frame"
+    },
+    {
+      "path": "assets/art/ui/poster/title_button_start.png",
+      "source": "Default branch de8a15b / title-reference commit 6d8ee23",
+      "sha256": "d870c4247fee3795a75063406a0636c6c3434b2c3430d45e8a0c7eecebedd657",
+      "integration": "scenes/ui/main_menu.gd; native painted controls without an extra focus frame"
+    },
+    {
+      "path": "assets/art/ui/poster/title_button_about.png",
+      "source": "Default branch de8a15b / title-reference commit 6d8ee23",
+      "sha256": "b9d8a6d75a742854db1db881f32788777c6f7fc9b62b8368e59eef9cc405f2cc",
+      "integration": "scenes/ui/main_menu.gd; native painted controls without an extra focus frame"
     }
   ]
 }

@@ -197,7 +197,7 @@ func _fight_wave(arena: WaveArena, max_ticks: int) -> bool:
 	return p1.alive and arena.robots_left() == 0
 
 
-## The boss fight as three rounds of its real chain: a parried scissor dazes the bot,
+## The boss fight as ten rounds of its real chain: a parried scissor dazes the bot,
 ## P1 (pompadour) launches P2 (twin-tails) off their head, P2 steers and glides onto
 ## the knob. Each round starts from a fixed setup next to the bot - a dodging,
 ## parrying bot strong enough to survive the whole fight on its own would test the
@@ -209,8 +209,11 @@ func _room_4() -> void:
 	var backup: WaveArena = room.get_node("Backup")
 	var floor_y: float = 19 * TILE - Player.HALF_SIZE.y
 	check(p1.ability is Pompadour, "R4: hair stays swapped in the boss room")
+	# Ten real launch/stomp cycles isolate the route from survival AI. Arena damage,
+	# wet/dry behavior and limited healing are covered separately in test_boss_encounter.
+	for player in [p1, p2]: player.make_invincible(180)
 
-	for round in 3:
+	for round in 10:
 		if not is_instance_valid(boss) or boss.hp <= 0:
 			break
 		await wait_until(func(): return boss.state == BarberBot.State.WALK, 300)
@@ -232,13 +235,13 @@ func _room_4() -> void:
 		var hp_before := boss.hp
 		await launch_and_stomp(p2, p1, boss)
 		check(not is_instance_valid(boss) or boss.hp < hp_before, "R4 round %d: launch + glide stomps its head" % (round + 1))
-		if round == 0:
-			check(boss.phase() == 2 and level.banner.text.begins_with("PHASE 2"), "R4: the first stomp starts phase 2 (banner)")
-			check(await wait_until(func(): return backup.robots_left() == 2, 120), "R4: phase 2 calls two backup robots through the corner vents")
-		elif round == 1:
-			check(boss.phase() == 3 and boss.shots == 5 and level.banner.text.begins_with("PHASE 3"), "R4: the second stomp makes it furious: phase 3, 5-scissor bursts")
+		if round == 3:
+			check(boss.phase() == 2 and level.banner.text.begins_with("PHASE 2"), "R4: health 6 starts phase 2 (banner)")
+			check(await wait_until(func(): return backup.robots_left() == 3, 160), "R4: phase 2 calls three backup robots through the vents")
+		elif round == 6:
+			check(boss.phase() == 3 and boss.shots == 5 and level.banner.text.begins_with("PHASE 3"), "R4: health 3 makes it furious: phase 3, 5-scissor bursts")
 		await _ticks(30)
-	check(not is_instance_valid(boss) or boss.hp <= 0, "R4: three stomps defeat the barber bot")
+	check(not is_instance_valid(boss) or boss.hp <= 0, "R4: ten stomps defeat the barber bot")
 	check(await wait_until(func(): return door.is_open, 60), "R4: defeating the bot opens the door")
 	await _ticks(2)
 	check(backup.robots_left() == 0, "R4: its backup robots power down with it")
@@ -268,16 +271,16 @@ func _boss_unit_checks() -> void:
 	boss.take_hit(1, 1.0)
 	check(boss.state != BarberBot.State.DAZED, "boss ignores a whip-sized stun")
 	boss.take_hit(1, 0.3, Vector2(300, 0))
-	check(boss.hp == 3, "boss ignores dash damage")
+	check(boss.hp == 10, "boss ignores dash damage")
 	boss.take_hit(1, 3.0)
 	check(boss.state == BarberBot.State.DAZED, "a parried scissor (3 s stun) dazes the boss")
 	p2.global_position = boss.global_position + Vector2(0, -BarberBot.SIZE.y - 80)
 	p2.velocity = Vector2.ZERO
-	check(await wait_until(func(): return boss.hp == 2, 90), "falling onto the knob while dazed is a stomp")
+	check(await wait_until(func(): return boss.hp == 9, 90), "falling onto the knob while dazed is a stomp")
 	await wait_until(func(): return boss.state == BarberBot.State.WALK, 120)
 	p2.global_position = boss.global_position + Vector2(0, -BarberBot.SIZE.y - 80)
 	await _ticks(60)
-	check(boss.hp == 2, "no stomp damage unless dazed")
+	check(boss.hp == 9, "no stomp damage unless dazed")
 	boss.state = BarberBot.State.CHARGE
 	boss._t = 5.0
 	check(await wait_until(func(): return boss.state == BarberBot.State.DAZED, 240), "a charge into the wall dazes the boss")

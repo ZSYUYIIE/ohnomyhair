@@ -1,7 +1,7 @@
 extends SceneTree
 ## Gate check: every room of the escape campaign is solvable by every
 ## haircut pair it allows. A room lists its obstacles as gates (each passable with any one
-## of a few verbs, StyleRules) and its chair's style set; every distinct pair from that set
+## of a few verbs, StyleRules) and its story haircut set; every distinct pair from that set
 ## must have a verb for every gate. This is the design contract behind the bot playthroughs:
 ## the bots prove one pair can do it, this proves no allowed pair is locked out.
 ## Run: godot --headless --path . --script res://tests/test_gates.gd
@@ -29,7 +29,7 @@ func _check_room(level_name: String, room: Room) -> void:
 	check(room.gates.size() > 0, "%s: lists its gates" % where)
 	check(room.starting_hair.size() == 2 and room.starting_hair[0] != room.starting_hair[1], "%s: starts with two different haircuts" % where)
 	check(room.styles.size() >= 2 and room.starting_hair[0] in room.styles and room.starting_hair[1] in room.styles,
-		"%s: its starting pair is one its chair offers" % where)
+		"%s: its starting pair belongs to the story haircut set" % where)
 	check(room.styles.size() == 2 and StyleRules.TT in room.styles and StyleRules.POMP in room.styles,
 		"%s: the story stays with Twin-Tails and Pompadour" % where)
 	for pair in StyleRules.pairs(room.styles):

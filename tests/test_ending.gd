@@ -55,7 +55,12 @@ func _run() -> void:
 	level = current_scene
 	check(level is Level and not paused and level.room_index == 0 and level.deaths == 0 and level.ending_cutscene == null, "Play again restarts the final chapter with fresh stats")
 	await clear_scene()
+	level = await finale()
+	level._after_clear(false, false, Progress.LEVELS.size() - 1)
+	check(level.ending_cutscene == null and level.menu.is_open() and Progress.has_seen_ending(), "later finale clears go directly to results with a persisted seen flag")
+	await clear_scene()
 	for kind in ["keyboard", "mouse", "controller", "button"]:
+		Progress.reset()
 		level = await finale()
 		level._after_clear(false, false, Progress.LEVELS.size() - 1)
 		ending = level.ending_cutscene
@@ -67,15 +72,19 @@ func _run() -> void:
 			var event: InputEvent
 			if kind == "keyboard":
 				event = InputEventKey.new()
-				event.keycode = KEY_SPACE
+				event.keycode = KEY_ESCAPE
 			elif kind == "mouse":
 				event = InputEventMouseButton.new()
 				event.button_index = MOUSE_BUTTON_LEFT
 			else:
 				event = InputEventJoypadButton.new()
-				event.button_index = JOY_BUTTON_A
+				event.button_index = JOY_BUTTON_B
 			event.pressed = true
-			Input.parse_input_event(event)
+			if kind == "mouse":
+				ending._shot_index = Ending.SHOTS.size() - 1
+				ending._gui_input(event)
+			else:
+				Input.parse_input_event(event)
 		await frames()
 		check(level.menu.is_open() and paused and level.ending_cutscene == null, "%s skips to results while gameplay remains paused" % kind)
 		level.menu.press("Main menu")

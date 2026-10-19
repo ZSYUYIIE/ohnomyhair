@@ -253,32 +253,34 @@ monitorable = false
 script = ExtResource("9_kxbgd")
 
 [node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=416656765]
-offset_left = 48.0
-offset_top = 400.0
-offset_right = 48.0
-offset_bottom = 400.0
+offset_left = 40.0
+offset_top = 300.0
+offset_right = 350.0
+offset_bottom = 376.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P2: parry scissors back with  L"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "{pomp}: {pomp.attack} parries scissors.\nSend the blue scissor to your friend."
 script = ExtResource("10_lky54")
-template = "{pomp}: parry scissors back with  {pomp.attack}"
+template = "{pomp}: {pomp.attack} parries scissors.\nSend the blue scissor to your friend."
 
 [node name="Hint10" type="Label" parent="Rooms/Room1" unique_id=604514293]
-offset_left = 420.0
-offset_top = 300.0
-offset_right = 420.0
-offset_bottom = 300.0
+offset_left = 440.0
+offset_top = 220.0
+offset_right = 830.0
+offset_bottom = 296.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P1: wait in the trench and HOLD G
-to catch the BLUE scissor - let go to toss it up"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "{tt}: hold {tt.skill} to catch blue scissors;\nrelease to toss them into the bell."
 script = ExtResource("10_lky54")
-template = "{tt}: wait in the trench and HOLD {tt.skill}
-to catch the BLUE scissor - let go to toss it up"
+template = "{tt}: hold {tt.skill} to catch blue scissors;\nrelease to toss them into the bell."
 
 [node name="Room2" type="Node2D" parent="Rooms" unique_id=763970059]
 position = Vector2(1280, 0)
@@ -475,14 +477,16 @@ script = ExtResource("9_kxbgd")
 
 [node name="Hint13" type="Label" parent="Rooms/Room2" unique_id=1891613147]
 offset_left = 440.0
-offset_top = 300.0
-offset_right = 440.0
-offset_bottom = 300.0
+offset_top = 270.0
+offset_right = 810.0
+offset_bottom = 346.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Two bells. The door needs both."
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Catch and toss into both ceiling bells."
 
 [node name="Players" type="Node2D" parent="." unique_id=481844226]
 

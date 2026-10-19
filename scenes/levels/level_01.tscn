@@ -93,76 +93,35 @@ collision_mask = 2
 monitorable = false
 script = ExtResource("12_e5bmj")
 
-[node name="Hint7" type="Label" parent="Rooms/Room1" unique_id=1202133120]
-offset_left = 48.0
-offset_top = 290.0
-offset_right = 48.0
-offset_bottom = 290.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P1:  A / D move   W jump        Twin-Tails (P1): HOLD G to glide"
-script = ExtResource("13_iqf6e")
-template = "P1:  A / D move   W jump        Twin-Tails ({tt}): HOLD {tt.skill} to glide"
-
-[node name="Hint8" type="Label" parent="Rooms/Room1" unique_id=663938458]
-offset_left = 48.0
-offset_top = 318.0
-offset_right = 48.0
-offset_bottom = 318.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P2:  arrow keys move & jump    Pompadour (P2): K to dash"
-script = ExtResource("13_iqf6e")
-template = "P2:  arrow keys move & jump    Pompadour ({pomp}): {pomp.skill} to dash"
-
 [node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=135307447]
-offset_left = 380.0
-offset_top = 236.0
-offset_right = 380.0
-offset_bottom = 236.0
+offset_left = 300.0
+offset_top = 220.0
+offset_right = 600.0
+offset_bottom = 296.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Hair-gel wall!
-P2: dash into it with  K"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "{pomp}: {pomp.skill} dashes through gel."
 script = ExtResource("13_iqf6e")
-template = "Hair-gel wall!
-{pomp}: dash into it with  {pomp.skill}"
+template = "{pomp}: {pomp.skill} dashes through gel."
 
 [node name="Hint10" type="Label" parent="Rooms/Room1" unique_id=1221174397]
-offset_left = 740.0
-offset_top = 190.0
-offset_right = 740.0
-offset_bottom = 190.0
+offset_left = 760.0
+offset_top = 220.0
+offset_right = 1130.0
+offset_bottom = 296.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Too far for P2...
-P1: jump, then HOLD G to glide"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Glide across together.\n{tt}: {tt.skill} pulls the lever on the far side."
 script = ExtResource("13_iqf6e")
-template = "Too far for {pomp}...
-{tt}: jump, then HOLD {tt.skill} to glide"
-
-[node name="Hint11" type="Label" parent="Rooms/Room1" unique_id=280483047]
-offset_left = 1040.0
-offset_top = 300.0
-offset_right = 1040.0
-offset_bottom = 300.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P1: press G
-at the lever"
-script = ExtResource("13_iqf6e")
-template = "{tt}: press {tt.skill}
-at the lever"
+template = "Glide across together.\n{tt}: {tt.skill} pulls the lever on the far side."
 
 [node name="Room2" type="Node2D" parent="Rooms" unique_id=2135062259]
 position = Vector2(1280, 0)
@@ -236,61 +195,33 @@ script = ExtResource("12_e5bmj")
 
 [node name="Hint7" type="Label" parent="Rooms/Room2" unique_id=1844044407]
 offset_left = 40.0
-offset_top = 330.0
-offset_right = 40.0
-offset_bottom = 330.0
+offset_top = 270.0
+offset_right = 390.0
+offset_bottom = 346.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Deadly hair dye!
-P1: stand next to P2 and HOLD G to grab,
-then jump from the high ledge"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "{tt}: hold {tt.skill} beside your friend to carry.\nJump from the high ledge and keep gliding."
 script = ExtResource("13_iqf6e")
-template = "Deadly hair dye!
-{tt}: stand next to {pomp} and HOLD {tt.skill} to grab,
-then jump from the high ledge"
-
-[node name="Hint8" type="Label" parent="Rooms/Room2" unique_id=2038341686]
-offset_left = 236.0
-offset_top = 500.0
-offset_right = 236.0
-offset_bottom = 500.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "^ take off here"
+template = "{tt}: hold {tt.skill} beside your friend to carry.\nJump from the high ledge and keep gliding."
 
 [node name="Hint9" type="Label" parent="Rooms/Room2" unique_id=456140751]
-offset_left = 612.0
-offset_top = 420.0
-offset_right = 612.0
-offset_bottom = 420.0
+offset_left = 740.0
+offset_top = 260.0
+offset_right = 1160.0
+offset_bottom = 336.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Too high!
-A Pompadour launches whoever
-stands on its head:  K"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Ride on Pompadour's head; {pomp.skill} launches.\n{tt}: {tt.skill} pulls the lever above."
 script = ExtResource("13_iqf6e")
-template = "Too high!
-A Pompadour launches whoever
-stands on its head:  {pomp.skill}"
-
-[node name="Hint10" type="Label" parent="Rooms/Room2" unique_id=828539448]
-offset_left = 880.0
-offset_top = 300.0
-offset_right = 880.0
-offset_bottom = 300.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P1: G pulls the lever"
-script = ExtResource("13_iqf6e")
-template = "{tt}: {tt.skill} pulls the lever"
+template = "Ride on Pompadour's head; {pomp.skill} launches.\n{tt}: {tt.skill} pulls the lever above."
 
 [node name="Room3" type="Node2D" parent="Rooms" unique_id=348211457]
 position = Vector2(2560, 0)
@@ -339,31 +270,20 @@ collision_mask = 2
 monitorable = false
 script = ExtResource("12_e5bmj")
 
-[node name="Hint6" type="Label" parent="Rooms/Room3" unique_id=1980947323]
-offset_left = 600.0
-offset_top = 40.0
-offset_right = 600.0
-offset_bottom = 40.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "This gel grows back!"
-
 [node name="Hint7" type="Label" parent="Rooms/Room3" unique_id=1859877254]
 offset_left = 40.0
-offset_top = 330.0
-offset_right = 40.0
-offset_bottom = 330.0
+offset_top = 270.0
+offset_right = 460.0
+offset_bottom = 346.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "P2 hanging from P1's hair:
-press  K  to get flung through"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Carry Pompadour, then {pomp.skill} for a sling dash.\nThe gel grows back: cross together."
 script = ExtResource("13_iqf6e")
-template = "{pomp} hanging from {tt}'s hair:
-press  {pomp.skill}  to get flung through"
+template = "Carry Pompadour, then {pomp.skill} for a sling dash.\nThe gel grows back: cross together."
 
 [node name="Players" type="Node2D" parent="." unique_id=1749853986]
 

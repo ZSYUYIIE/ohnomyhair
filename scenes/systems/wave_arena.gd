@@ -24,6 +24,10 @@ signal cleared
 @export var patrol_tiles := 3.0
 ## Hits a wave robot takes: 1 = one dash breaks it. A horde is about numbers, not toughness.
 @export var robot_hp := 1
+## Boss waves advance only on phase changes; later refills reuse the current wave.
+@export var manual_waves := false
+@export var max_robots := 0
+@export var roam_room := false
 
 const TILE := 32.0
 const WARN_TIME := 0.9
@@ -55,6 +59,7 @@ func _physics_process(delta: float) -> void:
 			_warning.erase(col)
 			_drop_robot(col)
 	queue_redraw()
+	if manual_waves: return
 	if is_cleared or wave >= waves.size() or not _started:
 		return
 	if _wait > 0.0:
@@ -77,9 +82,15 @@ func _physics_process(delta: float) -> void:
 
 ## Start the next wave now (a boss's call for backup).
 func start_next() -> void:
+	if is_cleared: return
 	_started = true
 	_wait = 0.0
 	_begin_wave(wave + 1)
+
+
+func reinforce() -> void:
+	if not is_cleared and wave >= 0 and _warning.is_empty():
+		_begin_wave(wave)
 
 
 func robots_left() -> int:
@@ -89,6 +100,8 @@ func robots_left() -> int:
 
 ## The fight is over (a boss went down): scrap whatever is still running.
 func scrap_all() -> void:
+	is_cleared = true
+	_started = false
 	_warning.clear()
 	for r in robots:
 		if is_instance_valid(r):
@@ -101,8 +114,12 @@ func _begin_wave(index: int) -> void:
 		return
 	wave = index
 	var w: Dictionary = waves[index]
+	var slots := maxi(0, max_robots - robots_left() - _warning.size()) if max_robots > 0 else 999
 	for col in w.get("drops", []):
+		if slots <= 0: break
+		if _warning.has(col): continue
 		_warning[col] = WARN_TIME
+		slots -= 1
 	if not w.get("drops", []).is_empty():
 		Sound.play("wave_alarm" if auto_start else "robot_drop", 0.0)
 	# Every hazard woken so far comes back on, plus this wave's new ones.
@@ -117,6 +134,10 @@ func _drop_robot(col: int) -> void:
 	bot.position = position + Vector2(col * TILE + TILE / 2.0, (vent_row + 1) * TILE + ClipperBot.SIZE.y)
 	bot.patrol_range = patrol_tiles * TILE
 	bot.hp = robot_hp
+	if roam_room:
+		bot.use_platforms = true
+		bot.direction = 1.0 if col < 20 else -1.0
+		bot.speed = float(waves[wave].get("speed", 100.0))
 	get_parent().add_child(bot)
 	robots.append(bot)
 

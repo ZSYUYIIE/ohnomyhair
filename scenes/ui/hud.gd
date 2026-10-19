@@ -4,7 +4,9 @@ extends CanvasLayer
 ## during camera pans. Each player card follows their current haircut and skill keys.
 
 const CARD_W := 330.0
-const CARD_H := 56.0
+const CARD_H := 68.0
+const FOOTER_HEIGHT := 88.0
+var _cards: HBoxContainer
 
 var level: Level
 var _names := {}
@@ -23,16 +25,28 @@ func _ready() -> void:
 	root.theme = UiTheme.get_theme()
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(root)
-	for rect in [Rect2(0, 0, 64, 648), Rect2(1216, 0, 64, 648), Rect2(0, 648, 1280, 72)]:
+	var room_height := 720.0 - FOOTER_HEIGHT
+	var side_width := (1280.0 - 1280.0 * room_height / 720.0) / 2.0
+	for rect in [Rect2(0, 0, side_width, room_height), Rect2(1280.0 - side_width, 0, side_width, room_height), Rect2(0, room_height, 1280, FOOTER_HEIGHT)]:
 		var matte := ColorRect.new()
 		matte.position = rect.position
 		matte.size = rect.size
-		matte.color = UiTheme.WOOD if rect.position.y >= 648 else Color("49344e")
+		matte.color = UiTheme.WOOD if rect.position.y >= room_height else Color("49344e")
 		matte.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		root.add_child(matte)
-	for id in [1, 2]:
-		root.add_child(_player_card(id))
-	root.add_child(_stage_card())
+	_cards = HBoxContainer.new()
+	_cards.name = "HudCards"
+	_cards.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	_cards.offset_left = 8
+	_cards.offset_right = -8
+	_cards.offset_top = -CARD_H - 10
+	_cards.offset_bottom = -10
+	_cards.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_cards.add_theme_constant_override("separation", 12)
+	root.add_child(_cards)
+	_cards.add_child(_player_card(1))
+	_cards.add_child(_stage_card())
+	_cards.add_child(_player_card(2))
 
 
 func _process(_delta: float) -> void:
@@ -60,14 +74,7 @@ func _player_card(id: int) -> Control:
 	var panel := _plate()
 	var left := id == 1
 	panel.add_theme_stylebox_override("panel", UiTheme.card(Color("ffe6ef") if left else Color("e1f2fc"), UiTheme.INK, 3, 18, 6))
-	panel.anchor_left = 0.0 if left else 1.0
-	panel.anchor_right = panel.anchor_left
-	panel.anchor_top = 1.0
-	panel.anchor_bottom = 1.0
-	panel.offset_left = 8.0 if left else -CARD_W - 8.0
-	panel.offset_right = panel.offset_left + CARD_W
-	panel.offset_top = -CARD_H - 6.0
-	panel.offset_bottom = -6.0
+	panel.custom_minimum_size = Vector2(CARD_W, CARD_H)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 10)
 	panel.add_child(row)
@@ -81,6 +88,7 @@ func _player_card(id: int) -> Control:
 	var top := HBoxContainer.new()
 	col.add_child(top)
 	_names[id] = UiTheme.heading("P%d" % id, 19)
+	_names[id].clip_text = true
 	_names[id].size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(_names[id])
 	_hearts[id] = HeartBar.new()
@@ -93,14 +101,8 @@ func _player_card(id: int) -> Control:
 
 func _stage_card() -> Control:
 	var panel := _plate()
-	panel.anchor_left = 0.5
-	panel.anchor_right = 0.5
-	panel.anchor_top = 1.0
-	panel.anchor_bottom = 1.0
-	panel.offset_left = -290.0
-	panel.offset_right = 290.0
-	panel.offset_top = -CARD_H - 6.0
-	panel.offset_bottom = -6.0
+	panel.custom_minimum_size.y = CARD_H
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 0)
 	panel.add_child(col)
@@ -110,6 +112,7 @@ func _stage_card() -> Control:
 	col.add_child(_stage)
 	_stats = UiTheme.label("", 17, UiTheme.MUTED)
 	_stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_stats.clip_text = true
 	col.add_child(_stats)
 	return panel
 

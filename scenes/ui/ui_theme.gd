@@ -1,7 +1,7 @@
 class_name UiTheme
 extends RefCounted
 ## Shared look for menus and the HUD: cream salon cards with walnut borders,
-## pink focus ring (keyboard navigation must be visible).
+## gold keyboard focus and ink button borders.
 
 const INK := Color("2b2140")
 const CREAM := Color("fff5e3")
@@ -23,6 +23,7 @@ static func body_font() -> Font:
 	if not _body_font:
 		_body_font = FontVariation.new()
 		_body_font.base_font = preload("res://assets/fonts/Nunito.ttf")
+		_body_font.fallbacks = [preload("res://assets/fonts/SalonArrows.ttf"), preload("res://assets/fonts/SalonIcons.ttf")]
 		_body_font.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): 750.0}
 	return _body_font
 
@@ -31,6 +32,7 @@ static func heading_font() -> Font:
 	if not _heading_font:
 		_heading_font = FontVariation.new()
 		_heading_font.base_font = preload("res://assets/fonts/Fredoka.ttf")
+		_heading_font.fallbacks = [preload("res://assets/fonts/SalonArrows.ttf"), preload("res://assets/fonts/SalonIcons.ttf")]
 		_heading_font.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): 600.0}
 	return _heading_font
 
@@ -76,8 +78,7 @@ static func button_skin(fill: Color, hover := false, pressed := false) -> StyleB
 	s.border_width_bottom = 3 if pressed else 7
 	s.shadow_color = Color(0.12, 0.05, 0.20, 0.36)
 	s.shadow_size = 2 if pressed else 4
-	s.shadow_offset = Vector2(0, 1 if pressed else 6)
-	if hover: s.border_color = Color("9b426a")
+	s.shadow_offset = Vector2(0, 1 if pressed else (4 if hover else 6))
 	return s
 
 

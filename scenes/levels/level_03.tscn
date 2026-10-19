@@ -101,35 +101,31 @@ script = ExtResource("11_py8xv")
 
 [node name="Hint8" type="Label" parent="Rooms/Room1" unique_id=344102253]
 offset_left = 40.0
-offset_top = 330.0
-offset_right = 40.0
-offset_bottom = 330.0
+offset_top = 270.0
+offset_right = 380.0
+offset_bottom = 346.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Warm air lifts a glider:
-P1: jump + HOLD G in the dryer"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "{tt}: jump and hold {tt.skill}\nin warm air to rise."
 script = ExtResource("12_j1cpe")
-template = "Warm air lifts a glider:
-{tt}: jump + HOLD {tt.skill} in the dryer"
+template = "{tt}: jump and hold {tt.skill}\nin warm air to rise."
 
 [node name="Hint9" type="Label" parent="Rooms/Room1" unique_id=2039197746]
-offset_left = 520.0
-offset_top = 330.0
-offset_right = 520.0
-offset_bottom = 330.0
+offset_left = 550.0
+offset_top = 220.0
+offset_right = 910.0
+offset_bottom = 296.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "It lifts you both too!
-P1: grab P2, then glide into the dryer
-(P2 riding on P1's head goes up faster)"
-script = ExtResource("12_j1cpe")
-template = "It lifts you both too!
-{tt}: grab {pomp}, then glide into the dryer
-({pomp} riding on {tt}'s head goes up faster)"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Carry your friend into the warm air.\nRiding on your head rises faster."
 
 [node name="Room2" type="Node2D" parent="Rooms" unique_id=1521249640]
 position = Vector2(1280, 0)
@@ -208,31 +204,30 @@ monitorable = false
 script = ExtResource("11_py8xv")
 
 [node name="Hint9" type="Label" parent="Rooms/Room2" unique_id=1729618297]
-offset_left = 450.0
-offset_top = 170.0
-offset_right = 450.0
-offset_bottom = 170.0
+offset_left = 400.0
+offset_top = 180.0
+offset_right = 760.0
+offset_bottom = 256.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Wet tails can't glide - or carry!
-Go between sprays.
-Soaked? Step down, hair dries."
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Wet tails cannot glide or carry.\nCross between sprays."
 
 [node name="Hint10" type="Label" parent="Rooms/Room2" unique_id=1299798508]
-offset_left = 900.0
+offset_left = 870.0
 offset_top = 200.0
-offset_right = 900.0
-offset_bottom = 200.0
+offset_right = 1220.0
+offset_bottom = 276.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "A soggy pompadour
-bounces off gel.
-Dry off in the dryer,
-then cross between sprays"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Wet Pompadour cannot break gel.\nUse the dryer first."
 
 [node name="Room3" type="Node2D" parent="Rooms" unique_id=990349998]
 position = Vector2(2560, 0)
@@ -301,33 +296,17 @@ monitorable = false
 script = ExtResource("11_py8xv")
 
 [node name="Hint8" type="Label" parent="Rooms/Room3" unique_id=300014722]
-offset_left = 296.0
-offset_top = 262.0
-offset_right = 296.0
-offset_bottom = 262.0
+offset_left = 240.0
+offset_top = 220.0
+offset_right = 640.0
+offset_bottom = 296.0
+mouse_filter = 2
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Carry P2 up the warm air.
-Soaked? You drop back in -
-wait for the spray to stop"
-script = ExtResource("12_j1cpe")
-template = "Carry {pomp} up the warm air.
-Soaked? You drop back in -
-wait for the spray to stop"
-
-[node name="Hint9" type="Label" parent="Rooms/Room3" unique_id=592225890]
-offset_left = 560.0
-offset_top = 300.0
-offset_right = 560.0
-offset_bottom = 300.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.23137255, 0.19607843, 0.2509804, 1)
-theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.85)
-theme_override_constants/outline_size = 6
-text = "Fly the moment
-the spray stops!"
+theme_override_colors/font_color = Color(0.23, 0.19, 0.25, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.94, 0.9)
+theme_override_constants/outline_size = 4
+autowrap_mode = 3
+text = "Carry your friend up the warm air.\nCross when the shower stops."
 
 [node name="Players" type="Node2D" parent="." unique_id=162234760]
 

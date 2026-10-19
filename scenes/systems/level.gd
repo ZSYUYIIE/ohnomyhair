@@ -13,6 +13,8 @@ signal replaced(fresh: Level)
 @export_file("*.tscn") var next_level := ""
 ## Handy while building: start the level in a later room.
 @export var start_room := 0
+## Postgame single-room practice; never writes campaign records or plays the ending.
+var room_replay := false
 @export var level_title := ""
 ## Shown after the last room of the last level, above the results.
 @export_multiline var ending_text := ""
@@ -35,33 +37,31 @@ var _banner_tween: Tween
 
 ## Handed from a level to its fresh copy across restart_room().
 static var _carry_over := {}
-const StyleMenu := preload("res://scenes/ui/styling_menu.gd")
-const StyleChair := preload("res://scenes/props/styling_chair.gd")
 const Ending := preload("res://scenes/ui/ending_cutscene.gd")
 var ending_cutscene: Control
-var styling_menu: CanvasLayer
-var _active_chair: Area2D
-var _checkpoint := {}
 ## level_time when the current room (re)started, for the play log's room times.
 var _room_t0 := 0.0
 
 
 func _ready() -> void:
-	# Fit the entire 1280 x 720 room above a dedicated 72 px HUD footer.
+	# Fit the entire room above the HUD's reserved footer, including both text rows.
 	# Keep a uniform scale and center it horizontally; physics stays in room units.
-	camera.zoom = Vector2(0.9, 0.9)
-	camera.offset = Vector2(-64.0 / 0.9, 0.0)
+	var room_scale := (720.0 - Hud.FOOTER_HEIGHT) / 720.0
+	var side_margin := (1280.0 - 1280.0 * room_scale) / 2.0
+	camera.zoom = Vector2.ONE * room_scale
+	camera.offset = Vector2(-side_margin / room_scale, 0.0)
 	add_child(Hud.new())
 	menu = LevelMenu.new()
 	add_child(menu)
 	menu.chosen.connect(_on_menu_chosen)
-	styling_menu = StyleMenu.new()
-	add_child(styling_menu)
-	styling_menu.styles_chosen.connect(_save_styles)
-	styling_menu.closed.connect(func(): get_tree().paused = false)
 	# The banner sits below the top edge, clear of the ceiling bells.
-	banner.offset_top = 70.0
-	banner.offset_bottom = 190.0
+	banner.offset_left = 120.0
+	banner.offset_right = -120.0
+	banner.offset_top = 74.0
+	banner.offset_bottom = 138.0
+	banner.add_theme_font_size_override("font_size", 24)
+	banner.add_theme_constant_override("outline_size", 4)
+	banner.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	for room in $Rooms.get_children():
 		rooms.append(room)
 		room.exit.both_inside.connect(_on_room_cleared.bind(room))
@@ -73,7 +73,7 @@ func _ready() -> void:
 		start_room = _carry_over.room
 		level_time = _carry_over.time
 		deaths = _carry_over.deaths
-		_checkpoint = _carry_over.get("checkpoint", {})
+		room_replay = _carry_over.get("room_replay", false)
 	else:
 		# `godot ... -- --room=3` starts in room 3 (1-based) without editing the scene.
 		for arg in OS.get_cmdline_user_args():
@@ -84,8 +84,9 @@ func _ready() -> void:
 	_activate_room(room_index)
 	camera.position = rooms[room_index].position
 	_place_players()
-	_install_stations()
-	show_banner(level_title + "\n" + rooms[room_index].title)
+	# Room names already live in the HUD. Reserve banners for actual events.
+	banner.text = ""
+	banner.modulate.a = 0.0
 	_log_room_start(restarted)
 
 
@@ -135,12 +136,19 @@ func _on_menu_chosen(action: String) -> void:
 		"restart":
 			restart_room()
 		"replay":
-			_checkpoint = {}
-			_load_fresh(0, 0.0, 0)
+			_load_fresh(room_index if room_replay else 0, 0.0, 0)
 		"next":
 			get_tree().change_scene_to_file(next_level)
 		"menu":
 			get_tree().change_scene_to_file(Progress.MAIN_MENU)
+		"rooms":
+			var map_menu: MainMenu = load(Progress.MAIN_MENU).instantiate()
+			var tree := get_tree()
+			tree.root.add_child(map_menu)
+			tree.current_scene = map_menu
+			map_menu._open_chapters(Progress.index_of(scene_file_path))
+			map_menu._open_rooms()
+			queue_free()
 
 
 ## Rebuild the whole level at the current room: enemies, props and the hair swap reset,
@@ -152,7 +160,7 @@ func restart_room() -> void:
 func _load_fresh(room: int, time: float, death_count: int) -> void:
 	get_tree().paused = false
 	Engine.time_scale = 1.0
-	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count, "checkpoint": _checkpoint.duplicate(true)}
+	_carry_over = {"path": scene_file_path, "room": room, "time": time, "deaths": death_count, "room_replay": room_replay}
 	var fresh: Level = load(scene_file_path).instantiate()
 	# Grab the tree first: once this level is removed from it, get_tree() returns null.
 	var tree := get_tree()
@@ -177,10 +185,7 @@ func _activate_room(index: int) -> void:
 func _place_players() -> void:
 	for player in players:
 		var at := rooms[room_index].spawn_point(player.player_id)
-		if _checkpoint.get("room", -1) == room_index:
-			player.set_hair(_checkpoint.hair[player.player_id - 1])
-			at = _checkpoint.positions[player.player_id - 1]
-		elif rooms[room_index].starting_hair.size() == 2:
+		if rooms[room_index].starting_hair.size() == 2:
 			player.set_hair(rooms[room_index].starting_hair[player.player_id - 1])
 		player.respawn_at(at)
 
@@ -192,6 +197,11 @@ func _on_room_cleared(room: Room) -> void:
 	Telemetry.log_event("room_clear", self, {"room_time": snappedf(level_time - _room_t0, 0.01)})
 	for player in players:
 		player.set_frozen(true)
+	if room_replay:
+		Sound.play("room_clear", 0.0)
+		get_tree().paused = true
+		menu.show_room_results(rooms[room_index].title, level_time, deaths)
+		return
 
 	if room_index == rooms.size() - 1:
 		Sound.play("level_clear", 0.0)
@@ -200,7 +210,6 @@ func _on_room_cleared(room: Room) -> void:
 	Sound.play("room_clear", 0.0)
 
 	room_index += 1
-	_checkpoint = {}
 	var pan := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	pan.tween_property(camera, "position", rooms[room_index].position, 0.7)
 	await pan.finished
@@ -208,7 +217,6 @@ func _on_room_cleared(room: Room) -> void:
 	_place_players()
 	for player in players:
 		player.set_frozen(false)
-	show_banner(rooms[room_index].title)
 	_log_room_start(false)
 	_busy = false
 
@@ -217,45 +225,6 @@ func _log_room_start(restarted: bool) -> void:
 	_room_t0 = level_time
 	Telemetry.log_event("room_start", self, {"restart": restarted,
 		"pair": [Player.HAIR_INFO[players[0].hair].name, Player.HAIR_INFO[players[1].hair].name]})
-
-
-func _install_stations() -> void:
-	for room in rooms:
-		if room.styles.size() < 2:
-			continue
-		var station := StyleChair.new()
-		station.level = self
-		station.name = "StylingStation"
-		station.position = (room.get_node("SpawnP1").position + room.get_node("SpawnP2").position) / 2 + Vector2(0, 22)
-		room.add_child(station)
-
-
-func open_styling(chair: Area2D) -> void:
-	if _busy or get_tree().paused or chair.get_parent() != rooms[room_index]: return
-	for player in players:
-		if not player.alive or player.global_position.distance_to(chair.global_position) > 160:
-			show_banner("Bring both friends to the styling chair", 1.5)
-			return
-	_active_chair = chair
-	get_tree().paused = true
-	styling_menu.open(players, rooms[room_index].styles)
-
-
-func _save_styles(styles: Array[int]) -> void:
-	get_tree().paused = false
-	if not is_instance_valid(_active_chair) or styles.size() != players.size(): return
-	# Two friends never share a haircut, and only the room's own styles are on offer.
-	if styles[0] == styles[1] or styles.any(func(s): return s not in rooms[room_index].styles): return
-	var positions: Array[Vector2] = []
-	for i in players.size():
-		players[i].set_hair(styles[i])
-		players[i].heal(players[i].max_hp)
-		players[i].dry()
-		# A restart resets the room's obstacles too. Use its authored safe starts:
-		# fixed offsets from the chair can land inside a tower or on a hot iron.
-		positions.append(rooms[room_index].spawn_point(players[i].player_id))
-	_checkpoint = {"room": room_index, "hair": styles.duplicate(), "positions": positions}
-	show_banner("Fresh styles. Room checkpoint saved!", 1.8)
 
 
 ## Last room cleared: record the time, show it in the banner, then keep the flow going
@@ -280,8 +249,9 @@ func _after_clear(has_next: bool, new_best: bool, index: int) -> void:
 	if ending_text != "":
 		show_banner(ending_text, 0.0)
 	get_tree().paused = true
-	if ending_text != "":
+	if ending_text != "" and not Progress.has_seen_ending():
 		# Keep the finished level and its stats; only the CG runs while gameplay is paused.
+		Progress.mark_ending_seen()
 		var overlay := CanvasLayer.new()
 		overlay.name = "EndingCG"
 		overlay.layer = 30

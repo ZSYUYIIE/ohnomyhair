@@ -8,16 +8,19 @@ const SIZE := Vector2(28, 24)
 @export var speed := 100.0
 @export var patrol_range := 96.0
 @export var hp := 2
+## Boss reinforcements land on the corner shelves, then walk off onto the floor.
+@export var use_platforms := false
 
 var direction := 1.0
 var stun := 0.0
 var _start_x := 0.0
+var _landed := false
 
 
 func _ready() -> void:
 	add_to_group("enemies")
 	collision_layer = Layers.ENEMIES
-	collision_mask = Layers.WORLD
+	collision_mask = Layers.WORLD | (Layers.PLATFORMS if use_platforms else 0)
 	Player.add_rect_shape(self, SIZE, Vector2(0, -SIZE.y / 2))
 	_start_x = global_position.x
 
@@ -27,6 +30,9 @@ func _physics_process(delta: float) -> void:
 	if stun > 0.0:
 		stun -= delta
 		velocity.x = move_toward(velocity.x, 0.0, 800.0 * delta)
+	elif use_platforms and not _landed:
+		# Fall into the announced shelf slot before beginning the full-width patrol.
+		velocity.x = 0.0
 	else:
 		if global_position.x > _start_x + patrol_range:
 			direction = -1.0
@@ -35,6 +41,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * speed
 		_hurt_touching_players()
 	move_and_slide()
+	if is_on_floor(): _landed = true
 	if is_on_wall() and stun <= 0.0:
 		direction *= -1.0
 	queue_redraw()
