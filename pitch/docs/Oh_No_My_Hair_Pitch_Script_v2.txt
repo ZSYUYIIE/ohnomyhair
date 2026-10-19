@@ -1,0 +1,111 @@
+OH NO MY HAIR - PITCH SCRIPT v2 (two voices)
+
+Read by the two of you, taking turns. A = ZSYUYIIE, B = ChenHongshan333 (swap freely).
+Same 18 scenes as v1, so the existing gameplay clips still fit.
+About 688 spoken words: about 4 minutes with the gameplay pauses.
+Lines in [brackets] are notes for you, not things to read out.
+
+-------------------------------------------------------------------
+01  On screen: Oh No My Hair / a co-op puzzle platformer for two
+
+A: Hi, we're NPC Union. I'm ZSYUYIIE.
+B: And I'm ChenHongshan333. We made this game in a 48-hour game jam where the theme was "Better Together".
+A: It's called Oh No My Hair. It's a puzzle platformer for two people sharing one keyboard, and neither of you can finish it alone.
+
+-------------------------------------------------------------------
+02  On screen: One snip too many
+
+B: Two friends get to a salon right before closing, and the barber leaves his robot assistant in charge.
+A: The robot cuts way too much. Their hair gets powers, the robot locks the front door, and the two of them have to find another way out.
+
+-------------------------------------------------------------------
+03  On screen: Twin-Tails
+
+A: Player one is Twin-Tails. She can glide and pull levers, and she can pick her friend up and fly with him.
+
+-------------------------------------------------------------------
+04  On screen: Pompadour
+
+B: Player two is Pompadour. He dashes through hair gel, knocks flying scissors back, and can launch his friend off the top of his head.
+A: Every room is built around something one of them can't do on their own.
+
+-------------------------------------------------------------------
+05  On screen: The sling
+
+A: This is our favourite move. Twin-Tails carries Pompadour over a pit and he throws himself out of her grip. He smashes through a wall of gel that grows back, and she has to glide through the hole before it closes.
+
+-------------------------------------------------------------------
+06  On screen: Return to sender
+
+B: The enemy's scissors end up helping you. Pompadour knocks one back, Twin-Tails catches it in her pigtails and throws it straight up into a service bell. Ring the bell and the next door opens.
+
+-------------------------------------------------------------------
+07  On screen: Wash and blow-dry
+
+A: The salon gets in your way too. Wet hair from the shampoo showers stops working, so Twin-Tails can't glide and Pompadour bounces off the gel.
+B: A hair dryer fixes that, and its hot air lifts you up.
+
+-------------------------------------------------------------------
+08  On screen: The assistant
+
+B: At the end you fight the assistant itself. It throws scissors, charges across the room and calls in backup robots.
+A: You stun it with its own scissors or by tricking it into a wall, then one of you lands on its head. Get hit and it can swap your haircuts, so suddenly you have each other's powers.
+
+-------------------------------------------------------------------
+09  On screen: Talk to each other
+
+A: Both players have to matter in every room, so you end up shouting "carry me" and "wait for the water" at the person next to you. That's our favourite part.
+
+-------------------------------------------------------------------
+10  On screen: Who it's for
+
+B: It's for friends, siblings and couples who like puzzles. You only need one keyboard and a browser.
+
+-------------------------------------------------------------------
+11  On screen: Games like it
+
+A: There are already good co-op puzzle games. PICO PARK 2 is built for groups of two to eight, and ibb and obb is a two-player game about gravity.
+B: Ours is smaller, and each of you has a power the other one doesn't. We still have to find out whether people want that.
+
+-------------------------------------------------------------------
+12  On screen: Playable now
+
+B: The prototype is finished and playable on itch.io: four chapters, twelve rooms and a boss with three phases, with saved progress.
+
+-------------------------------------------------------------------
+13  On screen: What it costs (US$17,200 and four bars)
+
+A: To polish it and launch on Steam in twelve weeks, we need about seventeen thousand two hundred US dollars.
+B: Eight thousand eight hundred pays the two of us sixteen hundred a month each. That's the low end for small indie teams.
+A: Four thousand two hundred buys freelance art, music and sound.
+B: Thirteen hundred covers the Steam fee, playtests, tools, store art and a trailer.
+A: And the last twenty-nine hundred is a twenty percent buffer.
+
+-------------------------------------------------------------------
+14  On screen: If we raise nothing (US$900 fallback, where the rest could come from)
+
+B: If we raise nothing, we still ship a smaller version on about nine hundred dollars of our own savings.
+A: For the full version, we'd cover the production costs ourselves and run a small Kickstarter for our pay. Any prize money would be a bonus.
+[Kickstarter needs one of you to live in one of its 25 supported countries. If neither of you does, say "pre-orders and itch.io sales" instead.]
+
+-------------------------------------------------------------------
+15  On screen: Twelve weeks
+
+B: Weeks one to four are playtests and fixing the tutorial. Weeks five to eight are polish, and the Steam page goes up by week eight. Weeks nine to twelve are accessibility, bug fixes and the release.
+
+-------------------------------------------------------------------
+16  On screen: How we'll know it works
+
+A: Next we want to watch twenty pairs play. We'll check whether they finish the tutorial without help, where they get stuck and whether they want one more room.
+B: The game already logs where players die, and bots that play with human-sized mistakes flag rooms that need perfect timing. We haven't tested with outside players yet, so those are goals for now.
+
+-------------------------------------------------------------------
+17  On screen: NPC Union / ChenHongshan333 / ZSYUYIIE
+
+B: That's us, NPC Union. We're looking for playtesters, feedback and mentoring to get this finished.
+
+-------------------------------------------------------------------
+18  On screen: Oh No My Hair / Bad hair. Good friends. / QR code
+
+A: Scan the code, grab a friend and give it a go.
+B: Thanks for watching.

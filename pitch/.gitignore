@@ -1,0 +1,6 @@
+out/
+editor/node_modules/
+.venv*/
+cb_cache/
+voice_samples/
+__pycache__/
