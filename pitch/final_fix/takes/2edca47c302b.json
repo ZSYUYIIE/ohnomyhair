@@ -1,7 +1,7 @@
 {
   "recording": "hs_audio.m4a (6:54), ChenHongshan333, 2026-10-20",
   "model": "medium.en",
-  "notes": "Seconds in the recording. Where a section was read more than once the last complete take is used; spoken notes such as 'I'll say that again' are left out. market and costs borrow their last sentence from the first take, which the re-read skipped. text is what is said (the captions).",
+  "notes": "Seconds in the recording. Where a section was read more than once the last complete take is used; spoken notes such as 'I'll say that again' are left out. market borrows its last sentence from the first take, which the re-read skipped. costs leaves out 'Online multiplayer is outside this scope.' (online multiplayer is planned). text is what is said (the captions).",
   "scenes": {
     "hook": {"keep": [[1.55, 10.98]], "text": "What if your worst haircut became your best escape plan? This is Oh No My Hair, a two-player cooperative puzzle platformer by NPC Union."},
     "story": {"keep": [[12.68, 34.2]], "text": "Imagine two friends visit a salon at closing time. The barber just leaves his robot assistant in charge. Then the scissors suddenly go wrong, their hair gains unexpected powers, and the front door just locks. That means you have to escape from the house, and moreover, escaping means learning to trust each other."},
@@ -16,7 +16,7 @@
     "market": {"keep": [[252.72, 265.72], [243.98, 246.34]], "text": "PICO PARK 2 serves larger cooperative groups. Ibb and Obb explores two-player gravity puzzles. Our niche, on the other hand, is two asymmetric hair abilities, combination moves, and a compact salon escape. We still need to validate the demand."},
     "prototype": {"keep": [[284.6, 300.99]], "text": "The prototype has 4 chapters, 12 rooms, a 3-phase boss, story sequences, saved progression and room replay. It is now publicly playable on itch.io. Future expansion will depend on testing with more pairs."},
     "budget": {"keep": [[303.47, 318.76]], "text": "Our indicative budgets are 20,000 US dollars for a 12-week minimum version, 60,000 for 24 weeks, or 120,000 for an expanded 36-week scope. These are planning estimates, not funding raised."},
-    "costs": {"keep": [[338.95, 347.84], [331.1, 333.65]], "text": "The minimum allocates 12,000 to development, 3,000 to art and audio, 1,000 to testing and tools, and 4,000 to contingency. Online multiplayer is outside this scope."},
+    "costs": {"keep": [[338.95, 347.84]], "text": "The minimum allocates 12,000 to development, 3,000 to art and audio, 1,000 to testing and tools, and 4,000 to contingency."},
     "roadmap": {"keep": [[350.05, 364.19]], "text": "Weeks 1 to 4: playtests and onboarding. Weeks 5 to 8: polish rooms, controls, and visual feedback. Weeks 9 to 12: accessibility checks, bug fixing, and release preparation. Expansion follows player evidence."},
     "validation": {"keep": [[376.35, 389.03]], "text": "Next, we plan to test 20 player pairs, tracking unaided tutorial completion, repeated failure points, and willingness to play another room. These are future validation targets, not achieved audience metrics."},
     "team": {"keep": [[391.08, 400.29]], "text": "We are NPC Union: ChenHongshan333 and ZSYUYIIE. We are seeking playtest feedback and incubation support to polish this cooperative experience."},
