@@ -1,0 +1,67 @@
+{
+  "key": "46e94dac68a77524ca9725b9e4fc38a27ec26031e08ec9957781941f80b1d755",
+  "voice": "en-US-AnaNeural",
+  "seconds": 8.352,
+  "words": [
+    {
+      "text": "Oh",
+      "start": 0.099,
+      "end": 0.319583
+    },
+    {
+      "text": "No",
+      "start": 0.331875,
+      "end": 0.61375
+    },
+    {
+      "text": "My",
+      "start": 0.626,
+      "end": 0.834333
+    },
+    {
+      "text": "Hair",
+      "start": 0.846583,
+      "end": 1.275499
+    },
+    {
+      "text": "A",
+      "start": 2.120333,
+      "end": 2.242874
+    },
+    {
+      "text": "two-player",
+      "start": 2.255166,
+      "end": 2.904666
+    },
+    {
+      "text": "puzzle",
+      "start": 2.916916,
+      "end": 3.345832
+    },
+    {
+      "text": "platformer",
+      "start": 3.358083,
+      "end": 4.105624
+    },
+    {
+      "text": "Bad",
+      "start": 4.951,
+      "end": 5.281875
+    },
+    {
+      "text": "hair",
+      "start": 5.294125,
+      "end": 5.747541
+    },
+    {
+      "text": "Good",
+      "start": 6.593125,
+      "end": 6.850458
+    },
+    {
+      "text": "friends",
+      "start": 6.86275,
+      "end": 7.51225
+    }
+  ]
+}

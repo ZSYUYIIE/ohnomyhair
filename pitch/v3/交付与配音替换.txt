@@ -1,0 +1,30 @@
+Oh No My Hair — pitch v3
+
+成片时长：4 分 12.63 秒，1920×1080，30fps。
+主片：pitch/videos/Oh_No_My_Hair_Pitch_v3.mp4
+本次工作分支：feat/pitch-v3
+
+这一版采用英文双人 AI 临时配音。开场直接展示合作动作，随后解释
+角色分工、甩投、剪刀接力、洗吹与换发型，接到 Boss 配合。
+后半段说明现有原型、目标玩家、团队、测试计划和预算，结尾可扫码试玩。
+20 对玩家、12 周和 USD 17,200 都是后续计划，没有当成已有成绩。
+
+后期统一换真人配音：
+1. 将 videos/Oh_No_My_Hair_Pitch_v3_Clean.mp4 导入剪辑软件。
+   这是同样剪辑、无字幕、无音轨的画面。
+2. 将本目录 Oh_No_My_Hair_v3_Music_Effects.wav 放在时间轴零秒。
+3. 按 read_aloud.txt 录制真人配音并替换临时人声。
+4. 导入 videos/Oh_No_My_Hair_Pitch_v3.en.srt，按真人语速调整字幕。
+   storyboard.txt 提供每段开始时间和录音台词。
+
+想保留临时配音、只去掉音乐，可使用 NoBGM.mp4。
+现有 AI 人声完整分轨是 Oh_No_My_Hair_v3_Voiceover.wav。
+每段和每句的声音还保留在 editor/public/v3/voice/。
+
+可编辑工程在 pitch/editor/src/v3/。
+在 pitch/editor 运行 npm run dev:v3 可打开 Remotion；合成名为
+OhNoMyHairPitchV3。详细重建步骤、录屏来源、技能引用见 README.txt。
+
+录屏来自本项目的真实 Godot 渲染与物理，由测试机器人提供确定输入。
+Boss 片段安排了起点、入射剪刀与免伤，随后使用真实技能和碰撞结算；
+这是玩法演示，不是无辅助的人类通关或外部试玩数据。

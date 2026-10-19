@@ -1,0 +1,1177 @@
+{
+  "fps": 30,
+  "frames": 7579,
+  "scenes": {
+    "hook": {
+      "id": "hook",
+      "title": "Throw me!",
+      "minimum": 15,
+      "lead": 0,
+      "kind": "hook",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Ready?",
+          "at": 0.4
+        },
+        {
+          "speaker": "B",
+          "text": "Throw me!",
+          "at": 1.5
+        },
+        {
+          "speaker": "A",
+          "text": "Oh No My Hair. A two-player puzzle platformer where your haircut is your way out.",
+          "at": 7
+        }
+      ],
+      "from_frame": 0,
+      "frames": 450,
+      "captions": [
+        {
+          "text": "Ready?",
+          "startMs": 473,
+          "endMs": 900,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Throw me!",
+          "startMs": 1585,
+          "endMs": 2183,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Oh No My Hair.",
+          "startMs": 7049,
+          "endMs": 7974,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "A two-player puzzle platformer where your haircut",
+          "startMs": 8262,
+          "endMs": 10665,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "is your way out.",
+          "startMs": 10665,
+          "endMs": 11700,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 11.968,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.4,
+          "end": 1.1680000000000001,
+          "speaker": "A",
+          "text": "Ready?"
+        },
+        {
+          "line": 2,
+          "start": 1.5,
+          "end": 2.436,
+          "speaker": "B",
+          "text": "Throw me!"
+        },
+        {
+          "line": 3,
+          "start": 7.0,
+          "end": 11.968,
+          "speaker": "A",
+          "text": "Oh No My Hair. A two-player puzzle platformer where your haircut is your way out."
+        }
+      ]
+    },
+    "story": {
+      "id": "story",
+      "title": "One snip too many",
+      "minimum": 12,
+      "lead": 0.5,
+      "kind": "story",
+      "lines": [
+        {
+          "speaker": "B",
+          "text": "Two friends visit a salon. The robot assistant cuts too much, their hair gets powers, and the front door locks. Now they have to escape together."
+        }
+      ],
+      "from_frame": 450,
+      "frames": 360,
+      "captions": [
+        {
+          "text": "Two friends visit a salon.",
+          "startMs": 585,
+          "endMs": 2190,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "The robot assistant cuts too much, their hair",
+          "startMs": 2478,
+          "endMs": 4954,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "gets powers, and the front door locks.",
+          "startMs": 4954,
+          "endMs": 7032,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Now they have to escape together.",
+          "startMs": 7320,
+          "endMs": 9047,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 8.784,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 8.784,
+          "speaker": "B",
+          "text": "Two friends visit a salon. The robot assistant cuts too much, their hair gets powers, and the front door locks. Now they have to escape together."
+        }
+      ]
+    },
+    "roles": {
+      "id": "roles",
+      "title": "Two haircuts. Two jobs.",
+      "minimum": 17,
+      "lead": 0.5,
+      "kind": "roles",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Twin-Tails can glide and carry her friend across gaps."
+        },
+        {
+          "speaker": "B",
+          "text": "Pompadour can dash through hair gel, parry scissors, and launch her from his head. Put those abilities together, and you can reach places neither friend could reach alone."
+        }
+      ],
+      "from_frame": 810,
+      "frames": 510,
+      "captions": [
+        {
+          "text": "Twin-Tails can glide and carry her friend across gaps.",
+          "startMs": 573,
+          "endMs": 3816,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Pompadour can dash through hair gel, parry scissors,",
+          "startMs": 4473,
+          "endMs": 7325,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "and launch her from his head.",
+          "startMs": 7325,
+          "endMs": 8760,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Put those abilities together, and you can reach",
+          "startMs": 9048,
+          "endMs": 11476,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "places neither friend could reach alone.",
+          "startMs": 11476,
+          "endMs": 13602,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 13.356,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 3.576,
+          "speaker": "A",
+          "text": "Twin-Tails can glide and carry her friend across gaps."
+        },
+        {
+          "line": 2,
+          "start": 3.876,
+          "end": 13.356,
+          "speaker": "B",
+          "text": "Pompadour can dash through hair gel, parry scissors, and launch her from his head. Put those abilities together, and you can reach places neither friend could reach alone."
+        }
+      ]
+    },
+    "sling": {
+      "id": "sling",
+      "title": "The sling",
+      "minimum": 28,
+      "lead": 0.5,
+      "kind": "sling",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Here's the problem: this gel curtain grows back. Carrying your friend gets you to the wall, but you still can't get through."
+        },
+        {
+          "speaker": "B",
+          "text": "So she carries him over the gap. He dashes out of her grip and breaks the gel. She follows before it closes. Watch their timing."
+        }
+      ],
+      "from_frame": 1320,
+      "frames": 840,
+      "captions": [
+        {
+          "text": "Here's the problem: this gel curtain grows back.",
+          "startMs": 549,
+          "endMs": 3767,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Carrying your friend gets you to the wall,",
+          "startMs": 4044,
+          "endMs": 6000,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "but you still can't get through.",
+          "startMs": 6350,
+          "endMs": 7991,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "So she carries him over the gap.",
+          "startMs": 8601,
+          "endMs": 10400,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "He dashes out of her grip and breaks",
+          "startMs": 10688,
+          "endMs": 12460,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "the gel. She follows before it closes.",
+          "startMs": 12460,
+          "endMs": 15181,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Watch their timing.",
+          "startMs": 15457,
+          "endMs": 16553,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 16.308,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 7.752,
+          "speaker": "A",
+          "text": "Here's the problem: this gel curtain grows back. Carrying your friend gets you to the wall, but you still can't get through."
+        },
+        {
+          "line": 2,
+          "start": 8.052,
+          "end": 16.308,
+          "speaker": "B",
+          "text": "So she carries him over the gap. He dashes out of her grip and breaks the gel. She follows before it closes. Watch their timing."
+        }
+      ]
+    },
+    "parry": {
+      "id": "parry",
+      "title": "Return to sender",
+      "minimum": 27,
+      "lead": 0.5,
+      "kind": "parry",
+      "lines": [
+        {
+          "speaker": "B",
+          "text": "This time, the door needs a bell that's out of reach. A parry sends a scissor back horizontally. That won't ring it."
+        },
+        {
+          "speaker": "A",
+          "text": "Twin-Tails catches the blue scissor, then tosses it straight up. The enemy's attack becomes the tool that opens your route. Both players have a job in that chain."
+        }
+      ],
+      "from_frame": 2160,
+      "frames": 810,
+      "captions": [
+        {
+          "text": "This time, the door needs a bell that's",
+          "startMs": 585,
+          "endMs": 2417,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "out of reach.",
+          "startMs": 2417,
+          "endMs": 3233,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "A parry sends a scissor back horizontally.",
+          "startMs": 3522,
+          "endMs": 5940,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "That won't ring it.",
+          "startMs": 6240,
+          "endMs": 7360,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Twin-Tails catches the blue scissor, then tosses",
+          "startMs": 7977,
+          "endMs": 11205,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "it straight up.",
+          "startMs": 11205,
+          "endMs": 12057,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "The enemy's attack becomes the tool that opens",
+          "startMs": 12321,
+          "endMs": 14809,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "your route. Both players have a job in that chain.",
+          "startMs": 14809,
+          "endMs": 18040,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 17.796,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 7.104,
+          "speaker": "B",
+          "text": "This time, the door needs a bell that's out of reach. A parry sends a scissor back horizontally. That won't ring it."
+        },
+        {
+          "line": 2,
+          "start": 7.404,
+          "end": 17.796,
+          "speaker": "A",
+          "text": "Twin-Tails catches the blue scissor, then tosses it straight up. The enemy's attack becomes the tool that opens your route. Both players have a job in that chain."
+        }
+      ]
+    },
+    "salon": {
+      "id": "salon",
+      "title": "Wash. Dry. Try again.",
+      "minimum": 20,
+      "lead": 0.5,
+      "kind": "salon",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "The salon changes how your hair works. Get soaked and Twin-Tails can't glide. Pompadour can't break gel."
+        },
+        {
+          "speaker": "B",
+          "text": "Warm air dries you off and lifts Twin-Tails. Carry your friend into it, and you rise together. Now you have to choose when to cross the showers."
+        }
+      ],
+      "from_frame": 2970,
+      "frames": 600,
+      "captions": [
+        {
+          "text": "The salon changes how your hair works.",
+          "startMs": 573,
+          "endMs": 2857,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Get soaked and Twin-Tails can't glide.",
+          "startMs": 3121,
+          "endMs": 5382,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Pompadour can't break gel.",
+          "startMs": 5646,
+          "endMs": 7250,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Warm air dries you off and lifts Twin-Tails.",
+          "startMs": 7893,
+          "endMs": 10396,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Carry your friend into it, and you rise",
+          "startMs": 10684,
+          "endMs": 12808,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "together. Now you have to choose when to",
+          "startMs": 12808,
+          "endMs": 15029,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "cross the showers.",
+          "startMs": 15029,
+          "endMs": 16185,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 15.948,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 7.008,
+          "speaker": "A",
+          "text": "The salon changes how your hair works. Get soaked and Twin-Tails can't glide. Pompadour can't break gel."
+        },
+        {
+          "line": 2,
+          "start": 7.308,
+          "end": 15.948,
+          "speaker": "B",
+          "text": "Warm air dries you off and lifts Twin-Tails. Carry your friend into it, and you rise together. Now you have to choose when to cross the showers."
+        }
+      ]
+    },
+    "swap": {
+      "id": "swap",
+      "title": "Your haircut. My controls.",
+      "minimum": 10,
+      "lead": 0.5,
+      "kind": "swap",
+      "lines": [
+        {
+          "speaker": "B",
+          "text": "Then a barber's chair swaps your haircuts. The powers go with the hair, so the person who was carrying now needs a lift. You have to switch jobs."
+        }
+      ],
+      "from_frame": 3570,
+      "frames": 304,
+      "captions": [
+        {
+          "text": "Then a barber's chair swaps your haircuts.",
+          "startMs": 585,
+          "endMs": 2857,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "The powers go with the hair, so the",
+          "startMs": 3158,
+          "endMs": 4760,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "person who was carrying now needs a lift.",
+          "startMs": 4760,
+          "endMs": 6983,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "You have to switch jobs.",
+          "startMs": 7260,
+          "endMs": 8585,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 8.328,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 8.328,
+          "speaker": "B",
+          "text": "Then a barber's chair swaps your haircuts. The powers go with the hair, so the person who was carrying now needs a lift. You have to switch jobs."
+        }
+      ]
+    },
+    "boss": {
+      "id": "boss",
+      "title": "The assistant is waiting",
+      "minimum": 14,
+      "lead": 0.5,
+      "kind": "boss",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "The escape ends at the robot assistant. It charges, throws scissors, and brings in backup."
+        },
+        {
+          "speaker": "B",
+          "text": "Stun it, launch your friend, and land on its head. The moves you've learned become your way through the final fight."
+        }
+      ],
+      "from_frame": 3874,
+      "frames": 420,
+      "captions": [
+        {
+          "text": "The escape ends at the robot assistant.",
+          "startMs": 561,
+          "endMs": 3027,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "It charges, throws scissors, and brings in backup.",
+          "startMs": 3291,
+          "endMs": 6134,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Stun it, launch your friend, and land on",
+          "startMs": 6777,
+          "endMs": 8682,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "its head. The moves you've learned become your",
+          "startMs": 8682,
+          "endMs": 10964,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "way through the final fight.",
+          "startMs": 10964,
+          "endMs": 12399,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 12.155999999999999,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 5.904,
+          "speaker": "A",
+          "text": "The escape ends at the robot assistant. It charges, throws scissors, and brings in backup."
+        },
+        {
+          "line": 2,
+          "start": 6.204,
+          "end": 12.155999999999999,
+          "speaker": "B",
+          "text": "Stun it, launch your friend, and land on its head. The moves you've learned become your way through the final fight."
+        }
+      ]
+    },
+    "audience": {
+      "id": "audience",
+      "title": "A game for the person next to you",
+      "minimum": 16,
+      "lead": 0.5,
+      "kind": "audience",
+      "lines": [
+        {
+          "speaker": "B",
+          "text": "We're making this for two people who enjoy solving something together, sharing one keyboard. The prototype runs in a browser."
+        },
+        {
+          "speaker": "A",
+          "text": "PICO PARK and ibb and obb are useful reference points. Our focus is these hair-powered combinations, inside one mischievous salon."
+        }
+      ],
+      "from_frame": 4294,
+      "frames": 556,
+      "captions": [
+        {
+          "text": "We're making this for two people who enjoy",
+          "startMs": 585,
+          "endMs": 2490,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "solving something together, sharing one keyboard.",
+          "startMs": 2490,
+          "endMs": 5636,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "The prototype runs in a browser.",
+          "startMs": 5900,
+          "endMs": 7821,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "PICO PARK and ibb and obb are useful",
+          "startMs": 8445,
+          "endMs": 10653,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "reference points. Our focus is these hair-powered",
+          "startMs": 10653,
+          "endMs": 13663,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "combinations, inside one mischievous salon.",
+          "startMs": 13663,
+          "endMs": 16979,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 16.716,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 7.584,
+          "speaker": "B",
+          "text": "We're making this for two people who enjoy solving something together, sharing one keyboard. The prototype runs in a browser."
+        },
+        {
+          "line": 2,
+          "start": 7.8839999999999995,
+          "end": 16.716,
+          "speaker": "A",
+          "text": "PICO PARK and ibb and obb are useful reference points. Our focus is these hair-powered combinations, inside one mischievous salon."
+        }
+      ]
+    },
+    "proof": {
+      "id": "proof",
+      "title": "You can play it today",
+      "minimum": 16,
+      "lead": 0.5,
+      "kind": "proof",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "The playable prototype has four chapters, twelve rooms, saved progress, and a three-phase boss."
+        },
+        {
+          "speaker": "B",
+          "text": "It starts with learning each haircut, then asks you to combine them under new conditions. Every exit needs both friends. You can try the full prototype on itch dot io."
+        }
+      ],
+      "from_frame": 4850,
+      "frames": 549,
+      "captions": [
+        {
+          "text": "The playable prototype has four chapters, twelve",
+          "startMs": 573,
+          "endMs": 3303,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "rooms, saved progress, and a three-phase boss.",
+          "startMs": 3303,
+          "endMs": 6280,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "It starts with learning each haircut, then asks",
+          "startMs": 6933,
+          "endMs": 9603,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "you to combine them under new conditions.",
+          "startMs": 9603,
+          "endMs": 11705,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Every exit needs both friends.",
+          "startMs": 11994,
+          "endMs": 13841,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "You can try the full prototype on itch dot io.",
+          "startMs": 14117,
+          "endMs": 16717,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 16.476,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 6.048,
+          "speaker": "A",
+          "text": "The playable prototype has four chapters, twelve rooms, saved progress, and a three-phase boss."
+        },
+        {
+          "line": 2,
+          "start": 6.348,
+          "end": 16.476,
+          "speaker": "B",
+          "text": "It starts with learning each haircut, then asks you to combine them under new conditions. Every exit needs both friends. You can try the full prototype on itch dot io."
+        }
+      ]
+    },
+    "team": {
+      "id": "team",
+      "title": "Made by NPC Union",
+      "minimum": 13,
+      "lead": 0.5,
+      "kind": "team",
+      "lines": [
+        {
+          "speaker": "B",
+          "text": "We're NPC Union: ChenHongshan333 and ZSYUYIIE. This started in a forty-eight-hour jam with the theme Better Together."
+        },
+        {
+          "speaker": "A",
+          "text": "We've kept iterating on the escape, the rooms, and how the two players help each other."
+        }
+      ],
+      "from_frame": 5399,
+      "frames": 469,
+      "captions": [
+        {
+          "text": "We're NPC Union: ChenHongshan333 and ZSYUYIIE.",
+          "startMs": 585,
+          "endMs": 5163,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "This started in a forty-eight-hour jam with the",
+          "startMs": 5451,
+          "endMs": 7502,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "theme Better Together.",
+          "startMs": 7502,
+          "endMs": 8719,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "We've kept iterating on the escape, the rooms,",
+          "startMs": 9369,
+          "endMs": 11993,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "and how the two players help each other.",
+          "startMs": 12160,
+          "endMs": 14056,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 13.812000000000001,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 8.472,
+          "speaker": "B",
+          "text": "We're NPC Union: ChenHongshan333 and ZSYUYIIE. This started in a forty-eight-hour jam with the theme Better Together."
+        },
+        {
+          "line": 2,
+          "start": 8.772,
+          "end": 13.812000000000001,
+          "speaker": "A",
+          "text": "We've kept iterating on the escape, the rooms, and how the two players help each other."
+        }
+      ]
+    },
+    "plan": {
+      "id": "plan",
+      "title": "Next: watch real pairs play",
+      "minimum": 24,
+      "lead": 0.5,
+      "kind": "plan",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Next, we want twenty pairs to play without us explaining the puzzles. Can they learn the first combo? Where do they keep failing? Do they choose another room?"
+        },
+        {
+          "speaker": "B",
+          "text": "Our proposed twelve-week plan starts with those tests and clearer tutorials, then room and audio polish, followed by accessibility, bug fixes, and release preparation. Those player results are still ahead of us."
+        }
+      ],
+      "from_frame": 5868,
+      "frames": 736,
+      "captions": [
+        {
+          "text": "Next, we want twenty pairs to play without",
+          "startMs": 585,
+          "endMs": 3024,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "us explaining the puzzles.",
+          "startMs": 3024,
+          "endMs": 4520,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Can they learn the first combo?",
+          "startMs": 4784,
+          "endMs": 6571,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Where do they keep failing?",
+          "startMs": 6847,
+          "endMs": 8173,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Do they choose another room?",
+          "startMs": 8461,
+          "endMs": 10017,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Our proposed twelve-week plan starts with those",
+          "startMs": 10653,
+          "endMs": 12765,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "tests and clearer tutorials, then room and audio",
+          "startMs": 12765,
+          "endMs": 15641,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "polish, followed by accessibility, bug fixes,",
+          "startMs": 15641,
+          "endMs": 18978,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "and release preparation.",
+          "startMs": 18978,
+          "endMs": 20401,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Those player results are still ahead of us.",
+          "startMs": 20689,
+          "endMs": 22950,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 22.716,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 9.768,
+          "speaker": "A",
+          "text": "Next, we want twenty pairs to play without us explaining the puzzles. Can they learn the first combo? Where do they keep failing? Do they choose another room?"
+        },
+        {
+          "line": 2,
+          "start": 10.068000000000001,
+          "end": 22.716,
+          "speaker": "B",
+          "text": "Our proposed twelve-week plan starts with those tests and clearer tutorials, then room and audio polish, followed by accessibility, bug fixes, and release preparation. Those player results are still ahead of us."
+        }
+      ]
+    },
+    "budget": {
+      "id": "budget",
+      "title": "A focused production plan",
+      "minimum": 18,
+      "lead": 0.5,
+      "kind": "budget",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "We estimate seventeen thousand two hundred US dollars for that twelve-week production plan. It covers our time, commissioned art and audio, launch costs, and a twenty-percent buffer."
+        },
+        {
+          "speaker": "B",
+          "text": "The immediate help we're looking for is playtesters and mentoring on onboarding and release planning."
+        }
+      ],
+      "from_frame": 6604,
+      "frames": 555,
+      "captions": [
+        {
+          "text": "We estimate seventeen thousand two hundred US",
+          "startMs": 573,
+          "endMs": 3012,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "dollars for that twelve-week production plan.",
+          "startMs": 3012,
+          "endMs": 5454,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "It covers our time, commissioned art and audio,",
+          "startMs": 5718,
+          "endMs": 8500,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "launch costs, and a twenty-percent buffer.",
+          "startMs": 8959,
+          "endMs": 11559,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "The immediate help we're looking for is playtesters",
+          "startMs": 12213,
+          "endMs": 14519,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "and mentoring on onboarding and release planning.",
+          "startMs": 14519,
+          "endMs": 16912,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 16.668,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 11.328,
+          "speaker": "A",
+          "text": "We estimate seventeen thousand two hundred US dollars for that twelve-week production plan. It covers our time, commissioned art and audio, launch costs, and a twenty-percent buffer."
+        },
+        {
+          "line": 2,
+          "start": 11.628,
+          "end": 16.668,
+          "speaker": "B",
+          "text": "The immediate help we're looking for is playtesters and mentoring on onboarding and release planning."
+        }
+      ]
+    },
+    "end": {
+      "id": "end",
+      "title": "Bring a friend.",
+      "minimum": 14,
+      "lead": 0.6,
+      "kind": "end",
+      "lines": [
+        {
+          "speaker": "B",
+          "text": "Grab the person next to you and try the prototype. We'd love to see how you solve it together."
+        },
+        {
+          "speaker": "A",
+          "text": "Scan the code to play Oh No My Hair. Thanks for watching."
+        }
+      ],
+      "from_frame": 7159,
+      "frames": 420,
+      "captions": [
+        {
+          "text": "Grab the person next to you and try",
+          "startMs": 697,
+          "endMs": 2384,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "the prototype. We'd love to see how you",
+          "startMs": 2384,
+          "endMs": 4678,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "solve it together.",
+          "startMs": 4678,
+          "endMs": 5833,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Scan the code to play Oh No My",
+          "startMs": 6446,
+          "endMs": 8084,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "Hair. Thanks for watching.",
+          "startMs": 8084,
+          "endMs": 10015,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "voice_seconds": 9.684000000000001,
+      "lines_timing": [
+        {
+          "line": 1,
+          "start": 0.0,
+          "end": 5.496,
+          "speaker": "B",
+          "text": "Grab the person next to you and try the prototype. We'd love to see how you solve it together."
+        },
+        {
+          "line": 2,
+          "start": 5.796,
+          "end": 9.684000000000001,
+          "speaker": "A",
+          "text": "Scan the code to play Oh No My Hair. Thanks for watching."
+        }
+      ]
+    }
+  },
+  "clips": {
+    "boss.mp4": {
+      "seconds": 9.966667,
+      "audio": false
+    },
+    "carry_launch.mp4": {
+      "seconds": 10.6,
+      "audio": false
+    },
+    "dryer.mp4": {
+      "seconds": 12.8,
+      "audio": false
+    },
+    "fresh_cut.mp4": {
+      "seconds": 11.166667,
+      "audio": false
+    },
+    "parry_catch.mp4": {
+      "seconds": 30.4,
+      "audio": false
+    },
+    "sling_gel.mp4": {
+      "seconds": 10.5,
+      "audio": false
+    },
+    "stomp.mp4": {
+      "seconds": 2.966667,
+      "audio": false
+    },
+    "water.mp4": {
+      "seconds": 16.833333,
+      "audio": false
+    },
+    "wet_coop.mp4": {
+      "seconds": 14.633333,
+      "audio": false
+    },
+    "v3/boss.mp4": {
+      "seconds": 5.433333,
+      "audio": true
+    },
+    "v3/dryer.mp4": {
+      "seconds": 13.7,
+      "audio": true
+    },
+    "v3/failure.mp4": {
+      "seconds": 8.033333,
+      "audio": true
+    },
+    "v3/parry.mp4": {
+      "seconds": 31.533333,
+      "audio": true
+    },
+    "v3/sling.mp4": {
+      "seconds": 10.9,
+      "audio": true
+    },
+    "v3/swap.mp4": {
+      "seconds": 5.766667,
+      "audio": true
+    },
+    "v3/ui.mp4": {
+      "seconds": 3.566667,
+      "audio": true
+    }
+  }
+}

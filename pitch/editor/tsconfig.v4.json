@@ -1,0 +1,1 @@
+{"extends":"./tsconfig.json","include":["src/v4/**/*.ts","src/v4/**/*.tsx","src/v3/Marker.tsx"]}

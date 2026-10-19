@@ -1,0 +1,512 @@
+{
+  "checks": [
+    {
+      "check": "main: authored 3\u20135 minute duration",
+      "pass": true
+    },
+    {
+      "check": "main: 1080p / 30fps / exact frame count",
+      "pass": true
+    },
+    {
+      "check": "main: expected audio presence",
+      "pass": true
+    },
+    {
+      "check": "main: full decode without errors",
+      "pass": true
+    },
+    {
+      "check": "nobgm: authored 3\u20135 minute duration",
+      "pass": true
+    },
+    {
+      "check": "nobgm: 1080p / 30fps / exact frame count",
+      "pass": true
+    },
+    {
+      "check": "nobgm: expected audio presence",
+      "pass": true
+    },
+    {
+      "check": "nobgm: full decode without errors",
+      "pass": true
+    },
+    {
+      "check": "clean: authored 3\u20135 minute duration",
+      "pass": true
+    },
+    {
+      "check": "clean: 1080p / 30fps / exact frame count",
+      "pass": true
+    },
+    {
+      "check": "clean: expected audio presence",
+      "pass": true
+    },
+    {
+      "check": "clean: full decode without errors",
+      "pass": true
+    },
+    {
+      "check": "team before every gameplay section",
+      "pass": true
+    },
+    {
+      "check": "caption bounds valid",
+      "pass": true
+    },
+    {
+      "check": "captions do not overlap",
+      "pass": true
+    },
+    {
+      "check": "roles clip 0: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "roles clip 1: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "roles clip 2: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "roles clip 3: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "sling clip 0: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "sling clip 1: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "sling clip 2: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "parry clip 0: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "parry clip 1: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "parry clip 2: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "parry clip 3: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "parry clip 4: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "salon clip 0: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "salon clip 1: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "salon clip 2: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "salon clip 3: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "swap clip 0: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "boss clip 0: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "boss clip 1: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "boss clip 2: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "boss clip 3: all four source corners retained",
+      "pass": true
+    },
+    {
+      "check": "main and NoBGM pictures bit-identical",
+      "pass": true
+    },
+    {
+      "check": "encoded QR opens the correct prototype",
+      "pass": true
+    },
+    {
+      "check": "Narration: replaceable 48kHz stereo full-length stem",
+      "pass": true
+    },
+    {
+      "check": "Music: replaceable 48kHz stereo full-length stem",
+      "pass": true
+    },
+    {
+      "check": "SFX: replaceable 48kHz stereo full-length stem",
+      "pass": true
+    },
+    {
+      "check": "Music_Effects: replaceable 48kHz stereo full-length stem",
+      "pass": true
+    },
+    {
+      "check": "team: final voice matches the replacement stem",
+      "pass": true
+    },
+    {
+      "check": "sling: final voice matches the replacement stem",
+      "pass": true
+    },
+    {
+      "check": "budget: final voice matches the replacement stem",
+      "pass": true
+    },
+    {
+      "check": "background music covers every section including final hold",
+      "pass": true
+    },
+    {
+      "check": "NoBGM final hold is silent",
+      "pass": true
+    },
+    {
+      "check": "encoded loudness and true peak acceptable",
+      "pass": true
+    },
+    {
+      "check": "single full-recording alignment rehearsal passed (AI stand-in, no human file yet)",
+      "pass": true
+    },
+    {
+      "check": "replacement section crops are disjoint and confidently anchored",
+      "pass": true
+    }
+  ],
+  "seconds": 268.6,
+  "files": {
+    "main": {
+      "bytes": 20888943,
+      "seconds": 268.6,
+      "frames": "8058",
+      "width": 1920,
+      "height": 1080
+    },
+    "nobgm": {
+      "bytes": 19429431,
+      "seconds": 268.6,
+      "frames": "8058",
+      "width": 1920,
+      "height": 1080
+    },
+    "clean": {
+      "bytes": 13936741,
+      "seconds": 268.599333,
+      "frames": "8058",
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "corner_checks": [
+    {
+      "scene": "roles",
+      "clip": 0,
+      "source_time": 2.2,
+      "corner_psnr_db": [
+        45.01,
+        45.18,
+        36.87,
+        37.42
+      ]
+    },
+    {
+      "scene": "roles",
+      "clip": 1,
+      "source_time": 3.5,
+      "corner_psnr_db": [
+        45.01,
+        45.18,
+        36.74,
+        37.27
+      ]
+    },
+    {
+      "scene": "roles",
+      "clip": 2,
+      "source_time": 4.7,
+      "corner_psnr_db": [
+        45.01,
+        45.18,
+        36.85,
+        37.42
+      ]
+    },
+    {
+      "scene": "roles",
+      "clip": 3,
+      "source_time": 2.0,
+      "corner_psnr_db": [
+        45.01,
+        45.18,
+        36.94,
+        37.47
+      ]
+    },
+    {
+      "scene": "sling",
+      "clip": 0,
+      "source_time": 1.0,
+      "corner_psnr_db": [
+        45.01,
+        45.16,
+        36.77,
+        37.29
+      ]
+    },
+    {
+      "scene": "sling",
+      "clip": 1,
+      "source_time": 3.2,
+      "corner_psnr_db": [
+        45.01,
+        45.08,
+        36.71,
+        37.45
+      ]
+    },
+    {
+      "scene": "sling",
+      "clip": 2,
+      "source_time": 4.5600000000000005,
+      "corner_psnr_db": [
+        45.01,
+        45.08,
+        36.92,
+        37.49
+      ]
+    },
+    {
+      "scene": "parry",
+      "clip": 0,
+      "source_time": 2.0,
+      "corner_psnr_db": [
+        45.12,
+        45.18,
+        36.8,
+        37.3
+      ]
+    },
+    {
+      "scene": "parry",
+      "clip": 1,
+      "source_time": 15.7,
+      "corner_psnr_db": [
+        45.12,
+        45.11,
+        36.69,
+        37.59
+      ]
+    },
+    {
+      "scene": "parry",
+      "clip": 2,
+      "source_time": 17.5,
+      "corner_psnr_db": [
+        45.12,
+        45.1,
+        36.9,
+        37.52
+      ]
+    },
+    {
+      "scene": "parry",
+      "clip": 3,
+      "source_time": 18.0,
+      "corner_psnr_db": [
+        45.12,
+        45.04,
+        36.92,
+        37.47
+      ]
+    },
+    {
+      "scene": "parry",
+      "clip": 4,
+      "source_time": 18.666666666666668,
+      "corner_psnr_db": [
+        45.11,
+        45.02,
+        36.84,
+        37.51
+      ]
+    },
+    {
+      "scene": "salon",
+      "clip": 0,
+      "source_time": 1.2,
+      "corner_psnr_db": [
+        45.12,
+        45.12,
+        36.92,
+        37.42
+      ]
+    },
+    {
+      "scene": "salon",
+      "clip": 1,
+      "source_time": 1.2,
+      "corner_psnr_db": [
+        45.12,
+        45.12,
+        37.01,
+        37.36
+      ]
+    },
+    {
+      "scene": "salon",
+      "clip": 2,
+      "source_time": 7.6000000000000005,
+      "corner_psnr_db": [
+        45.12,
+        45.24,
+        36.99,
+        37.35
+      ]
+    },
+    {
+      "scene": "salon",
+      "clip": 3,
+      "source_time": 5.2,
+      "corner_psnr_db": [
+        45.01,
+        45.01,
+        36.62,
+        36.96
+      ]
+    },
+    {
+      "scene": "swap",
+      "clip": 0,
+      "source_time": 0.2,
+      "corner_psnr_db": [
+        45.01,
+        44.83,
+        36.88,
+        37.53
+      ]
+    },
+    {
+      "scene": "boss",
+      "clip": 0,
+      "source_time": 1.2,
+      "corner_psnr_db": [
+        45.09,
+        44.93,
+        37.0,
+        37.29
+      ]
+    },
+    {
+      "scene": "boss",
+      "clip": 1,
+      "source_time": 6.2,
+      "corner_psnr_db": [
+        45.01,
+        44.73,
+        36.9,
+        37.4
+      ]
+    },
+    {
+      "scene": "boss",
+      "clip": 2,
+      "source_time": 0.8,
+      "corner_psnr_db": [
+        45.01,
+        44.73,
+        36.94,
+        37.4
+      ]
+    },
+    {
+      "scene": "boss",
+      "clip": 3,
+      "source_time": 1.46,
+      "corner_psnr_db": [
+        45.01,
+        44.83,
+        36.73,
+        37.51
+      ]
+    }
+  ],
+  "picture_hashes": {
+    "main": "36face5460e638d8cd6caf90a3ba94f517f3c0271678fa410984e79ad3952972",
+    "nobgm": "36face5460e638d8cd6caf90a3ba94f517f3c0271678fa410984e79ad3952972"
+  },
+  "qr": "https://chenhongshan333.itch.io/ohnomyhair",
+  "voice_alignment": [
+    {
+      "scene": "team",
+      "offset_ms": -0.042,
+      "correlation": 0.9956
+    },
+    {
+      "scene": "sling",
+      "offset_ms": 0.042,
+      "correlation": 0.9854
+    },
+    {
+      "scene": "budget",
+      "offset_ms": 0.0,
+      "correlation": 0.9965
+    }
+  ],
+  "music_coverage_dbfs": {
+    "hook": -30.48,
+    "team": -28.17,
+    "story": -31.1,
+    "roles": -30.25,
+    "sling": -25.3,
+    "parry": -25.92,
+    "salon": -28.98,
+    "swap": -19.93,
+    "boss": -32.41,
+    "audience": -29.2,
+    "proof": -30.28,
+    "plan": -27.56,
+    "budget": -27.7,
+    "end": -41.15
+  },
+  "nobgm_tail_dbfs": -240.0,
+  "loudness": {
+    "input_i": "-16.20",
+    "input_tp": "-2.22",
+    "input_lra": "6.50",
+    "input_thresh": "-27.50",
+    "output_i": "-16.23",
+    "output_tp": "-1.86",
+    "output_lra": "5.80",
+    "output_thresh": "-27.23",
+    "normalization_type": "dynamic",
+    "target_offset": "0.23"
+  }
+}

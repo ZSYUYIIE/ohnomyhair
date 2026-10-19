@@ -1,0 +1,29 @@
+﻿Independent final V4 review — APPROVED WITH DOCUMENTED LIMITS
+2026-10-19. Final reviewed export: pitch/videos/Oh_No_My_Hair_Pitch_v4.mp4, 20,888,943 bytes, 8058 frames / 268.6 seconds. Main video bitstream SHA256: 36face5460e638d8cd6caf90a3ba94f517f3c0271678fa410984e79ad3952972. This verdict supersedes the preliminary first-export review.
+
+Scope and evidence
+Read production_brief.json, recording_script.txt, current timeline/media, Scenes.tsx, build.py/mix_audio.py/render.py/replace_voice.py/qa.py, current README and relevant game sources; checked shotcraft skill, final-review.md, aesthetic-rules.md, selected card, Gallery index, exact demo and marker-reference.mp4, plus V1 reference contact sheet. Reviewed encoded final frames through in-memory extraction and review keyframes. Final rerender samples include13,44,48,52,59,73,99,105,124,136,138,140,142,143,144,146,150,157,161,165,195,215,237,255.5 seconds. Independent reviewer changed only this report; no implementation, publishing or delegation.
+
+P1/P3/F1 PASS — Product and facts
+The local two-player puzzle platformer, complementary hair abilities, cooperative gel/scissor chain, salon conditions, haircut swap, boss, audience, prototype, proposed plan/budget and play CTA are clear. Team starts f305 and precedes story f845 and all gameplay f1270 onward. Progress.LEVELS has four chapters; authored rooms total3+2+3+4=12. BarberBot has10HP and three phases; boss_encounter implements later showers/reinforcements. RoomExit requires both players. Twenty pairs, twelve weeks and USD17,200 are labelled plans/estimates, not achieved results or secured funding. Staged boss capture is disclosed in README.
+
+V1/D3/Q1/Q3 PASS — Direction, complete footage and stability
+Game art, Fredoka/Nunito and cream/pink/blue/gold/lilac preserve V1 direction. Full source1280x720 is scaled to1440x810 at x240/y150; code has no crop or corner mask. Encoded samples visibly retain four corners and bottom HUD. Tags above and captions below avoid HUD overlap. Refreshed technical_checks.json reports all21 cut corner comparisons pass, minimum36.62dB, against the same FFmpeg Lanczos scaling. No observed camera shake, clipped gameplay, unrelated visual skin or excessive glow. Sampled type/art remain sharp.
+
+B1/B2/F3 PASS — Semantics and readable action
+Roles48s shows dash during dash speech,52s launch during launch speech; boss157s shows phase-two showers/reinforcements during that explanation,161s stomp during stun/launch/stomp explanation,165s explicitly labelled replay. The continuous scissor chain and step rail remain intelligible; replay labels distinguish repetition. Current swap source is24.333s, longer than its13.267s scene: encoded136–146s samples show changing chair/swap/action positions, so the former long freeze is absent. Short completed-action holds remain reasonable. Brand/CTA hold exceeds one second.
+
+S1/S3 PASS AS ADAPTED FRAGMENT
+Gallery index, card and exact demo agree on marker-underline-title. Seeded dry-brush geometry and f32–42 reveal are retained. Encoded local end frames around32–42 and resting frame show the draw and hold. V4 adapts only the underline fragment; it does not reproduce the demo title landing/push, and current attribution accurately states this limit.
+
+A1/A8 / delivery technical PASS
+Refreshed technical_checks.json has50/50 passing assertions: all three exports1080p30 /8058f/268.6s, expected audio presence and full decode; main/NoBGM video bitstreams identical; QR resolves to the prototype. Full48kHz stereo Narration/Music/SFX/Music_Effects stems exist. Encoded loudness is -16.20LUFS / -2.22dBTP. Voice-to-stem probes correlate.9854–.9965 with offsets within.042ms. Music covers every section including final hold. Independently decoded music and main waveform audit found no silent interior1s windows; Music stem minRMS=.011814 at8k mono. Continuous PCM looping and ducking are explicit in mix source. No subjective listening was performed; sweet/youthful/cozy character remains a listening-dependent judgment, not a numeric result.
+
+Replacement workflow PASS FOR PROVIDED REHEARSAL, NOT HUMAN ACCEPTANCE
+One full read-aloud script and one-command local ASR/retime/remix/export workflow are supplied. Updated rehearsal matches95.28% with14 disjoint sections; roles begins42.72s after story ends40.11s, audience169.67s after boss167.01s. Section-local alignment, uncertain-edge rejection and disjoint assertion prevent the earlier cross-paragraph interpolation issue. This was check-only using the full AI narration stem. No human recording or end-to-end replacement export has been tested; README states that explicitly. Human replacement still requires listening and final picture/caption review.
+
+Q11 INTENTIONAL DEVIATION / ADVISORY
+Caption font56px produces measured47px white-glyph height at encoded44/73/157/161s (y993–1039), below the skill recommendation of56px effective glyph height. The compact single-line strip preserves the full game/HUD and is clear at full size; readability will decline in a small player. Auxiliary copy is similarly compact. Do not claim literal full Q11 compliance. This documented tradeoff does not block the user-requested full-frame pitch delivery.
+
+Verdict
+Approved for delivery with the Q11 compact-caption tradeoff and listening/human-replacement limits above. No remaining blocking issue found in the reviewed final encoded export or refreshed technical evidence. This is a sampled visual/source/technical review, not uninterrupted subjective audiovisual playback or a real-human replacement acceptance test.

@@ -1,0 +1,122 @@
+{
+  "recording": "F:\\gamejam\\pitch\\editor\\public\\v4\\audio\\Narration.wav",
+  "sha256": "7b145100c352b457fa24d924cc5634ec4cd240d82fc006e26627f2815a638f1f",
+  "matched_fraction": 0.9527720739219713,
+  "sections": [
+    {
+      "id": "hook",
+      "recording_start": 0.41000000000000003,
+      "recording_end": 7.85,
+      "matched_fraction": 1.0,
+      "speech_seconds": 7.44,
+      "film_seconds": 9.24
+    },
+    {
+      "id": "team",
+      "recording_start": 10.639999999999999,
+      "recording_end": 23.38,
+      "matched_fraction": 1.0,
+      "speech_seconds": 12.74,
+      "film_seconds": 18
+    },
+    {
+      "id": "story",
+      "recording_start": 28.71,
+      "recording_end": 40.11,
+      "matched_fraction": 1.0,
+      "speech_seconds": 11.4,
+      "film_seconds": 13.200000000000001
+    },
+    {
+      "id": "roles",
+      "recording_start": 42.72,
+      "recording_end": 58.7,
+      "matched_fraction": 0.9459459459459459,
+      "speech_seconds": 15.98,
+      "film_seconds": 21
+    },
+    {
+      "id": "sling",
+      "recording_start": 63.82,
+      "recording_end": 82.2,
+      "matched_fraction": 1.0,
+      "speech_seconds": 18.38,
+      "film_seconds": 26
+    },
+    {
+      "id": "parry",
+      "recording_start": 89.83,
+      "recording_end": 109.37,
+      "matched_fraction": 0.9555555555555556,
+      "speech_seconds": 19.54,
+      "film_seconds": 25
+    },
+    {
+      "id": "salon",
+      "recording_start": 114.75,
+      "recording_end": 132.79,
+      "matched_fraction": 1.0,
+      "speech_seconds": 18.04,
+      "film_seconds": 20
+    },
+    {
+      "id": "swap",
+      "recording_start": 135.35,
+      "recording_end": 145.91,
+      "matched_fraction": 0.9629629629629629,
+      "speech_seconds": 10.56,
+      "film_seconds": 12.360000000000001
+    },
+    {
+      "id": "boss",
+      "recording_start": 148.57,
+      "recording_end": 167.01,
+      "matched_fraction": 0.9743589743589743,
+      "speech_seconds": 18.44,
+      "film_seconds": 20.240000000000002
+    },
+    {
+      "id": "audience",
+      "recording_start": 169.67,
+      "recording_end": 187.83,
+      "matched_fraction": 0.8974358974358975,
+      "speech_seconds": 18.16,
+      "film_seconds": 19.96
+    },
+    {
+      "id": "proof",
+      "recording_start": 190.51999999999998,
+      "recording_end": 206.76,
+      "matched_fraction": 0.9117647058823529,
+      "speech_seconds": 16.24,
+      "film_seconds": 18.04
+    },
+    {
+      "id": "plan",
+      "recording_start": 209.51,
+      "recording_end": 231.77,
+      "matched_fraction": 0.9574468085106383,
+      "speech_seconds": 22.26,
+      "film_seconds": 24.060000000000002
+    },
+    {
+      "id": "budget",
+      "recording_start": 234.82,
+      "recording_end": 251.98,
+      "matched_fraction": 0.8055555555555556,
+      "speech_seconds": 17.16,
+      "film_seconds": 18.96
+    },
+    {
+      "id": "end",
+      "recording_start": 254.84,
+      "recording_end": 266.56,
+      "matched_fraction": 0.967741935483871,
+      "speech_seconds": 11.72,
+      "film_seconds": 13.520000000000001
+    }
+  ],
+  "check_only": true,
+  "proposed_film_seconds": 259.58,
+  "disjoint_sections": true
+}

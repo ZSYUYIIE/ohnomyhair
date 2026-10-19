@@ -1,0 +1,11 @@
+review/render*.mp4
+review/opening-sample.mp4
+review/decode-probe.mp4
+review/no-bgm.wav
+review/qr.rgba
+review/logs/
+review/*.png
+!review/final-qr.png
+review/style-contact.jpg
+review/graphics-check.jpg
+review/encoded-opening.jpg

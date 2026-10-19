@@ -1,0 +1,285 @@
+{
+  "seconds": 16.476,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 6.048,
+      "speaker": "A",
+      "text": "The playable prototype has four chapters, twelve rooms, saved progress, and a three-phase boss."
+    },
+    {
+      "line": 2,
+      "start": 6.348,
+      "end": 16.476,
+      "speaker": "B",
+      "text": "It starts with learning each haircut, then asks you to combine them under new conditions. Every exit needs both friends. You can try the full prototype on itch dot io."
+    }
+  ],
+  "words": [
+    {
+      "text": "The",
+      "start": 0.072833,
+      "end": 0.133499,
+      "speaker": "A"
+    },
+    {
+      "text": "playable",
+      "start": 0.145625,
+      "end": 0.509708,
+      "speaker": "A"
+    },
+    {
+      "text": "prototype",
+      "start": 0.521833,
+      "end": 1.080083,
+      "speaker": "A"
+    },
+    {
+      "text": "has",
+      "start": 1.09225,
+      "end": 1.322833,
+      "speaker": "A"
+    },
+    {
+      "text": "four",
+      "start": 1.334958,
+      "end": 1.601958,
+      "speaker": "A"
+    },
+    {
+      "text": "chapters",
+      "start": 1.614083,
+      "end": 2.269416,
+      "speaker": "A"
+    },
+    {
+      "text": "twelve",
+      "start": 2.463583,
+      "end": 2.791249,
+      "speaker": "A"
+    },
+    {
+      "text": "rooms",
+      "start": 2.803416,
+      "end": 3.240291,
+      "speaker": "A"
+    },
+    {
+      "text": "saved",
+      "start": 3.580083,
+      "end": 3.932041,
+      "speaker": "A"
+    },
+    {
+      "text": "progress",
+      "start": 3.944166,
+      "end": 4.453874,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 4.466,
+      "end": 4.62375,
+      "speaker": "A"
+    },
+    {
+      "text": "a",
+      "start": 4.635916,
+      "end": 4.696582,
+      "speaker": "A"
+    },
+    {
+      "text": "three-phase",
+      "start": 4.70875,
+      "end": 5.206333,
+      "speaker": "A"
+    },
+    {
+      "text": "boss",
+      "start": 5.218458,
+      "end": 5.679624,
+      "speaker": "A"
+    },
+    {
+      "text": "It",
+      "start": 6.432958,
+      "end": 6.530041,
+      "speaker": "B"
+    },
+    {
+      "text": "starts",
+      "start": 6.542166,
+      "end": 6.906249,
+      "speaker": "B"
+    },
+    {
+      "text": "with",
+      "start": 6.918375,
+      "end": 7.064,
+      "speaker": "B"
+    },
+    {
+      "text": "learning",
+      "start": 7.076166,
+      "end": 7.415957,
+      "speaker": "B"
+    },
+    {
+      "text": "each",
+      "start": 7.428083,
+      "end": 7.585833,
+      "speaker": "B"
+    },
+    {
+      "text": "haircut",
+      "start": 7.598,
+      "end": 8.107708,
+      "speaker": "B"
+    },
+    {
+      "text": "then",
+      "start": 8.593125,
+      "end": 8.763041,
+      "speaker": "B"
+    },
+    {
+      "text": "asks",
+      "start": 8.775166,
+      "end": 9.090707,
+      "speaker": "B"
+    },
+    {
+      "text": "you",
+      "start": 9.102875000000001,
+      "end": 9.187833,
+      "speaker": "B"
+    },
+    {
+      "text": "to",
+      "start": 9.199958,
+      "end": 9.321333,
+      "speaker": "B"
+    },
+    {
+      "text": "combine",
+      "start": 9.333416,
+      "end": 9.733916,
+      "speaker": "B"
+    },
+    {
+      "text": "them",
+      "start": 9.746041,
+      "end": 9.903791,
+      "speaker": "B"
+    },
+    {
+      "text": "under",
+      "start": 9.915958,
+      "end": 10.146541,
+      "speaker": "B"
+    },
+    {
+      "text": "new",
+      "start": 10.158666,
+      "end": 10.316416,
+      "speaker": "B"
+    },
+    {
+      "text": "conditions",
+      "start": 10.328583,
+      "end": 11.105291000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "Every",
+      "start": 11.493625,
+      "end": 11.760625000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "exit",
+      "start": 11.77275,
+      "end": 12.136833,
+      "speaker": "B"
+    },
+    {
+      "text": "needs",
+      "start": 12.148958,
+      "end": 12.391666,
+      "speaker": "B"
+    },
+    {
+      "text": "both",
+      "start": 12.403832999999999,
+      "end": 12.646541,
+      "speaker": "B"
+    },
+    {
+      "text": "friends",
+      "start": 12.658666,
+      "end": 13.241207,
+      "speaker": "B"
+    },
+    {
+      "text": "You",
+      "start": 13.617415999999999,
+      "end": 13.702373999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "can",
+      "start": 13.714500000000001,
+      "end": 13.835875,
+      "speaker": "B"
+    },
+    {
+      "text": "try",
+      "start": 13.847999999999999,
+      "end": 14.102875000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 14.115,
+      "end": 14.224208,
+      "speaker": "B"
+    },
+    {
+      "text": "full",
+      "start": 14.236333,
+      "end": 14.454791,
+      "speaker": "B"
+    },
+    {
+      "text": "prototype",
+      "start": 14.466916000000001,
+      "end": 15.073706999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "on",
+      "start": 15.085875000000001,
+      "end": 15.195083,
+      "speaker": "B"
+    },
+    {
+      "text": "itch",
+      "start": 15.207208000000001,
+      "end": 15.389249,
+      "speaker": "B"
+    },
+    {
+      "text": "dot",
+      "start": 15.401416000000001,
+      "end": 15.644124000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "io",
+      "start": 15.65625,
+      "end": 16.117416,
+      "speaker": "B"
+    }
+  ]
+}

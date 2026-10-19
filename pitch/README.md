@@ -6,7 +6,16 @@ The pitch video for Oh No My Hair, and everything needed to change and re-render
 
 | Path | What it is |
 |---|---|
-| `videos/Oh_No_My_Hair_Pitch_v2.mp4` | Current version: two voices taking turns, rewritten script, sourced USD budget (3:59) |
+| `videos/Oh_No_My_Hair_Pitch_v4.mp4` | Current version: team before levels, full game frame, single female AI placeholder, continuous BGM (4:29) |
+| `v4/README.md` | V4 delivery, recording instructions, one-command narration replacement and self-check evidence |
+| `v4/recording_script.txt` | Single-speaker English script for one full replacement recording |
+| `videos/Oh_No_My_Hair_Pitch_v4_NoBGM.mp4` | Same V4 picture, narration and game SFX without background music |
+| `videos/Oh_No_My_Hair_Pitch_v4_Clean.mp4` | Silent V4 picture without burned-in captions |
+| `videos/Oh_No_My_Hair_Pitch_v3.mp4` | Archived V3: gameplay-first pitch, two temporary AI voices, captions and game audio (4:13) |
+| `v3/README.txt` | v3 editing, AI voice replacement, rebuild commands, capture provenance and review notes |
+| `videos/Oh_No_My_Hair_Pitch_v3_Clean.mp4` | Silent v3 picture without burned-in subtitles, for replacing narration |
+| `videos/Oh_No_My_Hair_Pitch_v3_NoBGM.mp4` | v3 with voices and game SFX, without background music |
+| `videos/Oh_No_My_Hair_Pitch_v2.mp4` | Previous version: two voices, rewritten script, sourced USD budget (3:59) |
 | `videos/Oh_No_My_Hair_Pitch_Final.mp4` | First version (one AI voice), kept for comparison |
 | `docs/Oh_No_My_Hair_Pitch_Script_v2.txt` | The v2 script as a read-aloud script (A = ZSYUYIIE, B = ChenHongshan333) |
 | `docs/Oh_No_My_Hair_Pitch_v2_Notes.md` | Why v1 sounded like AI, what changed, tips for recording yourselves |

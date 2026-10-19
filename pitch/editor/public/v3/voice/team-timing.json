@@ -1,0 +1,219 @@
+{
+  "seconds": 13.812000000000001,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 8.472,
+      "speaker": "B",
+      "text": "We're NPC Union: ChenHongshan333 and ZSYUYIIE. This started in a forty-eight-hour jam with the theme Better Together."
+    },
+    {
+      "line": 2,
+      "start": 8.772,
+      "end": 13.812000000000001,
+      "speaker": "A",
+      "text": "We've kept iterating on the escape, the rooms, and how the two players help each other."
+    }
+  ],
+  "words": [
+    {
+      "text": "We're",
+      "start": 0.084958,
+      "end": 0.254874,
+      "speaker": "B"
+    },
+    {
+      "text": "NPC",
+      "start": 0.267,
+      "end": 0.764583,
+      "speaker": "B"
+    },
+    {
+      "text": "Union",
+      "start": 0.776708,
+      "end": 1.201458,
+      "speaker": "B"
+    },
+    {
+      "text": "ChenHongshan333",
+      "start": 1.784,
+      "end": 3.398041,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 3.410208,
+      "end": 3.531583,
+      "speaker": "B"
+    },
+    {
+      "text": "ZSYUYIIE",
+      "start": 3.543708,
+      "end": 4.563124,
+      "speaker": "B"
+    },
+    {
+      "text": "This",
+      "start": 4.951458,
+      "end": 5.121374,
+      "speaker": "B"
+    },
+    {
+      "text": "started",
+      "start": 5.1335,
+      "end": 5.497583,
+      "speaker": "B"
+    },
+    {
+      "text": "in",
+      "start": 5.509708,
+      "end": 5.606791,
+      "speaker": "B"
+    },
+    {
+      "text": "a",
+      "start": 5.618916,
+      "end": 5.679582,
+      "speaker": "B"
+    },
+    {
+      "text": "forty-eight-hour",
+      "start": 5.69175,
+      "end": 6.444166,
+      "speaker": "B"
+    },
+    {
+      "text": "jam",
+      "start": 6.456291,
+      "end": 6.747541,
+      "speaker": "B"
+    },
+    {
+      "text": "with",
+      "start": 6.759708,
+      "end": 6.881083,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 6.893208,
+      "end": 6.990291,
+      "speaker": "B"
+    },
+    {
+      "text": "theme",
+      "start": 7.002416,
+      "end": 7.281541,
+      "speaker": "B"
+    },
+    {
+      "text": "Better",
+      "start": 7.293708,
+      "end": 7.548583,
+      "speaker": "B"
+    },
+    {
+      "text": "Together",
+      "start": 7.560666,
+      "end": 8.118916,
+      "speaker": "B"
+    },
+    {
+      "text": "We've",
+      "start": 8.869083,
+      "end": 9.026833,
+      "speaker": "A"
+    },
+    {
+      "text": "kept",
+      "start": 9.039,
+      "end": 9.318125,
+      "speaker": "A"
+    },
+    {
+      "text": "iterating",
+      "start": 9.342375,
+      "end": 9.864208,
+      "speaker": "A"
+    },
+    {
+      "text": "on",
+      "start": 9.876375,
+      "end": 10.022,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 10.034125,
+      "end": 10.094791,
+      "speaker": "A"
+    },
+    {
+      "text": "escape",
+      "start": 10.106958,
+      "end": 10.713749,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 10.738,
+      "end": 10.822958,
+      "speaker": "A"
+    },
+    {
+      "text": "rooms",
+      "start": 10.835125,
+      "end": 11.393375,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 11.660333,
+      "end": 11.830249,
+      "speaker": "A"
+    },
+    {
+      "text": "how",
+      "start": 11.842375,
+      "end": 12.024416,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 12.036583,
+      "end": 12.133666,
+      "speaker": "A"
+    },
+    {
+      "text": "two",
+      "start": 12.145791000000001,
+      "end": 12.327832,
+      "speaker": "A"
+    },
+    {
+      "text": "players",
+      "start": 12.339958,
+      "end": 12.728291,
+      "speaker": "A"
+    },
+    {
+      "text": "help",
+      "start": 12.740458,
+      "end": 12.958916,
+      "speaker": "A"
+    },
+    {
+      "text": "each",
+      "start": 12.971041,
+      "end": 13.128791,
+      "speaker": "A"
+    },
+    {
+      "text": "other",
+      "start": 13.140916,
+      "end": 13.456457,
+      "speaker": "A"
+    }
+  ]
+}

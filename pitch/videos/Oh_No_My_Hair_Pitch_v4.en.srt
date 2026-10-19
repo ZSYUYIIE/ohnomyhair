@@ -1,0 +1,303 @@
+1
+00:00:00,599 --> 00:00:01,875
+Oh No My Hair.
+
+2
+00:00:02,620 --> 00:00:04,706
+A two-player puzzle platformer.
+
+3
+00:00:05,451 --> 00:00:08,112
+Bad hair. Good friends.
+
+4
+00:00:10,766 --> 00:00:13,819
+We're NPC Union, a two-person team.
+
+5
+00:00:14,564 --> 00:00:17,150
+We started with a forty-eight-hour jam and the
+
+6
+00:00:17,150 --> 00:00:18,561
+theme Better Together.
+
+7
+00:00:19,307 --> 00:00:21,733
+We've kept building one escape where helping
+
+8
+00:00:21,733 --> 00:00:23,426
+your friend is the whole point.
+
+9
+00:00:28,766 --> 00:00:30,680
+Two friends visit a salon.
+
+10
+00:00:31,424 --> 00:00:34,562
+The robot assistant cuts too much, their hair
+
+11
+00:00:34,562 --> 00:00:37,309
+gets powers, and the front door locks.
+
+12
+00:00:38,054 --> 00:00:40,250
+Now they have to escape together.
+
+13
+00:00:42,932 --> 00:00:45,971
+Twin-Tails can glide and carry her friend across
+
+14
+00:00:45,971 --> 00:00:50,309
+gaps. Pompadour can dash through hair gel, parry
+
+15
+00:00:50,309 --> 00:00:52,896
+scissors, and launch her from his head.
+
+16
+00:00:53,642 --> 00:00:56,411
+Put those abilities together, and you can reach
+
+17
+00:00:56,411 --> 00:00:58,815
+places neither friend could reach alone.
+
+18
+00:01:03,932 --> 00:01:05,944
+This gel curtain grows back.
+
+19
+00:01:06,688 --> 00:01:08,994
+Carrying your friend gets you to the wall,
+
+20
+00:01:09,188 --> 00:01:11,004
+but you still can't get through.
+
+21
+00:01:11,750 --> 00:01:13,774
+So she carries him over the gap.
+
+22
+00:01:14,519 --> 00:01:16,701
+He dashes out of her grip and breaks
+
+23
+00:01:16,701 --> 00:01:20,306
+the gel. She follows before it closes.
+
+24
+00:01:21,051 --> 00:01:22,328
+Watch their timing.
+
+25
+00:01:29,932 --> 00:01:31,905
+This door needs a bell that's out of
+
+26
+00:01:31,905 --> 00:01:35,801
+reach. Pompadour parries a scissor, sending it
+
+27
+00:01:35,801 --> 00:01:39,465
+back horizontally. Twin-Tails catches the blue
+
+28
+00:01:39,465 --> 00:01:41,943
+scissor, then tosses it straight up.
+
+29
+00:01:42,688 --> 00:01:45,483
+The enemy's attack becomes the tool that opens
+
+30
+00:01:45,483 --> 00:01:49,418
+your route. Both players have a job in that chain.
+
+31
+00:01:54,932 --> 00:01:57,495
+Get soaked and Twin-Tails can't glide.
+
+32
+00:01:58,240 --> 00:02:00,203
+Pompadour can't break gel.
+
+33
+00:02:00,948 --> 00:02:04,075
+Warm air dries you off and lifts Twin-Tails.
+
+34
+00:02:04,821 --> 00:02:07,370
+Carry your friend into it, and you rise
+
+35
+00:02:07,370 --> 00:02:10,630
+together. You have to choose when to cross
+
+36
+00:02:10,630 --> 00:02:12,776
+the showers, and when to wait.
+
+37
+00:02:15,432 --> 00:02:17,983
+A barber's chair swaps your haircuts.
+
+38
+00:02:18,728 --> 00:02:20,933
+The powers go with the hair, so the
+
+39
+00:02:20,933 --> 00:02:23,521
+person who was carrying now needs a lift.
+
+40
+00:02:24,267 --> 00:02:26,033
+You have to switch jobs.
+
+41
+00:02:28,699 --> 00:02:31,324
+The escape ends at the robot assistant.
+
+42
+00:02:32,068 --> 00:02:34,288
+It charges and throws scissors.
+
+43
+00:02:35,034 --> 00:02:38,406
+Later phases bring showers and reinforcements.
+
+44
+00:02:39,151 --> 00:02:42,240
+Stun it, launch your friend, and land on
+
+45
+00:02:42,240 --> 00:02:45,450
+its head. The moves you've learned become your
+
+46
+00:02:45,450 --> 00:02:47,021
+way through the final fight.
+
+47
+00:02:49,699 --> 00:02:52,040
+We're making this for two people who enjoy
+
+48
+00:02:52,040 --> 00:02:55,289
+solving something together, sharing one keyboard.
+
+49
+00:02:56,034 --> 00:02:58,217
+The prototype runs in a browser.
+
+50
+00:02:58,963 --> 00:03:01,450
+PICO PARK and ibb and obb are useful
+
+51
+00:03:01,450 --> 00:03:05,826
+reference points. Our focus is hair-powered combinations
+
+52
+00:03:05,826 --> 00:03:07,936
+inside one mischievous salon.
+
+53
+00:03:10,599 --> 00:03:14,030
+The playable prototype has four chapters, twelve
+
+54
+00:03:14,030 --> 00:03:17,733
+rooms, saved progress, and a three-phase boss.
+
+55
+00:03:18,478 --> 00:03:21,444
+It starts with learning each haircut, then asks
+
+56
+00:03:21,444 --> 00:03:23,921
+you to combine them under new conditions.
+
+57
+00:03:24,667 --> 00:03:26,973
+Every exit needs both friends.
+
+58
+00:03:29,632 --> 00:03:32,647
+Next, we want twenty pairs to play without
+
+59
+00:03:32,647 --> 00:03:34,377
+us explaining the puzzles.
+
+60
+00:03:35,121 --> 00:03:36,998
+Can they learn the first combo?
+
+61
+00:03:37,744 --> 00:03:39,081
+Where do they get stuck?
+
+62
+00:03:39,827 --> 00:03:41,361
+Do they choose another room?
+
+63
+00:03:42,107 --> 00:03:44,913
+Our proposed twelve-week plan starts with those
+
+64
+00:03:44,913 --> 00:03:48,639
+tests, then clearer tutorials, room and audio
+
+65
+00:03:48,639 --> 00:03:52,244
+polish, accessibility, and release preparation.
+
+66
+00:03:54,899 --> 00:03:57,938
+We estimate seventeen thousand two hundred US
+
+67
+00:03:57,938 --> 00:04:00,109
+dollars for that twelve-week plan.
+
+68
+00:04:00,854 --> 00:04:04,214
+It covers our time, commissioned art and audio,
+
+69
+00:04:04,432 --> 00:04:07,425
+launch costs, and a twenty-percent buffer.
+
+70
+00:04:08,170 --> 00:04:11,087
+The immediate help we're looking for is playtesters
+
+71
+00:04:11,087 --> 00:04:12,069
+and mentoring.
+
+72
+00:04:14,732 --> 00:04:16,877
+Grab the person next to you and try
+
+73
+00:04:16,877 --> 00:04:19,988
+the prototype. We'd love to see how you
+
+74
+00:04:19,988 --> 00:04:21,216
+solve it together.
+
+75
+00:04:21,961 --> 00:04:24,045
+Scan the code to play Oh No My
+
+76
+00:04:24,045 --> 00:04:26,522
+Hair. Thanks for watching.

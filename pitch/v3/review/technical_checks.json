@@ -1,0 +1,158 @@
+{
+  "scope": "all-deliverables",
+  "expected_seconds": 252.63333333333333,
+  "checks": [
+    {
+      "pass": true,
+      "check": "main duration within 3\u20135 minutes"
+    },
+    {
+      "pass": true,
+      "check": "main follows the authored timeline"
+    },
+    {
+      "pass": true,
+      "check": "main is 1080p / 30fps"
+    },
+    {
+      "pass": true,
+      "check": "main has AAC / 48kHz audio"
+    },
+    {
+      "pass": true,
+      "check": "main fully decodes without errors"
+    },
+    {
+      "pass": true,
+      "check": "nobgm duration within 3\u20135 minutes"
+    },
+    {
+      "pass": true,
+      "check": "nobgm follows the authored timeline"
+    },
+    {
+      "pass": true,
+      "check": "nobgm is 1080p / 30fps"
+    },
+    {
+      "pass": true,
+      "check": "nobgm has AAC / 48kHz audio"
+    },
+    {
+      "pass": true,
+      "check": "nobgm fully decodes without errors"
+    },
+    {
+      "pass": true,
+      "check": "clean duration within 3\u20135 minutes"
+    },
+    {
+      "pass": true,
+      "check": "clean follows the authored timeline"
+    },
+    {
+      "pass": true,
+      "check": "clean is 1080p / 30fps"
+    },
+    {
+      "pass": true,
+      "check": "clean picture has no audio"
+    },
+    {
+      "pass": true,
+      "check": "clean fully decodes without errors"
+    },
+    {
+      "pass": true,
+      "check": "Voiceover stem starts at zero and covers the complete timeline"
+    },
+    {
+      "pass": true,
+      "check": "Voiceover stem uses 48kHz"
+    },
+    {
+      "pass": true,
+      "check": "Music_Effects stem starts at zero and covers the complete timeline"
+    },
+    {
+      "pass": true,
+      "check": "Music_Effects stem uses 48kHz"
+    },
+    {
+      "pass": true,
+      "check": "Music stem starts at zero and covers the complete timeline"
+    },
+    {
+      "pass": true,
+      "check": "Music stem uses 48kHz"
+    },
+    {
+      "pass": true,
+      "check": "all captions have valid time bounds"
+    },
+    {
+      "pass": true,
+      "check": "caption phrases do not overlap"
+    },
+    {
+      "pass": true,
+      "check": "main and NoBGM share a bit-identical picture stream"
+    },
+    {
+      "pass": true,
+      "check": "final frame QR decodes to the public prototype"
+    }
+  ],
+  "files": {
+    "main": {
+      "path": "F:\\gamejam\\pitch\\videos\\Oh_No_My_Hair_Pitch_v3.mp4",
+      "bytes": 36496037,
+      "seconds": 252.7,
+      "video_codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": "30/1"
+    },
+    "nobgm": {
+      "path": "F:\\gamejam\\pitch\\videos\\Oh_No_My_Hair_Pitch_v3_NoBGM.mp4",
+      "bytes": 34684240,
+      "seconds": 252.7,
+      "video_codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": "30/1"
+    },
+    "clean": {
+      "path": "F:\\gamejam\\pitch\\videos\\Oh_No_My_Hair_Pitch_v3_Clean.mp4",
+      "bytes": 25018221,
+      "seconds": 252.633333,
+      "video_codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": "30/1"
+    },
+    "Voiceover": {
+      "seconds": 252.633333,
+      "sample_rate": "48000",
+      "channels": 2,
+      "bytes": 48505678
+    },
+    "Music_Effects": {
+      "seconds": 252.633646,
+      "sample_rate": "48000",
+      "channels": 2,
+      "bytes": 48505738
+    },
+    "Music": {
+      "seconds": 252.633354,
+      "sample_rate": "48000",
+      "channels": 2,
+      "bytes": 48505682
+    }
+  },
+  "picture_sha256": [
+    "8e1caa9d937baaf4bb9e0fec09e10a1fb1eebd1cf0c15e48d67181841ccc42d5",
+    "8e1caa9d937baaf4bb9e0fec09e10a1fb1eebd1cf0c15e48d67181841ccc42d5"
+  ],
+  "qr_destination": "https://chenhongshan333.itch.io/ohnomyhair"
+}

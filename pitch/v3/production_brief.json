@@ -1,0 +1,115 @@
+{
+  "version": "v3",
+  "mode": "autonomous-original",
+  "authorization": "User asked to execute the preceding proposal, create a complete video and a new branch; no intermediate approval is needed.",
+  "audience": "Game pitch jury / mentors; no formal scoring rubric supplied.",
+  "format": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration_seconds": [
+      180,
+      300
+    ],
+    "speech": "English, two temporary AI voices",
+    "captions": "English burned-in and SRT"
+  },
+  "hook": "Hair-powered physical cooperation: carry, sling through gel, relay an enemy scissor into a bell.",
+  "primary_ask": "Play the prototype; recruit the next cohort of 20 pairs and seek mentoring.",
+  "truth_rules": [
+    "No invented player results, traction, awards, member responsibilities or funding commitments.",
+    "12 weeks and USD 17,200 are a proposed production plan, not a launch promise or funding already secured.",
+    "Capture uses the real Godot renderer, physics, inputs and game audio. Any staged boss setup is documented as a mechanic demonstration.",
+    "Hair swap changes the existing two friends' abilities, not the playable roster.",
+    "Use an isolated capture save, never the user's normal progress."
+  ],
+  "visual_tokens": {
+    "ink": "#30203f",
+    "cream": "#fff5df",
+    "pink": "#f65a9d",
+    "blue": "#74c7e5",
+    "gold": "#ffdd47",
+    "lilac": "#e8d9ef",
+    "heading_font": "Fredoka",
+    "body_font": "Nunito",
+    "caption_px": 56,
+    "safe_margin_px": 80
+  },
+  "direction": "Hand-drawn salon comedy; clean full-frame gameplay; pink and blue role markers; restrained ink titles and elastic punctuation. A continuous action takes priority over decorative motion.",
+  "requirement_decisions": [
+    {
+      "requirement": "A complete 3-5 minute game pitch",
+      "decision": "14 sections; gameplay hook, cooperation proof, audience, current build, team, proposed plan/budget, playable CTA",
+      "evidence": "storyboard.txt; timeline.json"
+    },
+    {
+      "requirement": "Show why two people are needed",
+      "decision": "Show carry alone failing, then the complete sling; show horizontal parry contrasted with an upward relay",
+      "evidence": "Scenes.tsx sling/parry; public/v3/failure.mp4, sling.mp4, parry.mp4"
+    },
+    {
+      "requirement": "Replace temporary AI narration later",
+      "decision": "Keep full voice and music/effects stems, clean picture, per-line audio and editable SRT",
+      "evidence": "README.txt; voice.py; props-clean.json; props-voiceonly.json"
+    },
+    {
+      "requirement": "Version and branch isolation",
+      "decision": "Use feat/pitch-v3 and a separate v3 Remotion entry without changing the v2 composition",
+      "evidence": "editor/src/v3/Root.tsx"
+    }
+  ],
+  "feature_shots": {
+    "core_cooperation": [
+      "hook",
+      "sling",
+      "parry"
+    ],
+    "role_identity": [
+      "roles",
+      "swap"
+    ],
+    "salon_rules": [
+      "salon"
+    ],
+    "combat_payoff": [
+      "boss"
+    ],
+    "existing_build": [
+      "proof"
+    ],
+    "audience_and_next_step": [
+      "audience",
+      "team",
+      "plan",
+      "budget",
+      "end"
+    ]
+  },
+  "gallery_adaptation": {
+    "card": "marker-underline-title",
+    "style_key": "marker-underline-title",
+    "source": "demos/typography/marker-underline-title/MarkerUnderlineTitle.tsx",
+    "commit": "43bd349a136651865ecfa6ea1cf012f6e957d304",
+    "local_implementation": "editor/src/v3/Marker.tsx",
+    "used_in": "end",
+    "preserved": "seeded dry-brush geometry; stroke f32-42; resting hold",
+    "adapted": "game palette, width and caption-safe placement",
+    "other_shots": "custom editorial gameplay, not claimed as Gallery copies"
+  },
+  "shotcraft_adaptations": [
+    "Use the product-derived palette, preproduction specification, feature-to-shot mapping, hold/rest time, frame-pinned SFX, deterministic motion, two audio versions and independent final review.",
+    "Game-specific exceptions to product-advert rules S1/Q8: retain actual game audio and characterful game music; no tech-house requirement, metallic UI orbit or launch-event particle finale.",
+    "Gameplay camera treatments are custom editorial shots: source-frame spatial continuity and readable targets take priority over a template's camera movement."
+  ],
+  "references": [
+    "https://github.com/Vincentwei1021/video-shotcraft",
+    "https://github.com/remotion-dev/skills",
+    "https://github.com/blader/humanizer",
+    "https://www.youtube.com/watch?v=t5MZhwGgXbk",
+    "https://www.tinybuild.com/single-post/how-to-pitch-games-in-2024",
+    ".agents/skills/game-feel/SKILL.md",
+    ".agents/skills/audio-design/SKILL.md",
+    ".agents/skills/game-ui-ux/SKILL.md"
+  ],
+  "reference_video_method": "Video identity and chapters checked; author's official companion article supplies the verified recommendations: snappy gameplay walkthrough, clear audience path, concise budget. No claim to have transcribed the full talk."
+}

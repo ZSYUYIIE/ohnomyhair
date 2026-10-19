@@ -1,0 +1,170 @@
+{
+  "seconds": 8.784,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 8.784,
+      "speaker": "B",
+      "text": "Two friends visit a salon. The robot assistant cuts too much, their hair gets powers, and the front door locks. Now they have to escape together."
+    }
+  ],
+  "words": [
+    {
+      "text": "Two",
+      "start": 0.084958,
+      "end": 0.254874,
+      "speaker": "B"
+    },
+    {
+      "text": "friends",
+      "start": 0.267,
+      "end": 0.594666,
+      "speaker": "B"
+    },
+    {
+      "text": "visit",
+      "start": 0.606791,
+      "end": 0.910207,
+      "speaker": "B"
+    },
+    {
+      "text": "a",
+      "start": 0.922333,
+      "end": 0.9708739,
+      "speaker": "B"
+    },
+    {
+      "text": "salon",
+      "start": 0.983,
+      "end": 1.589791,
+      "speaker": "B"
+    },
+    {
+      "text": "The",
+      "start": 1.978166,
+      "end": 2.038832,
+      "speaker": "B"
+    },
+    {
+      "text": "robot",
+      "start": 2.050958,
+      "end": 2.402916,
+      "speaker": "B"
+    },
+    {
+      "text": "assistant",
+      "start": 2.415041,
+      "end": 2.900457,
+      "speaker": "B"
+    },
+    {
+      "text": "cuts",
+      "start": 2.912625,
+      "end": 3.203875,
+      "speaker": "B"
+    },
+    {
+      "text": "too",
+      "start": 3.216,
+      "end": 3.37375,
+      "speaker": "B"
+    },
+    {
+      "text": "much",
+      "start": 3.385916,
+      "end": 3.810666,
+      "speaker": "B"
+    },
+    {
+      "text": "their",
+      "start": 4.053416,
+      "end": 4.223332,
+      "speaker": "B"
+    },
+    {
+      "text": "hair",
+      "start": 4.235416,
+      "end": 4.441707,
+      "speaker": "B"
+    },
+    {
+      "text": "gets",
+      "start": 4.453875,
+      "end": 4.696583,
+      "speaker": "B"
+    },
+    {
+      "text": "powers",
+      "start": 4.70875,
+      "end": 5.169916,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 5.194166,
+      "end": 5.303374,
+      "speaker": "B"
+    },
+    {
+      "text": "the",
+      "start": 5.315541,
+      "end": 5.400499,
+      "speaker": "B"
+    },
+    {
+      "text": "front",
+      "start": 5.412625,
+      "end": 5.679625,
+      "speaker": "B"
+    },
+    {
+      "text": "door",
+      "start": 5.69175,
+      "end": 5.898041,
+      "speaker": "B"
+    },
+    {
+      "text": "locks",
+      "start": 5.910208,
+      "end": 6.432041,
+      "speaker": "B"
+    },
+    {
+      "text": "Now",
+      "start": 6.820375,
+      "end": 7.002416,
+      "speaker": "B"
+    },
+    {
+      "text": "they",
+      "start": 7.014583,
+      "end": 7.135958,
+      "speaker": "B"
+    },
+    {
+      "text": "have",
+      "start": 7.148041,
+      "end": 7.330082,
+      "speaker": "B"
+    },
+    {
+      "text": "to",
+      "start": 7.34225,
+      "end": 7.439333,
+      "speaker": "B"
+    },
+    {
+      "text": "escape",
+      "start": 7.451458,
+      "end": 7.851958,
+      "speaker": "B"
+    },
+    {
+      "text": "together",
+      "start": 7.864083,
+      "end": 8.446624,
+      "speaker": "B"
+    }
+  ]
+}

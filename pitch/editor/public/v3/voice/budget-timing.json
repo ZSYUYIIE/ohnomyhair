@@ -1,0 +1,273 @@
+{
+  "seconds": 16.668,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 11.328,
+      "speaker": "A",
+      "text": "We estimate seventeen thousand two hundred US dollars for that twelve-week production plan. It covers our time, commissioned art and audio, launch costs, and a twenty-percent buffer."
+    },
+    {
+      "line": 2,
+      "start": 11.628,
+      "end": 16.668,
+      "speaker": "B",
+      "text": "The immediate help we're looking for is playtesters and mentoring on onboarding and release planning."
+    }
+  ],
+  "words": [
+    {
+      "text": "We",
+      "start": 0.072833,
+      "end": 0.230583,
+      "speaker": "A"
+    },
+    {
+      "text": "estimate",
+      "start": 0.242708,
+      "end": 0.740291,
+      "speaker": "A"
+    },
+    {
+      "text": "seventeen",
+      "start": 0.752416,
+      "end": 1.237832,
+      "speaker": "A"
+    },
+    {
+      "text": "thousand",
+      "start": 1.25,
+      "end": 1.747583,
+      "speaker": "A"
+    },
+    {
+      "text": "two",
+      "start": 1.759708,
+      "end": 1.917458,
+      "speaker": "A"
+    },
+    {
+      "text": "hundred",
+      "start": 1.929625,
+      "end": 2.20875,
+      "speaker": "A"
+    },
+    {
+      "text": "US",
+      "start": 2.220875,
+      "end": 2.5,
+      "speaker": "A"
+    },
+    {
+      "text": "dollars",
+      "start": 2.512125,
+      "end": 2.985416,
+      "speaker": "A"
+    },
+    {
+      "text": "for",
+      "start": 2.997583,
+      "end": 3.155333,
+      "speaker": "A"
+    },
+    {
+      "text": "that",
+      "start": 3.167458,
+      "end": 3.385916,
+      "speaker": "A"
+    },
+    {
+      "text": "twelve-week",
+      "start": 3.398041,
+      "end": 3.956291,
+      "speaker": "A"
+    },
+    {
+      "text": "production",
+      "start": 3.968458,
+      "end": 4.441749,
+      "speaker": "A"
+    },
+    {
+      "text": "plan",
+      "start": 4.453875,
+      "end": 4.854375,
+      "speaker": "A"
+    },
+    {
+      "text": "It",
+      "start": 5.218458,
+      "end": 5.303416,
+      "speaker": "A"
+    },
+    {
+      "text": "covers",
+      "start": 5.315541,
+      "end": 5.667499,
+      "speaker": "A"
+    },
+    {
+      "text": "our",
+      "start": 5.679625,
+      "end": 5.788833,
+      "speaker": "A"
+    },
+    {
+      "text": "time",
+      "start": 5.800958,
+      "end": 6.262124,
+      "speaker": "A"
+    },
+    {
+      "text": "commissioned",
+      "start": 6.54125,
+      "end": 7.014541,
+      "speaker": "A"
+    },
+    {
+      "text": "art",
+      "start": 7.026708,
+      "end": 7.293708,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 7.305833,
+      "end": 7.427208,
+      "speaker": "A"
+    },
+    {
+      "text": "audio",
+      "start": 7.439333,
+      "end": 7.900499,
+      "speaker": "A"
+    },
+    {
+      "text": "launch",
+      "start": 8.45875,
+      "end": 8.774291,
+      "speaker": "A"
+    },
+    {
+      "text": "costs",
+      "start": 8.786416,
+      "end": 9.308249,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 9.623791,
+      "end": 9.781541,
+      "speaker": "A"
+    },
+    {
+      "text": "a",
+      "start": 9.793708,
+      "end": 9.854374,
+      "speaker": "A"
+    },
+    {
+      "text": "twenty-percent",
+      "start": 9.8665,
+      "end": 10.533958,
+      "speaker": "A"
+    },
+    {
+      "text": "buffer",
+      "start": 10.546125,
+      "end": 10.95875,
+      "speaker": "A"
+    },
+    {
+      "text": "The",
+      "start": 11.712958,
+      "end": 11.773624,
+      "speaker": "B"
+    },
+    {
+      "text": "immediate",
+      "start": 11.78575,
+      "end": 12.222625,
+      "speaker": "B"
+    },
+    {
+      "text": "help",
+      "start": 12.234791,
+      "end": 12.465374,
+      "speaker": "B"
+    },
+    {
+      "text": "we're",
+      "start": 12.477500000000001,
+      "end": 12.598875,
+      "speaker": "B"
+    },
+    {
+      "text": "looking",
+      "start": 12.611,
+      "end": 12.926541,
+      "speaker": "B"
+    },
+    {
+      "text": "for",
+      "start": 12.938666,
+      "end": 13.120707,
+      "speaker": "B"
+    },
+    {
+      "text": "is",
+      "start": 13.132875,
+      "end": 13.25425,
+      "speaker": "B"
+    },
+    {
+      "text": "playtesters",
+      "start": 13.266333,
+      "end": 14.006624,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 14.018791,
+      "end": 14.115874,
+      "speaker": "B"
+    },
+    {
+      "text": "mentoring",
+      "start": 14.128,
+      "end": 14.589166,
+      "speaker": "B"
+    },
+    {
+      "text": "on",
+      "start": 14.601291,
+      "end": 14.722666,
+      "speaker": "B"
+    },
+    {
+      "text": "onboarding",
+      "start": 14.734791,
+      "end": 15.317332,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 15.329458,
+      "end": 15.450833,
+      "speaker": "B"
+    },
+    {
+      "text": "release",
+      "start": 15.462958,
+      "end": 15.802749,
+      "speaker": "B"
+    },
+    {
+      "text": "planning",
+      "start": 15.814875,
+      "end": 16.312458,
+      "speaker": "B"
+    }
+  ]
+}

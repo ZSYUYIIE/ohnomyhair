@@ -1,0 +1,37 @@
+{
+  "verdict": "CONDITIONAL PASS",
+  "baseline": "master c51cacc; feat/pitch-v4",
+  "scope": "Pitch-only implementation plus LFS attributes; no game-code changes. V3 archive carried in separate commit b1ba3c6.",
+  "lanes": [
+    {
+      "id": "pitch_v4_review",
+      "status": "completed",
+      "scope": "Only independent_review.txt",
+      "result": "APPROVED WITH DOCUMENTED LIMITS",
+      "evidence": "independent_review.txt"
+    },
+    {
+      "id": "pitch_v3_review",
+      "status": "completed archive validation",
+      "scope": "V3 review report only",
+      "result": "Archived V3 validation retained; not used as V4 approval"
+    }
+  ],
+  "verification": {
+    "encoded_checks": "50/50",
+    "qa_exit": 0,
+    "typescript_exit": 0,
+    "git_diff_cached_check_exit": 0,
+    "workbench_parity": "4/4 frames; 0% pixels beyond tolerance",
+    "source_corner_cuts": 21
+  },
+  "presets": "No locale mirrors, frontier-model facts, or repository catalog entries; delivery-file README index only. Reconciliation applied to review output.",
+  "limits": [
+    "Caption compact strip: font56px, measured glyph47px, below strict skill Q11 recommendation.",
+    "No subjective audio listening performed.",
+    "Full-recording replacement alignment tested with AI stand-in in check-only mode; real human and end-to-end replacement export untested."
+  ],
+  "blockers": [],
+  "approval": "Existing user authorization covers creation, local branch and delivery; no publishing or push requested.",
+  "review_sha256": "9cfc279855d69bafd413f56414159da07257d08bcbcd37168f12f7fb20ca04a0"
+}

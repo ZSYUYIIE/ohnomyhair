@@ -1,0 +1,9 @@
+video-shotcraft
+Copyright 2026 Wei Yihao
+https://github.com/Vincentwei1021/video-shotcraft
+
+Marker.tsx adapts the project's MarkerUnderlineTitle.tsx implementation.
+Modifications: removed product-specific fixture and brand dependencies,
+parameterized width and color, embedded the stroke in the game's closing
+title, and retained deterministic stroke geometry and drawing timings.
+Licensed under the Apache License, Version 2.0; see LICENSE-shotcraft.txt.

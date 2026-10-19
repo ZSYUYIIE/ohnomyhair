@@ -1,0 +1,69 @@
+{
+  "version": "v4",
+  "mode": "autonomous-original",
+  "base": "c51cacc",
+  "branch": "feat/pitch-v4",
+  "audience": "pitch jury and mentors",
+  "duration_seconds": [
+    180,
+    300
+  ],
+  "requirements": {
+    "order": "hero > team > story > roles and levels > audience > prototype > plan/budget > CTA",
+    "footage": "entire 1280x720 source contained in 1440x810 panel at x240/y150; no crop, zoom, rounded clip, or subtitle overlap",
+    "voice": "one bright, sweet youthful female AI narrator; replaceable from one full user recording",
+    "music": "cozy game BGM like the first pitch, continuous sample-exact loop, ducked under speech",
+    "replacement": "one command transcribes and aligns a full recording, retimes scenes/captions, remixes and exports"
+  },
+  "visual_tokens": {
+    "ink": "#30203f",
+    "cream": "#fff5df",
+    "pink": "#f65a9d",
+    "blue": "#74c7e5",
+    "gold": "#ffdd47",
+    "lilac": "#e8d9ef",
+    "fonts": [
+      "Fredoka",
+      "Nunito"
+    ],
+    "caption_px": 56
+  },
+  "reference_breakdown": [
+    {
+      "technique": "full framed footage",
+      "reference": "Final.mp4 retains all four corners and HUD",
+      "decision": "adopt complete contained video; labels and captions outside panel"
+    },
+    {
+      "technique": "cooperation walkthrough",
+      "reference": "v3 failure, complete action, replay, step rail",
+      "decision": "retain readable continuous action and labelled replay"
+    },
+    {
+      "technique": "team position",
+      "reference": "user explicitly requests team before levels",
+      "decision": "move team to second section, before all gameplay"
+    },
+    {
+      "technique": "background audio",
+      "reference": "Final.mp4 game music",
+      "decision": "reuse project calm music, sample-based looping, explicit encoded coverage checks"
+    }
+  ],
+  "truth_rules": [
+    "Four chapters / twelve rooms / three boss phases verified in latest code.",
+    "20 pairs, twelve weeks, USD17200 are proposed, not achieved results or funding.",
+    "Deterministic real Godot captures; staged boss positions, immunity and phase demonstrations disclosed."
+  ],
+  "shotcraft": {
+    "repo": "https://github.com/Vincentwei1021/video-shotcraft",
+    "commit": "43bd349a136651865ecfa6ea1cf012f6e957d304",
+    "card": "marker-underline-title",
+    "style_key": "marker-underline-title",
+    "source": "demos/typography/marker-underline-title/MarkerUnderlineTitle.tsx",
+    "preserved": "seeded geometry and stroke f32-42",
+    "adapted": "game colors and wider line spacing; used once at end"
+  },
+  "styleframe": "Existing Final.mp4 and v3 define strict game palette and type; extracted reference contact sheet replaces a separate speculative styleframe.",
+  "renderer": "Shared scene/cut JSON drives Remotion preview and FFmpeg final composition. Remotion renders graphics, FFmpeg preserves video pixels and mixes PCM audio."
+}

@@ -1,0 +1,381 @@
+{
+  "seconds": 22.716,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 9.768,
+      "speaker": "A",
+      "text": "Next, we want twenty pairs to play without us explaining the puzzles. Can they learn the first combo? Where do they keep failing? Do they choose another room?"
+    },
+    {
+      "line": 2,
+      "start": 10.068000000000001,
+      "end": 22.716,
+      "speaker": "B",
+      "text": "Our proposed twelve-week plan starts with those tests and clearer tutorials, then room and audio polish, followed by accessibility, bug fixes, and release preparation. Those player results are still ahead of us."
+    }
+  ],
+  "words": [
+    {
+      "text": "Next",
+      "start": 0.084958,
+      "end": 0.533999,
+      "speaker": "A"
+    },
+    {
+      "text": "we",
+      "start": 0.55825,
+      "end": 0.716,
+      "speaker": "A"
+    },
+    {
+      "text": "want",
+      "start": 0.728166,
+      "end": 0.958749,
+      "speaker": "A"
+    },
+    {
+      "text": "twenty",
+      "start": 0.970875,
+      "end": 1.274291,
+      "speaker": "A"
+    },
+    {
+      "text": "pairs",
+      "start": 1.286416,
+      "end": 1.626207,
+      "speaker": "A"
+    },
+    {
+      "text": "to",
+      "start": 1.638333,
+      "end": 1.735416,
+      "speaker": "A"
+    },
+    {
+      "text": "play",
+      "start": 1.747583,
+      "end": 2.123791,
+      "speaker": "A"
+    },
+    {
+      "text": "without",
+      "start": 2.135916,
+      "end": 2.512124,
+      "speaker": "A"
+    },
+    {
+      "text": "us",
+      "start": 2.524291,
+      "end": 2.694207,
+      "speaker": "A"
+    },
+    {
+      "text": "explaining",
+      "start": 2.706291,
+      "end": 3.252416,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 3.264583,
+      "end": 3.349541,
+      "speaker": "A"
+    },
+    {
+      "text": "puzzles",
+      "start": 3.361666,
+      "end": 3.919916,
+      "speaker": "A"
+    },
+    {
+      "text": "Can",
+      "start": 4.284,
+      "end": 4.4175,
+      "speaker": "A"
+    },
+    {
+      "text": "they",
+      "start": 4.429625,
+      "end": 4.57525,
+      "speaker": "A"
+    },
+    {
+      "text": "learn",
+      "start": 4.587375,
+      "end": 4.975708,
+      "speaker": "A"
+    },
+    {
+      "text": "the",
+      "start": 4.987875,
+      "end": 5.084958,
+      "speaker": "A"
+    },
+    {
+      "text": "first",
+      "start": 5.097083,
+      "end": 5.436874,
+      "speaker": "A"
+    },
+    {
+      "text": "combo",
+      "start": 5.449041,
+      "end": 5.970874,
+      "speaker": "A"
+    },
+    {
+      "text": "Where",
+      "start": 6.347083,
+      "end": 6.504833,
+      "speaker": "A"
+    },
+    {
+      "text": "do",
+      "start": 6.517,
+      "end": 6.601958,
+      "speaker": "A"
+    },
+    {
+      "text": "they",
+      "start": 6.614083,
+      "end": 6.759708,
+      "speaker": "A"
+    },
+    {
+      "text": "keep",
+      "start": 6.771833,
+      "end": 7.002416,
+      "speaker": "A"
+    },
+    {
+      "text": "failing",
+      "start": 7.014583,
+      "end": 7.572833,
+      "speaker": "A"
+    },
+    {
+      "text": "Do",
+      "start": 7.961166,
+      "end": 8.082541,
+      "speaker": "A"
+    },
+    {
+      "text": "they",
+      "start": 8.094666,
+      "end": 8.240291,
+      "speaker": "A"
+    },
+    {
+      "text": "choose",
+      "start": 8.252416,
+      "end": 8.628624,
+      "speaker": "A"
+    },
+    {
+      "text": "another",
+      "start": 8.640791,
+      "end": 9.016999,
+      "speaker": "A"
+    },
+    {
+      "text": "room",
+      "start": 9.029125,
+      "end": 9.417458,
+      "speaker": "A"
+    },
+    {
+      "text": "Our",
+      "start": 10.152958000000002,
+      "end": 10.274333000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "proposed",
+      "start": 10.286458000000001,
+      "end": 10.711208000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "twelve-week",
+      "start": 10.723333000000002,
+      "end": 11.233041000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "plan",
+      "start": 11.245166000000001,
+      "end": 11.560707,
+      "speaker": "B"
+    },
+    {
+      "text": "starts",
+      "start": 11.572875000000002,
+      "end": 11.900541,
+      "speaker": "B"
+    },
+    {
+      "text": "with",
+      "start": 11.912666000000002,
+      "end": 12.009749000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "those",
+      "start": 12.021875000000001,
+      "end": 12.252458,
+      "speaker": "B"
+    },
+    {
+      "text": "tests",
+      "start": 12.264583000000002,
+      "end": 12.604374000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 12.616541000000002,
+      "end": 12.713624000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "clearer",
+      "start": 12.725750000000001,
+      "end": 13.041291000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "tutorials",
+      "start": 13.053416000000002,
+      "end": 13.769416000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "then",
+      "start": 14.230625000000002,
+      "end": 14.449083000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "room",
+      "start": 14.461208000000001,
+      "end": 14.667499000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 14.679666000000001,
+      "end": 14.788874000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "audio",
+      "start": 14.801000000000002,
+      "end": 15.128666000000003,
+      "speaker": "B"
+    },
+    {
+      "text": "polish",
+      "start": 15.140833,
+      "end": 15.626249000000001,
+      "speaker": "B"
+    },
+    {
+      "text": "followed",
+      "start": 15.9175,
+      "end": 16.257291000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "by",
+      "start": 16.269458,
+      "end": 16.415083000000003,
+      "speaker": "B"
+    },
+    {
+      "text": "accessibility",
+      "start": 16.427208,
+      "end": 17.276708,
+      "speaker": "B"
+    },
+    {
+      "text": "bug",
+      "start": 17.713625,
+      "end": 17.944208000000003,
+      "speaker": "B"
+    },
+    {
+      "text": "fixes",
+      "start": 17.956333,
+      "end": 18.453916,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 18.478208000000002,
+      "end": 18.660249,
+      "speaker": "B"
+    },
+    {
+      "text": "release",
+      "start": 18.672375000000002,
+      "end": 18.987916000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "preparation",
+      "start": 19.000041000000003,
+      "end": 19.800999,
+      "speaker": "B"
+    },
+    {
+      "text": "Those",
+      "start": 20.189375000000002,
+      "end": 20.407833000000004,
+      "speaker": "B"
+    },
+    {
+      "text": "player",
+      "start": 20.419958,
+      "end": 20.735499,
+      "speaker": "B"
+    },
+    {
+      "text": "results",
+      "start": 20.747625,
+      "end": 21.172375000000002,
+      "speaker": "B"
+    },
+    {
+      "text": "are",
+      "start": 21.1845,
+      "end": 21.281583,
+      "speaker": "B"
+    },
+    {
+      "text": "still",
+      "start": 21.293708000000002,
+      "end": 21.548583,
+      "speaker": "B"
+    },
+    {
+      "text": "ahead",
+      "start": 21.560708,
+      "end": 21.815583000000004,
+      "speaker": "B"
+    },
+    {
+      "text": "of",
+      "start": 21.827708,
+      "end": 21.961208,
+      "speaker": "B"
+    },
+    {
+      "text": "us",
+      "start": 21.973333000000004,
+      "end": 22.349541000000002,
+      "speaker": "B"
+    }
+  ]
+}

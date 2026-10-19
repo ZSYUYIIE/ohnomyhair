@@ -1,0 +1,243 @@
+{
+  "seconds": 13.356,
+  "lines": [
+    {
+      "line": 1,
+      "start": 0.0,
+      "end": 3.576,
+      "speaker": "A",
+      "text": "Twin-Tails can glide and carry her friend across gaps."
+    },
+    {
+      "line": 2,
+      "start": 3.876,
+      "end": 13.356,
+      "speaker": "B",
+      "text": "Pompadour can dash through hair gel, parry scissors, and launch her from his head. Put those abilities together, and you can reach places neither friend could reach alone."
+    }
+  ],
+  "words": [
+    {
+      "text": "Twin-Tails",
+      "start": 0.072833,
+      "end": 0.655374,
+      "speaker": "A"
+    },
+    {
+      "text": "can",
+      "start": 0.667458,
+      "end": 0.837374,
+      "speaker": "A"
+    },
+    {
+      "text": "glide",
+      "start": 0.8495,
+      "end": 1.347083,
+      "speaker": "A"
+    },
+    {
+      "text": "and",
+      "start": 1.359208,
+      "end": 1.516958,
+      "speaker": "A"
+    },
+    {
+      "text": "carry",
+      "start": 1.529125,
+      "end": 1.844666,
+      "speaker": "A"
+    },
+    {
+      "text": "her",
+      "start": 1.856791,
+      "end": 2.002416,
+      "speaker": "A"
+    },
+    {
+      "text": "friend",
+      "start": 2.014583,
+      "end": 2.330124,
+      "speaker": "A"
+    },
+    {
+      "text": "across",
+      "start": 2.34225,
+      "end": 2.706333,
+      "speaker": "A"
+    },
+    {
+      "text": "gaps",
+      "start": 2.718458,
+      "end": 3.216041,
+      "speaker": "A"
+    },
+    {
+      "text": "Pompadour",
+      "start": 3.973083,
+      "end": 4.458499,
+      "speaker": "B"
+    },
+    {
+      "text": "can",
+      "start": 4.470666,
+      "end": 4.628416,
+      "speaker": "B"
+    },
+    {
+      "text": "dash",
+      "start": 4.6405829999999995,
+      "end": 4.968249,
+      "speaker": "B"
+    },
+    {
+      "text": "through",
+      "start": 4.980375,
+      "end": 5.138125,
+      "speaker": "B"
+    },
+    {
+      "text": "hair",
+      "start": 5.150291,
+      "end": 5.392999,
+      "speaker": "B"
+    },
+    {
+      "text": "gel",
+      "start": 5.405125,
+      "end": 5.81775,
+      "speaker": "B"
+    },
+    {
+      "text": "parry",
+      "start": 5.9755,
+      "end": 6.303166,
+      "speaker": "B"
+    },
+    {
+      "text": "scissors",
+      "start": 6.315333,
+      "end": 6.800749,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 6.825041,
+      "end": 7.019207,
+      "speaker": "B"
+    },
+    {
+      "text": "launch",
+      "start": 7.031333,
+      "end": 7.2983329999999995,
+      "speaker": "B"
+    },
+    {
+      "text": "her",
+      "start": 7.310458,
+      "end": 7.431832999999999,
+      "speaker": "B"
+    },
+    {
+      "text": "from",
+      "start": 7.443958,
+      "end": 7.613874,
+      "speaker": "B"
+    },
+    {
+      "text": "his",
+      "start": 7.6259999999999994,
+      "end": 7.771625,
+      "speaker": "B"
+    },
+    {
+      "text": "head",
+      "start": 7.7837499999999995,
+      "end": 8.159958,
+      "speaker": "B"
+    },
+    {
+      "text": "Put",
+      "start": 8.548333,
+      "end": 8.706083,
+      "speaker": "B"
+    },
+    {
+      "text": "those",
+      "start": 8.71825,
+      "end": 8.924541,
+      "speaker": "B"
+    },
+    {
+      "text": "abilities",
+      "start": 8.936666,
+      "end": 9.434249,
+      "speaker": "B"
+    },
+    {
+      "text": "together",
+      "start": 9.446375,
+      "end": 9.956083,
+      "speaker": "B"
+    },
+    {
+      "text": "and",
+      "start": 10.271625,
+      "end": 10.368708,
+      "speaker": "B"
+    },
+    {
+      "text": "you",
+      "start": 10.380875,
+      "end": 10.50225,
+      "speaker": "B"
+    },
+    {
+      "text": "can",
+      "start": 10.514333,
+      "end": 10.708499,
+      "speaker": "B"
+    },
+    {
+      "text": "reach",
+      "start": 10.720666,
+      "end": 10.963374,
+      "speaker": "B"
+    },
+    {
+      "text": "places",
+      "start": 10.9755,
+      "end": 11.388125,
+      "speaker": "B"
+    },
+    {
+      "text": "neither",
+      "start": 11.400291,
+      "end": 11.715832,
+      "speaker": "B"
+    },
+    {
+      "text": "friend",
+      "start": 11.727958,
+      "end": 12.067749,
+      "speaker": "B"
+    },
+    {
+      "text": "could",
+      "start": 12.079875,
+      "end": 12.249791,
+      "speaker": "B"
+    },
+    {
+      "text": "reach",
+      "start": 12.261916,
+      "end": 12.480374,
+      "speaker": "B"
+    },
+    {
+      "text": "alone",
+      "start": 12.4925,
+      "end": 13.002208,
+      "speaker": "B"
+    }
+  ]
+}
