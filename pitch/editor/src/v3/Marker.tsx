@@ -1,5 +1,5 @@
 // Adapted from video-shotcraft's MarkerUnderlineTitle.tsx (Apache-2.0).
-// Preserve its 22-frame landing, f32–42 stroke and seeded dry-brush geometry.
+// Adapted underline fragment: preserve f32–42 stroke and seeded dry-brush geometry.
 import {useId} from 'react';
 import {interpolate,useCurrentFrame} from 'remotion';
 

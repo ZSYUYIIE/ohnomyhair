@@ -1,0 +1,137 @@
+{
+  "key": "83525aba7bf0ede7bba28bbd2a006e13345a15d3c1dcb9e41247f767be30a63b",
+  "voice": "en-US-AnaNeural",
+  "seconds": 12.336,
+  "words": [
+    {
+      "text": "Two",
+      "start": 0.099,
+      "end": 0.368625
+    },
+    {
+      "text": "friends",
+      "start": 0.380875,
+      "end": 0.822041
+    },
+    {
+      "text": "visit",
+      "start": 0.834333,
+      "end": 1.214249
+    },
+    {
+      "text": "a",
+      "start": 1.226458,
+      "end": 1.299999
+    },
+    {
+      "text": "salon",
+      "start": 1.31225,
+      "end": 1.91275
+    },
+    {
+      "text": "The",
+      "start": 2.757333,
+      "end": 2.904374
+    },
+    {
+      "text": "robot",
+      "start": 2.916666,
+      "end": 3.419124
+    },
+    {
+      "text": "assistant",
+      "start": 3.431375,
+      "end": 4.019625
+    },
+    {
+      "text": "cuts",
+      "start": 4.031875,
+      "end": 4.399541
+    },
+    {
+      "text": "too",
+      "start": 4.41175,
+      "end": 4.607833
+    },
+    {
+      "text": "much",
+      "start": 4.620083,
+      "end": 5.024499
+    },
+    {
+      "text": "their",
+      "start": 5.330875,
+      "end": 5.514708
+    },
+    {
+      "text": "hair",
+      "start": 5.526958,
+      "end": 5.882333
+    },
+    {
+      "text": "gets",
+      "start": 5.894625,
+      "end": 6.151958
+    },
+    {
+      "text": "powers",
+      "start": 6.164208,
+      "end": 6.776958
+    },
+    {
+      "text": "and",
+      "start": 7.071083,
+      "end": 7.218124
+    },
+    {
+      "text": "the",
+      "start": 7.230375,
+      "end": 7.328416
+    },
+    {
+      "text": "front",
+      "start": 7.340666,
+      "end": 7.696041
+    },
+    {
+      "text": "door",
+      "start": 7.708333,
+      "end": 7.990208
+    },
+    {
+      "text": "locks",
+      "start": 8.002458,
+      "end": 8.541666
+    },
+    {
+      "text": "Now",
+      "start": 9.38725,
+      "end": 9.742625
+    },
+    {
+      "text": "they",
+      "start": 9.754916,
+      "end": 9.914249
+    },
+    {
+      "text": "have",
+      "start": 9.926458,
+      "end": 10.220583
+    },
+    {
+      "text": "to",
+      "start": 10.232833,
+      "end": 10.367624
+    },
+    {
+      "text": "escape",
+      "start": 10.379916,
+      "end": 10.870124
+    },
+    {
+      "text": "together",
+      "start": 10.882333,
+      "end": 11.482833
+    }
+  ]
+}

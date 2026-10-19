@@ -1,0 +1,54 @@
+00:00:00,000 | hook | 10.17s
+Oh No My Hair. A two-player puzzle platformer. Bad hair. Good friends.
+
+
+00:00:10,167 | team | 18.00s
+We're NPC Union, a two-person team. We started with a forty-eight-hour jam and the theme Better Together. We've kept building one escape where helping your friend is the whole point.
+
+
+00:00:28,167 | story | 14.17s
+Two friends visit a salon. The robot assistant cuts too much, their hair gets powers, and the front door locks. Now they have to escape together.
+
+
+00:00:42,333 | roles | 21.00s
+Twin-Tails can glide and carry her friend across gaps. Pompadour can dash through hair gel, parry scissors, and launch her from his head. Put those abilities together, and you can reach places neither friend could reach alone.
+
+
+00:01:03,333 | sling | 26.00s
+This gel curtain grows back. Carrying your friend gets you to the wall, but you still can't get through. So she carries him over the gap. He dashes out of her grip and breaks the gel. She follows before it closes. Watch their timing.
+
+
+00:01:29,333 | parry | 25.00s
+This door needs a bell that's out of reach. Pompadour parries a scissor, sending it back horizontally. Twin-Tails catches the blue scissor, then tosses it straight up. The enemy's attack becomes the tool that opens your route. Both players have a job in that chain.
+
+
+00:01:54,333 | salon | 20.50s
+Get soaked and Twin-Tails can't glide. Pompadour can't break gel. Warm air dries you off and lifts Twin-Tails. Carry your friend into it, and you rise together. You have to choose when to cross the showers, and when to wait.
+
+
+00:02:14,833 | swap | 13.27s
+A barber's chair swaps your haircuts. The powers go with the hair, so the person who was carrying now needs a lift. You have to switch jobs.
+
+
+00:02:28,100 | boss | 21.00s
+The escape ends at the robot assistant. It charges and throws scissors. Later phases bring showers and reinforcements. Stun it, launch your friend, and land on its head. The moves you've learned become your way through the final fight.
+
+
+00:02:49,100 | audience | 20.90s
+We're making this for two people who enjoy solving something together, sharing one keyboard. The prototype runs in a browser. PICO PARK and ibb and obb are useful reference points. Our focus is hair-powered combinations inside one mischievous salon.
+
+
+00:03:10,000 | proof | 19.03s
+The playable prototype has four chapters, twelve rooms, saved progress, and a three-phase boss. It starts with learning each haircut, then asks you to combine them under new conditions. Every exit needs both friends.
+
+
+00:03:29,033 | plan | 25.27s
+Next, we want twenty pairs to play without us explaining the puzzles. Can they learn the first combo? Where do they get stuck? Do they choose another room? Our proposed twelve-week plan starts with those tests, then clearer tutorials, room and audio polish, accessibility, and release preparation.
+
+
+00:03:54,300 | budget | 19.83s
+We estimate seventeen thousand two hundred US dollars for that twelve-week plan. It covers our time, commissioned art and audio, launch costs, and a twenty-percent buffer. The immediate help we're looking for is playtesters and mentoring.
+
+
+00:04:14,133 | end | 14.47s
+Grab the person next to you and try the prototype. We'd love to see how you solve it together. Scan the code to play Oh No My Hair. Thanks for watching.

@@ -1,0 +1,11 @@
+Command: node scripts/parity.mjs --frames 400,2000,4800,7800
+Working directory: build/pitch-v3-shotcraft/workbench
+Exit: 0
+f400: 0 / 2073600 pixels outside channel tolerance 2; maximum channel difference 1
+f2000: 0 / 2073600; maximum difference 0
+f4800: 0 / 2073600; maximum difference 0
+f7800: 0 / 2073600; maximum difference 1
+
+Scope: imported V4 workbench manifest vs V4 Remotion original composition.
+Not a claim of bit-identical Remotion vs hybrid FFmpeg output.
+Workbench started at http://localhost:5198/?import=project through the skill's open.mjs.

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "hook",
+    "kind": "hero",
+    "minimum": 9,
+    "title": "Oh No My Hair",
+    "kicker": "Bad hair. Good friends.",
+    "text": "Oh No My Hair. A two-player puzzle platformer. Bad hair. Good friends."
+  },
+  {
+    "id": "team",
+    "kind": "team",
+    "minimum": 18,
+    "title": "Meet NPC Union",
+    "kicker": "THE TWO-PERSON TEAM",
+    "text": "We're NPC Union, a two-person team. We started with a forty-eight-hour jam and the theme Better Together. We've kept building one escape where helping your friend is the whole point."
+  },
+  {
+    "id": "story",
+    "kind": "story",
+    "minimum": 12,
+    "title": "One snip too many.",
+    "kicker": "THE ESCAPE",
+    "text": "Two friends visit a salon. The robot assistant cuts too much, their hair gets powers, and the front door locks. Now they have to escape together."
+  },
+  {
+    "id": "roles",
+    "kind": "game",
+    "minimum": 21,
+    "title": "Two haircuts. Two jobs.",
+    "kicker": "COMPLEMENTARY POWERS",
+    "text": "Twin-Tails can glide and carry her friend across gaps. Pompadour can dash through hair gel, parry scissors, and launch her from his head. Put those abilities together, and you can reach places neither friend could reach alone."
+  },
+  {
+    "id": "sling",
+    "kind": "game",
+    "minimum": 26,
+    "title": "Carry. Dash. Follow.",
+    "kicker": "THE SLING",
+    "text": "This gel curtain grows back. Carrying your friend gets you to the wall, but you still can't get through. So she carries him over the gap. He dashes out of her grip and breaks the gel. She follows before it closes. Watch their timing."
+  },
+  {
+    "id": "parry",
+    "kind": "game",
+    "minimum": 25,
+    "title": "Return to sender.",
+    "kicker": "A FOUR-STEP HAND-OFF",
+    "text": "This door needs a bell that's out of reach. Pompadour parries a scissor, sending it back horizontally. Twin-Tails catches the blue scissor, then tosses it straight up. The enemy's attack becomes the tool that opens your route. Both players have a job in that chain."
+  },
+  {
+    "id": "salon",
+    "kind": "game",
+    "minimum": 20,
+    "title": "Wash. Dry. Try again.",
+    "kicker": "THE SALON CHANGES THE RULES",
+    "text": "Get soaked and Twin-Tails can't glide. Pompadour can't break gel. Warm air dries you off and lifts Twin-Tails. Carry your friend into it, and you rise together. You have to choose when to cross the showers, and when to wait."
+  },
+  {
+    "id": "swap",
+    "kind": "game",
+    "minimum": 11,
+    "title": "Your haircut. My controls.",
+    "kicker": "SWITCH JOBS",
+    "text": "A barber's chair swaps your haircuts. The powers go with the hair, so the person who was carrying now needs a lift. You have to switch jobs."
+  },
+  {
+    "id": "boss",
+    "kind": "game",
+    "minimum": 18,
+    "title": "The assistant is waiting.",
+    "kicker": "A FINALE BUILT ON YOUR COMBOS",
+    "text": "The escape ends at the robot assistant. It charges and throws scissors. Later phases bring showers and reinforcements. Stun it, launch your friend, and land on its head. The moves you've learned become your way through the final fight."
+  },
+  {
+    "id": "audience",
+    "kind": "audience",
+    "minimum": 16,
+    "title": "For the person next to you.",
+    "kicker": "LOCAL CO-OP FIRST",
+    "text": "We're making this for two people who enjoy solving something together, sharing one keyboard. The prototype runs in a browser. PICO PARK and ibb and obb are useful reference points. Our focus is hair-powered combinations inside one mischievous salon."
+  },
+  {
+    "id": "proof",
+    "kind": "proof",
+    "minimum": 16,
+    "title": "You can play it today.",
+    "kicker": "THE CURRENT PROTOTYPE",
+    "text": "The playable prototype has four chapters, twelve rooms, saved progress, and a three-phase boss. It starts with learning each haircut, then asks you to combine them under new conditions. Every exit needs both friends."
+  },
+  {
+    "id": "plan",
+    "kind": "plan",
+    "minimum": 22,
+    "title": "Watch real pairs play.",
+    "kicker": "OUR PROPOSED NEXT STEP",
+    "text": "Next, we want twenty pairs to play without us explaining the puzzles. Can they learn the first combo? Where do they get stuck? Do they choose another room? Our proposed twelve-week plan starts with those tests, then clearer tutorials, room and audio polish, accessibility, and release preparation."
+  },
+  {
+    "id": "budget",
+    "kind": "budget",
+    "minimum": 18,
+    "title": "A focused production plan.",
+    "kicker": "PROPOSED · USD",
+    "text": "We estimate seventeen thousand two hundred US dollars for that twelve-week plan. It covers our time, commissioned art and audio, launch costs, and a twenty-percent buffer. The immediate help we're looking for is playtesters and mentoring."
+  },
+  {
+    "id": "end",
+    "kind": "end",
+    "minimum": 13,
+    "title": "Bring a friend.",
+    "kicker": "PLAY THE BROWSER PROTOTYPE",
+    "text": "Grab the person next to you and try the prototype. We'd love to see how you solve it together. Scan the code to play Oh No My Hair. Thanks for watching."
+  }
+]

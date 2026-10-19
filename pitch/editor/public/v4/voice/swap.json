@@ -1,0 +1,142 @@
+{
+  "key": "5cdfb3048456fdfeac9fec1a1e49f2f0cb567f45670297ade6a01c72a286eecb",
+  "voice": "en-US-AnaNeural",
+  "seconds": 11.448,
+  "words": [
+    {
+      "text": "A",
+      "start": 0.09925,
+      "end": 0.221791
+    },
+    {
+      "text": "barber's",
+      "start": 0.234083,
+      "end": 0.797791
+    },
+    {
+      "text": "chair",
+      "start": 0.810041,
+      "end": 1.165416
+    },
+    {
+      "text": "swaps",
+      "start": 1.177708,
+      "end": 1.631124
+    },
+    {
+      "text": "your",
+      "start": 1.643375,
+      "end": 1.790416
+    },
+    {
+      "text": "haircuts",
+      "start": 1.802708,
+      "end": 2.550249
+    },
+    {
+      "text": "The",
+      "start": 3.394625,
+      "end": 3.541666
+    },
+    {
+      "text": "powers",
+      "start": 3.553916,
+      "end": 4.056374
+    },
+    {
+      "text": "go",
+      "start": 4.068625,
+      "end": 4.289208
+    },
+    {
+      "text": "with",
+      "start": 4.301458,
+      "end": 4.485291
+    },
+    {
+      "text": "the",
+      "start": 4.497541,
+      "end": 4.583332
+    },
+    {
+      "text": "hair",
+      "start": 4.595583,
+      "end": 4.987749
+    },
+    {
+      "text": "so",
+      "start": 5.281875,
+      "end": 5.453458
+    },
+    {
+      "text": "the",
+      "start": 5.465666,
+      "end": 5.588207
+    },
+    {
+      "text": "person",
+      "start": 5.6005,
+      "end": 6.066166
+    },
+    {
+      "text": "who",
+      "start": 6.078416,
+      "end": 6.213207
+    },
+    {
+      "text": "was",
+      "start": 6.2255,
+      "end": 6.409333
+    },
+    {
+      "text": "carrying",
+      "start": 6.421583,
+      "end": 6.948541
+    },
+    {
+      "text": "now",
+      "start": 6.960791,
+      "end": 7.181374
+    },
+    {
+      "text": "needs",
+      "start": 7.193625,
+      "end": 7.5245
+    },
+    {
+      "text": "a",
+      "start": 7.53675,
+      "end": 7.610291
+    },
+    {
+      "text": "lift",
+      "start": 7.622541,
+      "end": 8.088207
+    },
+    {
+      "text": "You",
+      "start": 8.933833,
+      "end": 9.129916
+    },
+    {
+      "text": "have",
+      "start": 9.142166,
+      "end": 9.436291
+    },
+    {
+      "text": "to",
+      "start": 9.448541,
+      "end": 9.558832
+    },
+    {
+      "text": "switch",
+      "start": 9.571083,
+      "end": 9.987749
+    },
+    {
+      "text": "jobs",
+      "start": 10.0,
+      "end": 10.6005
+    }
+  ]
+}

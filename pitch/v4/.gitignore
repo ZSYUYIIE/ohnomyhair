@@ -1,0 +1,5 @@
+review/logs/
+review/frames/
+review/*.rgba
+cache/
+__pycache__/

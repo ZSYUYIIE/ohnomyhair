@@ -1,0 +1,28 @@
+{
+  "sample_rate": 48000,
+  "samples": 12892800,
+  "seconds": 268.6,
+  "voice_gains": {
+    "hook": 1.8060213572166726,
+    "team": 2.0,
+    "story": 1.7913352466858004,
+    "roles": 1.878225979795085,
+    "sling": 1.7458807858807859,
+    "parry": 1.7560557341907825,
+    "salon": 1.756173377101896,
+    "swap": 1.8510379889846067,
+    "boss": 1.909278951201748,
+    "audience": 1.8836243443270821,
+    "proof": 1.8712541937326006,
+    "plan": 1.89794381697075,
+    "budget": 1.8727246749535649,
+    "end": 1.6850549591823618
+  },
+  "music_loop_samples": 1588965,
+  "music_loop_method": "repeat exact PCM samples, then duck under each voice interval",
+  "peaks": {
+    "voice": 0.800000011920929,
+    "effects": 0.534157931804657,
+    "music": 0.07542762905359268
+  }
+}

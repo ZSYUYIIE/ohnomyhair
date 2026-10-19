@@ -1,5 +1,5 @@
 ﻿OH NO MY HAIR PITCH V3 — INDEPENDENT REVIEW
-Status: MAIN VISUAL / MEASURED AUDIO CHECKS PASS; FULL DELIVERY PENDING
+Status: FINAL V3 ARCHIVE AUDIT PASS WITH REVIEW LIMITS
 Date: 2026-10-19. Read-only review; no source/film edits. Only this report written.
 
 Evidence and limits
@@ -11,6 +11,11 @@ script/timeline/storyboard, implementation, capture provenance and Shotcraft
 final-review/aesthetic rules; compared exact marker card, Gallery style entry,
 demo TSX and marker-reference.mp4. This is sampled frame review, not a claim to
 have watched all 7,579 frames in real time. No subjective listening performed.
+Final archive closure: all three MP4s, SRT and three WAV stems exist. Inspected
+all-deliverables technical_checks.json: every listed metadata/timing/decode/
+caption/parity/QR check passes. Independently probed Clean/stem metadata and
+sampled Clean at170s/245s, confirming absence of burned-in narration captions.
+This audit concerns V3 only. It does not cover V4 or later changes.
 
 Technical facts independently measured
 H264 High, 1920x1080, 30/1 fps, 7,579 video frames = 252.633s; AAC stereo 48kHz.
@@ -115,7 +120,7 @@ shot lengths/freeze boundaries. No final subjective tail/audibility assessment.
 A6 UNVERIFIED: no listening; speech intelligibility, individual effect audibility
 and music masking cannot be certified by peak/correlation numbers alone.
 A7 DOCUMENTED ADAPTATION: actual game feedback sounds serve visible game actions.
-A8 PASS NOBGM / CLEAN PENDING: independently extracted main and NoBGM H264 AnnexB
+A8 PASS DELIVERABLES: independently extracted main and NoBGM H264 AnnexB
 bitstreams match exactly (30,169,478 bytes; SHA256
 8e1caa9d937baaf4bb9e0fec09e10a1fb1eebd1cf0c15e48d67181841ccc42d5).
 NoBGM metadata matches main7579f/1920x1080/30fps with48kHz stereo AAC. Supplied
@@ -126,6 +131,13 @@ consistent with music removed. No subjective listening. SFX-only source evidence
 PlayBot.load_level adds level under root without current_scene; capture routes
 inherit it and call no Sound.music. Sound._track_for_scene stays empty. UI capture
 alone sets current_scene but only its PNGs are used. Legacy clips audio:false.
+Clean independently probed H264,1920x1080,30fps,7579 frames, start_time0,
+252.633333s, no audio stream. Clean170s/245s samples show intended picture and
+CTA with no burned-in narration captions. Voiceover/Music_Effects/Music WAVs
+independently probed stereo48kHz PCM_s16le, duration252.633333/252.633646/
+252.633354s respectively, covering common time-zero timeline within0.4ms.
+Stem metadata and supplied complete-media decode checks pass; subjective stem
+content/listening was not performed.
 A9 PASS FOR MEASURED EVENTS / LIMITED SCOPE: six final narration waveform probes
 show consistent+46ms versus MP3 source (coefficients .975–.995 after remaster). This is about1.38f
 and below stated80ms non-lip-synced narration tolerance; not a caption-reading
@@ -158,6 +170,9 @@ No must-fix visual issue found in inspected main encoded frames. Earlier main
 music coverage defect is corrected and independently verified CLOSED. Optional:
 reposition closing underline to avoid 'Bring' descender and consider shorter
 held footage. Earlier caption safe-area and auxiliary-size issues are resolved.
-Full delivery decision remains PENDING Clean and stems.
-NoBGM metadata/picture parity and measured cues passed. Subjective audio remains explicitly
-unverified; report this limit rather than asserting it was listened to.
+Final V3 archive decision: PASS for sampled visual review and measured technical
+delivery. No unresolved must-fix finding. Clean/stem metadata and supplied full
+decode checks pass; NoBGM picture parity and measured cues pass; corrected music
+coverage independently passes. Optional holds/underline notes remain non-blocking.
+Subjective listening, loop-seam quality, every-effect audibility and full real-time
+film pacing remain explicitly unverified; this is not a claim they were heard.

@@ -1,0 +1,88 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Nunito,56,&H00F0FAFF,&H00FFFFFF,&H003F2030,&H003F2030,-1,0,0,0,100,100,0,0,1,0,0,2,100,100,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.60,0:00:01.88,Default,,0,0,0,,Oh No My Hair.
+Dialogue: 0,0:00:02.62,0:00:04.71,Default,,0,0,0,,A two-player puzzle platformer.
+Dialogue: 0,0:00:05.45,0:00:08.11,Default,,0,0,0,,Bad hair. Good friends.
+Dialogue: 0,0:00:10.77,0:00:13.82,Default,,0,0,0,,We're NPC Union, a two-person team.
+Dialogue: 0,0:00:14.56,0:00:17.15,Default,,0,0,0,,We started with a forty-eight-hour jam and the
+Dialogue: 0,0:00:17.15,0:00:18.56,Default,,0,0,0,,theme Better Together.
+Dialogue: 0,0:00:19.31,0:00:21.73,Default,,0,0,0,,We've kept building one escape where helping
+Dialogue: 0,0:00:21.73,0:00:23.43,Default,,0,0,0,,your friend is the whole point.
+Dialogue: 0,0:00:28.77,0:00:30.68,Default,,0,0,0,,Two friends visit a salon.
+Dialogue: 0,0:00:31.42,0:00:34.56,Default,,0,0,0,,The robot assistant cuts too much, their hair
+Dialogue: 0,0:00:34.56,0:00:37.31,Default,,0,0,0,,gets powers, and the front door locks.
+Dialogue: 0,0:00:38.05,0:00:40.25,Default,,0,0,0,,Now they have to escape together.
+Dialogue: 0,0:00:42.93,0:00:45.97,Default,,0,0,0,,Twin-Tails can glide and carry her friend across
+Dialogue: 0,0:00:45.97,0:00:50.31,Default,,0,0,0,,gaps. Pompadour can dash through hair gel, parry
+Dialogue: 0,0:00:50.31,0:00:52.90,Default,,0,0,0,,scissors, and launch her from his head.
+Dialogue: 0,0:00:53.64,0:00:56.41,Default,,0,0,0,,Put those abilities together, and you can reach
+Dialogue: 0,0:00:56.41,0:00:58.82,Default,,0,0,0,,places neither friend could reach alone.
+Dialogue: 0,0:01:03.93,0:01:05.94,Default,,0,0,0,,This gel curtain grows back.
+Dialogue: 0,0:01:06.69,0:01:08.99,Default,,0,0,0,,Carrying your friend gets you to the wall,
+Dialogue: 0,0:01:09.19,0:01:11.00,Default,,0,0,0,,but you still can't get through.
+Dialogue: 0,0:01:11.75,0:01:13.77,Default,,0,0,0,,So she carries him over the gap.
+Dialogue: 0,0:01:14.52,0:01:16.70,Default,,0,0,0,,He dashes out of her grip and breaks
+Dialogue: 0,0:01:16.70,0:01:20.31,Default,,0,0,0,,the gel. She follows before it closes.
+Dialogue: 0,0:01:21.05,0:01:22.33,Default,,0,0,0,,Watch their timing.
+Dialogue: 0,0:01:29.93,0:01:31.91,Default,,0,0,0,,This door needs a bell that's out of
+Dialogue: 0,0:01:31.91,0:01:35.80,Default,,0,0,0,,reach. Pompadour parries a scissor, sending it
+Dialogue: 0,0:01:35.80,0:01:39.47,Default,,0,0,0,,back horizontally. Twin-Tails catches the blue
+Dialogue: 0,0:01:39.47,0:01:41.94,Default,,0,0,0,,scissor, then tosses it straight up.
+Dialogue: 0,0:01:42.69,0:01:45.48,Default,,0,0,0,,The enemy's attack becomes the tool that opens
+Dialogue: 0,0:01:45.48,0:01:49.42,Default,,0,0,0,,your route. Both players have a job in that chain.
+Dialogue: 0,0:01:54.93,0:01:57.50,Default,,0,0,0,,Get soaked and Twin-Tails can't glide.
+Dialogue: 0,0:01:58.24,0:02:00.20,Default,,0,0,0,,Pompadour can't break gel.
+Dialogue: 0,0:02:00.95,0:02:04.08,Default,,0,0,0,,Warm air dries you off and lifts Twin-Tails.
+Dialogue: 0,0:02:04.82,0:02:07.37,Default,,0,0,0,,Carry your friend into it, and you rise
+Dialogue: 0,0:02:07.37,0:02:10.63,Default,,0,0,0,,together. You have to choose when to cross
+Dialogue: 0,0:02:10.63,0:02:12.78,Default,,0,0,0,,the showers, and when to wait.
+Dialogue: 0,0:02:15.43,0:02:17.98,Default,,0,0,0,,A barber's chair swaps your haircuts.
+Dialogue: 0,0:02:18.73,0:02:20.93,Default,,0,0,0,,The powers go with the hair, so the
+Dialogue: 0,0:02:20.93,0:02:23.52,Default,,0,0,0,,person who was carrying now needs a lift.
+Dialogue: 0,0:02:24.27,0:02:26.03,Default,,0,0,0,,You have to switch jobs.
+Dialogue: 0,0:02:28.70,0:02:31.32,Default,,0,0,0,,The escape ends at the robot assistant.
+Dialogue: 0,0:02:32.07,0:02:34.29,Default,,0,0,0,,It charges and throws scissors.
+Dialogue: 0,0:02:35.03,0:02:38.41,Default,,0,0,0,,Later phases bring showers and reinforcements.
+Dialogue: 0,0:02:39.15,0:02:42.24,Default,,0,0,0,,Stun it, launch your friend, and land on
+Dialogue: 0,0:02:42.24,0:02:45.45,Default,,0,0,0,,its head. The moves you've learned become your
+Dialogue: 0,0:02:45.45,0:02:47.02,Default,,0,0,0,,way through the final fight.
+Dialogue: 0,0:02:49.70,0:02:52.04,Default,,0,0,0,,We're making this for two people who enjoy
+Dialogue: 0,0:02:52.04,0:02:55.29,Default,,0,0,0,,solving something together, sharing one keyboard.
+Dialogue: 0,0:02:56.03,0:02:58.22,Default,,0,0,0,,The prototype runs in a browser.
+Dialogue: 0,0:02:58.96,0:03:01.45,Default,,0,0,0,,PICO PARK and ibb and obb are useful
+Dialogue: 0,0:03:01.45,0:03:05.83,Default,,0,0,0,,reference points. Our focus is hair-powered combinations
+Dialogue: 0,0:03:05.83,0:03:07.94,Default,,0,0,0,,inside one mischievous salon.
+Dialogue: 0,0:03:10.60,0:03:14.03,Default,,0,0,0,,The playable prototype has four chapters, twelve
+Dialogue: 0,0:03:14.03,0:03:17.73,Default,,0,0,0,,rooms, saved progress, and a three-phase boss.
+Dialogue: 0,0:03:18.48,0:03:21.44,Default,,0,0,0,,It starts with learning each haircut, then asks
+Dialogue: 0,0:03:21.44,0:03:23.92,Default,,0,0,0,,you to combine them under new conditions.
+Dialogue: 0,0:03:24.67,0:03:26.97,Default,,0,0,0,,Every exit needs both friends.
+Dialogue: 0,0:03:29.63,0:03:32.65,Default,,0,0,0,,Next, we want twenty pairs to play without
+Dialogue: 0,0:03:32.65,0:03:34.38,Default,,0,0,0,,us explaining the puzzles.
+Dialogue: 0,0:03:35.12,0:03:37.00,Default,,0,0,0,,Can they learn the first combo?
+Dialogue: 0,0:03:37.74,0:03:39.08,Default,,0,0,0,,Where do they get stuck?
+Dialogue: 0,0:03:39.83,0:03:41.36,Default,,0,0,0,,Do they choose another room?
+Dialogue: 0,0:03:42.11,0:03:44.91,Default,,0,0,0,,Our proposed twelve-week plan starts with those
+Dialogue: 0,0:03:44.91,0:03:48.64,Default,,0,0,0,,tests, then clearer tutorials, room and audio
+Dialogue: 0,0:03:48.64,0:03:52.24,Default,,0,0,0,,polish, accessibility, and release preparation.
+Dialogue: 0,0:03:54.90,0:03:57.94,Default,,0,0,0,,We estimate seventeen thousand two hundred US
+Dialogue: 0,0:03:57.94,0:04:00.11,Default,,0,0,0,,dollars for that twelve-week plan.
+Dialogue: 0,0:04:00.85,0:04:04.21,Default,,0,0,0,,It covers our time, commissioned art and audio,
+Dialogue: 0,0:04:04.43,0:04:07.42,Default,,0,0,0,,launch costs, and a twenty-percent buffer.
+Dialogue: 0,0:04:08.17,0:04:11.09,Default,,0,0,0,,The immediate help we're looking for is playtesters
+Dialogue: 0,0:04:11.09,0:04:12.07,Default,,0,0,0,,and mentoring.
+Dialogue: 0,0:04:14.73,0:04:16.88,Default,,0,0,0,,Grab the person next to you and try
+Dialogue: 0,0:04:16.88,0:04:19.99,Default,,0,0,0,,the prototype. We'd love to see how you
+Dialogue: 0,0:04:19.99,0:04:21.22,Default,,0,0,0,,solve it together.
+Dialogue: 0,0:04:21.96,0:04:24.05,Default,,0,0,0,,Scan the code to play Oh No My
+Dialogue: 0,0:04:24.05,0:04:26.52,Default,,0,0,0,,Hair. Thanks for watching.

@@ -1,12 +1,11 @@
-// Single timing source shared with the v3 composition.
-import {PitchV3} from './v3/PitchV3';
-import {V3Visual,V3Captions,MusicBed} from './v3/Scenes';
-import {SECTIONS,TOTAL} from './v3/data';
+// V4 uses the same cut and caption timing data as the production composition.
+import {V4Scene,V4Film,V4Caption} from './v4/Scenes';
+import {DATA} from './v4/data';
 export const WORKBENCH={
- name:'Oh No My Hair · pitch v3',fps:30,width:1920,height:1080,total:TOTAL,background:'#fff5df',
- shots:Object.values(SECTIONS).map(s=>({id:s.id,label:s.title,from:s.from_frame,duration:s.frames,component:V3Visual,props:{id:s.id,title:s.title,duration:s.frames,gameAudio:true},durationProp:'duration',schema:[{type:'text',key:'title',label:'Heading',default:s.title}],cardId:'v3-'+s.id})),
- captions:Object.values(SECTIONS).map(s=>({id:s.id+'-captions',label:s.id+' · English captions',from:s.from_frame,duration:s.frames,component:V3Captions,props:{captions:s.captions}})),
- overlays:[{id:'music-bed',label:'Salon music · ducking under speech',from:0,duration:TOTAL,component:MusicBed}],
- sfx:Object.values(SECTIONS).map(s=>({from:s.from_frame+Math.round(s.lead*30),duration:Math.ceil(s.voice_seconds*30),src:'v3/voice/'+s.id+'.mp3',volume:1})),
- transitions:[],bgm:[],order:['captions','overlays'],original:PitchV3,
+ name:'Oh No My Hair - pitch v4',fps:30,width:1920,height:1080,total:DATA.frames,background:'#fff5df',
+ shots:DATA.scenes.map(s=>({id:s.id,label:s.title,from:s.from_frame,duration:s.frames,component:V4Scene,props:{id:s.id},cardId:'v4-'+s.id})),
+ captions:DATA.captions.map((c,i)=>({id:'caption-'+i,label:c.text,from:Math.ceil(c.start*30),duration:Math.ceil(c.end*30)-Math.ceil(c.start*30),component:V4Caption,props:{text:c.text,fontSize:56,color:'#fffaf0'},cardId:'v4-caption',schema:[{type:'textarea',key:'text',label:'Caption',default:''},{type:'number',key:'fontSize',label:'Font size',default:56,min:32,max:80},{type:'color',key:'color',label:'Text color',default:'#fffaf0'}]})),
+ sfx:[{from:0,duration:DATA.frames,src:'v4/audio/Narration.wav',volume:1,label:'Narration - replaceable'},{from:0,duration:DATA.frames,src:'v4/audio/SFX.wav',volume:1,label:'Game SFX'}],
+ bgm:[{from:0,duration:DATA.frames,src:'v4/audio/Music.wav',volume:1,label:'Salon music - ducked under narration'}],
+ transitions:[],overlays:[],order:['captions'],original:V4Film,
 };
