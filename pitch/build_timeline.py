@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent
 PUB = ROOT / "editor" / "public"
 FFPROBE = str(ROOT / "editor" / "node_modules" / "@remotion" / "compositor-win32-x64-msvc" / "ffprobe.exe")
 SRT_OUT = ROOT / "out" / "Oh_No_My_Hair_Pitch.en.srt"
+BRIDGE_MS = 1200  # pauses shorter than this keep the caption box on screen
 TAIL = 0.85  # seconds of breathing room after each scene's narration
 
 
@@ -51,6 +52,13 @@ def main():
                 caps.append({"text": text, "startMs": a, "endMs": b, "timestampMs": a, "confidence": None})
                 allcaps.append({"text": text, "start": clock / 30 + a / 1000, "end": clock / 30 + b / 1000})
                 group = []
+        # Hold each caption until the next one if the pause is short, so the box doesn't blink.
+        for c, n in zip(caps, caps[1:]):
+            if n["startMs"] - c["endMs"] < BRIDGE_MS:
+                c["endMs"] = n["startMs"]
+        for c, n in zip(allcaps[len(allcaps) - len(caps):], allcaps[len(allcaps) - len(caps) + 1:]):
+            if (n["start"] - c["end"]) * 1000 < BRIDGE_MS:
+                c["end"] = n["start"]
         s["captions"] = caps
         clock += s["frames"]
 
