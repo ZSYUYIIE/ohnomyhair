@@ -1,0 +1,311 @@
+1
+00:00:00,300 --> 00:00:02,838
+What if your worst haircut became your best escape
+
+2
+00:00:02,750 --> 00:00:06,412
+plan? This is Oh No My Hair, a two-player
+
+3
+00:00:06,325 --> 00:00:09,275
+cooperative puzzle platformer by NPC Union.
+
+4
+00:00:11,000 --> 00:00:13,625
+Two friends visit a salon at closing time.
+
+5
+00:00:14,400 --> 00:00:17,150
+The barber leaves his robot assistant in charge.
+
+6
+00:00:17,912 --> 00:00:21,212
+Then the scissors go wrong, their hair gains unexpected
+
+7
+00:00:21,125 --> 00:00:23,212
+powers, and the front door locks.
+
+8
+00:00:23,987 --> 00:00:26,412
+Escaping means learning to trust each other.
+
+9
+00:00:28,167 --> 00:00:31,704
+Twin-Tails can glide, pull levers, and carry her partner
+
+10
+00:00:31,617 --> 00:00:34,979
+through the air. She creates routes and keeps a
+
+11
+00:00:34,892 --> 00:00:38,867
+friend above danger. Her movement ability becomes a shared
+
+12
+00:00:38,779 --> 00:00:41,792
+resource, rather than just a personal advantage.
+
+13
+00:00:43,533 --> 00:00:47,158
+Pompadour can dash through gel, parry flying scissors, and
+
+14
+00:00:47,071 --> 00:00:48,696
+launch a teammate from his head.
+
+15
+00:00:49,458 --> 00:00:51,158
+His tools complement hers.
+
+16
+00:00:51,921 --> 00:00:53,546
+One player opens a route;
+
+17
+00:00:53,758 --> 00:00:55,958
+the other makes that route usable for both.
+
+18
+00:00:57,733 --> 00:01:00,033
+Our signature moment is the sling dash.
+
+19
+00:01:00,796 --> 00:01:03,408
+Twin-Tails carries Pompadour over a pit.
+
+20
+00:01:04,183 --> 00:01:06,633
+He launches out of her grip, punches through a
+
+21
+00:01:06,546 --> 00:01:09,921
+regrowing gel curtain, and she follows before it closes.
+
+22
+00:01:10,683 --> 00:01:12,996
+The solution belongs to both players.
+
+23
+00:01:14,767 --> 00:01:17,892
+Cooperation also changes what a projectile can do.
+
+24
+00:01:18,667 --> 00:01:20,267
+Pompadour parries a scissor.
+
+25
+00:01:21,029 --> 00:01:23,667
+Twin-Tails catches it with her hair and tosses it
+
+26
+00:01:23,579 --> 00:01:25,254
+upward to ring a service bell.
+
+27
+00:01:26,017 --> 00:01:28,492
+An enemy attack becomes the key to the next
+
+28
+00:01:28,404 --> 00:01:28,892
+door.
+
+29
+00:01:30,633 --> 00:01:32,458
+The salon is part of the puzzle.
+
+30
+00:01:33,221 --> 00:01:37,008
+Water makes hair heavy and temporarily disables key abilities.
+
+31
+00:01:37,771 --> 00:01:41,021
+Hair dryers restore those powers and create rising air
+
+32
+00:01:40,933 --> 00:01:45,446
+currents. Familiar tools ask players to rethink their timing
+
+33
+00:01:45,358 --> 00:01:46,246
+and their route.
+
+34
+00:01:48,000 --> 00:01:52,413
+The finale combines aimed scissors, overhead warnings, charging attacks,
+
+35
+00:01:52,500 --> 00:01:54,562
+showers, and roaming robots.
+
+36
+00:01:55,325 --> 00:01:58,475
+Players create a counterattack window and strike together.
+
+37
+00:01:59,238 --> 00:02:02,413
+Hair swaps can also exchange their roles, turning a
+
+38
+00:02:02,325 --> 00:02:05,363
+familiar partnership into an unexpected challenge.
+
+39
+00:02:07,100 --> 00:02:09,613
+Better Together is our rule for level design.
+
+40
+00:02:10,375 --> 00:02:13,075
+Carry me. Wait for the water.
+
+41
+00:02:13,838 --> 00:02:17,712
+Parry now. A bad haircut becomes a warm story
+
+42
+00:02:17,625 --> 00:02:18,562
+about trust.
+
+43
+00:02:20,300 --> 00:02:23,712
+Our audience is friends, siblings, and couples who enjoy
+
+44
+00:02:23,625 --> 00:02:26,212
+cooperative puzzles and playful platforming.
+
+45
+00:02:26,988 --> 00:02:29,888
+One shared keyboard and a browser make the prototype
+
+46
+00:02:29,800 --> 00:02:31,125
+easy to try together.
+
+47
+00:02:32,867 --> 00:02:35,892
+PICO PARK 2 serves larger cooperative groups.
+
+48
+00:02:36,654 --> 00:02:39,504
+Ibb and Obb explores two-player gravity puzzles.
+
+49
+00:02:40,267 --> 00:02:43,929
+Our niche is two asymmetric hair abilities, combination moves,
+
+50
+00:02:44,004 --> 00:02:45,842
+and a compact salon escape.
+
+51
+00:02:46,604 --> 00:02:48,629
+We still need to validate demand.
+
+52
+00:02:50,367 --> 00:02:54,104
+The prototype has four chapters, twelve rooms, a three-phase
+
+53
+00:02:54,017 --> 00:02:58,042
+boss, story sequences, saved progression, and room replay.
+
+54
+00:02:58,817 --> 00:03:01,354
+It is publicly playable on itch dot io.
+
+55
+00:03:02,129 --> 00:03:05,467
+Future expansion will depend on testing with more pairs.
+
+56
+00:03:07,233 --> 00:03:10,471
+Our indicative budgets are twenty thousand US dollars for
+
+57
+00:03:10,383 --> 00:03:14,421
+a twelve-week minimum version, sixty thousand for twenty-four weeks,
+
+58
+00:03:14,671 --> 00:03:17,183
+or one hundred and twenty thousand for an expanded
+
+59
+00:03:17,096 --> 00:03:22,246
+thirty-six-week scope. These are planning estimates, not funding raised.
+
+60
+00:03:24,000 --> 00:03:27,688
+The minimum allocates twelve thousand to development, three thousand
+
+61
+00:03:27,600 --> 00:03:30,275
+to art and audio, one thousand to testing and
+
+62
+00:03:30,188 --> 00:03:32,825
+tools, and four thousand to contingency.
+
+63
+00:03:33,600 --> 00:03:36,212
+Online multiplayer is outside this scope.
+
+64
+00:03:37,933 --> 00:03:40,821
+Weeks one to four: playtests and onboarding.
+
+65
+00:03:41,596 --> 00:03:45,371
+Weeks five to eight: polish rooms, controls, and visual
+
+66
+00:03:45,283 --> 00:03:50,471
+feedback. Weeks nine to twelve: accessibility checks, bug fixing,
+
+67
+00:03:50,533 --> 00:03:54,946
+and release preparation. Expansion follows player evidence.
+
+68
+00:03:56,700 --> 00:04:00,125
+Next, we plan to test twenty player pairs, tracking
+
+69
+00:04:00,038 --> 00:04:04,200
+unaided tutorial completion, repeated failure points, and willingness to
+
+70
+00:04:04,112 --> 00:04:08,550
+play another room. These are future validation targets, not
+
+71
+00:04:08,462 --> 00:04:10,150
+achieved audience metrics.
+
+72
+00:04:11,900 --> 00:04:17,425
+We are NPC Union: ChenHongshan333 and ZSYUYIIE.
+
+73
+00:04:18,200 --> 00:04:21,575
+We are seeking playtest feedback and incubation support to
+
+74
+00:04:21,488 --> 00:04:23,600
+polish this cooperative experience.
+
+75
+00:04:25,333 --> 00:04:27,321
+Scan the code to play and tell us what
+
+76
+00:04:27,233 --> 00:04:29,946
+you think. Oh No My Hair.
+
+77
+00:04:30,721 --> 00:04:33,346
+Bad hair. Good friends.
+
+78
+00:04:34,121 --> 00:04:34,883
+Thank you.

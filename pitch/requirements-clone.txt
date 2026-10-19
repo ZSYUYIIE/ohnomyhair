@@ -1,0 +1,18 @@
+# Local voice cloning (make_voice_cb.py). Install in its own venv, in this order:
+#   python -m venv .venv-clone
+#   .venv-clone\Scripts\python -m pip install torch==2.8.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+#   .venv-clone\Scripts\python -m pip install --no-deps chatterbox-tts==0.1.7
+#   .venv-clone\Scripts\python -m pip install -c constraints-clone.txt -r requirements-clone.txt
+# chatterbox-tts pins torch 2.6, which can't run on RTX 50-series GPUs; 2.8 + CUDA 12.8 works.
+numpy<2
+librosa==0.11.0
+s3tokenizer
+transformers==5.2.0
+diffusers==0.29.0
+resemble-perth>=1.0.0
+conformer==0.3.2
+safetensors==0.5.3
+pyloudnorm
+omegaconf
+faster-whisper
+imageio-ffmpeg
