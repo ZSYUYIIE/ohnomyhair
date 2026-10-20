@@ -57,8 +57,14 @@ SCENES = [
     {"id": "roadmap", "kind": "footage"},
     {"id": "validation", "kind": "footage"},
     {"id": "team", "kind": "footage"},
+    # Not in Final: who does what. Its narration was recorded separately; a takes file supplies it
+    # as an audio file, so the automatic path leaves this scene out.
+    {"id": "roles", "kind": "code", "pitch": "roles", "eyebrow": "THE CONTRIBUTORS", "extra": True, "title": "Who does what.",
+     "text": "Hongshan and Zuyi are both third-year computer science students. Hongshan works on art and coding, and Zuyi works on audio and coding. "
+             "We discuss the game design together, and we both do QA through internal playtests."},
     {"id": "end", "kind": "code", "pitch": "end", "eyebrow": ""},
 ]
+FINAL_ORDER = [s["id"] for s in SCENES if not s.get("extra")]
 
 # Gameplay played once, without looping and without the room-exit wipe at the end of each capture
 # (Final looped the clips and showed that wipe, which made the picture jump). Pieces are
@@ -93,8 +99,9 @@ def probe_seconds(path):
 def load_script():
     lines = [x.strip() for x in SCRIPT.read_text(encoding="utf-8").splitlines() if x.strip()]
     pairs = list(zip(lines[0::2], lines[1::2]))
-    assert len(pairs) == len(SCENES), f"{len(pairs)} script sections for {len(SCENES)} scenes"
-    for s, (title, text) in zip(SCENES, pairs):
+    original = [s for s in SCENES if not s.get("extra")]
+    assert len(pairs) == len(original), f"{len(pairs)} script sections for {len(original)} scenes"
+    for s, (title, text) in zip(original, pairs):
         s["title"], s["text"] = title, text
     SCENES[0]["title"] = "Bad hair. Good friends."  # hero subtitle
     return SCENES
@@ -377,6 +384,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("recording", help="the full narration recording (m4a, wav, mp3...)")
     p.add_argument("--check-only", action="store_true", help="align and report, but do not write the timeline")
+    p.add_argument("--takes", help="edit list to use (default: takes/<recording hash>.json), e.g. for a re-encoded copy of the same recording")
     p.add_argument("--model", default="base.en", help="faster-whisper model for the transcript (a takes file names its own)")
     args = p.parse_args()
     recording = Path(args.recording).resolve()
@@ -386,13 +394,15 @@ def main():
     scenes = load_script()
     # A takes file (takes/<hash>.json) is a hand-made edit list for one recording: which stretches of
     # the recording each scene uses, and the words actually said there (captions follow them).
-    takes_path = ROOT / "takes" / f"{key}.json"
+    takes_path = Path(args.takes).resolve() if args.takes else ROOT / "takes" / f"{key}.json"
     takes = json.loads(takes_path.read_text(encoding="utf-8")) if takes_path.exists() else None
     words = transcribe(recording, work, takes["model"] if takes else args.model)
     if takes:
         print("Using edit list", takes_path.relative_to(PITCH))
+        scenes = [s for s in scenes if s["id"] in takes["scenes"]]
         infos, coverage = [], None
     else:
+        scenes = [s for s in scenes if not s.get("extra")]
         infos, coverage = align(scenes, words)
 
     audio = np.frombuffer(subprocess.check_output(["ffmpeg", "-v", "error", "-i", str(recording), "-f", "f32le", "-ar", str(SR), "-ac", "1", "-"]), dtype="<f4")
@@ -403,7 +413,25 @@ def main():
     clock = 0
     pieces_audio = []
     for i, s in enumerate(scenes):
-        if takes:
+        source = audio
+        if takes and "audio" in takes["scenes"][s["id"]]:
+            # Narration from a separate file (a line recorded later), matched to the recording's loudness.
+            take = takes["scenes"][s["id"]]
+            clip_path = ROOT / take["audio"]
+            source = np.frombuffer(subprocess.check_output(["ffmpeg", "-v", "error", "-i", str(clip_path), "-f", "f32le", "-ar", str(SR), "-ac", "1", "-"]), dtype="<f4").copy()
+            clip_key = hashlib.sha256(clip_path.read_bytes()).hexdigest()[:12]
+            clip_dir = CACHE / clip_key
+            clip_dir.mkdir(parents=True, exist_ok=True)
+            clip_words = transcribe(clip_path, clip_dir, takes["model"])
+            level = np.median([np.sqrt((source[int(w["start"] * SR):int(w["end"] * SR)] ** 2).mean() + 1e-12) for w in clip_words if w["end"] - w["start"] > 0.1])
+            source *= SPEECH_RMS / level
+            # Whole clip from just before the first word to just after the last, unless keep says otherwise.
+            keep = [tuple(k) for k in take.get("keep", [(max(0.0, clip_words[0]["start"] - 0.12), min(len(source) / SR, clip_words[-1]["end"] + 0.22))])]
+            inside = [w for a, b in keep for w in clip_words if a - 0.05 <= w["start"] < b]
+            timed, matched = time_tokens(take.get("text", s["text"]).split(), inside)
+            info = {"tokens": timed, "matched": matched}
+            keep, removed = shorten_pauses(keep, source)
+        elif takes:
             take = takes["scenes"][s["id"]]
             keep = [tuple(k) for k in take["keep"]]
             # Words in edit order (a scene may borrow a sentence from an earlier take).
@@ -423,7 +451,8 @@ def main():
         tokens = [{"text": w["text"], "start": remap(w["start"], keep), "end": remap(w["end"], keep)} for w in info["tokens"]]
         s.update({"from": clock, "frames": frames, "voiceSeconds": round(voice, 3), "captions": captions(tokens, LEAD)})
         if s["kind"] == "footage":
-            a, b = FINAL_STARTS[i], FINAL_STARTS[i + 1] if i + 1 < len(FINAL_STARTS) else FINAL_FRAMES
+            n = FINAL_ORDER.index(s["id"])
+            a, b = FINAL_STARTS[n], FINAL_STARTS[n + 1] if n + 1 < len(FINAL_STARTS) else FINAL_FRAMES
             s["source"] = {"start": a, "end": b}
         if s["id"] in MEDIA:
             s["media"], speed = media_plan(MEDIA[s["id"]], frames)
@@ -433,7 +462,7 @@ def main():
             idx = [n for n, w in enumerate(tokens) if norm(w["text"]) in ("then", "escaping")][:2]
             if len(idx) == 2:
                 s["storyCuts"] = [round((LEAD + tokens[n]["start"]) * FPS) - 3 for n in idx]
-        pieces_audio.append((clock / FPS + LEAD, keep))
+        pieces_audio.append((clock / FPS + LEAD, keep, source))
         report["scenes"].append({"id": s["id"], "matched": round(info["matched"], 3), "recording": [round(keep[0][0], 2), round(keep[-1][1], 2)],
                                  "voice_seconds": round(voice, 2), "scene_seconds": round(frames / FPS, 2),
                                  "removed": [{"from": round(a, 2), "to": round(b, 2), "why": why} for a, b, why in removed],
@@ -453,10 +482,10 @@ def main():
     # Narration track: each scene's kept audio with 10 ms fades at every cut, placed at its scene.
     track = np.zeros(int((clock / FPS + 1) * SR), dtype=np.float32)
     fade = int(0.01 * SR)
-    for at, keep in pieces_audio:
+    for at, keep, source in pieces_audio:
         pos = int(round(at * SR))
         for a, b in keep:
-            seg = audio[int(a * SR):int(b * SR)].copy()
+            seg = source[int(a * SR):int(b * SR)].copy()
             n = min(fade, len(seg) // 2)
             if n:
                 seg[:n] *= np.linspace(0, 1, n, dtype=np.float32)

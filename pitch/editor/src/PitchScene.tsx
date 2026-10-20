@@ -67,6 +67,18 @@ const SceneInner=({title,eyebrow,kind,id,clip,endFrames,media,narration=true,sto
    {kind==='roadmap'&&<div style={{...body,display:'flex',gap:32,alignItems:'center'}}><Milestone n="01" time="WEEKS 1–4" title="Validate" copy="Playtests · onboarding · difficulty" active={f/endFrames<.33}/><Milestone n="02" time="WEEKS 5–8" title="Polish" copy="Rooms · controls · Steam page" active={f/endFrames>=.33&&f/endFrames<.66}/><Milestone n="03" time="WEEKS 9–12" title="Prepare release" copy="Accessibility · QA · packaging" active={f/endFrames>=.66}/></div>}
    {kind==='validation'&&<div style={{...body,display:'flex',gap:45,alignItems:'center'}}><Card style={{width:620,background:GOLD,textAlign:'center'}}><div style={{fontSize:190,fontWeight:650,lineHeight:1}}>20</div><Heading>player pairs</Heading><Copy style={{fontSize:28,marginTop:22}}>Planned next test cohort</Copy></Card><div style={{flex:1,display:'flex',flexDirection:'column',gap:28}}><Card><Heading>Can they learn without hints?</Heading></Card><Card><Heading>Where do they fail repeatedly?</Heading></Card><Card><Heading>Do they choose another room?</Heading></Card><div style={{fontSize:27,fontFamily:'Nunito',fontWeight:850,color:'#78617f'}}>Goals for the next test. No outside players yet.</div></div></div>}
    {kind==='team'&&<div style={{...body,display:'flex',gap:80,alignItems:'center'}}><Friends style={{width:700,height:650,translate:`0 ${Math.sin(f/24)*7}px`}}/><div style={{flex:1}}><Card style={{background:GOLD}}><Heading>ChenHongshan333</Heading></Card><Card style={{marginTop:35}}><Heading>ZSYUYIIE</Heading></Card><Copy style={{marginTop:50}}>Looking for playtesters,<br/>feedback and mentoring.</Copy></div></div>}
+   {kind==='roles'&&<div style={{...body,display:'grid',gridTemplateColumns:'1fr 1fr',gridTemplateRows:'1.45fr 1fr',gap:36}}>
+    {[{name:'Hongshan',handle:'ChenHongshan333',roles:['ART','CODING'],bg:GOLD,tag:CREAM},{name:'Zuyi',handle:'ZSYUYIIE',roles:['AUDIO','CODING'],bg:CREAM,tag:GOLD}].map(p=><Card key={p.name} style={{background:p.bg,display:'flex',flexDirection:'column',justifyContent:'center'}}>
+     <div style={{fontFamily:'Nunito',fontSize:25,fontWeight:900,letterSpacing:2,color:'#78617f'}}>YEAR-3 CS STUDENT</div>
+     <div style={{fontSize:72,fontWeight:650,lineHeight:1.05,marginTop:10}}>{p.name}</div>
+     <Copy style={{fontSize:28,color:'#78617f',marginTop:4}}>{p.handle}</Copy>
+     <div style={{display:'flex',gap:18,marginTop:30}}>{p.roles.map(r=><span key={r} style={{...pill,background:p.tag}}>{r}</span>)}</div>
+    </Card>)}
+    <Card style={{gridColumn:'1 / span 2',background:LILAC,display:'flex',alignItems:'center',justifyContent:'space-between',gap:40}}>
+     <div><Heading>Both of us</Heading><Copy style={{marginTop:12}}>We shape the design together and QA every room in internal playtests.</Copy></div>
+     <div style={{display:'flex',gap:18,flexShrink:0}}><span style={pill}>GAME DESIGN</span><span style={{...pill,background:CREAM}}>QA · PLAYTESTS</span></div>
+    </Card>
+   </div>}
    {kind==='end'&&<>
     <CanvasImage src={staticFile('ending_07_bad_hair_good_friends.png')} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
     <div style={{position:'absolute',inset:0,background:'rgba(48,32,63,.75)'}}/>

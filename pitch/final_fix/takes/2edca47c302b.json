@@ -1,7 +1,7 @@
 {
   "recording": "hs_audio.m4a (6:54), ChenHongshan333, 2026-10-20",
   "model": "medium.en",
-  "notes": "Seconds in the recording. Where a section was read more than once the last complete take is used; spoken notes such as 'I'll say that again' are left out. market borrows its last sentence from the first take, which the re-read skipped. costs leaves out 'Online multiplayer is outside this scope.' (online multiplayer is planned). text is what is said (the captions).",
+  "notes": "Seconds in the recording. Where a section was read more than once the last complete take is used; spoken notes such as 'I'll say that again' are left out. market borrows its last sentence from the first take, which the re-read skipped. costs leaves out 'Online multiplayer is outside this scope.' (online multiplayer is planned). roles was recorded separately (voice/roles.*). text is what is said (the captions).",
   "scenes": {
     "hook": {"keep": [[1.55, 10.98]], "text": "What if your worst haircut became your best escape plan? This is Oh No My Hair, a two-player cooperative puzzle platformer by NPC Union."},
     "story": {"keep": [[12.68, 34.2]], "text": "Imagine two friends visit a salon at closing time. The barber just leaves his robot assistant in charge. Then the scissors suddenly go wrong, their hair gains unexpected powers, and the front door just locks. That means you have to escape from the house, and moreover, escaping means learning to trust each other."},
@@ -20,6 +20,7 @@
     "roadmap": {"keep": [[350.05, 364.19]], "text": "Weeks 1 to 4: playtests and onboarding. Weeks 5 to 8: polish rooms, controls, and visual feedback. Weeks 9 to 12: accessibility checks, bug fixing, and release preparation. Expansion follows player evidence."},
     "validation": {"keep": [[376.35, 389.03]], "text": "Next, we plan to test 20 player pairs, tracking unaided tutorial completion, repeated failure points, and willingness to play another room. These are future validation targets, not achieved audience metrics."},
     "team": {"keep": [[391.08, 400.29]], "text": "We are NPC Union: ChenHongshan333 and ZSYUYIIE. We are seeking playtest feedback and incubation support to polish this cooperative experience."},
+    "roles": {"audio": "voice/roles.m4a", "text": "Hongshan and Zuyi are both third-year computer science students. Hongshan works on art and coding, and Zuyi works on audio and coding as well. We discuss the game design together, and we both do QA through internal playtests."},
     "end": {"keep": [[401.85, 410.43]], "text": "So, at the end, scan the code to play and tell us what you think. Oh No My Hair. Bad hair, good friends. Thank you for listening."}
   }
 }

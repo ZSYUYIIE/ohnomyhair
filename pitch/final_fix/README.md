@@ -25,6 +25,8 @@ Final 的游戏片段是循环播放的，而且每段录屏结尾都带着过�
 
 Final 原画面上另有两处改动：Theme 页的黄色标签由 SOMETHING’S OFF 改为 JAM THEME: BETTER TOGETHER；预算拆分页卡片删去 “Online multiplayer excluded.”（见 `editor/src/final/Film.tsx` 的 `PATCHES`，补丁跟随该页原有的淡入淡出）。
 
+Team 页之后新增一页 “Who does what.”（`PitchScene.tsx` 的 `roles` 页）：两人都是大三 CS 学生，Hongshan 负责美术与编程，Zuyi 负责音频与编程，游戏设计与 QA（内部试玩）两人共同参与。这一页的旁白是单独补录的 `voice/roles.m4a`。
+
 页面布局沿用 Final：开场、故事、6 个游戏场景、Prototype、结尾由同一份 `PitchScene.tsx` 重新渲染（与 Final 逐像素比对，只差编码噪点）；Theme、Audience、Market、两页预算、Roadmap、Validation、Team 这 8 页的旧版布局已不在代码里，所以直接复用 Final 的原画面，只盖掉旧字幕条、按新旁白长度放慢或加快中段（两端的淡入淡出保持原速）。字幕按真人录音的词级时间重新生成，样式与 Final 相同。
 
 `PitchScene.tsx` 只加了可选参数（`media`、`narration`、`storyCuts`），v2 的渲染结果不变。
@@ -37,6 +39,8 @@ Final 原画面上另有两处改动：Theme 页的黄色标签由 SOMETHING’S
 
 ```powershell
 pitch/.venv-v3/Scripts/python.exe pitch/final_fix/build.py "C:/Recordings/pitch.m4a"
+# 录音文件改过格式或位置（内容相同）时，用 --takes 指定原来的剪辑清单：
+# pitch/.venv-v3/Scripts/python.exe pitch/final_fix/build.py copy.wav --takes pitch/final_fix/takes/2edca47c302b.json
 pitch/.venv-v3/Scripts/python.exe pitch/final_fix/render.py
 pitch/.venv-v3/Scripts/python.exe pitch/final_fix/qa.py
 ```
@@ -48,9 +52,10 @@ pitch/.venv-v3/Scripts/python.exe pitch/final_fix/qa.py
 录音里整段重读、口头说明（"I'll say that again"）、即兴加词较多时，自动判断不可靠，就为这条录音写一份剪辑清单 `takes/<录音 sha256 前 12 位>.json`；`build.py` 发现同名清单会自动使用它。每段写明：
 
 - `keep`：这一段用录音里的哪几段（秒），按播放顺序排列，可以从更早的一遍里借一句；
+- `audio`（可选）：这一段改用单独录的文件（相对 `final_fix/`），`keep` 此时指该文件里的秒数，省略则用整段说话部分；
 - `text`：这几段里实际说的话，字幕按它生成并对齐时间。
 
-清单里还写明用哪个识别模型（`model`）。现有的 `takes/2edca47c302b.json` 对应 `hs_audio.m4a`：用 `medium.en` 识别，每段取最后一遍完整的朗读，Market 的最后一句取自第一遍（重读时漏了这一句），预算拆分一段不再用“Online multiplayer is outside this scope.”（之后计划加入联机），切点都落在静音处。清单内段落之间超过 1.2 秒的停顿按音量检测后缩短到 0.6 秒。
+清单里还写明用哪个识别模型（`model`）。现有的 `takes/2edca47c302b.json` 对应 `hs_audio.m4a`：用 `medium.en` 识别，每段取最后一遍完整的朗读，Market 的最后一句取自第一遍（重读时漏了这一句），预算拆分一段不再用“Online multiplayer is outside this scope.”（之后计划加入联机），切点都落在静音处；`roles` 一段用 `"audio": "voice/roles.m4a"` 指向补录文件，去掉首尾静音后按主录音的音量对齐。清单内段落之间超过 1.2 秒的停顿按音量检测后缩短到 0.6 秒。
 
 - 场景长度 = 0.4 秒 + 该段旁白 + 0.85 秒，与 Final 的节奏一致。
 - 游戏画面按场景长度调速，最慢 0.5 倍；还不够长时停在最后一帧。

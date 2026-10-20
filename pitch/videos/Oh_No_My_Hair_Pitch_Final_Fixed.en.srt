@@ -307,21 +307,41 @@ We are seeking playtest feedback and
 incubation support to polish this cooperative experience.
 
 78
-00:04:12,717 --> 00:04:15,107
-So, at the end, scan the code to
+00:04:12,837 --> 00:04:16,617
+Hongshan and Zuyi are both third-year computer science students.
 
 79
-00:04:15,107 --> 00:04:16,807
-play and tell us what you think.
+00:04:16,957 --> 00:04:19,323
+Hongshan works on art and coding,
 
 80
-00:04:16,807 --> 00:04:18,427
-Oh No My Hair.
+00:04:19,323 --> 00:04:21,797
+and Zuyi works on audio and coding as well.
 
 81
-00:04:18,607 --> 00:04:20,087
-Bad hair, good friends.
+00:04:22,177 --> 00:04:23,857
+We discuss the game design together,
 
 82
-00:04:20,367 --> 00:04:21,327
+00:04:23,857 --> 00:04:26,857
+and we both do QA through internal playtests.
+
+83
+00:04:28,550 --> 00:04:30,940
+So, at the end, scan the code to
+
+84
+00:04:30,940 --> 00:04:32,640
+play and tell us what you think.
+
+85
+00:04:32,640 --> 00:04:34,260
+Oh No My Hair.
+
+86
+00:04:34,440 --> 00:04:35,920
+Bad hair, good friends.
+
+87
+00:04:36,200 --> 00:04:37,160
 Thank you for listening.
