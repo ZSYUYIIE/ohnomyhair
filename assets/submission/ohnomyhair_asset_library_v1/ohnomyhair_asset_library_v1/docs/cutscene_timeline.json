@@ -1,0 +1,211 @@
+{
+  "reference_resolution": [
+    1280,
+    720
+  ],
+  "subtitle_region": [
+    0,
+    580,
+    1280,
+    140
+  ],
+  "skip": "any_key",
+  "total_seconds": 39,
+  "shots": [
+    {
+      "id": "01",
+      "duration_seconds": 4,
+      "image": "cutscene/panels/cutscene_01_closing_time.png",
+      "subtitle": "Two friends. One last chance for a great haircut.",
+      "framing": "wide",
+      "emotion": "joy_and_surprise",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "id": "02",
+      "duration_seconds": 3,
+      "image": "cutscene/panels/cutscene_02_robot_assistant.png",
+      "subtitle": "Back in a moment. My assistant will handle everything.",
+      "framing": "medium_wide",
+      "emotion": "curiosity_and_doubt",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "03",
+      "duration_seconds": 4,
+      "image": "cutscene/panels/cutscene_03_good_hair_day.png",
+      "subtitle": "A fresh look. That's all we wanted.",
+      "framing": "two_person_closeup",
+      "emotion": "happy_anticipation",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "04",
+      "duration_seconds": 4,
+      "image": "cutscene/panels/cutscene_04_robot_malfunction.png",
+      "subtitle": "Something's off.",
+      "framing": "robot_eye_extreme_closeup",
+      "emotion": "mechanical_glitch",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "05",
+      "duration_seconds": 2,
+      "image": "cutscene/panels/cutscene_05_hair_burst.png",
+      "subtitle": "That was definitely too much.",
+      "framing": "graphic_detail",
+      "emotion": "comic_impact",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "06",
+      "duration_seconds": 5,
+      "image": "cutscene/panels/cutscene_06_power_hair_reveal.png",
+      "subtitle": "Our hair has other plans.",
+      "framing": "reaction_closeup",
+      "emotion": "crying_and_fear",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "07",
+      "duration_seconds": 3,
+      "image": "cutscene/panels/cutscene_07_door_lock.png",
+      "subtitle": "The front door is locked.",
+      "framing": "door_lock_closeup",
+      "emotion": "trapped",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "08",
+      "duration_seconds": 3,
+      "image": "cutscene/panels/cutscene_08_protect_friend.png",
+      "subtitle": "Hey! Stay away from my friend!",
+      "framing": "medium_wide",
+      "emotion": "anger_and_fear",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "id": "09",
+      "duration_seconds": 3,
+      "image": "cutscene/panels/cutscene_09_another_way.png",
+      "subtitle": "Wait. There's another way.",
+      "framing": "discovery_closeup",
+      "emotion": "recognition",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "10",
+      "duration_seconds": 4,
+      "image": "cutscene/panels/cutscene_10_trust_me.png",
+      "subtitle": "Trust me.",
+      "framing": "decision_two_shot",
+      "emotion": "trust",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "11",
+      "duration_seconds": 4,
+      "image": "cutscene/panels/cutscene_11_escape_together.png",
+      "subtitle": "Today, we just wanted a good haircut.",
+      "framing": "running_medium_wide",
+      "emotion": "shared_action",
+      "suggested_camera": {
+        "zoom_start": 1.0,
+        "zoom_end": 1.1,
+        "anchor_normalized": [
+          0.5,
+          0.8
+        ]
+      }
+    }
+  ],
+  "ending_panel_ids": [
+    "07",
+    "08",
+    "09",
+    "10",
+    "11"
+  ],
+  "ending_seconds": 17,
+  "notes": [
+    "Subtitles and button prompts exist only in review previews, not production assets.",
+    "Revision 03: shots03/04/06 use close-ups, with mouthless expressive eye shapes.",
+    "Revision04 expands the ending to lock, protect, discover, decide, escape.",
+    "Shot08 retains the four-pronged comic anger-vein symbol, not lettering.",
+    "In shots08/10/11, blue P2 stays left of pink P1; danger is left and the route is right.",
+    "Panel11 is a concept passage; match its transition to the actual Fresh Cut start in Godot.",
+    "Image paths are relative to the asset-library root.",
+    "Camera settings are suggestions only; validate crops in the actual Godot viewport.",
+    "The title menu and map are flat mockups with baked text, not production-separated UI layers."
+  ]
+}

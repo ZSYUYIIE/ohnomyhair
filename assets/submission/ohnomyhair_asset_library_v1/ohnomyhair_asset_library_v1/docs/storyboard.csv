@@ -1,0 +1,12 @@
+﻿shot,start_seconds,duration_seconds,image,framing,emotion,subtitle
+01,0,4,cutscene/panels/cutscene_01_closing_time.png,wide,joy_and_surprise,Two friends. One last chance for a great haircut.
+02,4,3,cutscene/panels/cutscene_02_robot_assistant.png,medium_wide,curiosity_and_doubt,Back in a moment. My assistant will handle everything.
+03,7,4,cutscene/panels/cutscene_03_good_hair_day.png,two_person_closeup,happy_anticipation,A fresh look. That's all we wanted.
+04,11,4,cutscene/panels/cutscene_04_robot_malfunction.png,robot_eye_extreme_closeup,mechanical_glitch,Something's off.
+05,15,2,cutscene/panels/cutscene_05_hair_burst.png,graphic_detail,comic_impact,That was definitely too much.
+06,17,5,cutscene/panels/cutscene_06_power_hair_reveal.png,reaction_closeup,crying_and_fear,Our hair has other plans.
+07,22,3,cutscene/panels/cutscene_07_door_lock.png,door_lock_closeup,trapped,The front door is locked.
+08,25,3,cutscene/panels/cutscene_08_protect_friend.png,medium_wide,anger_and_fear,Hey! Stay away from my friend!
+09,28,3,cutscene/panels/cutscene_09_another_way.png,discovery_closeup,recognition,Wait. There's another way.
+10,31,4,cutscene/panels/cutscene_10_trust_me.png,decision_two_shot,trust,Trust me.
+11,35,4,cutscene/panels/cutscene_11_escape_together.png,running_medium_wide,shared_action,"Today, we just wanted a good haircut."
