@@ -17,6 +17,8 @@ The pitch video for Oh No My Hair, and everything needed to change and re-render
 | `videos/Oh_No_My_Hair_Pitch_v3_NoBGM.mp4` | v3 with voices and game SFX, without background music |
 | `videos/Oh_No_My_Hair_Pitch_v2.mp4` | Previous version: two voices, rewritten script, sourced USD budget (3:59) |
 | `videos/Oh_No_My_Hair_Pitch_Final.mp4` | First version (one AI voice), kept for comparison |
+| `videos/Oh_No_My_Hair_Pitch_Final_Fixed.mp4` | The first version with its gameplay jumps fixed and a human narration in place of the AI voice |
+| `final_fix/README.md` | What was fixed in the first version, the recording script, and the one-command voice replacement |
 | `docs/Oh_No_My_Hair_Pitch_Script_v2.txt` | The v2 script as a read-aloud script (A = ZSYUYIIE, B = ChenHongshan333) |
 | `docs/Oh_No_My_Hair_Pitch_v2_Notes.md` | Why v1 sounded like AI, what changed, tips for recording yourselves |
 | `docs/Oh No My Hair global USD budget.md` | Budget research behind scenes 13 and 14, with sources (notes in `docs/research_notes/`) |

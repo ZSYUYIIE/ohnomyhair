@@ -1,0 +1,59 @@
+Oh No My Hair - Pitch (Final) recording script
+
+Read only the paragraphs, in order, as one recording. Do not read the section headings.
+Leave a pause of about 1.5-2 seconds between sections. If you stumble, pause and re-read the
+whole sentence; the build removes the false start. Quiet room, normal pace. Any format (m4a is fine).
+
+[01] Hook
+What if your worst haircut became your best escape plan? This is Oh No My Hair, a two-player cooperative puzzle platformer by NPC Union.
+
+[02] Story
+Two friends visit a salon at closing time. The barber leaves his robot assistant in charge. Then the scissors go wrong, their hair gains unexpected powers, and the front door locks. Escaping means learning to trust each other.
+
+[03] Twin-Tails
+Twin-Tails can glide, pull levers, and carry her partner through the air. She creates routes and keeps a friend above danger. Her movement ability becomes a shared resource, rather than just a personal advantage.
+
+[04] Pompadour
+Pompadour can dash through gel, parry flying scissors, and launch a teammate from his head. His tools complement hers. One player opens a route; the other makes that route usable for both.
+
+[05] Sling dash
+Our signature moment is the sling dash. Twin-Tails carries Pompadour over a pit. He launches out of her grip, punches through a regrowing gel curtain, and she follows before it closes. The solution belongs to both players.
+
+[06] Return to sender
+Cooperation also changes what a projectile can do. Pompadour parries a scissor. Twin-Tails catches it with her hair and tosses it upward to ring a service bell. An enemy attack becomes the key to the next door.
+
+[07] Salon hazards
+The salon is part of the puzzle. Water makes hair heavy and temporarily disables key abilities. Hair dryers restore those powers and create rising air currents. Familiar tools ask players to rethink their timing and their route.
+
+[08] Boss
+The finale combines aimed scissors, overhead warnings, charging attacks, showers, and roaming robots. Players create a counterattack window and strike together. Hair swaps can also exchange their roles, turning a familiar partnership into an unexpected challenge.
+
+[09] Better Together
+Better Together is our rule for level design. Carry me. Wait for the water. Parry now. A bad haircut becomes a warm story about trust.
+
+[10] Audience
+Our audience is friends, siblings, and couples who enjoy cooperative puzzles and playful platforming. One shared keyboard and a browser make the prototype easy to try together.
+
+[11] Market
+PICO PARK 2 serves larger cooperative groups. Ibb and Obb explores two-player gravity puzzles. Our niche is two asymmetric hair abilities, combination moves, and a compact salon escape. We still need to validate demand.
+
+[12] Prototype
+The prototype has four chapters, twelve rooms, a three-phase boss, story sequences, saved progression, and room replay. It is publicly playable on itch dot io. Future expansion will depend on testing with more pairs.
+
+[13] Three budgets
+Our indicative budgets are twenty thousand US dollars for a twelve-week minimum version, sixty thousand for twenty-four weeks, or one hundred and twenty thousand for an expanded thirty-six-week scope. These are planning estimates, not funding raised.
+
+[14] Budget breakdown
+The minimum allocates twelve thousand to development, three thousand to art and audio, one thousand to testing and tools, and four thousand to contingency. Online multiplayer is outside this scope.
+
+[15] Roadmap
+Weeks one to four: playtests and onboarding. Weeks five to eight: polish rooms, controls, and visual feedback. Weeks nine to twelve: accessibility checks, bug fixing, and release preparation. Expansion follows player evidence.
+
+[16] Validation
+Next, we plan to test twenty player pairs, tracking unaided tutorial completion, repeated failure points, and willingness to play another room. These are future validation targets, not achieved audience metrics.
+
+[17] Team
+We are NPC Union: ChenHongshan333 and ZSYUYIIE. We are seeking playtest feedback and incubation support to polish this cooperative experience.
+
+[18] Ending
+Scan the code to play and tell us what you think. Oh No My Hair. Bad hair. Good friends. Thank you.
